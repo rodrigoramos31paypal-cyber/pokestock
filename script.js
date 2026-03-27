@@ -40,121 +40,33 @@ function getStoreName(url) {
     }
 }
 
+
 // --- MASTER PRODUCT CATALOG (Smart Matching) ---
 // Just list the required words. If ALL words in a group are found, it's a match!
 const PRODUCT_CATALOG = [
-    // --- ELITE TRAINER BOXES ---
     {
-        matchGroups: [ ["phantasmal", "flames", "elite"], ["phantasmal", "flames", "etb"], ["phantasmal", "flames", "elitetrainer"] ],
-        standardName: "Phantasmal Flames - Elite Trainer Box",
-        image: "images/etbph.png" // Update with your actual image path
-    },
-    {
-        matchGroups: [ ["mega", "evolution", "elite", "lucario"], ["mega", "evolution", "etb", "lucario"], ["mega", "evolution", "elitetrainer", "lucario"] ],
-        standardName: "Mega Evolution - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["ascended", "heroes", "elite"], ["ascended", "heroes", "etb"], ["ascended", "heroes", "elitetrainer"] ],
-        standardName: "Ascended Heroes - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["destined", "rivals", "elite"], ["destined", "rivals", "etb"], ["destined", "rivals", "elitetrainer"] ],
-        standardName: "Destined Rivals - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["stellar", "crown", "elite"], ["stellar", "crown", "etb"], ["stellar", "crown", "elitetrainer"] ],
-        standardName: "Stellar Crown - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["twilight", "masquerade", "elite"], ["twilight", "masquerade", "etb"], ["twilight", "masquerade", "elitetrainer"] ],
-        standardName: "Twilight Masquerade - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["paldean", "fates", "elite"], ["paldean", "fates", "etb"], ["paldean", "fates", "elitetrainer"] ],
-        standardName: "Paldean Fates - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["paradox", "rift", "elite"], ["paradox", "rift", "etb"], ["paradox", "rift", "elitetrainer"] ],
-        standardName: "Paradox Rift - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["paldea", "evolved", "elite"], ["paldea", "evolved", "etb"], ["paldea", "evolved", "elitetrainer"] ],
-        standardName: "Paldea Evolved - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["151", "elite"], ["151", "etb"], ["151", "elitetrainer"] ],
-        standardName: "Scarlet & Violet 151 - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["pokemon", "go", "elite"], ["pokemon", "go", "etb"], ["pokemon", "go", "elitetrainer"] ],
-        standardName: "Pokémon GO - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["shrouded", "fable", "elite"], ["shrouded", "fable", "etb"], ["shrouded", "fable", "elitetrainer"] ],
-        standardName: "Shrouded Fable - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["journey", "together", "elite"], ["journey", "together", "etb"], ["journey", "together", "elitetrainer"] ],
-        standardName: "Journey Together - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["black", "bolt", "elite"], ["black", "bolt", "etb"], ["black", "bolt", "elitetrainer"] ],
-        standardName: "Black Bolt - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["white", "flare", "elite"], ["white", "flare", "etb"], ["white", "flare", "elitetrainer"] ],
-        standardName: "White Flare - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        // Prismatic Evolutions is tricky because stores sometimes write "Evolution" instead of "Evolutions"
-        matchGroups: [ 
-            ["prismatic", "evolutions", "elite"], ["prismatic", "evolutions", "etb"], ["prismatic", "evolutions", "elitetrainer"],
-            ["prismatic", "evolution", "elite"], ["prismatic", "evolution", "etb"], ["prismatic", "evolution", "elitetrainer"]
+        matchGroups: [
+            ["phantasmal", "flames", "elite"], 
+            ["phantasmal", "flames", "etb"]
         ],
-        standardName: "Prismatic Evolutions - Elite Trainer Box",
+        standardName: "Phantasmal Flames - Elite Trainer Box",
+        image: "images/etbph.png"
+    },
+    {
+        matchGroups: [
+            ["v", "memories", "collection"]
+        ],
+        standardName: "Celebrations: V Memories Collection",
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     },
     {
-        matchGroups: [ ["shining", "fates", "elite"], ["shining", "fates", "etb"], ["shining", "fates", "elitetrainer"] ],
-        standardName: "Shining Fates - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["obsidian", "flames", "elite"], ["obsidian", "flames", "etb"], ["obsidian", "flames", "elitetrainer"] ],
-        standardName: "Obsidian Flames - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["astral", "radiance", "elite"], ["astral", "radiance", "etb"], ["astral", "radiance", "elitetrainer"] ],
-        standardName: "Astral Radiance - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["mega", "gardevoir", "elite"], ["mega", "gardevoir", "etb"], ["mega", "gardevoir", "elitetrainer"] ],
-        standardName: "Mega Gardevoir - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["mega", "lucario", "elite"], ["mega", "lucario", "etb"], ["mega", "lucario", "elitetrainer"] ],
-        standardName: "Mega Lucario - Elite Trainer Box",
+        matchGroups: [
+            ["mega", "evolution", "build"],
+            ["mega", "evolution", "b&b"]
+        ],
+        standardName: "Mega Evolution - Build & Battle Box",
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     }
-
-    // --- You can start adding Collection Boxes or Booster Boxes below this line later! ---
 ];
 
 function standardizeProduct(originalName, originalUrl, originalImg) {

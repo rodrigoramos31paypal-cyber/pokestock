@@ -40,65 +40,28 @@ function getStoreName(url) {
     }
 }
 
-
-// --- MASTER PRODUCT CATALOG (Smart Matching) ---
-// Just list the required words. If ALL words in a group are found, it's a match!
+// --- MASTER PRODUCT CATALOG (Normalization) ---
+// Add your product rules here! 
 const PRODUCT_CATALOG = [
     {
-        matchGroups: [
-            ["phantasmal", "flames", "elite"], 
-            ["phantasmal", "flames", "etb"]
-        ],
+        // We look for these keywords in the messy name/url
+        keywords: ["phantasmal flames elite", "phantasmal flames etb", "phantasmal flames - elite"],
+        // If found, we force it to use this exact Name and Image:
         standardName: "Phantasmal Flames - Elite Trainer Box",
         image: "images/etbph.png"
     },
     {
-        matchGroups: [
-            ["v", "memories", "collection"]
-        ],
+        keywords: ["v memories collection", "v-memories collection", "v memories"],
         standardName: "Celebrations: V Memories Collection",
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     },
     {
-        matchGroups: [
-            ["mega", "evolution", "build"],
-            ["mega", "evolution", "b&b"]
-        ],
+        keywords: ["mega evolution build", "mega evolution b&b"],
         standardName: "Mega Evolution - Build & Battle Box",
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     }
+    // Add new products here as you find them!
 ];
-
-function standardizeProduct(originalName, originalUrl, originalImg) {
-    // 1. Combine name & url, make lowercase
-    let textToSearch = (originalName + " " + originalUrl).toLowerCase();
-    
-    // 2. MAGIC TRICK: Replace all punctuation (hyphens, brackets, colons) with spaces
-    // This turns "Flames - Elite (ENG)" into "flames   elite  eng "
-    textToSearch = textToSearch.replace(/[^a-z0-9]/g, ' ');
-    
-    for (const item of PRODUCT_CATALOG) {
-        // Check each group of required words
-        for (const wordGroup of item.matchGroups) {
-            
-            // If EVERY word in this specific group is found in the text, we have a match!
-            const isMatch = wordGroup.every(word => textToSearch.includes(word));
-            
-            if (isMatch) {
-                return {
-                    name: item.standardName,
-                    img: item.image
-                };
-            }
-        }
-    }
-    
-    // If no match, return original
-    return {
-        name: originalName,
-        img: originalImg
-    };
-}
 
 function standardizeProduct(originalName, originalUrl, originalImg) {
     const textToSearch = (originalName + " " + originalUrl).toLowerCase();

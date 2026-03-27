@@ -40,28 +40,153 @@ function getStoreName(url) {
     }
 }
 
-// --- MASTER PRODUCT CATALOG (Normalization) ---
-// Add your product rules here! 
+// --- MASTER PRODUCT CATALOG (Smart Matching) ---
+// Just list the required words. If ALL words in a group are found, it's a match!
 const PRODUCT_CATALOG = [
+    // --- ELITE TRAINER BOXES ---
     {
-        // We look for these keywords in the messy name/url
-        keywords: ["phantasmal flames elite trainer box", "phantasmal flames etb", "phantasmal flames - elite"],
-        // If found, we force it to use this exact Name and Image:
+        matchGroups: [ ["phantasmal", "flames", "elite"], ["phantasmal", "flames", "etb"], ["phantasmal", "flames", "elitetrainer"] ],
         standardName: "Phantasmal Flames - Elite Trainer Box",
-        image: "images/etbph.png"
+        image: "images/etbph" // Update with your actual image path
     },
     {
-        keywords: ["v memories collection", "v-memories collection", "v memories"],
-        standardName: "Celebrations: V Memories Collection",
+        matchGroups: [ ["mega", "evolution", "elite", "lucario"], ["mega", "evolution", "etb", "lucario"], ["mega", "evolution", "elitetrainer", "lucario"] ],
+        standardName: "Mega Evolution Lucario - Elite Trainer Box",
+        image: "images/etbluca"
+    },
+    {
+        matchGroups: [ ["ascended", "heroes", "elite"], ["ascended", "heroes", "etb"], ["ascended", "heroes", "elitetrainer"] ],
+        standardName: "Ascended Heroes - Elite Trainer Box",
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     },
     {
-        keywords: ["mega evolution build", "mega evolution b&b"],
-        standardName: "Mega Evolution - Build & Battle Box",
+        matchGroups: [ ["destined", "rivals", "elite"], ["destined", "rivals", "etb"], ["destined", "rivals", "elitetrainer"] ],
+        standardName: "Destined Rivals - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["stellar", "crown", "elite"], ["stellar", "crown", "etb"], ["stellar", "crown", "elitetrainer"] ],
+        standardName: "Stellar Crown - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["twilight", "masquerade", "elite"], ["twilight", "masquerade", "etb"], ["twilight", "masquerade", "elitetrainer"] ],
+        standardName: "Twilight Masquerade - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["paldean", "fates", "elite"], ["paldean", "fates", "etb"], ["paldean", "fates", "elitetrainer"] ],
+        standardName: "Paldean Fates - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["paradox", "rift", "elite"], ["paradox", "rift", "etb"], ["paradox", "rift", "elitetrainer"] ],
+        standardName: "Paradox Rift - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["paldea", "evolved", "elite"], ["paldea", "evolved", "etb"], ["paldea", "evolved", "elitetrainer"] ],
+        standardName: "Paldea Evolved - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["151", "elite"], ["151", "etb"], ["151", "elitetrainer"] ],
+        standardName: "Scarlet & Violet 151 - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["pokemon", "go", "elite"], ["pokemon", "go", "etb"], ["pokemon", "go", "elitetrainer"] ],
+        standardName: "Pokémon GO - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["shrouded", "fable", "elite"], ["shrouded", "fable", "etb"], ["shrouded", "fable", "elitetrainer"] ],
+        standardName: "Shrouded Fable - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["journey", "together", "elite"], ["journey", "together", "etb"], ["journey", "together", "elitetrainer"] ],
+        standardName: "Journey Together - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["black", "bolt", "elite"], ["black", "bolt", "etb"], ["black", "bolt", "elitetrainer"] ],
+        standardName: "Black Bolt - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["white", "flare", "elite"], ["white", "flare", "etb"], ["white", "flare", "elitetrainer"] ],
+        standardName: "White Flare - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        // Prismatic Evolutions is tricky because stores sometimes write "Evolution" instead of "Evolutions"
+        matchGroups: [ 
+            ["prismatic", "evolutions", "elite"], ["prismatic", "evolutions", "etb"], ["prismatic", "evolutions", "elitetrainer"],
+            ["prismatic", "evolution", "elite"], ["prismatic", "evolution", "etb"], ["prismatic", "evolution", "elitetrainer"]
+        ],
+        standardName: "Prismatic Evolutions - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["shining", "fates", "elite"], ["shining", "fates", "etb"], ["shining", "fates", "elitetrainer"] ],
+        standardName: "Shining Fates - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["obsidian", "flames", "elite"], ["obsidian", "flames", "etb"], ["obsidian", "flames", "elitetrainer"] ],
+        standardName: "Obsidian Flames - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["astral", "radiance", "elite"], ["astral", "radiance", "etb"], ["astral", "radiance", "elitetrainer"] ],
+        standardName: "Astral Radiance - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["mega", "gardevoir", "elite"], ["mega", "gardevoir", "etb"], ["mega", "gardevoir", "elitetrainer"] ],
+        standardName: "Mega Gardevoir - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["mega", "lucario", "elite"], ["mega", "lucario", "etb"], ["mega", "lucario", "elitetrainer"] ],
+        standardName: "Mega Lucario - Elite Trainer Box",
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     }
-    // Add new products here as you find them!
+
+    // --- You can start adding Collection Boxes or Booster Boxes below this line later! ---
 ];
+
+function standardizeProduct(originalName, originalUrl, originalImg) {
+    // 1. Combine name & url, make lowercase
+    let textToSearch = (originalName + " " + originalUrl).toLowerCase();
+    
+    // 2. MAGIC TRICK: Replace all punctuation (hyphens, brackets, colons) with spaces
+    // This turns "Flames - Elite (ENG)" into "flames   elite  eng "
+    textToSearch = textToSearch.replace(/[^a-z0-9]/g, ' ');
+    
+    for (const item of PRODUCT_CATALOG) {
+        // Check each group of required words
+        for (const wordGroup of item.matchGroups) {
+            
+            // If EVERY word in this specific group is found in the text, we have a match!
+            const isMatch = wordGroup.every(word => textToSearch.includes(word));
+            
+            if (isMatch) {
+                return {
+                    name: item.standardName,
+                    img: item.image
+                };
+            }
+        }
+    }
+    
+    // If no match, return original
+    return {
+        name: originalName,
+        img: originalImg
+    };
+}
 
 function standardizeProduct(originalName, originalUrl, originalImg) {
     const textToSearch = (originalName + " " + originalUrl).toLowerCase();

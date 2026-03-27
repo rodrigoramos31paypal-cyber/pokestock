@@ -51,8 +51,8 @@ const PRODUCT_CATALOG = [
     },
     {
         matchGroups: [ ["mega", "evolution", "elite", "lucario"], ["mega", "evolution", "etb", "lucario"], ["mega", "evolution", "elitetrainer", "lucario"] ],
-        standardName: "Mega Evolution Lucario - Elite Trainer Box",
-        image: "images/etbluca.png"
+        standardName: "Mega Evolution - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     },
     {
         matchGroups: [ ["ascended", "heroes", "elite"], ["ascended", "heroes", "etb"], ["ascended", "heroes", "elitetrainer"] ],

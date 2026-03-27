@@ -45,7 +45,7 @@ function getStoreName(url) {
 const PRODUCT_CATALOG = [
     {
         // We look for these keywords in the messy name/url
-        keywords: ["phantasmal flames elite", "phantasmal flames etb", "phantasmal flames - elite"],
+        keywords: ["phantasmal flames elite trainer box", "phantasmal flames etb", "phantasmal flames - elite"],
         // If found, we force it to use this exact Name and Image:
         standardName: "Phantasmal Flames - Elite Trainer Box",
         image: "images/etbph.png"

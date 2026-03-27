@@ -47,12 +47,12 @@ const PRODUCT_CATALOG = [
     {
         matchGroups: [ ["phantasmal", "flames", "elite"], ["phantasmal", "flames", "etb"], ["phantasmal", "flames", "elitetrainer"] ],
         standardName: "Phantasmal Flames - Elite Trainer Box",
-        image: "images/etbph" // Update with your actual image path
+        image: "images/etbph.png" // Update with your actual image path
     },
     {
         matchGroups: [ ["mega", "evolution", "elite", "lucario"], ["mega", "evolution", "etb", "lucario"], ["mega", "evolution", "elitetrainer", "lucario"] ],
         standardName: "Mega Evolution Lucario - Elite Trainer Box",
-        image: "images/etbluca"
+        image: "images/etbluca.png"
     },
     {
         matchGroups: [ ["ascended", "heroes", "elite"], ["ascended", "heroes", "etb"], ["ascended", "heroes", "elitetrainer"] ],

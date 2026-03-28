@@ -19,6 +19,7 @@ const KNOWN_SETS = [
     "Hidden Fates", "Unified Minds", "Unbroken Bonds", "Team Up"
 ];
 
+// --- MASTER PRODUCT CATALOG ---
 // --- MASTER PRODUCT CATALOG (Smart Matching) ---
 const PRODUCT_CATALOG = [
     {
@@ -130,15 +131,35 @@ function identifySet(name, url) {
     return name.includes(" - ") ? name.split(" - ")[0] : "Other Sets";
 }
 
+/**
+ * FIXED: Category Detection with Priority.
+ * Specific items (Tins, Blisters, ETBs) are checked FIRST to prevent them 
+ * from falling into the broader "Booster Box" or "Collection Box" categories.
+ */
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
+    
+    // 1. High Priority Specifics
     if (text.includes("elite trainer box") || text.includes("etb")) return "Elite Trainer Box";
-    if (text.includes("booster box") || text.includes("display") || text.includes("36")) return "Booster Box";
-    if (text.includes("build & battle") || text.includes("stadium") || text.includes("b&b")) return "Build & Battle";
-    if (text.includes("collection") || text.includes("premium") || text.includes("upc") || text.includes("box") || text.includes("deck")) return "Collection Boxes";
     if (text.includes("tin")) return "Tins";
     if (text.includes("blister") || text.includes("3-pack") || text.includes("checklane")) return "Blisters";
+    if (text.includes("build & battle") || text.includes("stadium") || text.includes("b&b")) return "Build & Battle";
+    
+    // 2. Booster Box (Must NOT contain "bundle" or "pack")
+    if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display") || text.includes("36")) && 
+        !text.includes("bundle") && !text.includes("pack")) {
+        return "Booster Box";
+    }
+
+    // 3. Packs & Bundles
+    if (text.includes("booster bundle") || text.includes("bundle")) return "Collection Boxes"; 
     if (text.includes("booster") || text.includes("pack") || text.includes("sleeved")) return "Booster Packs";
+    
+    // 4. General Boxes
+    if (text.includes("collection") || text.includes("premium") || text.includes("upc") || text.includes("box") || text.includes("deck")) {
+        return "Collection Boxes";
+    }
+    
     return "Other";
 }
 
@@ -151,7 +172,6 @@ function getStoreName(url) {
 
 function standardizeProduct(originalName, originalUrl, originalImg) {
     let textToSearch = (originalName + " " + originalUrl).toLowerCase().replace(/[^a-z0-9]/g, ' ');
-    
     for (const item of PRODUCT_CATALOG) {
         for (const wordGroup of item.matchGroups) {
             if (wordGroup.every(word => textToSearch.includes(word))) {
@@ -215,10 +235,17 @@ function renderProducts() {
         return;
     }
 
+    /**
+     * IMAGE SIZE FIX: 
+     * 1. Reduced container padding from p-4 to p-2.
+     * 2. Forced image to h-full and w-full to maximize space.
+     */
     grid.innerHTML = filtered.map(p => `
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
-            <div class="h-48 bg-white flex items-center justify-center p-4">
-                <img src="${p.img || 'https://via.placeholder.com/300'}" class="max-h-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+            <div class="h-48 bg-white flex items-center justify-center p-2">
+                <img src="${p.img || 'https://via.placeholder.com/300'}" 
+                     class="h-full w-full object-contain mix-blend-multiply" 
+                     onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
             </div>
             <div class="p-4 flex flex-col flex-grow">
                 <div class="flex justify-between items-start mb-1">

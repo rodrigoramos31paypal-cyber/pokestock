@@ -23,8 +23,6 @@ const PRODUCT_CATALOG = [
     { matchGroups: [["perfect", "order", "elite"]], standardName: "Perfect Order - Elite Trainer Box", image: "images/etbpo.png" }
 ];
 
-// --- Helper Functions ---
-
 function parsePrice(priceStr) {
     if (!priceStr) return 0;
     let cleaned = priceStr.replace(/[^\d.,]/g, '');
@@ -39,38 +37,21 @@ function identifySet(name, url) {
     return name.includes(" - ") ? name.split(" - ")[0] : "Other Sets";
 }
 
-/**
- * REFINED CATEGORY LOGIC - PRIORITY FIXED
- * Ensures Booster Boxes take priority over Booster Packs.
- */
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
     const cleanName = name.toLowerCase();
     
-    // 1. ELITE TRAINER BOX (Highest Priority)
     if (text.includes("elite trainer box") || text.includes("etb") || text.includes("elitetrainer")) return "Elite Trainer Box";
-
-    // 2. BOOSTER BOX
     if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && !text.includes("booster bundle")) return "Booster Box";
-    if (cleanName.includes("36") && cleanName.includes("booster") && !text.includes("bundle")) return "Booster Box";
-
-    // 3. BOOSTER BUNDLE
     if (text.includes("booster bundle")) return "Booster Bundle";
-
-    // 4. BLISTERS
     if (cleanName.includes("blister") || cleanName.includes("tech") || cleanName.includes("3-pack blister") || cleanName.includes("checklane")) return "Blisters";
-
-    // 5. TINS
     if (cleanName.includes("tin")) return "Tins";
 
-    // 6. COLLECTION BOXES (Strict Keywords)
     const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special"];
     if (collectionKeywords.some(kw => cleanName.includes(kw))) return "Collection Boxes";
 
-    // 7. BOOSTER PACKS
     if (text.includes("pack") || text.includes("booster") || text.includes("sleeved")) return "Booster Packs";
 
-    // 8. OTHERS (Accessories fallback)
     if (text.includes("binder") || text.includes("poster") || (text.includes("sleeve") && !text.includes("sleeved")) || text.includes("portfolio") || text.includes("portfólio") || text.includes("acrilico") || text.includes("acrílico") || text.includes("deck")) return "Other";
 
     return "Other";
@@ -91,18 +72,14 @@ function standardizeProduct(originalName, originalUrl, originalImg) {
     return { name: originalName, img: originalImg };
 }
 
-// --- UI Rendering ---
-
 function updateDropdowns() {
     const storeSelect = document.getElementById('storeFilter');
     const setSelect = document.getElementById('setFilter');
     const prevStore = selectedStore;
     const prevSet = selectedSet;
-
     const categoryMatch = allProducts.filter(p => currentCategory === 'All' || p.category === currentCategory);
     const availableStores = [...new Set(categoryMatch.map(p => p.store))].sort();
     const availableSets = [...new Set(categoryMatch.map(p => p.set))].sort();
-
     storeSelect.innerHTML = '<option value="All">All Stores</option>' + availableStores.map(s => `<option value="${s}" ${s === prevStore ? 'selected' : ''}>${s}</option>`).join('');
     setSelect.innerHTML = '<option value="All">All Sets</option>' + availableSets.map(s => `<option value="${s}" ${s === prevSet ? 'selected' : ''}>${s}</option>`).join('');
 }
@@ -122,21 +99,15 @@ function renderProducts() {
         const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.store.toLowerCase().includes(searchQuery.toLowerCase());
         return matchCat && matchStore && matchSet && matchPrice && matchSearch;
     });
-
     document.getElementById('productCount').textContent = `${filtered.length} products found`;
-    
     if (filtered.length === 0) {
         grid.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500">No products match these filters.</div>`;
         return;
     }
-
     grid.innerHTML = filtered.map(p => `
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
             <div class="h-48 bg-white flex items-center justify-center p-2">
-                <img src="${p.img}" 
-                     referrerpolicy="no-referrer"
-                     class="h-full w-full object-contain mix-blend-multiply" 
-                     onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                <img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
             </div>
             <div class="p-4 flex flex-col flex-grow">
                 <div class="flex justify-between items-start mb-1"><span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter">${p.store}</span><span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span></div>
@@ -166,7 +137,6 @@ async function fetchProducts() {
 
 function setCategory(cat) { currentCategory = cat; updateDropdowns(); renderFilters(); renderProducts(); }
 
-// Listeners
 document.getElementById('searchInput').addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
 document.getElementById('searchInputMobile').addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
 document.getElementById('storeFilter').addEventListener('change', (e) => { selectedStore = e.target.value; renderProducts(); });
@@ -184,9 +154,9 @@ const backToTopBtn = document.getElementById('backToTop');
 window.onscroll = () => { window.scrollY > 400 ? backToTopBtn.classList.add('show') : backToTopBtn.classList.remove('show'); };
 backToTopBtn.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
-// Updated Theme Toggle Logic for the Lamp Icon
+// Updated Theme Toggle Logic for the Modern Lightbulb Icon
 const themeBtn = document.getElementById('themeToggle');
-const lampIcon = document.getElementById('lampIcon');
+const themeIcon = document.getElementById('themeIcon');
 let isDark = false;
 
 themeBtn.addEventListener('click', () => {
@@ -194,11 +164,11 @@ themeBtn.addEventListener('click', () => {
     document.documentElement.classList.toggle('dark', isDark);
     
     if (isDark) {
-        // Dark Mode: Fill the lamp with yellow "light"
-        lampIcon.setAttribute('fill', 'currentColor');
+        themeIcon.setAttribute('fill', 'currentColor'); // Yellow bulb
+        themeIcon.classList.replace('text-gray-600', 'text-yellow-400');
     } else {
-        // Light Mode: Outline only
-        lampIcon.setAttribute('fill', 'none');
+        themeIcon.setAttribute('fill', 'none'); // Empty bulb
+        themeIcon.classList.replace('text-yellow-400', 'text-gray-600');
     }
 });
 

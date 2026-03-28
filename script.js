@@ -25,19 +25,12 @@
     closeDonate.onclick = closeModal;
     donateModal.onclick = (e) => { if(e.target === donateModal) closeModal(); };
 
-    // Attach to window so HTML buttons can trigger it
     window.copyCrypto = function(cryptoName, address) {
         navigator.clipboard.writeText(address).then(() => {
             const toast = document.getElementById('toast');
             document.getElementById('toastMsg').textContent = `${cryptoName} Address Copied!`;
-            
-            // Show toast
             toast.classList.remove('translate-y-20', 'opacity-0');
-            
-            // Hide toast after 3 seconds
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
         });
     };
 
@@ -48,6 +41,7 @@
     let _0x4d = 'All';
     let _0x5e = '';
     let _0xMaxP = 2000; 
+    let _0xSort = 'default'; // ADDED: Sort State
 
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Half Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Other'];
     const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together", "Rebel Clash", "Crown Zenith"];
@@ -144,7 +138,9 @@
 
     window.renderProducts = function() {
         const g = document.getElementById('productGrid');
-        const f = _0x1a.filter(p => {
+        
+        // 1. Filter Data
+        let f = _0x1a.filter(p => {
             const mC = _0x2b === 'All' || p.category === _0x2b;
             const mS = _0x3c === 'All' || p.store === _0x3c;
             const mT = _0x4d === 'All' || p.set === _0x4d;
@@ -153,20 +149,28 @@
             return mC && mS && mT && mP && mH;
         });
 
+        // 2. Sort Data (ADDED)
+        if (_0xSort === 'lowToHigh') {
+            f.sort((a, b) => a.price - b.price);
+        } else if (_0xSort === 'highToLow') {
+            f.sort((a, b) => b.price - a.price);
+        }
+
+        // 3. Render Data
         document.getElementById('productCount').textContent = `${f.length} items found`;
         g.innerHTML = f.map(p => `
             <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
                 <div class="h-52 bg-white flex items-center justify-center p-6 overflow-hidden">
                     <img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
                 </div>
-                <div class="p-5 flex flex-col flex-grow bg-white dark:bg-gray-800">
+                <div class="p-5 flex flex-col flex-grow bg-white dark:bg-gray-800 transition-colors duration-300">
                     <div class="flex justify-between items-center mb-3 gap-2">
-                        <span class="text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 truncate">${p.store}</span>
-                        <span class="text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 truncate">${p.set}</span>
+                        <span class="text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 transition-colors duration-300 truncate">${p.store}</span>
+                        <span class="text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 transition-colors duration-300 truncate">${p.set}</span>
                     </div>
-                    <h3 class="text-sm font-bold mb-4 line-clamp-2 h-10 group-hover:text-red-600 transition-colors">${p.name}</h3>
+                    <h3 class="text-sm font-bold mb-4 line-clamp-2 h-10 group-hover:text-red-600 transition-colors duration-300">${p.name}</h3>
                     <div class="mt-auto flex justify-between items-center">
-                        <span class="text-xl font-black text-gray-900 dark:text-white">€${p.price.toFixed(2)}</span>
+                        <span class="text-xl font-black text-gray-900 dark:text-white transition-colors duration-300">€${p.price.toFixed(2)}</span>
                         <a href="${p.url}" target="_blank" class="px-5 py-2.5 bg-gray-900 dark:bg-red-600 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-gray-900/10 dark:shadow-red-600/20">View Deal</a>
                     </div>
                 </div>
@@ -203,9 +207,13 @@
     document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; updateDropdowns(); renderProducts(); });
     document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; updateDropdowns(); renderProducts(); });
     
+    // ADDED: Sort Event Listener
+    document.getElementById('sortFilter').addEventListener('change', (e) => { _0xSort = e.target.value; renderProducts(); });
+
     document.getElementById('resetFilters').addEventListener('click', () => { 
-        _0x3c = 'All'; _0x4d = 'All'; _0xMaxP = 2000; _0x2b = 'All'; _0x5e = ''; 
+        _0x3c = 'All'; _0x4d = 'All'; _0xMaxP = 2000; _0x2b = 'All'; _0x5e = ''; _0xSort = 'default';
         slider.value = 2000; label.textContent = '€2000';
+        document.getElementById('sortFilter').value = 'default'; // Reset Dropdown
         fetchData(); 
     });
 

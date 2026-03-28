@@ -19,12 +19,72 @@ const KNOWN_SETS = [
     "Hidden Fates", "Unified Minds", "Unbroken Bonds", "Team Up"
 ];
 
-// --- Master Product Catalog (Smart Matching) ---
+// --- MASTER PRODUCT CATALOG (Smart Matching) ---
 const PRODUCT_CATALOG = [
     {
-        matchGroups: [ ["phantasmal", "flames", "elite"], ["phantasmal", "flames", "etb"], ["phantasmal", "flames", "elitetrainer"] ],
+        // TARGET: Phantasmal Flames Elite Trainer Boxes
+        matchGroups: [ 
+            ["phantasmal", "flames", "elite"], 
+            ["phantasmal", "flames", "etb"], 
+            ["phantasmal", "flames", "elitetrainer"] 
+        ],
         standardName: "Phantasmal Flames - Elite Trainer Box",
-        image: "images/etbph.png"
+        image: "images/etbph.png" // Your local high-quality image
+    },
+    {
+        matchGroups: [ ["mega", "evolution", "elite"], ["mega", "evolution", "etb"] ],
+        standardName: "Mega Evolution - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["ascended", "heroes", "elite"], ["ascended", "heroes", "etb"] ],
+        standardName: "Ascended Heroes - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["destined", "rivals", "elite"], ["destined", "rivals", "etb"] ],
+        standardName: "Destined Rivals - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["stellar", "crown", "elite"], ["stellar", "crown", "etb"] ],
+        standardName: "Stellar Crown - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["twilight", "masquerade", "elite"], ["twilight", "masquerade", "etb"] ],
+        standardName: "Twilight Masquerade - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["paldean", "fates", "elite"], ["paldean", "fates", "etb"] ],
+        standardName: "Paldean Fates - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["paradox", "rift", "elite"], ["paradox", "rift", "etb"] ],
+        standardName: "Paradox Rift - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["paldea", "evolved", "elite"], ["paldea", "evolved", "etb"] ],
+        standardName: "Paldea Evolved - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["151", "elite"], ["151", "etb"] ],
+        standardName: "Scarlet & Violet 151 - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["shrouded", "fable", "elite"], ["shrouded", "fable", "etb"] ],
+        standardName: "Shrouded Fable - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["prismatic", "evolutions", "elite"], ["prismatic", "evolutions", "etb"] ],
+        standardName: "Prismatic Evolutions - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     }
 ];
 
@@ -65,6 +125,7 @@ function getStoreName(url) {
 
 function standardizeProduct(originalName, originalUrl, originalImg) {
     let textToSearch = (originalName + " " + originalUrl).toLowerCase().replace(/[^a-z0-9]/g, ' ');
+    
     for (const item of PRODUCT_CATALOG) {
         for (const wordGroup of item.matchGroups) {
             if (wordGroup.every(word => textToSearch.includes(word))) {
@@ -81,11 +142,9 @@ function updateDropdowns() {
     const storeSelect = document.getElementById('storeFilter');
     const setSelect = document.getElementById('setFilter');
     
-    // Save selections
     const prevStore = selectedStore;
     const prevSet = selectedSet;
 
-    // Filter list based ONLY on the current Category tab
     const categoryMatch = allProducts.filter(p => 
         currentCategory === 'All' || p.category === currentCategory
     );
@@ -93,12 +152,10 @@ function updateDropdowns() {
     const availableStores = [...new Set(categoryMatch.map(p => p.store))].sort();
     const availableSets = [...new Set(categoryMatch.map(p => p.set))].sort();
 
-    // Rebuild Store Dropdown
     storeSelect.innerHTML = '<option value="All">All Stores</option>' + 
         availableStores.map(s => `<option value="${s}" ${s === prevStore ? 'selected' : ''}>${s}</option>`).join('');
     selectedStore = availableStores.includes(prevStore) ? prevStore : 'All';
 
-    // Rebuild Set Dropdown
     setSelect.innerHTML = '<option value="All">All Sets</option>' + 
         availableSets.map(s => `<option value="${s}" ${s === prevSet ? 'selected' : ''}>${s}</option>`).join('');
     selectedSet = availableSets.includes(prevSet) ? prevSet : 'All';
@@ -189,7 +246,7 @@ async function fetchProducts() {
 
 function setCategory(cat) { 
     currentCategory = cat; 
-    updateDropdowns(); // Cascading update
+    updateDropdowns(); 
     renderFilters(); 
     renderProducts(); 
 }
@@ -218,4 +275,4 @@ themeBtn.addEventListener('click', () => {
 
 // Initialize
 fetchProducts();
-setInterval(fetchProducts, 1800000); // 30 mins
+setInterval(fetchProducts, 1800000);

@@ -23,6 +23,8 @@ const PRODUCT_CATALOG = [
     { matchGroups: [["perfect", "order", "elite"]], standardName: "Perfect Order - Elite Trainer Box", image: "images/etbpo.png" }
 ];
 
+// --- Helper Functions ---
+
 function parsePrice(priceStr) {
     if (!priceStr) return 0;
     let cleaned = priceStr.replace(/[^\d.,]/g, '');
@@ -37,28 +39,41 @@ function identifySet(name, url) {
     return name.includes(" - ") ? name.split(" - ")[0] : "Other Sets";
 }
 
+/**
+ * REFINED CATEGORY LOGIC - PRIORITY FIXED
+ * We check from the MOST specific (Boxes/ETBs) to the MOST general (Packs).
+ */
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
     const cleanName = name.toLowerCase();
     
-    // Priority: Accessories & Decks
-    if (text.includes("binder") || text.includes("poster") || 
-        (text.includes("sleeve") && !text.includes("sleeved")) ||
-        text.includes("portfolio") || text.includes("portfólio") || 
-        text.includes("acrilico") || text.includes("acrílico") ||
-        text.includes("deck")) return "Other";
+    // 1. ELITE TRAINER BOX (Highest Priority)
+    if (text.includes("elite trainer box") || text.includes("etb") || text.includes("elitetrainer")) return "Elite Trainer Box";
 
-    if (text.includes("elite trainer box") || text.includes("etb")) return "Elite Trainer Box";
+    // 2. BOOSTER BOX
+    // We check for "display" or "booster box" and ignore "bundle"
+    if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && !text.includes("booster bundle")) return "Booster Box";
+    // Check for "36" in name + "booster" as a backup for boxes
+    if (cleanName.includes("36") && cleanName.includes("booster") && !text.includes("bundle")) return "Booster Box";
+
+    // 3. BOOSTER BUNDLE
     if (text.includes("booster bundle")) return "Booster Bundle";
-    if (cleanName.includes("blister") || cleanName.includes("tech")) return "Blisters";
-    if (text.includes("pack") || text.includes("booster") || text.includes("sleeved")) return "Booster Packs";
+
+    // 4. BLISTERS (Check for tech items too)
+    if (cleanName.includes("blister") || cleanName.includes("tech") || cleanName.includes("3-pack blister") || cleanName.includes("checklane")) return "Blisters";
+
+    // 5. TINS
     if (cleanName.includes("tin")) return "Tins";
 
-    if ((text.includes("booster box") || text.includes("display")) && !text.includes("bundle") && !text.includes("pack")) return "Booster Box";
-    if (cleanName.includes("36") && cleanName.includes("booster")) return "Booster Box";
-
+    // 6. COLLECTION BOXES (Strict Keywords)
     const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special"];
     if (collectionKeywords.some(kw => cleanName.includes(kw))) return "Collection Boxes";
+
+    // 7. BOOSTER PACKS (Now safe to check for 'pack' because Boxes were already caught)
+    if (text.includes("pack") || text.includes("booster") || text.includes("sleeved")) return "Booster Packs";
+
+    // 8. OTHERS (Accessories fallback)
+    if (text.includes("binder") || text.includes("poster") || (text.includes("sleeve") && !text.includes("sleeved")) || text.includes("portfolio") || text.includes("portfólio") || text.includes("acrilico") || text.includes("acrílico") || text.includes("deck")) return "Other";
 
     return "Other";
 }
@@ -77,6 +92,8 @@ function standardizeProduct(originalName, originalUrl, originalImg) {
     }
     return { name: originalName, img: originalImg };
 }
+
+// --- UI Rendering ---
 
 function updateDropdowns() {
     const storeSelect = document.getElementById('storeFilter');

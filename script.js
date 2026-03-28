@@ -9,28 +9,26 @@
     let _0x3c = 'All';
     let _0x4d = 'All';
     let _0x5e = '';
-    let _0xMaxP = 2000; // Increased to 2000 by default
+    let _0xMaxP = 2000; 
 
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
-    // Added Rebel Clash to master list
     const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together", "Rebel Clash"];
 
     const _tags = { 'DIVER': 'bg-blue-100 text-blue-600', 'COLECCIONAR': 'bg-purple-100 text-purple-600', 'ARENAPORTO': 'bg-orange-100 text-orange-600', 'ROTA151': 'bg-green-100 text-green-600', 'DEFAULT': 'bg-red-100 text-red-600' };
 
+    // Supercharged ETB Standardizer
     const _0x10a = [
-        { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box", i: "images/etbph.png" },
-        { m: [["phantasmal", "flames", "booster", "box"]], s: "Phantasmal Flames - Booster Box", i: "images/bbph.png" },
-        { m: [["phantasmal", "flames", "booster", "bundle"]], s: "Phantasmal Flames - Booster Bundle", i: "images/bunph.png" },
-        { m: [["surging", "sparks", "booster", "box"]], s: "Surging Sparks - Booster Box", i: "images/bbss.png" },
-        { m: [["surging", "sparks", "booster", "bundle"]], s: "Surging Sparks - Booster Bundle", i: "images/bunss.png" },
-        { m: [["stellar", "crown", "booster", "box"]], s: "Stellar Crown - Booster Box", i: "images/bbsc.png" },
-        { m: [["stellar", "crown", "booster", "bundle"]], s: "Stellar Crown - Booster Bundle", i: "images/bunsc.png" },
-        { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box", i: "images/etbfable.png" },
-        { m: [["shrouded", "fable", "booster", "bundle"]], s: "Shrouded Fable - Booster Bundle", i: "images/bunfable.png" },
-        { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box", i: "images/etbpo.png" }
+        { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box" },
+        { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box" },
+        { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box" },
+        { m: [["surging", "sparks", "elite"]], s: "Surging Sparks - Elite Trainer Box" },
+        { m: [["stellar", "crown", "elite"]], s: "Stellar Crown - Elite Trainer Box" },
+        { m: [["black", "bolt", "elite"]], s: "Black Bolt - Elite Trainer Box" },
+        { m: [["white", "flare", "elite"]], s: "White Flare - Elite Trainer Box" },
+        { m: [["rebel", "clash", "elite"]], s: "Rebel Clash - Elite Trainer Box" },
+        { m: [["paldea", "evolved", "elite"]], s: "Paldea Evolved - Elite Trainer Box" }
     ];
 
-    // UPDATED: Restored safe price parser for comma/dot combinations
     function _0x11b(_v) {
         if (!_v) return 0;
         let c = _v.replace(/[^\d.,]/g, '');
@@ -39,34 +37,30 @@
         return parseFloat(c) || 0;
     }
 
-    // UPDATED: Hierarchy fixed! Perfect Order & Ascended Heroes evaluated BEFORE Mega Evolution
     function _0x12c(_n) {
         const _nn = _n.toLowerCase();
         if (_nn.includes("portfolio") || _nn.includes("portfólio")) return "Other Sets";
         if (_nn.includes("charizard") && (_nn.includes("tin") || _nn.includes("ultra premium") || _nn.includes("ultra-premium"))) return "Phantasmal Flames";
         
-        // Black & White mapping (high priority)
         if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
-        
         if (_nn.includes("world championship") || _nn.includes("fernando cifuentes") || _nn.includes("ancient toolbox")) return "Pokémon World Championship";
         if (_nn.includes("destined rivals") || _nn.includes("team rocket")) return "Destined Rivals";
         if (_nn.includes("journey together")) return "Journey Together";
         
-        // Important: These two must come BEFORE Mega Evolution
+        // Priority check before Mega Evolution
         if (_nn.includes("perfect order")) return "Perfect Order";
         if (_nn.includes("ascended heroes")) return "Ascended Heroes";
-        
-        // Mega Evolution mapping
         if (_nn.includes("mega evolution") || _nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("mega kangaskhan")) return "Mega Evolution";
         
         if (_nn.includes("iono") || _nn.includes("classic") || _nn.includes("cynthia")) return "Other Sets";
-        
         for (const _s of _0x9c) if (_nn.includes(_s.toLowerCase())) return _s;
         return "Other Sets";
     }
 
     function _0x13d(_n) {
         const _t = _n.toLowerCase();
+        // Priority to catch Battle Decks immediately
+        if (_t.includes("battle deck") || _t.includes("battle decks")) return _0x8b[8];
         if (_t.includes("elite trainer") || _t.includes("etb")) return _0x8b[1];
         if (_t.includes("booster box") || _t.includes("display")) return _0x8b[2];
         if (_t.includes("bundle")) return _0x8b[3];
@@ -80,7 +74,7 @@
         let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
         for (const _it of _0x10a) {
             for (const _wg of _it.m) {
-                if (_wg.every(_w => _ts.includes(_w))) return { name: _it.s, img: _it.i };
+                if (_wg.every(_w => _ts.includes(_w))) return { name: _it.s, img: _it.i || _oi };
             }
         }
         return { name: _on, img: _oi };
@@ -92,7 +86,6 @@
         const sS = document.getElementById('storeFilter');
         const sT = document.getElementById('setFilter');
         
-        // UPDATED: Now filters by MAX PRICE to prevent "Ghost Sets"
         const cM = _0x1a.filter(p => (_0x2b === 'All' || p.category === _0x2b) && p.price <= _0xMaxP);
         
         const aS = [...new Set(cM.map(p => p.store))].sort();
@@ -100,6 +93,10 @@
         
         sS.innerHTML = '<option value="All">All Stores</option>' + aS.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
         sT.innerHTML = '<option value="All">All Sets</option>' + aT.map(s => `<option value="${s}" ${_0x4d === s ? 'selected' : ''}>${s}</option>`).join('');
+        
+        // GHOST SET FIX: Sync variables with dropdowns
+        _0x3c = sS.value;
+        _0x4d = sT.value;
     };
 
     window.setCategory = function(cat) { _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); };
@@ -123,11 +120,14 @@
             return mC && mS && mT && mP && mH;
         });
 
+        // BEST PRICE FIX: Only applies to Elite Trainer Boxes
         const minPrices = {};
         f.forEach(p => {
-            const norm = p.name.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
-            if (!minPrices[norm] || p.price < minPrices[norm]) {
-                minPrices[norm] = p.price;
+            if (p.category === 'Elite Trainer Box') {
+                const norm = p.name.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+                if (!minPrices[norm] || p.price < minPrices[norm]) {
+                    minPrices[norm] = p.price;
+                }
             }
         });
 
@@ -135,7 +135,9 @@
         g.innerHTML = f.map(p => {
             const tagStyle = _tags[p.store] || _tags['DEFAULT'];
             const norm = p.name.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
-            const isBestPrice = p.price === minPrices[norm];
+            
+            // Check if it is an ETB AND has the winning price
+            const isBestPrice = p.category === 'Elite Trainer Box' && p.price === minPrices[norm];
 
             return `
             <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
@@ -180,18 +182,15 @@
     slider.addEventListener('input', (e) => {
         _0xMaxP = parseInt(e.target.value);
         label.textContent = `€${_0xMaxP}`;
-        
-        // UPDATED: Now triggers dropdown update so Ghost Sets disappear live as you slide
         updateDropdowns(); 
         renderProducts();
     });
 
     document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
     document.getElementById('searchInputMobile').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
-    document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; renderProducts(); });
-    document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; renderProducts(); });
+    document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; updateDropdowns(); renderProducts(); });
+    document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; updateDropdowns(); renderProducts(); });
     
-    // UPDATED: Reset sets slider max back to 2000
     document.getElementById('resetFilters').addEventListener('click', () => { 
         _0x3c = 'All'; _0x4d = 'All'; _0xMaxP = 2000; _0x2b = 'All'; _0x5e = ''; 
         slider.value = 2000; label.textContent = '€2000';

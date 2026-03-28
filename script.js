@@ -25,19 +25,12 @@
     closeDonate.onclick = closeModal;
     donateModal.onclick = (e) => { if(e.target === donateModal) closeModal(); };
 
-    // Attach to window so HTML buttons can trigger it
     window.copyCrypto = function(cryptoName, address) {
         navigator.clipboard.writeText(address).then(() => {
             const toast = document.getElementById('toast');
             document.getElementById('toastMsg').textContent = `${cryptoName} Address Copied!`;
-            
-            // Show toast
             toast.classList.remove('translate-y-20', 'opacity-0');
-            
-            // Hide toast after 3 seconds
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
         });
     };
 
@@ -154,19 +147,21 @@
         });
 
         document.getElementById('productCount').textContent = `${f.length} items found`;
+        
+        // ADDED transition-colors duration-300 to Card Internals
         g.innerHTML = f.map(p => `
             <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
                 <div class="h-52 bg-white flex items-center justify-center p-6 overflow-hidden">
                     <img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
                 </div>
-                <div class="p-5 flex flex-col flex-grow bg-white dark:bg-gray-800">
+                <div class="p-5 flex flex-col flex-grow bg-white dark:bg-gray-800 transition-colors duration-300">
                     <div class="flex justify-between items-center mb-3 gap-2">
-                        <span class="text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 truncate">${p.store}</span>
-                        <span class="text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 truncate">${p.set}</span>
+                        <span class="text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 transition-colors duration-300 truncate">${p.store}</span>
+                        <span class="text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 transition-colors duration-300 truncate">${p.set}</span>
                     </div>
-                    <h3 class="text-sm font-bold mb-4 line-clamp-2 h-10 group-hover:text-red-600 transition-colors">${p.name}</h3>
+                    <h3 class="text-sm font-bold mb-4 line-clamp-2 h-10 group-hover:text-red-600 transition-colors duration-300">${p.name}</h3>
                     <div class="mt-auto flex justify-between items-center">
-                        <span class="text-xl font-black text-gray-900 dark:text-white">€${p.price.toFixed(2)}</span>
+                        <span class="text-xl font-black text-gray-900 dark:text-white transition-colors duration-300">€${p.price.toFixed(2)}</span>
                         <a href="${p.url}" target="_blank" class="px-5 py-2.5 bg-gray-900 dark:bg-red-600 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-gray-900/10 dark:shadow-red-600/20">View Deal</a>
                     </div>
                 </div>

@@ -41,7 +41,7 @@ function identifySet(name, url) {
 
 /**
  * REFINED CATEGORY LOGIC - PRIORITY FIXED
- * We check from the MOST specific (Boxes/ETBs) to the MOST general (Packs).
+ * Ensures Booster Boxes take priority over Booster Packs.
  */
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
@@ -51,15 +51,13 @@ function detectCategory(name, url) {
     if (text.includes("elite trainer box") || text.includes("etb") || text.includes("elitetrainer")) return "Elite Trainer Box";
 
     // 2. BOOSTER BOX
-    // We check for "display" or "booster box" and ignore "bundle"
     if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && !text.includes("booster bundle")) return "Booster Box";
-    // Check for "36" in name + "booster" as a backup for boxes
     if (cleanName.includes("36") && cleanName.includes("booster") && !text.includes("bundle")) return "Booster Box";
 
     // 3. BOOSTER BUNDLE
     if (text.includes("booster bundle")) return "Booster Bundle";
 
-    // 4. BLISTERS (Check for tech items too)
+    // 4. BLISTERS
     if (cleanName.includes("blister") || cleanName.includes("tech") || cleanName.includes("3-pack blister") || cleanName.includes("checklane")) return "Blisters";
 
     // 5. TINS
@@ -69,7 +67,7 @@ function detectCategory(name, url) {
     const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special"];
     if (collectionKeywords.some(kw => cleanName.includes(kw))) return "Collection Boxes";
 
-    // 7. BOOSTER PACKS (Now safe to check for 'pack' because Boxes were already caught)
+    // 7. BOOSTER PACKS
     if (text.includes("pack") || text.includes("booster") || text.includes("sleeved")) return "Booster Packs";
 
     // 8. OTHERS (Accessories fallback)
@@ -168,6 +166,7 @@ async function fetchProducts() {
 
 function setCategory(cat) { currentCategory = cat; updateDropdowns(); renderFilters(); renderProducts(); }
 
+// Listeners
 document.getElementById('searchInput').addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
 document.getElementById('searchInputMobile').addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
 document.getElementById('storeFilter').addEventListener('change', (e) => { selectedStore = e.target.value; renderProducts(); });
@@ -185,9 +184,23 @@ const backToTopBtn = document.getElementById('backToTop');
 window.onscroll = () => { window.scrollY > 400 ? backToTopBtn.classList.add('show') : backToTopBtn.classList.remove('show'); };
 backToTopBtn.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
+// Updated Theme Toggle Logic for the Lamp Icon
 const themeBtn = document.getElementById('themeToggle');
+const lampIcon = document.getElementById('lampIcon');
 let isDark = false;
-themeBtn.addEventListener('click', () => { isDark = !isDark; document.documentElement.classList.toggle('dark', isDark); themeBtn.textContent = isDark ? '☀️' : '🌙'; });
+
+themeBtn.addEventListener('click', () => {
+    isDark = !isDark;
+    document.documentElement.classList.toggle('dark', isDark);
+    
+    if (isDark) {
+        // Dark Mode: Fill the lamp with yellow "light"
+        lampIcon.setAttribute('fill', 'currentColor');
+    } else {
+        // Light Mode: Outline only
+        lampIcon.setAttribute('fill', 'none');
+    }
+});
 
 fetchProducts();
 setInterval(fetchProducts, 1800000);

@@ -19,7 +19,6 @@
 
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
     
-    // UPDATED: Removed "151", added new sets
     const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together"];
 
     const _0x10a = [
@@ -37,34 +36,43 @@
     }
 
     /**
-     * UPDATED: Comprehensive Set Mapping Logic
-     * Handles specific product-to-set overrides provided by user
+     * UPDATED: Comprehensive Set Mapping
+     * Handles specific product assignments for Phantasmal Flames, Perfect Order, etc.
      */
     function _0x12c(_n, _u) {
         const _nn = _n.toLowerCase();
         
-        // 1. Black & White Mapping (including Black Bolt)
+        // 1. Portfólio / Special Collection Fallback to Other Sets
+        if (_nn.includes("portfólio") || _nn.includes("portfolio")) return "Other Sets";
+
+        // 2. Phantasmal Flames Mapping (including Charizard UPC)
+        if (_nn.includes("phantasmal flames") || (_nn.includes("charizard") && (_nn.includes("ultra-premium") || _nn.includes("tin")))) return "Phantasmal Flames";
+
+        // 3. Perfect Order Mapping
+        if (_nn.includes("perfect order")) return "Perfect Order";
+
+        // 4. Ascended Heroes Mapping
+        if (_nn.includes("ascended heroes")) return "Ascended Heroes";
+
+        // 5. Black & White Mapping (including Black Bolt, White Flare, Unova)
         if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
 
-        // 2. Destined Rivals Mapping
+        // 6. Destined Rivals Mapping
         if (_nn.includes("destined rivals")) return "Destined Rivals";
 
-        // 3. Pokémon World Championship Mapping
+        // 7. World Championship Mapping
         if (_nn.includes("world championship") || _nn.includes("world champions deck") || _nn.includes("fernando cifuentes") || _nn.includes("sakuya ota") || _nn.includes("jesse parker")) return "Pokémon World Championship";
 
-        // 4. Journey Together Mapping
+        // 8. Journey Together Mapping
         if (_nn.includes("journey together")) return "Journey Together";
 
-        // 5. Mega Evolution Mapping (including Kangaskhan)
-        if (_nn.includes("mega evolution") || _nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("kangaskhan ex box")) return "Mega Evolution";
+        // 9. Mega Evolution Mapping (specific tins and boxes)
+        if (_nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("kangaskhan ex box") || _nn.includes("mega evolution")) return "Mega Evolution";
 
-        // 6. Phantasmal Flames Overrides (Charizard Tins)
-        if (_nn.includes("charizard") && _nn.includes("tin")) return "Phantasmal Flames";
-
-        // 7. Other Sets Mapping (Iono, Bellibolt, Poke Ball, Slashing, Classic, Charizard Special, Cynthia, Pokémon Day)
+        // 10. Other Sets Overrides
         if (_nn.includes("iono") || _nn.includes("bellibolt") || _nn.includes("poke ball tin") || _nn.includes("slashing legends") || _nn.includes("trading card game classic") || _nn.includes("charizard ex special collection") || _nn.includes("cynthia's garchomp") || _nn.includes("pokémon day 2026") || _nn.includes("calyrex vmax") || _nn.includes("mega venusaur ex") || _nn.includes("battle deck")) return "Other Sets";
 
-        // 8. General Set Matcher
+        // 11. Expansion Matcher
         for (const _s of _0x9c) {
             if (_nn.includes(_s.toLowerCase())) return _s;
         }

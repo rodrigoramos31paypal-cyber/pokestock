@@ -42,9 +42,13 @@ const PRODUCT_CATALOG = [
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     },
 	{
-        matchGroups: [ ["perfect", "order", "elite"], ["perfect", "order", "etb"] ],
+         matchGroups: [ 
+            ["perfect", "order", "elite"], 
+            ["perfect", "order", "etb"], 
+            ["perfect", "order", "elitetrainer"] 
+        ],
         standardName: "Perfect Order - Elite Trainer Box",
-        image: "images/etbpo.png"
+        image: "images/etbpo.png" // Your local high-quality image
     },
     {
         matchGroups: [ ["destined", "rivals", "elite"], ["destined", "rivals", "etb"] ],

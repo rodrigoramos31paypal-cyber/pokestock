@@ -32,9 +32,22 @@ const PRODUCT_CATALOG = [
         image: "images/etbph.png" // Your local high-quality image
     },
     {
-        matchGroups: [ ["mega", "evolution", "elite"], ["mega", "evolution", "etb"] ],
-        standardName: "Mega Evolution - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+        matchGroups: [ 
+            ["mega", "evolution", "elite", "lucario"], 
+            ["mega", "evolution", "etb", "lucario"], 
+            ["mega", "evolution", "elitetrainer", "lucario"] 
+        ],
+        standardName: "Mega Evolution Lucario - Elite Trainer Box",
+        image: "images/etbluca.png" // Your local high-quality image
+    },
+	{
+        matchGroups: [ 
+            ["mega", "evolution", "elite", "gardevoir"], 
+            ["mega", "evolution", "etb", "gardevoir"], 
+            ["mega", "evolution", "elitetrainer", "gardevoir"] 
+        ],
+        standardName: "Mega Evolution Gardevoir - Elite Trainer Box",
+        image: "images/etbgar.png" // Your local high-quality image
     },
     {
         matchGroups: [ ["ascended", "heroes", "elite"], ["ascended", "heroes", "etb"] ],
@@ -42,7 +55,7 @@ const PRODUCT_CATALOG = [
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     },
 	{
-         matchGroups: [ 
+        matchGroups: [ 
             ["perfect", "order", "elite"], 
             ["perfect", "order", "etb"], 
             ["perfect", "order", "elitetrainer"] 

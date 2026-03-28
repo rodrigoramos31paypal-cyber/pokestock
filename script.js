@@ -74,7 +74,7 @@ function detectCategory(name, url) {
     }
 
     // 2. ELITE TRAINER BOX
-    if (text.includes("elite trainer box") || text.includes("etb")) return "Elite Trainer Box";
+    if (text.includes("elite trainer box") || text.includes("etb")) || text.includes("elitetrainer box")) return "Elite Trainer Box";
 
     // 3. BOOSTER BUNDLE
     if (text.includes("booster bundle")) return "Booster Bundle";

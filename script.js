@@ -132,24 +132,18 @@ function renderProducts() {
         return;
     }
 
-    grid.innerHTML = filtered.map(p => `
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
-            <div class="h-48 bg-white flex items-center justify-center p-4">
-                <img src="${p.img || 'https://via.placeholder.com/300'}" class="max-h-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-            </div>
-            <div class="p-4 flex flex-col flex-grow">
-                <div class="flex justify-between items-start mb-1">
-                    <span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter">${p.store}</span>
-                    <span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span>
-                </div>
-                <h3 class="text-sm font-semibold mb-3 line-clamp-2">${p.name}</h3>
-                <div class="mt-auto flex justify-between items-center">
-                    <span class="text-lg font-bold">€${p.price.toFixed(2)}</span>
-                    <a href="${p.url}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition">BUY NOW</a>
-                </div>
-            </div>
-        </div>
-    `).join('');
+    // Change p-4 to p-2 to reduce wasted space
+	// Add h-full and w-full to the <img> tag
+	grid.innerHTML = filtered.map(p => `
+		<div class="bg-white dark:bg-gray-800 rounded-xl ...">
+			<div class="h-48 bg-white flex items-center justify-center p-2"> 
+				<img src="${p.img}" 
+					class="h-full w-full object-contain mix-blend-multiply" 
+					onerror="...">
+			</div>
+			...
+		</div>
+	`).join('');
 }
 
 // --- Core Data Fetching ---

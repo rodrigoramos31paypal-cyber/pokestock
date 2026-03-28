@@ -7,19 +7,23 @@ let searchQuery = '';
 let minPrice = 0;
 let maxPrice = Infinity;
 
+// UPDATED: Category list with correct sorting
 const CATEGORIES = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
 
 const KNOWN_SETS = [
-    "Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", 
-    "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", 
-    "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest",
-    "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", 
-    "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage",
-    "Champion's Path", "Darkness Ablaze", "Rebel Clash", "Sword & Shield", "Cosmic Eclipse"
+    "Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", 
+    "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", 
+    "Paradox Rift", "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", 
+    "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", 
+    "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", 
+    "Battle Styles", "Shining Fates", "Vivid Voltage", "Champion's Path", 
+    "Darkness Ablaze", "Rebel Clash", "Sword & Shield", "Cosmic Eclipse"
 ];
 
 const PRODUCT_CATALOG = [
-    { matchGroups: [["phantasmal", "flames", "elite"]], standardName: "Phantasmal Flames - Elite Trainer Box", image: "images/etbph.png" }
+    { matchGroups: [["phantasmal", "flames", "elite"]], standardName: "Phantasmal Flames - Elite Trainer Box", image: "images/etbph.png" },
+    { matchGroups: [["shrouded", "fable", "elite"]], standardName: "Shrouded Fable - Elite Trainer Box", image: "images/etbfable.png" },
+    { matchGroups: [["perfect", "order", "elite"]], standardName: "Perfect Order - Elite Trainer Box", image: "images/etbpo.png" }
 ];
 
 // --- Helper Functions ---
@@ -40,35 +44,42 @@ function identifySet(name, url) {
 
 /**
  * REFINED CATEGORY LOGIC
+ * Follows a strict priority system to prevent false positives in 'Others'.
  */
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
     const cleanName = name.toLowerCase();
     
-    // 1. ELITE TRAINER BOX (Surging Sparks fix)
-    if (text.includes("elite trainer box") || text.includes("etb")) return "Elite Trainer Box";
+    // 1. OTHERS/ACCESSORIES PRIORITY (Specific triggers for 'Other')
+    if (text.includes("binder") || text.includes("poster") || 
+        (text.includes("sleeve") && !text.includes("sleeved")) ||
+        text.includes("portfolio") || text.includes("portfólio") || 
+        text.includes("acrilico") || text.includes("acrílico") ||
+        text.includes("deck")) return "Other";
 
-    // 2. BOOSTER BOX
-    if ((text.includes("booster box") || text.includes("display")) && !text.includes("bundle") && !text.includes("pack")) return "Booster Box";
+    // 2. ELITE TRAINER BOX
+    if (text.includes("elite trainer") || text.includes("etb") || text.includes("elitetrainer")) return "Elite Trainer Box";
 
     // 3. BOOSTER BUNDLE
     if (text.includes("booster bundle")) return "Booster Bundle";
 
-    // 4. BLISTERS (Including 'tech')
-    if (cleanName.includes("blister") || cleanName.includes("tech")) return "Blisters";
+    // 4. BLISTERS (Checks for blister and tech)
+    if (cleanName.includes("blister") || cleanName.includes("3-pack") || cleanName.includes("checklane") || cleanName.includes("tech")) return "Blisters";
 
-    // 5. BOOSTER PACKS (Catch-all for 'Pack')
-    if (text.includes("pack") || text.includes("booster") || text.includes("sleeved")) return "Booster Packs";
-
-    // 6. TINS
+    // 5. TINS
     if (cleanName.includes("tin")) return "Tins";
 
-    // 7. COLLECTION BOXES (STRICT KEYWORDS)
+    // 6. BOOSTER BOX (Strict check for 36/Display)
+    if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && 
+        !text.includes("bundle") && !text.includes("pack")) return "Booster Box";
+    if (cleanName.includes("36") && cleanName.includes("booster")) return "Booster Box";
+
+    // 7. BOOSTER PACKS (Catch-all for Pack/Sleeved/Packs)
+    if (text.includes("packs") || text.includes("booster") || text.includes("pack") || text.includes("sleeved")) return "Booster Packs";
+
+    // 8. COLLECTION BOXES (Strict keyword list)
     const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special"];
     if (collectionKeywords.some(kw => cleanName.includes(kw))) return "Collection Boxes";
-
-    // 8. OTHERS (Accessories fallback)
-    if (text.includes("binder") || text.includes("poster") || text.includes("sleeve") || text.includes("portfolio") || text.includes("deck")) return "Other";
 
     return "Other";
 }
@@ -88,7 +99,7 @@ function standardizeProduct(originalName, originalUrl, originalImg) {
     return { name: originalName, img: originalImg };
 }
 
-// --- Dynamic Filter Management ---
+// --- UI Rendering ---
 
 function updateDropdowns() {
     const storeSelect = document.getElementById('storeFilter');
@@ -116,17 +127,25 @@ function renderProducts() {
         const matchStore = selectedStore === 'All' || p.store === selectedStore;
         const matchSet = selectedSet === 'All' || p.set === selectedSet;
         const matchPrice = p.price >= minPrice && p.price <= maxPrice;
-        // Search logic
+        // Search Filter logic
         const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.store.toLowerCase().includes(searchQuery.toLowerCase());
         return matchCat && matchStore && matchSet && matchPrice && matchSearch;
     });
 
     document.getElementById('productCount').textContent = `${filtered.length} products found`;
+    
+    if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500">No products match these filters.</div>`;
+        return;
+    }
+
     grid.innerHTML = filtered.map(p => `
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
-            <div class="h-48 bg-white flex items-center justify-center p-2"><img src="${p.img}" class="h-full w-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'"></div>
+            <div class="h-48 bg-white flex items-center justify-center p-2">
+                <img src="${p.img}" class="h-full w-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+            </div>
             <div class="p-4 flex flex-col flex-grow">
-                <div class="flex justify-between items-start mb-1"><span class="text-[10px] font-bold text-red-500 uppercase">${p.store}</span><span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span></div>
+                <div class="flex justify-between items-start mb-1"><span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter">${p.store}</span><span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span></div>
                 <h3 class="text-sm font-semibold mb-3 line-clamp-2">${p.name}</h3>
                 <div class="mt-auto flex justify-between items-center"><span class="text-lg font-bold">€${p.price.toFixed(2)}</span><a href="${p.url}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition">BUY NOW</a></div>
             </div>

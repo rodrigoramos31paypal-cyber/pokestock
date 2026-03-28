@@ -8,7 +8,7 @@
     };
     setInterval(() => { (function() { (function a() { try { (function b(i) { if (('' + (i / i)).length !== 1 || i % 20 === 0) { (function() {}).constructor('debugger')(); } else { debugger; } b(++i); })(0); } catch (e) { setTimeout(a, 5000); } })() })(); }, 5000);
 
-    // === 🧠 LOGIC ===
+    // === 🧠 CORE LOGIC ===
     let _0x1a = [];
     let _0x2b = 'All';
     let _0x3c = 'All';
@@ -19,8 +19,7 @@
 
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
     
-    // UPDATED: Added new set names to the list
-    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution"];
+    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order"];
 
     const _0x10a = [
         { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box", i: "images/etbph.png" },
@@ -38,20 +37,31 @@
 
     /**
      * UPDATED: Refined Set Identification
-     * Handles specific overrides and the Rota151 "151" URL issue.
+     * Handles explicit mappings for Charizard, Venusaur, Heroes, and more.
      */
     function _0x12c(_n, _u) {
         const _nn = _n.toLowerCase();
         const _uu = _u.toLowerCase();
         
-        // 1. Specific Set Overrides
-        if (_nn.includes("charizard x ex") && _nn.includes("premium collection")) return "Phantasmal Flames";
-        if (_nn.includes("black bolt")) return "Black & White";
-        if (_nn.includes("chaos rising")) return "Chaos Rising";
-        if (_nn.includes("ascended heroes")) return "Ascended Heroes";
-        if (_nn.includes("mega evolution") || _nn.includes("mega evolutions")) return "Mega Evolution";
+        // 1. Phantasmal Flames Overrides
+        if (_nn.includes("charizard") && (_nn.includes("tin") || _nn.includes("collection"))) return "Phantasmal Flames";
         
-        // 2. Rota151 URL Shield
+        // 2. Mega Evolution Overrides
+        if (_nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir")) return "Mega Evolution";
+        
+        // 3. Perfect Order Overrides
+        if (_nn.includes("perfect order")) return "Perfect Order";
+
+        // 4. Black & White Overrides
+        if (_nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
+
+        // 5. Prismatic Evolutions Figure Collection
+        if (_nn.includes("prismatic evolution") && _nn.includes("figure")) return "Prismatic Evolutions";
+
+        // 6. Explicit "Other Sets" Mapping
+        if (_nn.includes("calyrex vmax") || _nn.includes("mega venusaur ex") || _nn.includes("battle deck")) return "Other Sets";
+
+        // 7. Rota151 URL Shield
         if (_uu.includes("rota151")) {
             if (_nn.includes("151")) return "151";
         } else {
@@ -69,8 +79,6 @@
     function _0x13d(_n, _u) {
         const _t = (_n + " " + _u).toLowerCase();
         const _cn = _n.toLowerCase();
-        
-        // Priority check
         if (_t.includes("elite trainer") || _t.includes("etb") || _t.includes("elitetrainer")) return _0x8b[1];
         if ((_t.includes("booster box") || _t.includes("half booster box") || _t.includes("display")) && !_t.includes("bundle")) return _0x8b[2];
         if (_cn.includes("36") && _cn.includes("booster") && !_t.includes("bundle")) return _0x8b[2];

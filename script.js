@@ -1,4 +1,4 @@
-// --- State ---
+// --- State Management ---
 let allProducts = [];
 let currentCategory = 'All';
 let selectedStore = 'All';
@@ -6,10 +6,9 @@ let selectedSet = 'All';
 let minPrice = 0;
 let maxPrice = Infinity;
 
-// --- Config ---
+// --- Configuration ---
 const CATEGORIES = ['All', 'Elite Trainer Box', 'Booster Box', 'Build & Battle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
 
-// List of known sets to help extraction if not in Catalog
 const KNOWN_SETS = [
     "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", 
     "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", 
@@ -20,31 +19,86 @@ const KNOWN_SETS = [
     "Hidden Fates", "Unified Minds", "Unbroken Bonds", "Team Up"
 ];
 
-// --- Helper: Parse Price String to Number ---
+// --- Master Product Catalog (Smart Matching) ---
+const PRODUCT_CATALOG = [
+    {
+        matchGroups: [ ["phantasmal", "flames", "elite"], ["phantasmal", "flames", "etb"], ["phantasmal", "flames", "elitetrainer"] ],
+        standardName: "Phantasmal Flames - Elite Trainer Box",
+        image: "images/etbph.png"
+    },
+    {
+        matchGroups: [ ["mega", "evolution", "elite"], ["mega", "evolution", "etb"], ["mega", "evolution", "elitetrainer"] ],
+        standardName: "Mega Evolution - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["ascended", "heroes", "elite"], ["ascended", "heroes", "etb"], ["ascended", "heroes", "elitetrainer"] ],
+        standardName: "Ascended Heroes - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["destined", "rivals", "elite"], ["destined", "rivals", "etb"], ["destined", "rivals", "elitetrainer"] ],
+        standardName: "Destined Rivals - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["stellar", "crown", "elite"], ["stellar", "crown", "etb"], ["stellar", "crown", "elitetrainer"] ],
+        standardName: "Stellar Crown - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["twilight", "masquerade", "elite"], ["twilight", "masquerade", "etb"], ["twilight", "masquerade", "elitetrainer"] ],
+        standardName: "Twilight Masquerade - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["paldean", "fates", "elite"], ["paldean", "fates", "etb"], ["paldean", "fates", "elitetrainer"] ],
+        standardName: "Paldean Fates - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["paradox", "rift", "elite"], ["paradox", "rift", "etb"], ["paradox", "rift", "elitetrainer"] ],
+        standardName: "Paradox Rift - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["paldea", "evolved", "elite"], ["paldea", "evolved", "etb"], ["paldea", "evolved", "elitetrainer"] ],
+        standardName: "Paldea Evolved - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["151", "elite"], ["151", "etb"], ["151", "elitetrainer"] ],
+        standardName: "Scarlet & Violet 151 - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["shrouded", "fable", "elite"], ["shrouded", "fable", "etb"], ["shrouded", "fable", "elitetrainer"] ],
+        standardName: "Shrouded Fable - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    },
+    {
+        matchGroups: [ ["prismatic", "evolutions", "elite"], ["prismatic", "evolutions", "etb"], ["prismatic", "evolution", "elite"] ],
+        standardName: "Prismatic Evolutions - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+    }
+];
+
+// --- Helper Functions ---
+
 function parsePrice(priceStr) {
     if (!priceStr) return 0;
-    // Remove currency symbols and non-numeric characters except , and .
-    // Example: "15,99 €" -> "15.99"
     let cleaned = priceStr.replace(/[^\d.,]/g, '').replace(',', '.');
     return parseFloat(cleaned) || 0;
 }
 
-// --- Helper: Identify Set ---
 function identifySet(name, url) {
     const text = (name + " " + url).toLowerCase();
-    
-    // Check known sets list
     for (const set of KNOWN_SETS) {
         if (text.includes(set.toLowerCase())) return set;
     }
-    
-    // If it follows "Set Name - Product" format from Catalog
-    if (name.includes(" - ")) return name.split(" - ")[0];
-    
-    return "Unknown Set";
+    return name.includes(" - ") ? name.split(" - ")[0] : "Other Sets";
 }
 
-// --- Existing logic from your fixed version ---
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
     if (text.includes("elite trainer box") || text.includes("etb")) return "Elite Trainer Box";
@@ -64,17 +118,6 @@ function getStoreName(url) {
     } catch { return "Unknown Store"; }
 }
 
-// Paste your PRODUCT_CATALOG and standardizeProduct function here...
-// (Using the matchGroups logic we built earlier)
-const PRODUCT_CATALOG = [
-    {
-        matchGroups: [ ["phantasmal", "flames", "elite"], ["phantasmal", "flames", "etb"] ],
-        standardName: "Phantasmal Flames - Elite Trainer Box",
-        image: "images/etbph.png"
-    },
-    // ... add all other ETB groups here ...
-];
-
 function standardizeProduct(originalName, originalUrl, originalImg) {
     let textToSearch = (originalName + " " + originalUrl).toLowerCase().replace(/[^a-z0-9]/g, ' ');
     for (const item of PRODUCT_CATALOG) {
@@ -87,52 +130,36 @@ function standardizeProduct(originalName, originalUrl, originalImg) {
     return { name: originalName, img: originalImg };
 }
 
-// --- Core Data Fetching ---
-async function fetchProducts() {
-    try {
-        const response = await fetch(`seen_products.json?t=${Date.now()}`);
-        const data = await response.json();
-        
-        allProducts = [];
-        for (const key in data) {
-            const product = data[key];
-            if (product.in_stock) {
-                const clean = standardizeProduct(product.name, product.url, product.img);
-                
-                allProducts.push({
-                    name: clean.name,
-                    img: clean.img,
-                    url: product.url,
-                    priceRaw: product.price,
-                    price: parsePrice(product.price),
-                    store: getStoreName(product.url),
-                    category: detectCategory(clean.name, product.url),
-                    set: identifySet(clean.name, product.url)
-                });
-            }
-        }
-        
-        populateDropdowns();
-        renderFilters();
-        renderProducts();
-        document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
-    } catch (e) { console.error("Data error:", e); }
-}
+// --- Dynamic Filter Management ---
 
-// --- UI Management ---
-function populateDropdowns() {
+function updateDropdowns() {
     const storeSelect = document.getElementById('storeFilter');
     const setSelect = document.getElementById('setFilter');
     
-    const stores = [...new Set(allProducts.map(p => p.store))].sort();
-    const sets = [...new Set(allProducts.map(p => p.set))].sort();
+    // Save selections
+    const prevStore = selectedStore;
+    const prevSet = selectedSet;
 
+    // Filter list based ONLY on the current Category tab
+    const categoryMatch = allProducts.filter(p => 
+        currentCategory === 'All' || p.category === currentCategory
+    );
+
+    const availableStores = [...new Set(categoryMatch.map(p => p.store))].sort();
+    const availableSets = [...new Set(categoryMatch.map(p => p.set))].sort();
+
+    // Rebuild Store Dropdown
     storeSelect.innerHTML = '<option value="All">All Stores</option>' + 
-        stores.map(s => `<option value="${s}">${s}</option>`).join('');
-    
+        availableStores.map(s => `<option value="${s}" ${s === prevStore ? 'selected' : ''}>${s}</option>`).join('');
+    selectedStore = availableStores.includes(prevStore) ? prevStore : 'All';
+
+    // Rebuild Set Dropdown
     setSelect.innerHTML = '<option value="All">All Sets</option>' + 
-        sets.map(s => `<option value="${s}">${s}</option>`).join('');
+        availableSets.map(s => `<option value="${s}" ${s === prevSet ? 'selected' : ''}>${s}</option>`).join('');
+    selectedSet = availableSets.includes(prevSet) ? prevSet : 'All';
 }
+
+// --- Rendering Logic ---
 
 function renderFilters() {
     const container = document.getElementById('filterContainer');
@@ -180,8 +207,47 @@ function renderProducts() {
     `).join('');
 }
 
+// --- Core Data Fetching ---
+
+async function fetchProducts() {
+    try {
+        const response = await fetch(`seen_products.json?t=${Date.now()}`);
+        const data = await response.json();
+        
+        allProducts = [];
+        for (const key in data) {
+            const product = data[key];
+            if (product.in_stock) {
+                const clean = standardizeProduct(product.name, product.url, product.img);
+                
+                allProducts.push({
+                    name: clean.name,
+                    img: clean.img,
+                    url: product.url,
+                    priceRaw: product.price,
+                    price: parsePrice(product.price),
+                    store: getStoreName(product.url),
+                    category: detectCategory(clean.name, product.url),
+                    set: identifySet(clean.name, product.url)
+                });
+            }
+        }
+        
+        updateDropdowns();
+        renderFilters();
+        renderProducts();
+        document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
+    } catch (e) { console.error("Data error:", e); }
+}
+
 // --- Event Listeners ---
-function setCategory(cat) { currentCategory = cat; renderFilters(); renderProducts(); }
+
+function setCategory(cat) { 
+    currentCategory = cat; 
+    updateDropdowns(); // Cascading update
+    renderFilters(); 
+    renderProducts(); 
+}
 
 document.getElementById('storeFilter').addEventListener('change', (e) => { selectedStore = e.target.value; renderProducts(); });
 document.getElementById('setFilter').addEventListener('change', (e) => { selectedSet = e.target.value; renderProducts(); });
@@ -194,7 +260,7 @@ document.getElementById('resetFilters').addEventListener('click', () => {
     document.getElementById('setFilter').value = 'All';
     document.getElementById('minPrice').value = '';
     document.getElementById('maxPrice').value = '';
-    renderFilters(); renderProducts();
+    updateDropdowns(); renderFilters(); renderProducts();
 });
 
 const themeBtn = document.getElementById('themeToggle');
@@ -205,6 +271,6 @@ themeBtn.addEventListener('click', () => {
     themeBtn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
 });
 
-// Init
+// Initialize
 fetchProducts();
-setInterval(fetchProducts, 1800000);
+setInterval(fetchProducts, 1800000); // 30 mins

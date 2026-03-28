@@ -230,10 +230,13 @@
     window.onscroll = () => { window.scrollY > 400 ? bTT.classList.add('show') : bTT.classList.remove('show'); };
     bTT.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
+    // === 🌙 THEME TOGGLE LOGIC ===
     const tB = document.getElementById('themeToggle');
-    const tI = document.getElementById('themeIcon');
     let iD = false;
-    tB.addEventListener('click', () => { iD = !iD; document.documentElement.classList.toggle('dark', iD); if (iD) { tI.setAttribute('fill', 'currentColor'); tI.classList.replace('text-gray-500', 'text-yellow-400'); } else { tI.setAttribute('fill', 'none'); tI.classList.replace('text-yellow-400', 'text-gray-500'); } });
+    tB.addEventListener('click', () => {
+        iD = !iD;
+        document.documentElement.classList.toggle('dark', iD);
+    });
 
     fetchData();
     setInterval(fetchData, 1800000);

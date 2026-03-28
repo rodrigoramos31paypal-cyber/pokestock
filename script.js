@@ -6,16 +6,17 @@ let selectedSet = 'All';
 let minPrice = 0;
 let maxPrice = Infinity;
 
-// Categories configuration
+// UPDATED: Added "Booster Bundle" and "Surging Sparks" to config
 const CATEGORIES = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
 
 const KNOWN_SETS = [
-    "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", 
-    "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", 
-    "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest",
-    "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", 
-    "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage",
-    "Champion's Path", "Darkness Ablaze", "Rebel Clash", "Sword & Shield", "Cosmic Eclipse",
+    "Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", 
+    "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", 
+    "Paradox Rift", "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", 
+    "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", 
+    "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", 
+    "Battle Styles", "Shining Fates", "Vivid Voltage", "Champion's Path", 
+    "Darkness Ablaze", "Rebel Clash", "Sword & Shield", "Cosmic Eclipse",
     "Hidden Fates", "Unified Minds", "Unbroken Bonds", "Team Up"
 ];
 
@@ -61,45 +62,58 @@ function identifySet(name, url) {
 
 /**
  * REFINED CATEGORY LOGIC
+ * Uses a strict top-down priority system to ensure products land in their 
+ * correct categories and don't fallback to 'Other' incorrectly.
  */
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
     const cleanName = name.toLowerCase();
     
-    // 1. Others/Accessories Priority
-    // Updated: Only moves to 'Other' if it contains 'sleeve' but NOT 'sleeved'
+    // 1. ELITE TRAINER BOX (High Priority)
+    if (text.includes("elite trainer") || text.includes("etb") || text.includes("elitetrainer")) {
+        return "Elite Trainer Box";
+    }
+
+    // 2. BOOSTER BOX
+    if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && 
+        !text.includes("bundle") && !text.includes("pack")) {
+        return "Booster Box";
+    }
+    if (cleanName.includes("36") && cleanName.includes("booster")) return "Booster Box";
+
+    // 3. BOOSTER BUNDLE
+    if (text.includes("booster bundle")) return "Booster Bundle";
+
+    // 4. BLISTERS (Priority for 'blister' and 'tech')
+    if (cleanName.includes("blister") || cleanName.includes("3-pack") || cleanName.includes("checklane") || cleanName.includes("tech")) {
+        return "Blisters";
+    }
+
+    // 5. TINS (Name-only check to avoid URL false positives)
+    if (cleanName.includes("tin")) return "Tins";
+
+    // 6. BOOSTER PACKS (Catch-all for 'Pack' items)
+    if (text.includes("packs") || text.includes("booster") || text.includes("pack") || text.includes("sleeved")) {
+        return "Booster Packs";
+    }
+
+    // 7. COLLECTION BOXES (Strict keyword list)
+    const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special"];
+    if (collectionKeywords.some(kw => cleanName.includes(kw))) {
+        return "Collection Boxes";
+    }
+
+    // 8. OTHERS/ACCESSORIES FALLBACK
+    // Only items that didn't match the above categories are checked for accessory keywords.
     if (text.includes("binder") || text.includes("poster") || 
         (text.includes("sleeve") && !text.includes("sleeved")) ||
         text.includes("portfolio") || text.includes("portfólio") || 
         text.includes("acrilico") || text.includes("acrílico") ||
-        text.includes("deck")) return "Other";
+        text.includes("deck")) {
+        return "Other";
+    }
 
-    // 2. Elite Trainer Box
-    // Checks both standard and no-space variants
-    if (text.includes("elite trainer") || text.includes("etb") || text.includes("elitetrainer")) return "Elite Trainer Box";
-
-    // 3. Booster Bundle
-    if (text.includes("booster bundle")) return "Booster Bundle";
-
-    // 4. Blisters (Including 'tech' items)
-    if (cleanName.includes("blister") || cleanName.includes("3-pack") || cleanName.includes("checklane") || cleanName.includes("tech")) return "Blisters";
-
-    // 5. Tins (Name only check)
-    if (cleanName.includes("tin")) return "Tins";
-
-    // 6. Booster Box (Restricted SKU check)
-    if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && 
-        !text.includes("bundle") && !text.includes("pack")) return "Booster Box";
-    if (cleanName.includes("36") && cleanName.includes("booster")) return "Booster Box";
-
-    // 7. Booster Packs
-    // Updated: Explicitly handles 'sleeved' and 'packs'
-    if (text.includes("packs") || text.includes("booster") || text.includes("pack") || text.includes("sleeved")) return "Booster Packs";
-
-    // 8. Collection Boxes (STRICT FILTER)
-    const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special"];
-    if (collectionKeywords.some(kw => cleanName.includes(kw))) return "Collection Boxes";
-
+    // 9. FINAL FALLBACK
     return "Other";
 }
 
@@ -127,7 +141,6 @@ function standardizeProduct(originalName, originalUrl, originalImg) {
 function updateDropdowns() {
     const storeSelect = document.getElementById('storeFilter');
     const setSelect = document.getElementById('setFilter');
-    
     const prevStore = selectedStore;
     const prevSet = selectedSet;
 
@@ -188,8 +201,6 @@ function renderProducts() {
         </div>
     `).join('');
 }
-
-// --- Data Logic ---
 
 async function fetchProducts() {
     try {

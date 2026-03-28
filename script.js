@@ -36,43 +36,52 @@
     }
 
     /**
-     * UPDATED: Comprehensive Set Mapping
-     * Handles specific product assignments for Phantasmal Flames, Perfect Order, etc.
+     * UPDATED: Comprehensive Set Mapping Logic
+     * Handles specific product-to-set overrides provided by user.
      */
     function _0x12c(_n, _u) {
         const _nn = _n.toLowerCase();
         
-        // 1. Portfólio / Special Collection Fallback to Other Sets
-        if (_nn.includes("portfólio") || _nn.includes("portfolio")) return "Other Sets";
+        // 1. Phantasmal Flames Mapping (Specific Charizard UPCs)
+        if (_nn.includes("charizard x ex") && _nn.includes("ultra premium collection")) return "Phantasmal Flames";
+        if (_nn.includes("phantasmal flames")) return "Phantasmal Flames";
 
-        // 2. Phantasmal Flames Mapping (including Charizard UPC)
-        if (_nn.includes("phantasmal flames") || (_nn.includes("charizard") && (_nn.includes("ultra-premium") || _nn.includes("tin")))) return "Phantasmal Flames";
+        // 2. Obsidian Flames Mapping (Charizard Special Collections)
+        if (_nn.includes("charizard ex special collection")) return "Obsidian Flames";
 
-        // 3. Perfect Order Mapping
-        if (_nn.includes("perfect order")) return "Perfect Order";
+        // 3. Mega Evolution Mapping
+        if (_nn.includes("pkm enhanced 2-pack blister") || _nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("kangaskhan ex box") || _nn.includes("mega evolution") || _nn.includes("mega kangaskhan")) return "Mega Evolution";
 
-        // 4. Ascended Heroes Mapping
-        if (_nn.includes("ascended heroes")) return "Ascended Heroes";
+        // 4. Destined Rivals Mapping (including Team Rocket)
+        if (_nn.includes("destined rivals") || _nn.includes("team rocket collector's tin")) return "Destined Rivals";
 
-        // 5. Black & White Mapping (including Black Bolt, White Flare, Unova)
+        // 5. Stellar Crown Mapping
+        if (_nn.includes("terapagos") && _nn.includes("deck box")) return "Stellar Crown";
+
+        // 6. Scarlet & Violet Mapping
+        if (_nn.includes("scarlet&violet booster pack")) return "Scarlet & Violet";
+
+        // 7. Prismatic Evolutions Mapping
+        if (_nn.includes("prismatic evolution") && _nn.includes("figure collection")) return "Prismatic Evolutions";
+
+        // 8. Temporal Forces Mapping
+        if (_nn.includes("temporal forces") && _nn.includes("bellibolt")) return "Temporal Forces";
+
+        // 9. Black & White Mapping
         if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
 
-        // 6. Destined Rivals Mapping
-        if (_nn.includes("destined rivals")) return "Destined Rivals";
+        // 10. World Championship Mapping
+        if (_nn.includes("world championship") || _nn.includes("world champions deck") || _nn.includes("fernando cifuentes")) return "Pokémon World Championship";
 
-        // 7. World Championship Mapping
-        if (_nn.includes("world championship") || _nn.includes("world champions deck") || _nn.includes("fernando cifuentes") || _nn.includes("sakuya ota") || _nn.includes("jesse parker")) return "Pokémon World Championship";
-
-        // 8. Journey Together Mapping
+        // 11. Journey Together & Perfect Order
         if (_nn.includes("journey together")) return "Journey Together";
+        if (_nn.includes("perfect order")) return "Perfect Order";
+        if (_nn.includes("ascended heroes")) return "Ascended Heroes";
 
-        // 9. Mega Evolution Mapping (specific tins and boxes)
-        if (_nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("kangaskhan ex box") || _nn.includes("mega evolution")) return "Mega Evolution";
+        // 12. Other Sets Overrides
+        if (_nn.includes("trainer's toolkit 2025") || _nn.includes("iono") || _nn.includes("bellibolt") || _nn.includes("poke ball tin") || _nn.includes("slashing legends") || _nn.includes("trading card game classic") || _nn.includes("cynthia's garchomp") || _nn.includes("pokémon day 2026") || _nn.includes("calyrex vmax") || _nn.includes("mega venusaur ex") || _nn.includes("battle deck") || _nn.includes("portfolio") || _nn.includes("portfólio")) return "Other Sets";
 
-        // 10. Other Sets Overrides
-        if (_nn.includes("iono") || _nn.includes("bellibolt") || _nn.includes("poke ball tin") || _nn.includes("slashing legends") || _nn.includes("trading card game classic") || _nn.includes("charizard ex special collection") || _nn.includes("cynthia's garchomp") || _nn.includes("pokémon day 2026") || _nn.includes("calyrex vmax") || _nn.includes("mega venusaur ex") || _nn.includes("battle deck")) return "Other Sets";
-
-        // 11. Expansion Matcher
+        // 13. General Expansion Matcher
         for (const _s of _0x9c) {
             if (_nn.includes(_s.toLowerCase())) return _s;
         }

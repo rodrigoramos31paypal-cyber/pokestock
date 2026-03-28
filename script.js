@@ -1,5 +1,5 @@
 (function() {
-    // === 🛡️ SECURITY SHIELD ===
+    // === 🛡️ SECURITY ===
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.onkeydown = function(e) {
         if (e.keyCode == 123) return false;
@@ -8,7 +8,7 @@
     };
     setInterval(() => { (function() { (function a() { try { (function b(i) { if (('' + (i / i)).length !== 1 || i % 20 === 0) { (function() {}).constructor('debugger')(); } else { debugger; } b(++i); })(0); } catch (e) { setTimeout(a, 5000); } })() })(); }, 5000);
 
-    // === 🧠 CORE LOGIC ===
+    // === 🧠 LOGIC ===
     let _0x1a = [];
     let _0x2b = 'All';
     let _0x3c = 'All';
@@ -20,63 +20,40 @@
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
     const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together"];
 
-    const _0x10a = [
-        { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box", i: "images/etbph.png" },
-        { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box", i: "images/etbfable.png" },
-        { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box", i: "images/etbpo.png" }
-    ];
-
-    // Spinner Controls
     const _0xShowSync = () => { const o = document.getElementById('loadingOverlay'); o.classList.remove('invisible'); o.classList.add('opacity-100'); };
     const _0xHideSync = () => { const o = document.getElementById('loadingOverlay'); o.classList.remove('opacity-100'); setTimeout(() => o.classList.add('invisible'), 400); };
 
-    function _0x11b(_v) {
-        if (!_v) return 0;
-        let c = _v.replace(/[^\d.,]/g, '');
-        if (c.includes('.') && c.includes(',')) c = c.replace(/\./g, '').replace(',', '.');
-        else if (c.includes(',')) c = c.replace(',', '.');
-        return parseFloat(c) || 0;
-    }
+    function _0x11b(_v) { if (!_v) return 0; let c = _v.replace(/[^\d.,]/g, ''); if (c.includes('.') && c.includes(',')) c = c.replace(/\./g, '').replace(',', '.'); else if (c.includes(',')) c = c.replace(',', '.'); return parseFloat(c) || 0; }
 
     function _0x12c(_n, _u) {
         const _nn = _n.toLowerCase();
-        if (_nn.includes("portfólio") || _nn.includes("portfolio")) return "Other Sets";
-        if (_nn.includes("charizard") && (_nn.includes("tin") || _nn.includes("ultra premium collection") || _nn.includes("ultra-premium collection"))) return "Phantasmal Flames";
-        if (_nn.includes("phantasmal flames")) return "Phantasmal Flames";
-        if (_nn.includes("charizard ex special collection")) return "Obsidian Flames";
+        if (_nn.includes("portfolio") || _nn.includes("portfólio")) return "Other Sets";
+        if (_nn.includes("charizard") && (_nn.includes("tin") || _nn.includes("ultra premium") || _nn.includes("ultra-premium"))) return "Phantasmal Flames";
+        if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
+        if (_nn.includes("world championship") || _nn.includes("fernando cifuentes") || _nn.includes("ancient toolbox")) return "Pokémon World Championship";
+        if (_nn.includes("mega evolution") || _nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("mega kangaskhan")) return "Mega Evolution";
+        if (_nn.includes("destined rivals") || _nn.includes("team rocket")) return "Destined Rivals";
+        if (_nn.includes("journey together")) return "Journey Together";
         if (_nn.includes("perfect order")) return "Perfect Order";
         if (_nn.includes("ascended heroes")) return "Ascended Heroes";
-        if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
-        if (_nn.includes("destined rivals") || _nn.includes("team rocket collector's tin")) return "Destined Rivals";
-        if (_nn.includes("world championship") || _nn.includes("fernando cifuentes") || _nn.includes("ancient toolbox") || _nn.includes("the 'don")) return "Pokémon World Championship";
-        if (_nn.includes("journey together")) return "Journey Together";
-        if (_nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("kangaskhan") || _nn.includes("mega evolution")) return "Mega Evolution";
-        if (_nn.includes("trainer's toolkit 2025") || _nn.includes("iono") || _nn.includes("classic") || _nn.includes("cynthia") || _nn.includes("venusaur ex")) return "Other Sets";
+        if (_nn.includes("iono") || _nn.includes("classic") || _nn.includes("cynthia")) return "Other Sets";
         for (const _s of _0x9c) if (_nn.includes(_s.toLowerCase())) return _s;
-        return _n.includes(" - ") ? _n.split(" - ")[0] : "Other Sets";
+        return "Other Sets";
     }
 
     function _0x13d(_n, _u) {
         const _t = (_n + " " + _u).toLowerCase();
-        const _cn = _n.toLowerCase();
-        if (_t.includes("elite trainer") || _t.includes("etb") || _t.includes("elitetrainer")) return _0x8b[1];
+        if (_t.includes("elite trainer") || _t.includes("etb")) return _0x8b[1];
         if ((_t.includes("booster box") || _t.includes("display")) && !_t.includes("bundle")) return _0x8b[2];
-        if (_cn.includes("36") && _cn.includes("booster") && !_t.includes("bundle")) return _0x8b[2];
         if (_t.includes("booster bundle")) return _0x8b[3];
-        if (_cn.includes("blister") || _cn.includes("tech") || _cn.includes("checklane")) return _0x8b[6];
-        if (_cn.includes("tin")) return _0x8b[5];
-        if (["ultra", "premium", "collection", "ex box", "special", "upc"].some(k => _cn.includes(k))) return _0x8b[4];
+        if (_t.includes("blister") || _t.includes("tech") || _t.includes("checklane")) return _0x8b[6];
+        if (_t.includes("tin")) return _0x8b[5];
+        if (["ultra", "premium", "collection", "ex box", "special", "upc"].some(k => _t.includes(k))) return _0x8b[4];
         if (_t.includes("pack") || _t.includes("booster") || _t.includes("sleeved")) return _0x8b[7];
         return _0x8b[8];
     }
 
     function _0x14e(_u) { try { return new URL(_u).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(); } catch { return "STORE"; } }
-
-    function _0x15f(_on, _ou, _oi) {
-        let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
-        for (const _it of _0x10a) for (const _wg of _it.m) if (_wg.every(_w => _ts.includes(_w))) return { name: _it.s, img: _it.i };
-        return { name: _on, img: _oi };
-    }
 
     window.updateDropdowns = function() {
         const sS = document.getElementById('storeFilter');
@@ -90,9 +67,7 @@
 
     window.setCategory = function(cat) { 
         _0xShowSync(); 
-        setTimeout(() => { 
-            _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); _0xHideSync(); 
-        }, 300); 
+        setTimeout(() => { _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); _0xHideSync(); }, 300); 
     };
 
     window.renderFilters = function() {
@@ -132,12 +107,10 @@
             for (const k in d) {
                 const p = d[k];
                 if (p.in_stock) {
-                    const cl = _0x15f(p.name, p.url, p.img);
-                    _0x1a.push({ name: cl.name, img: cl.img, url: p.url, price: _0x11b(p.price), store: _0x14e(p.url), category: _0x13d(cl.name, p.url), set: _0x12c(cl.name, p.url) });
+                    _0x1a.push({ name: p.name, img: p.img, url: p.url, price: _0x11b(p.price), store: _0x14e(p.url), category: _0x13d(p.name, p.url), set: _0x12c(p.name, p.url) });
                 }
             }
             updateDropdowns(); renderFilters(); renderProducts();
-            document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
         } catch (e) { console.error("ERR"); }
         setTimeout(_0xHideSync, 500);
     }

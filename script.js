@@ -25,61 +25,6 @@ const PRODUCT_CATALOG = [
         matchGroups: [ ["phantasmal", "flames", "elite"], ["phantasmal", "flames", "etb"], ["phantasmal", "flames", "elitetrainer"] ],
         standardName: "Phantasmal Flames - Elite Trainer Box",
         image: "images/etbph.png"
-    },
-    {
-        matchGroups: [ ["mega", "evolution", "elite"], ["mega", "evolution", "etb"], ["mega", "evolution", "elitetrainer"] ],
-        standardName: "Mega Evolution - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["ascended", "heroes", "elite"], ["ascended", "heroes", "etb"], ["ascended", "heroes", "elitetrainer"] ],
-        standardName: "Ascended Heroes - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["destined", "rivals", "elite"], ["destined", "rivals", "etb"], ["destined", "rivals", "elitetrainer"] ],
-        standardName: "Destined Rivals - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["stellar", "crown", "elite"], ["stellar", "crown", "etb"], ["stellar", "crown", "elitetrainer"] ],
-        standardName: "Stellar Crown - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["twilight", "masquerade", "elite"], ["twilight", "masquerade", "etb"], ["twilight", "masquerade", "elitetrainer"] ],
-        standardName: "Twilight Masquerade - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["paldean", "fates", "elite"], ["paldean", "fates", "etb"], ["paldean", "fates", "elitetrainer"] ],
-        standardName: "Paldean Fates - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["paradox", "rift", "elite"], ["paradox", "rift", "etb"], ["paradox", "rift", "elitetrainer"] ],
-        standardName: "Paradox Rift - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["paldea", "evolved", "elite"], ["paldea", "evolved", "etb"], ["paldea", "evolved", "elitetrainer"] ],
-        standardName: "Paldea Evolved - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["151", "elite"], ["151", "etb"], ["151", "elitetrainer"] ],
-        standardName: "Scarlet & Violet 151 - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["shrouded", "fable", "elite"], ["shrouded", "fable", "etb"], ["shrouded", "fable", "elitetrainer"] ],
-        standardName: "Shrouded Fable - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        matchGroups: [ ["prismatic", "evolutions", "elite"], ["prismatic", "evolutions", "etb"], ["prismatic", "evolution", "elite"] ],
-        standardName: "Prismatic Evolutions - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     }
 ];
 

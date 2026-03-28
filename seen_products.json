@@ -4,7 +4,7 @@
     "url": "https://arenaporto.pt/14-pokemon/20619-pokemon-mega-charizard-x-ex-ultrapremium-collection-196214116924.html",
     "img": "https://arenaporto.pt/191102-home_default/pokemon-mega-charizard-x-ex-ultrapremium-collection.jpg",
     "price": "249,99 €",
-    "in_stock": true,
+    "in_stock": false,
     "last_checked": 1774657188.6073608
   },
   "https://arenaporto.pt/14-pokemon/20618-pokemon-ascended-heroes-elite-trainer-box-196214132474.html": {
@@ -28,7 +28,7 @@
     "url": "https://arenaporto.pt/14-pokemon/20421-pokemon--team-rockets-mewtwo-ex-league-battle-deck-196214118898.html",
     "img": "https://arenaporto.pt/14207-home_default/pokemon--team-rockets-mewtwo-ex-league-battle-deck.jpg",
     "price": "54,99 €",
-    "in_stock": true,
+    "in_stock": false,
     "last_checked": 1774657188.6073608
   },
   "https://arenaporto.pt/14-pokemon/20221-pokemon-knock-out-collection-1-820650131394.html": {
@@ -92,7 +92,7 @@
     "url": "https://arenaporto.pt/inicio/20066-pokemon-tcg-mega-evolution-booster-box.html",
     "img": "https://arenaporto.pt/13909-home_default/pokemon-tcg-mega-evolution-booster-box.jpg",
     "price": "220,00 €",
-    "in_stock": true,
+    "in_stock": false,
     "last_checked": 1774657188.6073608
   },
   "https://arenaporto.pt/14-pokemon/19903-pokemon-kanto-friends-mini-tin-1-820650803857.html": {

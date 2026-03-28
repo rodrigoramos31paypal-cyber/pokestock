@@ -69,11 +69,9 @@ const PRODUCT_CATALOG = [
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     },
     {
-        matchGroups: [ 
-            ["stellar", "crown", "box"], 
-        ],
-        standardName: "Stellar Crown - Booster Box",
-        image: "images/bbstellar.png" // Your local high-quality image
+        matchGroups: [ ["stellar", "crown", "elite"], ["stellar", "crown", "etb"] ],
+        standardName: "Stellar Crown - Elite Trainer Box",
+        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     },
     {
         matchGroups: [ ["twilight", "masquerade", "elite"], ["twilight", "masquerade", "etb"] ],

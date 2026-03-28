@@ -6,7 +6,8 @@ let selectedSet = 'All';
 let minPrice = 0;
 let maxPrice = Infinity;
 
-const CATEGORIES = ['All', 'Elite Trainer Box', 'Booster Box', 'Build & Battle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
+// Removed "Build & Battle" and added "Booster Bundle"
+const CATEGORIES = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
 
 const KNOWN_SETS = [
     "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", 
@@ -18,11 +19,9 @@ const KNOWN_SETS = [
     "Hidden Fates", "Unified Minds", "Unbroken Bonds", "Team Up"
 ];
 
-// --- Master Product Catalog ---
-// --- MASTER PRODUCT CATALOG (Smart Matching) ---
+// --- Master Product Catalog (Smart Matching) ---
 const PRODUCT_CATALOG = [
-    
-       
+
 ];
 
 // --- Helper Functions ---
@@ -47,45 +46,44 @@ function identifySet(name, url) {
 }
 
 /**
- * FIXED: Detect Category with SKU Protection.
- * 1. Specific items (Decks/Portfolios) checked FIRST.
- * 2. SKU matching for "36" disabled in URLs to avoid miscategorization.
+ * REFINED CATEGORY LOGIC
  */
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
     const cleanName = name.toLowerCase();
     
-    // 1. Others Priority: Accessories AND Decks [CITE: User Update 4]
-    if (text.includes("portfólio") || text.includes("portfolio") || 
-        text.includes("acrílico") || text.includes("acrilico") ||
+    // 1. Others/Accessories Priority: binder, poster, sleeve, portfolio, acrilico, deck
+    if (text.includes("binder") || text.includes("poster") || text.includes("sleeve") ||
+        text.includes("portfolio") || text.includes("portfólio") || 
+        text.includes("acrilico") || text.includes("acrílico") ||
         text.includes("deck")) return "Other";
 
-    // 2. Blisters Priority [CITE: User Update 1]
-    if (text.includes("blister") || text.includes("3-pack") || text.includes("checklane")) return "Blisters";
-
-    // 3. High Priority Specifics
+    // 2. Elite Trainer Box
     if (text.includes("elite trainer box") || text.includes("etb")) return "Elite Trainer Box";
+
+    // 3. Booster Bundle
+    if (text.includes("booster bundle")) return "Booster Bundle";
+
+    // 4. Blisters (including tech)
+    if (text.includes("blister") || text.includes("3-pack") || text.includes("checklane") || text.includes("tech")) return "Blisters";
+
+    // 5. Tins
     if (text.includes("tin")) return "Tins";
-    if (text.includes("build & battle") || text.includes("stadium") || text.includes("b&b")) return "Build & Battle";
-    
-    // 4. Booster Boxes (Specific check to avoid bundles and SKU interference)
+
+    // 6. Booster Box (Restricted SKU check)
     if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && 
-        !text.includes("bundle") && !text.includes("pack")) {
-        return "Booster Box";
-    }
-    // Only check for "36" if the word "booster" is also present in the NAME (not URL SKU)
+        !text.includes("bundle") && !text.includes("pack")) return "Booster Box";
     if (cleanName.includes("36") && cleanName.includes("booster")) return "Booster Box";
 
-    // 5. Collection Boxes: (Venusaur fix) [CITE: User Update 2]
-    if (text.includes("collection") || text.includes("premium") || 
-        text.includes("upc") || text.includes("box") || 
-        text.includes("bundle")) {
-        return "Collection Boxes";
-    }
+    // 7. Booster Packs
+    if (text.includes("packs") || text.includes("booster") || text.includes("pack") || text.includes("sleeved")) return "Booster Packs";
 
-    // 6. Booster Packs
-    if (text.includes("booster") || text.includes("pack") || text.includes("sleeved")) return "Booster Packs";
-    
+    // 8. Collection Boxes (STRICT FILTER)
+    // Only products with: ultra, premium, collection, ex box, special
+    const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special"];
+    if (collectionKeywords.some(kw => cleanName.includes(kw))) return "Collection Boxes";
+
+    // 9. Default Fallback (Old Build & Battle items fall here)
     return "Other";
 }
 
@@ -113,6 +111,7 @@ function standardizeProduct(originalName, originalUrl, originalImg) {
 function updateDropdowns() {
     const storeSelect = document.getElementById('storeFilter');
     const setSelect = document.getElementById('setFilter');
+    
     const prevStore = selectedStore;
     const prevSet = selectedSet;
 

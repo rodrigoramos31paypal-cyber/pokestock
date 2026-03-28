@@ -41,17 +41,24 @@ function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
     const cleanName = name.toLowerCase();
     
+    // Priority: Accessories & Decks
+    if (text.includes("binder") || text.includes("poster") || 
+        (text.includes("sleeve") && !text.includes("sleeved")) ||
+        text.includes("portfolio") || text.includes("portfólio") || 
+        text.includes("acrilico") || text.includes("acrílico") ||
+        text.includes("deck")) return "Other";
+
     if (text.includes("elite trainer box") || text.includes("etb")) return "Elite Trainer Box";
-    if ((text.includes("booster box") || text.includes("display")) && !text.includes("bundle") && !text.includes("pack")) return "Booster Box";
     if (text.includes("booster bundle")) return "Booster Bundle";
     if (cleanName.includes("blister") || cleanName.includes("tech")) return "Blisters";
     if (text.includes("pack") || text.includes("booster") || text.includes("sleeved")) return "Booster Packs";
     if (cleanName.includes("tin")) return "Tins";
 
+    if ((text.includes("booster box") || text.includes("display")) && !text.includes("bundle") && !text.includes("pack")) return "Booster Box";
+    if (cleanName.includes("36") && cleanName.includes("booster")) return "Booster Box";
+
     const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special"];
     if (collectionKeywords.some(kw => cleanName.includes(kw))) return "Collection Boxes";
-
-    if (text.includes("binder") || text.includes("poster") || text.includes("sleeve") || text.includes("portfolio") || text.includes("deck")) return "Other";
 
     return "Other";
 }
@@ -102,13 +109,22 @@ function renderProducts() {
     });
 
     document.getElementById('productCount').textContent = `${filtered.length} products found`;
+    
+    if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500">No products match these filters.</div>`;
+        return;
+    }
+
     grid.innerHTML = filtered.map(p => `
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
             <div class="h-48 bg-white flex items-center justify-center p-2">
-                <img src="${p.img}" class="h-full w-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                <img src="${p.img}" 
+                     referrerpolicy="no-referrer"
+                     class="h-full w-full object-contain mix-blend-multiply" 
+                     onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
             </div>
             <div class="p-4 flex flex-col flex-grow">
-                <div class="flex justify-between items-start mb-1"><span class="text-[10px] font-bold text-red-500 uppercase">${p.store}</span><span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span></div>
+                <div class="flex justify-between items-start mb-1"><span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter">${p.store}</span><span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span></div>
                 <h3 class="text-sm font-semibold mb-3 line-clamp-2">${p.name}</h3>
                 <div class="mt-auto flex justify-between items-center"><span class="text-lg font-bold">€${p.price.toFixed(2)}</span><a href="${p.url}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition">BUY NOW</a></div>
             </div>
@@ -135,10 +151,8 @@ async function fetchProducts() {
 
 function setCategory(cat) { currentCategory = cat; updateDropdowns(); renderFilters(); renderProducts(); }
 
-// Search Listeners
 document.getElementById('searchInput').addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
 document.getElementById('searchInputMobile').addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
-
 document.getElementById('storeFilter').addEventListener('change', (e) => { selectedStore = e.target.value; renderProducts(); });
 document.getElementById('setFilter').addEventListener('change', (e) => { selectedSet = e.target.value; renderProducts(); });
 document.getElementById('minPrice').addEventListener('input', (e) => { minPrice = parseFloat(e.target.value) || 0; renderProducts(); });

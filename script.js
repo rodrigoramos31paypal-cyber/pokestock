@@ -16,6 +16,13 @@
 
     const _tags = { 'DIVER': 'bg-blue-100 text-blue-600', 'COLECCIONAR': 'bg-purple-100 text-purple-600', 'ARENAPORTO': 'bg-orange-100 text-orange-600', 'ROTA151': 'bg-green-100 text-green-600', 'DEFAULT': 'bg-red-100 text-red-600' };
 
+    // Standard Names Catalog - Expansion point for more products
+    const _0x10a = [
+        { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box", i: "images/etbph.png" },
+        { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box", i: "images/etbfable.png" },
+        { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box", i: "images/etbpo.png" }
+    ];
+
     function _0x11b(_v) { if (!_v) return 0; let c = _v.replace(/[^\d.,]/g, '').replace(',', '.'); return parseFloat(c) || 0; }
 
     function _0x12c(_n) {
@@ -36,6 +43,16 @@
         if (["ultra", "premium", "collection", "ex box"].some(k => _t.includes(k))) return _0x8b[4];
         if (_t.includes("pack") || _t.includes("booster")) return _0x8b[7];
         return _0x8b[8];
+    }
+
+    function _0x15f(_on, _ou, _oi) {
+        let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
+        for (const _it of _0x10a) {
+            for (const _wg of _it.m) {
+                if (_wg.every(_w => _ts.includes(_w))) return { name: _it.s, img: _it.i };
+            }
+        }
+        return { name: _on, img: _oi };
     }
 
     window.updateDropdowns = function() {
@@ -69,27 +86,24 @@
             return mC && mS && mT && mP && mH;
         });
 
-        // --- 🌟 BEST PRICE LOGIC ---
+        // GLOBAL NORMALIZATION - Applies to every product
         const minPrices = {};
         f.forEach(p => {
-            if (!minPrices[p.name] || p.price < minPrices[p.name]) {
-                minPrices[p.name] = p.price;
+            const norm = p.name.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            if (!minPrices[norm] || p.price < minPrices[norm]) {
+                minPrices[norm] = p.price;
             }
         });
 
-        document.getElementById('productCount').textContent = `${f.length} items discovered`;
+        document.getElementById('productCount').textContent = `${f.length} items found`;
         g.innerHTML = f.map(p => {
             const tagStyle = _tags[p.store] || _tags['DEFAULT'];
-            const isBestPrice = p.price === minPrices[p.name]; // Flagging the winner
+            const norm = p.name.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            const isBestPrice = p.price === minPrices[norm];
 
             return `
             <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
-                
-                ${isBestPrice ? `
-                <div class="absolute top-3 right-3 z-10 bg-yellow-400 text-yellow-900 text-[9px] font-black px-2 py-1 rounded-lg shadow-lg flex items-center gap-1 animate-bounce">
-                    <span class="text-xs">⭐</span> BEST PRICE
-                </div>` : ''}
-
+                ${isBestPrice ? `<div class="absolute top-3 right-3 z-10 bg-yellow-400 text-yellow-900 text-[9px] font-black px-2 py-1 rounded-lg shadow-lg flex items-center gap-1 animate-bounce"><span class="text-xs">⭐</span> BEST PRICE</div>` : ''}
                 <div class="h-52 bg-white flex items-center justify-center p-6 overflow-hidden">
                     <img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
                 </div>
@@ -116,7 +130,8 @@
             for (const k in d) {
                 const p = d[k];
                 if (p.in_stock) {
-                    _0x1a.push({ name: p.name, img: p.img, url: p.url, price: _0x11b(p.price), store: new URL(p.url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(), category: _0x13d(p.name), set: _0x12c(p.name) });
+                    const cl = _0x15f(p.name, p.url, p.img);
+                    _0x1a.push({ name: cl.name, img: cl.img, url: p.url, price: _0x11b(p.price), store: new URL(p.url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(), category: _0x13d(cl.name), set: _0x12c(cl.name) });
                 }
             }
             updateDropdowns(); renderFilters(); renderProducts();

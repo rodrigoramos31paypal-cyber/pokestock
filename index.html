@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokéStock Tracker - Advanced Search</title>
     <meta name="referrer" content="no-referrer">
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' }
@@ -16,29 +19,12 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        #loadingOverlay { transition: opacity 0.4s ease, visibility 0.4s; }
-        .spinner {
-            width: 40px; height: 40px;
-            border: 4px solid rgba(220, 38, 38, 0.1);
-            border-left-color: #dc2626;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        
         #themeToggle svg, .nav-btn { transition: all 0.3s ease; }
         .nav-btn:hover { transform: translateY(-1px); }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
 
-    <div id="loadingOverlay" class="fixed inset-0 z-[100] bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center invisible opacity-0">
-        <div class="flex flex-col items-center gap-3">
-            <div class="spinner"></div>
-            <p class="text-sm font-bold text-red-600 animate-pulse uppercase tracking-widest">Syncing Stock...</p>
-        </div>
-    </div>
-    
     <nav class="p-4 bg-white dark:bg-gray-800 shadow-md flex justify-between items-center sticky top-0 z-[60]">
         <h1 class="text-2xl font-bold text-red-600 dark:text-red-400">PokéStock Tracker</h1>
         

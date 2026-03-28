@@ -20,9 +20,6 @@
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
     const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together"];
 
-    const _0xShowSync = () => { const o = document.getElementById('loadingOverlay'); o.classList.remove('invisible'); o.classList.add('opacity-100'); };
-    const _0xHideSync = () => { const o = document.getElementById('loadingOverlay'); o.classList.remove('opacity-100'); setTimeout(() => o.classList.add('invisible'), 400); };
-
     function _0x11b(_v) { if (!_v) return 0; let c = _v.replace(/[^\d.,]/g, ''); if (c.includes('.') && c.includes(',')) c = c.replace(/\./g, '').replace(',', '.'); else if (c.includes(',')) c = c.replace(',', '.'); return parseFloat(c) || 0; }
 
     function _0x12c(_n, _u) {
@@ -66,8 +63,7 @@
     };
 
     window.setCategory = function(cat) { 
-        _0xShowSync(); 
-        setTimeout(() => { _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); _0xHideSync(); }, 300); 
+        _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); 
     };
 
     window.renderFilters = function() {
@@ -99,7 +95,6 @@
     };
 
     async function fetchData() {
-        _0xShowSync();
         try {
             const r = await fetch(`seen_products.json?t=${Date.now()}`);
             const d = await r.json();
@@ -111,8 +106,8 @@
                 }
             }
             updateDropdowns(); renderFilters(); renderProducts();
+            document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
         } catch (e) { console.error("ERR"); }
-        setTimeout(_0xHideSync, 500);
     }
 
     document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });

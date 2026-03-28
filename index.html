@@ -11,7 +11,8 @@
     <style>
         body { transition: background-color 0.3s, color 0.3s; }
         html { scroll-behavior: smooth; }
-        /* Hide scrollbar for category list but keep functionality */
+        /* Style for the back to top button */
+        #backToTop.show { opacity: 1; pointer-events: auto; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -65,8 +66,7 @@
 
             <div class="flex-grow">
                 <div class="sticky top-[72px] lg:top-24 z-50 bg-gray-50 dark:bg-gray-900 py-4 mb-2 overflow-x-auto no-scrollbar">
-                    <div id="filterContainer" class="flex gap-2 min-w-max">
-                        </div>
+                    <div id="filterContainer" class="flex gap-2 min-w-max"></div>
                 </div>
 
                 <div class="flex justify-between items-end mb-4">
@@ -74,13 +74,12 @@
                     <p id="lastUpdated" class="text-xs text-gray-400"></p>
                 </div>
 
-                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                    </div>
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"></div>
             </div>
         </div>
     </main>
 
-    <button id="backToTop" class="fixed bottom-8 right-8 p-3 bg-red-600 text-white rounded-full shadow-lg hover:bg-red-700 transition-opacity opacity-0 pointer-events-none z-[70]">
+    <button id="backToTop" class="fixed bottom-8 right-8 p-3 bg-red-600 text-white rounded-full shadow-xl opacity-0 pointer-events-none transition-all duration-300 hover:bg-red-700 z-[70] hover:scale-110">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>

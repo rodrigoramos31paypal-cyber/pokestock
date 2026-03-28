@@ -136,32 +136,36 @@ function identifySet(name, url) {
 }
 
 /**
- * FIXED: Refined Category Logic
- * Priority: Accessories/Decks -> Blisters -> Specific TCG Items -> General Collections
+ * FIXED: Detect Category with SKU Protection.
+ * 1. Specific items (Decks/Portfolios) checked FIRST.
+ * 2. SKU matching for "36" disabled in URLs to avoid miscategorization.
  */
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
+    const cleanName = name.toLowerCase();
     
-    // 1. Others Priority: Accessories AND Decks
+    // 1. Others Priority: Accessories AND Decks [CITE: User Update 4]
     if (text.includes("portfólio") || text.includes("portfolio") || 
         text.includes("acrílico") || text.includes("acrilico") ||
-        text.includes("deck")) return "Other"; // Moves Battle Decks to "Other"
+        text.includes("deck")) return "Other";
 
-    // 2. Blisters Priority: Must catch this before "Collection" or "Premium"
+    // 2. Blisters Priority [CITE: User Update 1]
     if (text.includes("blister") || text.includes("3-pack") || text.includes("checklane")) return "Blisters";
 
-    // 3. High Priority TCG Specifics
+    // 3. High Priority Specifics
     if (text.includes("elite trainer box") || text.includes("etb")) return "Elite Trainer Box";
     if (text.includes("tin")) return "Tins";
     if (text.includes("build & battle") || text.includes("stadium") || text.includes("b&b")) return "Build & Battle";
     
-    // 4. Booster Boxes (Specific check to avoid bundles)
-    if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display") || text.includes("36")) && 
+    // 4. Booster Boxes (Specific check to avoid bundles and SKU interference)
+    if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && 
         !text.includes("bundle") && !text.includes("pack")) {
         return "Booster Box";
     }
+    // Only check for "36" if the word "booster" is also present in the NAME (not URL SKU)
+    if (cleanName.includes("36") && cleanName.includes("booster")) return "Booster Box";
 
-    // 5. Collection Boxes: (Catching "Premium" and "Collection")
+    // 5. Collection Boxes: (Venusaur fix) [CITE: User Update 2]
     if (text.includes("collection") || text.includes("premium") || 
         text.includes("upc") || text.includes("box") || 
         text.includes("bundle")) {
@@ -198,7 +202,6 @@ function standardizeProduct(originalName, originalUrl, originalImg) {
 function updateDropdowns() {
     const storeSelect = document.getElementById('storeFilter');
     const setSelect = document.getElementById('setFilter');
-    
     const prevStore = selectedStore;
     const prevSet = selectedSet;
 
@@ -298,11 +301,9 @@ const backToTopBtn = document.getElementById('backToTop');
 
 window.onscroll = function() {
     if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-        backToTopBtn.classList.add('opacity-100', 'pointer-events-auto');
+        backToTopBtn.classList.add('show');
     } else {
-        backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
-        backToTopBtn.classList.remove('opacity-100', 'pointer-events-auto');
+        backToTopBtn.classList.remove('show');
     }
 };
 

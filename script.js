@@ -16,10 +16,23 @@
 
     const _tags = { 'DIVER': 'bg-blue-100 text-blue-600', 'COLECCIONAR': 'bg-purple-100 text-purple-600', 'ARENAPORTO': 'bg-orange-100 text-orange-600', 'ROTA151': 'bg-green-100 text-green-600', 'DEFAULT': 'bg-red-100 text-red-600' };
 
-    // Standard Names Catalog - Expansion point for more products
+    // === 📦 EXPANDED STANDARD NAMES CATALOG ===
+    // This layer forces different store titles into a single "Master Name"
     const _0x10a = [
+        // Phantasmal Flames
         { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box", i: "images/etbph.png" },
+        { m: [["phantasmal", "flames", "booster", "box"]], s: "Phantasmal Flames - Booster Box", i: "images/bbph.png" },
+        { m: [["phantasmal", "flames", "booster", "bundle"]], s: "Phantasmal Flames - Booster Bundle", i: "images/bunph.png" },
+        // Surging Sparks
+        { m: [["surging", "sparks", "booster", "box"]], s: "Surging Sparks - Booster Box", i: "images/bbss.png" },
+        { m: [["surging", "sparks", "booster", "bundle"]], s: "Surging Sparks - Booster Bundle", i: "images/bunss.png" },
+        // Stellar Crown
+        { m: [["stellar", "crown", "booster", "box"]], s: "Stellar Crown - Booster Box", i: "images/bbsc.png" },
+        { m: [["stellar", "crown", "booster", "bundle"]], s: "Stellar Crown - Booster Bundle", i: "images/bunsc.png" },
+        // Shrouded Fable
         { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box", i: "images/etbfable.png" },
+        { m: [["shrouded", "fable", "booster", "bundle"]], s: "Shrouded Fable - Booster Bundle", i: "images/bunfable.png" },
+        // Perfect Order
         { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box", i: "images/etbpo.png" }
     ];
 
@@ -45,6 +58,7 @@
         return _0x8b[8];
     }
 
+    // Standardization Logic: Checks the catalog and returns the master name/image
     function _0x15f(_on, _ou, _oi) {
         let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
         for (const _it of _0x10a) {
@@ -86,7 +100,7 @@
             return mC && mS && mT && mP && mH;
         });
 
-        // GLOBAL NORMALIZATION - Applies to every product
+        // GLOBAL NORMALIZATION - Applies logic to every product name
         const minPrices = {};
         f.forEach(p => {
             const norm = p.name.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
@@ -130,8 +144,17 @@
             for (const k in d) {
                 const p = d[k];
                 if (p.in_stock) {
+                    // APPLY CATALOG STANDARDIZATION
                     const cl = _0x15f(p.name, p.url, p.img);
-                    _0x1a.push({ name: cl.name, img: cl.img, url: p.url, price: _0x11b(p.price), store: new URL(p.url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(), category: _0x13d(cl.name), set: _0x12c(cl.name) });
+                    _0x1a.push({ 
+                        name: cl.name, 
+                        img: cl.img, 
+                        url: p.url, 
+                        price: _0x11b(p.price), 
+                        store: new URL(p.url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(), 
+                        category: _0x13d(cl.name), 
+                        set: _0x12c(cl.name) 
+                    });
                 }
             }
             updateDropdowns(); renderFilters(); renderProducts();

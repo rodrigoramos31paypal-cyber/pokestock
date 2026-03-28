@@ -6,7 +6,7 @@ let selectedSet = 'All';
 let minPrice = 0;
 let maxPrice = Infinity;
 
-// Removed "Build & Battle" and added "Booster Bundle"
+// Categories configuration
 const CATEGORIES = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
 
 const KNOWN_SETS = [
@@ -52,7 +52,7 @@ function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
     const cleanName = name.toLowerCase();
     
-    // 1. Others/Accessories Priority: binder, poster, sleeve, portfolio, acrilico, deck
+    // 1. Others/Accessories Priority
     if (text.includes("binder") || text.includes("poster") || text.includes("sleeve") ||
         text.includes("portfolio") || text.includes("portfólio") || 
         text.includes("acrilico") || text.includes("acrílico") ||
@@ -64,11 +64,12 @@ function detectCategory(name, url) {
     // 3. Booster Bundle
     if (text.includes("booster bundle")) return "Booster Bundle";
 
-    // 4. Blisters (including tech)
-    if (text.includes("blister") || text.includes("3-pack") || text.includes("checklane") || text.includes("tech")) return "Blisters";
+    // 4. Blisters (Must check name to avoid URL tin confusion)
+    if (cleanName.includes("blister") || cleanName.includes("3-pack") || cleanName.includes("checklane") || cleanName.includes("tech")) return "Blisters";
 
-    // 5. Tins
-    if (text.includes("tin")) return "Tins";
+    // 5. Tins (NAME ONLY FIX)
+    // Checking only cleanName prevents items with "/tins/" in URL from being misclassified
+    if (cleanName.includes("tin")) return "Tins";
 
     // 6. Booster Box (Restricted SKU check)
     if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && 
@@ -76,14 +77,13 @@ function detectCategory(name, url) {
     if (cleanName.includes("36") && cleanName.includes("booster")) return "Booster Box";
 
     // 7. Booster Packs
+    // Handles "TCG Pokémon - Booster - Destined Rivals"
     if (text.includes("packs") || text.includes("booster") || text.includes("pack") || text.includes("sleeved")) return "Booster Packs";
 
     // 8. Collection Boxes (STRICT FILTER)
-    // Only products with: ultra, premium, collection, ex box, special
     const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special"];
     if (collectionKeywords.some(kw => cleanName.includes(kw))) return "Collection Boxes";
 
-    // 9. Default Fallback (Old Build & Battle items fall here)
     return "Other";
 }
 

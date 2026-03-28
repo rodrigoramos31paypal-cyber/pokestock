@@ -9,40 +9,58 @@
     let _0x3c = 'All';
     let _0x4d = 'All';
     let _0x5e = '';
-    let _0xMaxP = 500;
+    let _0xMaxP = 2000; // Increased to 2000 by default
 
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
-    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together"];
+    // Added Rebel Clash to master list
+    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together", "Rebel Clash"];
 
     const _tags = { 'DIVER': 'bg-blue-100 text-blue-600', 'COLECCIONAR': 'bg-purple-100 text-purple-600', 'ARENAPORTO': 'bg-orange-100 text-orange-600', 'ROTA151': 'bg-green-100 text-green-600', 'DEFAULT': 'bg-red-100 text-red-600' };
 
-    // === 📦 EXPANDED STANDARD NAMES CATALOG ===
-    // This layer forces different store titles into a single "Master Name"
     const _0x10a = [
-        // Phantasmal Flames
         { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box", i: "images/etbph.png" },
         { m: [["phantasmal", "flames", "booster", "box"]], s: "Phantasmal Flames - Booster Box", i: "images/bbph.png" },
         { m: [["phantasmal", "flames", "booster", "bundle"]], s: "Phantasmal Flames - Booster Bundle", i: "images/bunph.png" },
-        // Surging Sparks
         { m: [["surging", "sparks", "booster", "box"]], s: "Surging Sparks - Booster Box", i: "images/bbss.png" },
         { m: [["surging", "sparks", "booster", "bundle"]], s: "Surging Sparks - Booster Bundle", i: "images/bunss.png" },
-        // Stellar Crown
         { m: [["stellar", "crown", "booster", "box"]], s: "Stellar Crown - Booster Box", i: "images/bbsc.png" },
         { m: [["stellar", "crown", "booster", "bundle"]], s: "Stellar Crown - Booster Bundle", i: "images/bunsc.png" },
-        // Shrouded Fable
         { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box", i: "images/etbfable.png" },
         { m: [["shrouded", "fable", "booster", "bundle"]], s: "Shrouded Fable - Booster Bundle", i: "images/bunfable.png" },
-        // Perfect Order
         { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box", i: "images/etbpo.png" }
     ];
 
-    function _0x11b(_v) { if (!_v) return 0; let c = _v.replace(/[^\d.,]/g, '').replace(',', '.'); return parseFloat(c) || 0; }
+    // UPDATED: Restored safe price parser for comma/dot combinations
+    function _0x11b(_v) {
+        if (!_v) return 0;
+        let c = _v.replace(/[^\d.,]/g, '');
+        if (c.includes('.') && c.includes(',')) c = c.replace(/\./g, '').replace(',', '.');
+        else if (c.includes(',')) c = c.replace(',', '.');
+        return parseFloat(c) || 0;
+    }
 
+    // UPDATED: Hierarchy fixed! Perfect Order & Ascended Heroes evaluated BEFORE Mega Evolution
     function _0x12c(_n) {
         const _nn = _n.toLowerCase();
-        if (_nn.includes("charizard") && (_nn.includes("tin") || _nn.includes("premium"))) return "Phantasmal Flames";
-        if (_nn.includes("world championship")) return "Pokémon World Championship";
-        if (_nn.includes("mega evolution")) return "Mega Evolution";
+        if (_nn.includes("portfolio") || _nn.includes("portfólio")) return "Other Sets";
+        if (_nn.includes("charizard") && (_nn.includes("tin") || _nn.includes("ultra premium") || _nn.includes("ultra-premium"))) return "Phantasmal Flames";
+        
+        // Black & White mapping (high priority)
+        if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
+        
+        if (_nn.includes("world championship") || _nn.includes("fernando cifuentes") || _nn.includes("ancient toolbox")) return "Pokémon World Championship";
+        if (_nn.includes("destined rivals") || _nn.includes("team rocket")) return "Destined Rivals";
+        if (_nn.includes("journey together")) return "Journey Together";
+        
+        // Important: These two must come BEFORE Mega Evolution
+        if (_nn.includes("perfect order")) return "Perfect Order";
+        if (_nn.includes("ascended heroes")) return "Ascended Heroes";
+        
+        // Mega Evolution mapping
+        if (_nn.includes("mega evolution") || _nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("mega kangaskhan")) return "Mega Evolution";
+        
+        if (_nn.includes("iono") || _nn.includes("classic") || _nn.includes("cynthia")) return "Other Sets";
+        
         for (const _s of _0x9c) if (_nn.includes(_s.toLowerCase())) return _s;
         return "Other Sets";
     }
@@ -58,7 +76,6 @@
         return _0x8b[8];
     }
 
-    // Standardization Logic: Checks the catalog and returns the master name/image
     function _0x15f(_on, _ou, _oi) {
         let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
         for (const _it of _0x10a) {
@@ -69,12 +86,18 @@
         return { name: _on, img: _oi };
     }
 
+    function _0x14e(_u) { try { return new URL(_u).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(); } catch { return "STORE"; } }
+
     window.updateDropdowns = function() {
         const sS = document.getElementById('storeFilter');
         const sT = document.getElementById('setFilter');
-        const cM = _0x1a.filter(p => _0x2b === 'All' || p.category === _0x2b);
+        
+        // UPDATED: Now filters by MAX PRICE to prevent "Ghost Sets"
+        const cM = _0x1a.filter(p => (_0x2b === 'All' || p.category === _0x2b) && p.price <= _0xMaxP);
+        
         const aS = [...new Set(cM.map(p => p.store))].sort();
         const aT = [...new Set(cM.map(p => p.set))].sort();
+        
         sS.innerHTML = '<option value="All">All Stores</option>' + aS.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
         sT.innerHTML = '<option value="All">All Sets</option>' + aT.map(s => `<option value="${s}" ${_0x4d === s ? 'selected' : ''}>${s}</option>`).join('');
     };
@@ -100,7 +123,6 @@
             return mC && mS && mT && mP && mH;
         });
 
-        // GLOBAL NORMALIZATION - Applies logic to every product name
         const minPrices = {};
         f.forEach(p => {
             const norm = p.name.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
@@ -144,17 +166,8 @@
             for (const k in d) {
                 const p = d[k];
                 if (p.in_stock) {
-                    // APPLY CATALOG STANDARDIZATION
                     const cl = _0x15f(p.name, p.url, p.img);
-                    _0x1a.push({ 
-                        name: cl.name, 
-                        img: cl.img, 
-                        url: p.url, 
-                        price: _0x11b(p.price), 
-                        store: new URL(p.url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(), 
-                        category: _0x13d(cl.name), 
-                        set: _0x12c(cl.name) 
-                    });
+                    _0x1a.push({ name: cl.name, img: cl.img, url: p.url, price: _0x11b(p.price), store: new URL(p.url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(), category: _0x13d(cl.name), set: _0x12c(cl.name) });
                 }
             }
             updateDropdowns(); renderFilters(); renderProducts();
@@ -167,6 +180,9 @@
     slider.addEventListener('input', (e) => {
         _0xMaxP = parseInt(e.target.value);
         label.textContent = `€${_0xMaxP}`;
+        
+        // UPDATED: Now triggers dropdown update so Ghost Sets disappear live as you slide
+        updateDropdowns(); 
         renderProducts();
     });
 
@@ -174,9 +190,11 @@
     document.getElementById('searchInputMobile').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
     document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; renderProducts(); });
     document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; renderProducts(); });
+    
+    // UPDATED: Reset sets slider max back to 2000
     document.getElementById('resetFilters').addEventListener('click', () => { 
-        _0x3c = 'All'; _0x4d = 'All'; _0xMaxP = 500; _0x2b = 'All'; _0x5e = ''; 
-        slider.value = 500; label.textContent = '€500';
+        _0x3c = 'All'; _0x4d = 'All'; _0xMaxP = 2000; _0x2b = 'All'; _0x5e = ''; 
+        slider.value = 2000; label.textContent = '€2000';
         fetchData(); 
     });
 

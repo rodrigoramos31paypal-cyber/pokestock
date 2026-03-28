@@ -11,15 +11,22 @@
     let _0x5e = '';
     let _0xMaxP = 2000; 
 
-    const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
-    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together", "Rebel Clash"];
+    // CATEGORIES UPDATED: Removed Blisters/Packs, Added Half Booster Box
+    const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Half Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Other'];
+    
+    // SETS UPDATED: Added Crown Zenith
+    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together", "Rebel Clash", "Crown Zenith"];
 
-    const _tags = { 'DIVER': 'bg-blue-100 text-blue-600', 'COLECCIONAR': 'bg-purple-100 text-purple-600', 'ARENAPORTO': 'bg-orange-100 text-orange-600', 'ROTA151': 'bg-green-100 text-green-600', 'DEFAULT': 'bg-red-100 text-red-600' };
-
-    // Supercharged ETB Standardizer
     const _0x10a = [
         { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box" },
+        { m: [["phantasmal", "flames", "booster", "box"]], s: "Phantasmal Flames - Booster Box" },
+        { m: [["phantasmal", "flames", "booster", "bundle"]], s: "Phantasmal Flames - Booster Bundle" },
+        { m: [["surging", "sparks", "booster", "box"]], s: "Surging Sparks - Booster Box" },
+        { m: [["surging", "sparks", "booster", "bundle"]], s: "Surging Sparks - Booster Bundle" },
+        { m: [["stellar", "crown", "booster", "box"]], s: "Stellar Crown - Booster Box" },
+        { m: [["stellar", "crown", "booster", "bundle"]], s: "Stellar Crown - Booster Bundle" },
         { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box" },
+        { m: [["shrouded", "fable", "booster", "bundle"]], s: "Shrouded Fable - Booster Bundle" },
         { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box" },
         { m: [["surging", "sparks", "elite"]], s: "Surging Sparks - Elite Trainer Box" },
         { m: [["stellar", "crown", "elite"]], s: "Stellar Crown - Elite Trainer Box" },
@@ -41,33 +48,41 @@
         const _nn = _n.toLowerCase();
         if (_nn.includes("portfolio") || _nn.includes("portfólio")) return "Other Sets";
         if (_nn.includes("charizard") && (_nn.includes("tin") || _nn.includes("ultra premium") || _nn.includes("ultra-premium"))) return "Phantasmal Flames";
-        
         if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
         if (_nn.includes("world championship") || _nn.includes("fernando cifuentes") || _nn.includes("ancient toolbox")) return "Pokémon World Championship";
         if (_nn.includes("destined rivals") || _nn.includes("team rocket")) return "Destined Rivals";
         if (_nn.includes("journey together")) return "Journey Together";
-        
-        // Priority check before Mega Evolution
         if (_nn.includes("perfect order")) return "Perfect Order";
         if (_nn.includes("ascended heroes")) return "Ascended Heroes";
         if (_nn.includes("mega evolution") || _nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("mega kangaskhan")) return "Mega Evolution";
-        
         if (_nn.includes("iono") || _nn.includes("classic") || _nn.includes("cynthia")) return "Other Sets";
         for (const _s of _0x9c) if (_nn.includes(_s.toLowerCase())) return _s;
         return "Other Sets";
     }
 
+    // UPDATED CATEGORY LOGIC: Strict Enforcement for "Other" and "Half Booster Box"
     function _0x13d(_n) {
         const _t = _n.toLowerCase();
-        // Priority to catch Battle Decks immediately
-        if (_t.includes("battle deck") || _t.includes("battle decks")) return _0x8b[8];
-        if (_t.includes("elite trainer") || _t.includes("etb")) return _0x8b[1];
-        if (_t.includes("booster box") || _t.includes("display")) return _0x8b[2];
-        if (_t.includes("bundle")) return _0x8b[3];
-        if (_t.includes("tin")) return _0x8b[5];
-        if (["ultra", "premium", "collection", "ex box"].some(k => _t.includes(k))) return _0x8b[4];
-        if (_t.includes("pack") || _t.includes("booster")) return _0x8b[7];
-        return _0x8b[8];
+        
+        // 1. Force to "Other"
+        if (['deck', 'blister', 'checklane', 'checkla', 'checklan', 'tech', 'binder', 'poster'].some(k => _t.includes(k))) return 'Other';
+        
+        // 2. Booster Packs fallback (since category is removed)
+        if ((_t.includes('pack') || _t.includes('sleeved') || _t.includes('booster')) && !_t.includes('box') && !_t.includes('bundle') && !_t.includes('display') && !_t.includes('tin') && !_t.includes('elite')) {
+            return 'Other';
+        }
+
+        // 3. Half Booster Box Logic
+        if (_t.includes('half') || (_t.includes('booster box') && _t.includes('18')) || (_t.includes('display') && _t.includes('18'))) return 'Half Booster Box';
+
+        // 4. Standard Categories
+        if (_t.includes('elite trainer') || _t.includes('etb')) return 'Elite Trainer Box';
+        if ((_t.includes('booster box') || _t.includes('display')) && !_t.includes('bundle')) return 'Booster Box';
+        if (_t.includes('bundle')) return 'Booster Bundle';
+        if (_t.includes('tin')) return 'Tins';
+        if (['ultra', 'premium', 'collection', 'ex box', 'special', 'upc'].some(k => _t.includes(k))) return 'Collection Boxes';
+        
+        return 'Other';
     }
 
     function _0x15f(_on, _ou, _oi) {
@@ -94,7 +109,6 @@
         sS.innerHTML = '<option value="All">All Stores</option>' + aS.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
         sT.innerHTML = '<option value="All">All Sets</option>' + aT.map(s => `<option value="${s}" ${_0x4d === s ? 'selected' : ''}>${s}</option>`).join('');
         
-        // GHOST SET FIX: Sync variables with dropdowns
         _0x3c = sS.value;
         _0x4d = sT.value;
     };
@@ -120,39 +134,23 @@
             return mC && mS && mT && mP && mH;
         });
 
-        // BEST PRICE FIX: Only applies to Elite Trainer Boxes
-        const minPrices = {};
-        f.forEach(p => {
-            if (p.category === 'Elite Trainer Box') {
-                const norm = p.name.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
-                if (!minPrices[norm] || p.price < minPrices[norm]) {
-                    minPrices[norm] = p.price;
-                }
-            }
-        });
-
         document.getElementById('productCount').textContent = `${f.length} items found`;
+        
+        // BEST PRICE BADGE AND CUSTOM COLORS REMOVED
         g.innerHTML = f.map(p => {
-            const tagStyle = _tags[p.store] || _tags['DEFAULT'];
-            const norm = p.name.toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
-            
-            // Check if it is an ETB AND has the winning price
-            const isBestPrice = p.category === 'Elite Trainer Box' && p.price === minPrices[norm];
-
             return `
             <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
-                ${isBestPrice ? `<div class="absolute top-3 right-3 z-10 bg-yellow-400 text-yellow-900 text-[9px] font-black px-2 py-1 rounded-lg shadow-lg flex items-center gap-1 animate-bounce"><span class="text-xs">⭐</span> BEST PRICE</div>` : ''}
                 <div class="h-52 bg-white flex items-center justify-center p-6 overflow-hidden">
                     <img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
                 </div>
                 <div class="p-5 flex flex-col flex-grow bg-white dark:bg-gray-800">
                     <div class="flex justify-between items-center mb-3">
-                        <span class="text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest ${tagStyle}">${p.store}</span>
-                        <span class="text-[9px] font-bold text-gray-400 uppercase">${p.set}</span>
+                        <span class="text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300">${p.store}</span>
+                        <span class="text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300">${p.set}</span>
                     </div>
                     <h3 class="text-sm font-bold mb-4 line-clamp-2 h-10 group-hover:text-red-600 transition-colors">${p.name}</h3>
                     <div class="mt-auto flex justify-between items-center">
-                        <span class="text-xl font-black ${isBestPrice ? 'text-red-600' : 'text-gray-900 dark:text-white'}">€${p.price.toFixed(2)}</span>
+                        <span class="text-xl font-black text-gray-900 dark:text-white">€${p.price.toFixed(2)}</span>
                         <a href="${p.url}" target="_blank" class="px-5 py-2.5 bg-gray-900 dark:bg-red-600 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-gray-900/10 dark:shadow-red-600/20">View Deal</a>
                     </div>
                 </div>

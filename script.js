@@ -14,7 +14,6 @@
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
     const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together"];
 
-    // Store Tag Colors Mapping
     const _tags = { 'DIVER': 'bg-blue-100 text-blue-600', 'COLECCIONAR': 'bg-purple-100 text-purple-600', 'ARENAPORTO': 'bg-orange-100 text-orange-600', 'ROTA151': 'bg-green-100 text-green-600', 'DEFAULT': 'bg-red-100 text-red-600' };
 
     function _0x11b(_v) { if (!_v) return 0; let c = _v.replace(/[^\d.,]/g, '').replace(',', '.'); return parseFloat(c) || 0; }
@@ -51,7 +50,6 @@
 
     window.setCategory = function(cat) { _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); };
 
-    // 4. MODERNIZED ACTIVE STATES
     window.renderFilters = function() {
         const c = document.getElementById('filterContainer');
         c.innerHTML = _0x8b.map(cat => {
@@ -60,7 +58,6 @@
         }).join('');
     };
 
-    // 5. LEVEL UP PRODUCT CARDS
     window.renderProducts = function() {
         const g = document.getElementById('productGrid');
         const f = _0x1a.filter(p => {
@@ -71,11 +68,28 @@
             const mH = p.name.toLowerCase().includes(_0x5e.toLowerCase());
             return mC && mS && mT && mP && mH;
         });
+
+        // --- 🌟 BEST PRICE LOGIC ---
+        const minPrices = {};
+        f.forEach(p => {
+            if (!minPrices[p.name] || p.price < minPrices[p.name]) {
+                minPrices[p.name] = p.price;
+            }
+        });
+
         document.getElementById('productCount').textContent = `${f.length} items discovered`;
         g.innerHTML = f.map(p => {
             const tagStyle = _tags[p.store] || _tags['DEFAULT'];
+            const isBestPrice = p.price === minPrices[p.name]; // Flagging the winner
+
             return `
-            <div class="group bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
+            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
+                
+                ${isBestPrice ? `
+                <div class="absolute top-3 right-3 z-10 bg-yellow-400 text-yellow-900 text-[9px] font-black px-2 py-1 rounded-lg shadow-lg flex items-center gap-1 animate-bounce">
+                    <span class="text-xs">⭐</span> BEST PRICE
+                </div>` : ''}
+
                 <div class="h-52 bg-white flex items-center justify-center p-6 overflow-hidden">
                     <img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
                 </div>
@@ -86,7 +100,7 @@
                     </div>
                     <h3 class="text-sm font-bold mb-4 line-clamp-2 h-10 group-hover:text-red-600 transition-colors">${p.name}</h3>
                     <div class="mt-auto flex justify-between items-center">
-                        <span class="text-xl font-black text-gray-900 dark:text-white">€${p.price.toFixed(2)}</span>
+                        <span class="text-xl font-black ${isBestPrice ? 'text-red-600' : 'text-gray-900 dark:text-white'}">€${p.price.toFixed(2)}</span>
                         <a href="${p.url}" target="_blank" class="px-5 py-2.5 bg-gray-900 dark:bg-red-600 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-gray-900/10 dark:shadow-red-600/20">View Deal</a>
                     </div>
                 </div>
@@ -110,7 +124,6 @@
         } catch (e) { console.error("ERR"); }
     }
 
-    // Slider Event
     const slider = document.getElementById('priceSlider');
     const label = document.getElementById('priceLabel');
     slider.addEventListener('input', (e) => {

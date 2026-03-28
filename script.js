@@ -126,7 +126,13 @@
         _0x3c = sS.value; _0x4d = sT.value;
     };
 
-    window.setCategory = function(cat) { _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); };
+    window.setCategory = function(cat) { 
+        _0x2b = cat; 
+        document.getElementById('categorySelect').value = cat; // SYNC SIDEBAR
+        updateDropdowns(); 
+        renderFilters(); 
+        renderProducts(); 
+    };
 
     window.renderFilters = function() {
         const c = document.getElementById('filterContainer');
@@ -134,6 +140,9 @@
             const isActive = _0x2b === cat;
             return `<button onclick="setCategory('${cat}')" class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 border ${isActive ? 'bg-gradient-to-r from-red-600 to-red-500 text-white border-transparent shadow-lg shadow-red-500/40 scale-105' : 'bg-white dark:bg-gray-800 text-gray-500 border-gray-100 dark:border-gray-700 hover:border-red-200'}">${cat}</button>`;
         }).join('');
+        
+        // SYNC DROPDOWN ON INITIAL LOAD
+        document.getElementById('categorySelect').value = _0x2b; 
     };
 
     window.renderProducts = function() {
@@ -148,7 +157,6 @@
             return mC && mS && mT && mP && mH;
         });
 
-        // ACTIVATE SORTING
         if (_0xSort === 'lowToHigh') {
             f.sort((a, b) => a.price - b.price);
         } else if (_0xSort === 'highToLow') {
@@ -202,16 +210,19 @@
 
     document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
     document.getElementById('searchInputMobile').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    
+    // NEW: Category Select Event Listener
+    document.getElementById('categorySelect').addEventListener('change', (e) => { setCategory(e.target.value); });
+    
     document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; updateDropdowns(); renderProducts(); });
     document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; updateDropdowns(); renderProducts(); });
-    
-    // EVENT LISTENER FOR SORTING
     document.getElementById('sortFilter').addEventListener('change', (e) => { _0xSort = e.target.value; renderProducts(); });
 
     document.getElementById('resetFilters').addEventListener('click', () => { 
         _0x3c = 'All'; _0x4d = 'All'; _0xMaxP = 2000; _0x2b = 'All'; _0x5e = ''; _0xSort = 'default';
         slider.value = 2000; label.textContent = '€2000';
         document.getElementById('sortFilter').value = 'default';
+        document.getElementById('categorySelect').value = 'All';
         fetchData(); 
     });
 

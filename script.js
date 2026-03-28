@@ -18,7 +18,6 @@
     let _0x7a = Infinity;
 
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
-    
     const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together"];
 
     const _0x10a = [
@@ -26,6 +25,10 @@
         { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box", i: "images/etbfable.png" },
         { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box", i: "images/etbpo.png" }
     ];
+
+    // Spinner Controls
+    const _0xShowSync = () => { const o = document.getElementById('loadingOverlay'); o.classList.remove('invisible'); o.classList.add('opacity-100'); };
+    const _0xHideSync = () => { const o = document.getElementById('loadingOverlay'); o.classList.remove('opacity-100'); setTimeout(() => o.classList.add('invisible'), 400); };
 
     function _0x11b(_v) {
         if (!_v) return 0;
@@ -35,57 +38,21 @@
         return parseFloat(c) || 0;
     }
 
-    /**
-     * UPDATED: Comprehensive Set Mapping Logic
-     * Handles specific product-to-set overrides provided by user.
-     */
     function _0x12c(_n, _u) {
         const _nn = _n.toLowerCase();
-        
-        // 1. Phantasmal Flames Mapping (Specific Charizard UPCs)
-        if (_nn.includes("charizard x ex") && _nn.includes("ultra premium collection")) return "Phantasmal Flames";
+        if (_nn.includes("portfólio") || _nn.includes("portfolio")) return "Other Sets";
+        if (_nn.includes("charizard") && (_nn.includes("tin") || _nn.includes("ultra premium collection") || _nn.includes("ultra-premium collection"))) return "Phantasmal Flames";
         if (_nn.includes("phantasmal flames")) return "Phantasmal Flames";
-
-        // 2. Obsidian Flames Mapping (Charizard Special Collections)
         if (_nn.includes("charizard ex special collection")) return "Obsidian Flames";
-
-        // 3. Mega Evolution Mapping
-        if (_nn.includes("pkm enhanced 2-pack blister") || _nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("kangaskhan ex box") || _nn.includes("mega evolution") || _nn.includes("mega kangaskhan")) return "Mega Evolution";
-
-        // 4. Destined Rivals Mapping (including Team Rocket)
-        if (_nn.includes("destined rivals") || _nn.includes("team rocket collector's tin")) return "Destined Rivals";
-
-        // 5. Stellar Crown Mapping
-        if (_nn.includes("terapagos") && _nn.includes("deck box")) return "Stellar Crown";
-
-        // 6. Scarlet & Violet Mapping
-        if (_nn.includes("scarlet&violet booster pack")) return "Scarlet & Violet";
-
-        // 7. Prismatic Evolutions Mapping
-        if (_nn.includes("prismatic evolution") && _nn.includes("figure collection")) return "Prismatic Evolutions";
-
-        // 8. Temporal Forces Mapping
-        if (_nn.includes("temporal forces") && _nn.includes("bellibolt")) return "Temporal Forces";
-
-        // 9. Black & White Mapping
-        if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
-
-        // 10. World Championship Mapping
-        if (_nn.includes("world championship") || _nn.includes("world champions deck") || _nn.includes("fernando cifuentes")) return "Pokémon World Championship";
-
-        // 11. Journey Together & Perfect Order
-        if (_nn.includes("journey together")) return "Journey Together";
         if (_nn.includes("perfect order")) return "Perfect Order";
         if (_nn.includes("ascended heroes")) return "Ascended Heroes";
-
-        // 12. Other Sets Overrides
-        if (_nn.includes("trainer's toolkit 2025") || _nn.includes("iono") || _nn.includes("bellibolt") || _nn.includes("poke ball tin") || _nn.includes("slashing legends") || _nn.includes("trading card game classic") || _nn.includes("cynthia's garchomp") || _nn.includes("pokémon day 2026") || _nn.includes("calyrex vmax") || _nn.includes("mega venusaur ex") || _nn.includes("battle deck") || _nn.includes("portfolio") || _nn.includes("portfólio")) return "Other Sets";
-
-        // 13. General Expansion Matcher
-        for (const _s of _0x9c) {
-            if (_nn.includes(_s.toLowerCase())) return _s;
-        }
-        
+        if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
+        if (_nn.includes("destined rivals") || _nn.includes("team rocket collector's tin")) return "Destined Rivals";
+        if (_nn.includes("world championship") || _nn.includes("fernando cifuentes") || _nn.includes("ancient toolbox") || _nn.includes("the 'don")) return "Pokémon World Championship";
+        if (_nn.includes("journey together")) return "Journey Together";
+        if (_nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("kangaskhan") || _nn.includes("mega evolution")) return "Mega Evolution";
+        if (_nn.includes("trainer's toolkit 2025") || _nn.includes("iono") || _nn.includes("classic") || _nn.includes("cynthia") || _nn.includes("venusaur ex")) return "Other Sets";
+        for (const _s of _0x9c) if (_nn.includes(_s.toLowerCase())) return _s;
         return _n.includes(" - ") ? _n.split(" - ")[0] : "Other Sets";
     }
 
@@ -93,45 +60,40 @@
         const _t = (_n + " " + _u).toLowerCase();
         const _cn = _n.toLowerCase();
         if (_t.includes("elite trainer") || _t.includes("etb") || _t.includes("elitetrainer")) return _0x8b[1];
-        if ((_t.includes("booster box") || _t.includes("half booster box") || _t.includes("display")) && !_t.includes("bundle")) return _0x8b[2];
+        if ((_t.includes("booster box") || _t.includes("display")) && !_t.includes("bundle")) return _0x8b[2];
         if (_cn.includes("36") && _cn.includes("booster") && !_t.includes("bundle")) return _0x8b[2];
         if (_t.includes("booster bundle")) return _0x8b[3];
-        if (_cn.includes("blister") || _cn.includes("tech") || _cn.includes("3-pack") || _cn.includes("checklane")) return _0x8b[6];
+        if (_cn.includes("blister") || _cn.includes("tech") || _cn.includes("checklane")) return _0x8b[6];
         if (_cn.includes("tin")) return _0x8b[5];
         if (["ultra", "premium", "collection", "ex box", "special", "upc"].some(k => _cn.includes(k))) return _0x8b[4];
         if (_t.includes("pack") || _t.includes("booster") || _t.includes("sleeved")) return _0x8b[7];
-        if (_t.includes("binder") || _t.includes("poster") || (_t.includes("sleeve") && !_t.includes("sleeved")) || _t.includes("portfolio") || _t.includes("deck")) return _0x8b[8];
         return _0x8b[8];
     }
 
-    function _0x14e(_u) {
-        try { return new URL(_u).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(); } 
-        catch { return "STORE"; }
-    }
+    function _0x14e(_u) { try { return new URL(_u).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(); } catch { return "STORE"; } }
 
     function _0x15f(_on, _ou, _oi) {
         let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
-        for (const _it of _0x10a) {
-            for (const _wg of _it.m) {
-                if (_wg.every(_w => _ts.includes(_w))) return { name: _it.s, img: _it.i };
-            }
-        }
+        for (const _it of _0x10a) for (const _wg of _it.m) if (_wg.every(_w => _ts.includes(_w))) return { name: _it.s, img: _it.i };
         return { name: _on, img: _oi };
     }
 
     window.updateDropdowns = function() {
         const sS = document.getElementById('storeFilter');
         const sT = document.getElementById('setFilter');
-        const pS = _0x3c;
-        const pT = _0x4d;
         const cM = _0x1a.filter(p => _0x2b === 'All' || p.category === _0x2b);
         const aS = [...new Set(cM.map(p => p.store))].sort();
         const aT = [...new Set(cM.map(p => p.set))].sort();
-        sS.innerHTML = '<option value="All">All Stores</option>' + aS.map(s => `<option value="${s}" ${s === pS ? 'selected' : ''}>${s}</option>`).join('');
-        sT.innerHTML = '<option value="All">All Sets</option>' + aT.map(s => `<option value="${s}" ${s === pT ? 'selected' : ''}>${s}</option>`).join('');
+        sS.innerHTML = '<option value="All">All Stores</option>' + aS.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
+        sT.innerHTML = '<option value="All">All Sets</option>' + aT.map(s => `<option value="${s}" ${_0x4d === s ? 'selected' : ''}>${s}</option>`).join('');
     };
 
-    window.setCategory = function(cat) { _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); };
+    window.setCategory = function(cat) { 
+        _0xShowSync(); 
+        setTimeout(() => { 
+            _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); _0xHideSync(); 
+        }, 300); 
+    };
 
     window.renderFilters = function() {
         const c = document.getElementById('filterContainer');
@@ -148,15 +110,12 @@
             const mH = p.name.toLowerCase().includes(_0x5e.toLowerCase()) || p.store.toLowerCase().includes(_0x5e.toLowerCase());
             return mC && mS && mT && mP && mH;
         });
-        document.getElementById('productCount').textContent = `${f.length} products found`;
-        if (f.length === 0) { g.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500">No products match these filters.</div>`; return; }
+        document.getElementById('productCount').textContent = `${f.length} items found`;
         g.innerHTML = f.map(p => `
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
-                <div class="h-48 bg-white flex items-center justify-center p-2">
-                    <img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-                </div>
+                <div class="h-48 bg-white flex items-center justify-center p-2"><img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'"></div>
                 <div class="p-4 flex flex-col flex-grow">
-                    <div class="flex justify-between items-start mb-1"><span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter">${p.store}</span><span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span></div>
+                    <div class="flex justify-between items-start mb-1"><span class="text-[10px] font-bold text-red-500 uppercase">${p.store}</span><span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span></div>
                     <h3 class="text-sm font-semibold mb-3 line-clamp-2">${p.name}</h3>
                     <div class="mt-auto flex justify-between items-center"><span class="text-lg font-bold">€${p.price.toFixed(2)}</span><a href="${p.url}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition">BUY NOW</a></div>
                 </div>
@@ -165,6 +124,7 @@
     };
 
     async function fetchData() {
+        _0xShowSync();
         try {
             const r = await fetch(`seen_products.json?t=${Date.now()}`);
             const d = await r.json();
@@ -178,7 +138,8 @@
             }
             updateDropdowns(); renderFilters(); renderProducts();
             document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
-        } catch (e) { console.error("ERR_DATA_FETCH"); }
+        } catch (e) { console.error("ERR"); }
+        setTimeout(_0xHideSync, 500);
     }
 
     document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
@@ -187,11 +148,7 @@
     document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; renderProducts(); });
     document.getElementById('minPrice').addEventListener('input', (e) => { _0x6f = parseFloat(e.target.value) || 0; renderProducts(); });
     document.getElementById('maxPrice').addEventListener('input', (e) => { _0x7a = parseFloat(e.target.value) || Infinity; renderProducts(); });
-    document.getElementById('resetFilters').addEventListener('click', () => {
-        _0x3c = 'All'; _0x4d = 'All'; _0x6f = 0; _0x7a = Infinity; _0x2b = 'All'; _0x5e = '';
-        document.getElementById('searchInput').value = ''; document.getElementById('searchInputMobile').value = '';
-        updateDropdowns(); renderFilters(); renderProducts();
-    });
+    document.getElementById('resetFilters').addEventListener('click', () => { _0x3c = 'All'; _0x4d = 'All'; _0x6f = 0; _0x7a = Infinity; _0x2b = 'All'; _0x5e = ''; fetchData(); });
 
     const bTT = document.getElementById('backToTop');
     window.onscroll = () => { window.scrollY > 400 ? bTT.classList.add('show') : bTT.classList.remove('show'); };
@@ -200,12 +157,7 @@
     const tB = document.getElementById('themeToggle');
     const tI = document.getElementById('themeIcon');
     let iD = false;
-    tB.addEventListener('click', () => {
-        iD = !iD;
-        document.documentElement.classList.toggle('dark', iD);
-        if (iD) { tI.setAttribute('fill', 'currentColor'); tI.classList.replace('text-gray-600', 'text-yellow-400'); } 
-        else { tI.setAttribute('fill', 'none'); tI.classList.replace('text-yellow-400', 'text-gray-600'); }
-    });
+    tB.addEventListener('click', () => { iD = !iD; document.documentElement.classList.toggle('dark', iD); if (iD) { tI.setAttribute('fill', 'currentColor'); tI.classList.replace('text-gray-600', 'text-yellow-400'); } else { tI.setAttribute('fill', 'none'); tI.classList.replace('text-yellow-400', 'text-gray-600'); } });
 
     fetchData();
     setInterval(fetchData, 1800000);

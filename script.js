@@ -1,196 +1,174 @@
-// --- State Management ---
-let allProducts = [];
-let currentCategory = 'All';
-let selectedStore = 'All';
-let selectedSet = 'All';
-let searchQuery = '';
-let minPrice = 0;
-let maxPrice = Infinity;
-
-const CATEGORIES = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
-
-const KNOWN_SETS = [
-    "Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", 
-    "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", 
-    "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest",
-    "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", 
-    "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage"
-];
-
-const PRODUCT_CATALOG = [
-    { matchGroups: [["phantasmal", "flames", "elite"]], standardName: "Phantasmal Flames - Elite Trainer Box", image: "images/etbph.png" },
-    { matchGroups: [["shrouded", "fable", "elite"]], standardName: "Shrouded Fable - Elite Trainer Box", image: "images/etbfable.png" },
-    { matchGroups: [["perfect", "order", "elite"]], standardName: "Perfect Order - Elite Trainer Box", image: "images/etbpo.png" }
-];
-
-// --- Helper Functions ---
-
-function parsePrice(priceStr) {
-    if (!priceStr) return 0;
-    let cleaned = priceStr.replace(/[^\d.,]/g, '');
-    if (cleaned.includes('.') && cleaned.includes(',')) cleaned = cleaned.replace(/\./g, '').replace(',', '.');
-    else if (cleaned.includes(',')) cleaned = cleaned.replace(',', '.');
-    return parseFloat(cleaned) || 0;
-}
-
-function identifySet(name, url) {
-    const text = (name + " " + url).toLowerCase();
-    for (const set of KNOWN_SETS) if (text.includes(set.toLowerCase())) return set;
-    return name.includes(" - ") ? name.split(" - ")[0] : "Other Sets";
-}
-
-/**
- * REFINED CATEGORY LOGIC - PRIORITY FIXED
- * Ensures proper categorization and handles the Mega Charizard UPC.
- */
-function detectCategory(name, url) {
-    const text = (name + " " + url).toLowerCase();
-    const cleanName = name.toLowerCase();
+(function() {
+    // === 🛡️ SECURITY SHIELD: Deterrents ===
     
-    // 1. ELITE TRAINER BOX (Highest Priority)
-    if (text.includes("elite trainer box") || text.includes("etb") || text.includes("elitetrainer")) return "Elite Trainer Box";
+    // 1. Disable Right-Click
+    document.addEventListener('contextmenu', e => e.preventDefault());
 
-    // 2. BOOSTER BOX
-    if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && !text.includes("booster bundle")) return "Booster Box";
-    if (cleanName.includes("36") && cleanName.includes("booster") && !text.includes("bundle")) return "Booster Box";
+    // 2. Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.onkeydown = function(e) {
+        if (e.keyCode == 123) return false; // F12
+        if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) return false;
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // View Source
+    };
 
-    // 3. BOOSTER BUNDLE
-    if (text.includes("booster bundle")) return "Booster Bundle";
+    // 3. Simple Console Trap (Freezes if DevTools is opened)
+    setInterval(() => { (function() { (function a() { try { (function b(i) { if (('' + (i / i)).length !== 1 || i % 20 === 0) { (function() {}).constructor('debugger')(); } else { debugger; } b(++i); })(0); } catch (e) { setTimeout(a, 5000); } })() })(); }, 5000);
 
-    // 4. BLISTERS
-    if (cleanName.includes("blister") || cleanName.includes("tech") || cleanName.includes("3-pack blister") || cleanName.includes("checklane")) return "Blisters";
+    // === 🧠 OBFUSCATED CORE LOGIC ===
+    let _0x1a = [];
+    let _0x2b = 'All';
+    let _0x3c = 'All';
+    let _0x4d = 'All';
+    let _0x5e = '';
+    let _0x6f = 0;
+    let _0x7a = Infinity;
 
-    // 5. TINS
-    if (cleanName.includes("tin")) return "Tins";
+    const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
+    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage"];
+    
+    // Master Product Catalog (Hard-coded mappings)
+    const _0x10a = [
+        { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box", i: "images/etbph.png" },
+        { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box", i: "images/etbfable.png" },
+        { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box", i: "images/etbpo.png" }
+    ];
 
-    // 6. COLLECTION BOXES (Strict Keywords)
-    // Included 'upc' to ensure Ultra Premium Collections are caught.
-    const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special", "upc"];
-    if (collectionKeywords.some(kw => cleanName.includes(kw))) return "Collection Boxes";
-
-    // 7. BOOSTER PACKS
-    if (text.includes("pack") || text.includes("booster") || text.includes("sleeved")) return "Booster Packs";
-
-    // 8. OTHERS (Accessories fallback)
-    if (text.includes("binder") || text.includes("poster") || (text.includes("sleeve") && !text.includes("sleeved")) || text.includes("portfolio") || text.includes("portfólio") || text.includes("acrilico") || text.includes("acrílico") || text.includes("deck")) return "Other";
-
-    return "Other";
-}
-
-function getStoreName(url) {
-    try { return new URL(url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(); } 
-    catch { return "STORE"; }
-}
-
-function standardizeProduct(originalName, originalUrl, originalImg) {
-    let textToSearch = (originalName + " " + originalUrl).toLowerCase().replace(/[^a-z0-9]/g, ' ');
-    for (const item of PRODUCT_CATALOG) {
-        for (const wordGroup of item.matchGroups) {
-            if (wordGroup.every(word => textToSearch.includes(word))) return { name: item.standardName, img: item.image };
-        }
+    function _0x11b(_v) {
+        if (!_v) return 0;
+        let c = _v.replace(/[^\d.,]/g, '');
+        if (c.includes('.') && c.includes(',')) c = c.replace(/\./g, '').replace(',', '.');
+        else if (c.includes(',')) c = c.replace(',', '.');
+        return parseFloat(c) || 0;
     }
-    return { name: originalName, img: originalImg };
-}
 
-function updateDropdowns() {
-    const storeSelect = document.getElementById('storeFilter');
-    const setSelect = document.getElementById('setFilter');
-    const prevStore = selectedStore;
-    const prevSet = selectedSet;
-    const categoryMatch = allProducts.filter(p => currentCategory === 'All' || p.category === currentCategory);
-    const availableStores = [...new Set(categoryMatch.map(p => p.store))].sort();
-    const availableSets = [...new Set(categoryMatch.map(p => p.set))].sort();
-    storeSelect.innerHTML = '<option value="All">All Stores</option>' + availableStores.map(s => `<option value="${s}" ${s === prevStore ? 'selected' : ''}>${s}</option>`).join('');
-    setSelect.innerHTML = '<option value="All">All Sets</option>' + availableSets.map(s => `<option value="${s}" ${s === prevSet ? 'selected' : ''}>${s}</option>`).join('');
-}
-
-function renderFilters() {
-    const container = document.getElementById('filterContainer');
-    container.innerHTML = CATEGORIES.map(cat => `<button onclick="setCategory('${cat}')" class="px-4 py-2 rounded-full text-sm font-medium transition border ${currentCategory === cat ? 'bg-red-600 text-white border-red-600' : 'bg-white text-gray-700 dark:bg-gray-800 dark:text-gray-300 border-gray-300 dark:border-gray-600'}">${cat}</button>`).join('');
-}
-
-function renderProducts() {
-    const grid = document.getElementById('productGrid');
-    const filtered = allProducts.filter(p => {
-        const matchCat = currentCategory === 'All' || p.category === currentCategory;
-        const matchStore = selectedStore === 'All' || p.store === selectedStore;
-        const matchSet = selectedSet === 'All' || p.set === selectedSet;
-        const matchPrice = p.price >= minPrice && p.price <= maxPrice;
-        const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.store.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchCat && matchStore && matchSet && matchPrice && matchSearch;
-    });
-    document.getElementById('productCount').textContent = `${filtered.length} products found`;
-    if (filtered.length === 0) {
-        grid.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500">No products match these filters.</div>`;
-        return;
+    function _0x12c(_n, _u) {
+        const t = (_n + " " + _u).toLowerCase();
+        for (const s of _0x9c) if (t.includes(s.toLowerCase())) return s;
+        return _n.includes(" - ") ? _n.split(" - ")[0] : "Other Sets";
     }
-    grid.innerHTML = filtered.map(p => `
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
-            <div class="h-48 bg-white flex items-center justify-center p-2">
-                <img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-            </div>
-            <div class="p-4 flex flex-col flex-grow">
-                <div class="flex justify-between items-start mb-1"><span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter">${p.store}</span><span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span></div>
-                <h3 class="text-sm font-semibold mb-3 line-clamp-2">${p.name}</h3>
-                <div class="mt-auto flex justify-between items-center"><span class="text-lg font-bold">€${p.price.toFixed(2)}</span><a href="${p.url}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition">BUY NOW</a></div>
-            </div>
-        </div>
-    `).join('');
-}
 
-async function fetchProducts() {
-    try {
-        const response = await fetch(`seen_products.json?t=${Date.now()}`);
-        const data = await response.json();
-        allProducts = [];
-        for (const key in data) {
-            const product = data[key];
-            if (product.in_stock) {
-                const clean = standardizeProduct(product.name, product.url, product.img);
-                allProducts.push({ name: clean.name, img: clean.img, url: product.url, price: parsePrice(product.price), store: getStoreName(product.url), category: detectCategory(clean.name, product.url), set: identifySet(clean.name, product.url) });
+    // Mangled Category Logic
+    function _0x13d(_n, _u) {
+        const _t = (_n + " " + _u).toLowerCase();
+        const _cn = _n.toLowerCase();
+        if (_t.includes("elite trainer") || _t.includes("etb") || _t.includes("elitetrainer")) return _0x8b[1];
+        if ((_t.includes("booster box") || _t.includes("display")) && !_t.includes("bundle")) return _0x8b[2];
+        if (_cn.includes("36") && _cn.includes("booster") && !_t.includes("bundle")) return _0x8b[2];
+        if (_t.includes("booster bundle")) return _0x8b[3];
+        if (_cn.includes("blister") || _cn.includes("tech") || _cn.includes("3-pack") || _cn.includes("checklane")) return _0x8b[6];
+        if (_cn.includes("tin")) return _0x8b[5];
+        if (["ultra", "premium", "collection", "ex box", "special", "upc"].some(k => _cn.includes(k))) return _0x8b[4];
+        if (_t.includes("pack") || _t.includes("booster") || _t.includes("sleeved")) return _0x8b[7];
+        if (_t.includes("binder") || _t.includes("poster") || (_t.includes("sleeve") && !_t.includes("sleeved")) || _t.includes("portfolio") || _t.includes("deck")) return _0x8b[8];
+        return _0x8b[8];
+    }
+
+    function _0x14e(_u) {
+        try { return new URL(_u).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(); } 
+        catch { return "STORE"; }
+    }
+
+    function _0x15f(_on, _ou, _oi) {
+        let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
+        for (const _it of _0x10a) {
+            for (const _wg of _it.m) {
+                if (_wg.every(_w => _ts.includes(_w))) return { name: _it.s, img: _it.i };
             }
         }
-        updateDropdowns(); renderFilters(); renderProducts();
-        document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
-    } catch (e) { console.error("Error loading products:", e); }
-}
-
-function setCategory(cat) { currentCategory = cat; updateDropdowns(); renderFilters(); renderProducts(); }
-
-document.getElementById('searchInput').addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
-document.getElementById('searchInputMobile').addEventListener('input', (e) => { searchQuery = e.target.value; renderProducts(); });
-document.getElementById('storeFilter').addEventListener('change', (e) => { selectedStore = e.target.value; renderProducts(); });
-document.getElementById('setFilter').addEventListener('change', (e) => { selectedSet = e.target.value; renderProducts(); });
-document.getElementById('minPrice').addEventListener('input', (e) => { minPrice = parseFloat(e.target.value) || 0; renderProducts(); });
-document.getElementById('maxPrice').addEventListener('input', (e) => { maxPrice = parseFloat(e.target.value) || Infinity; renderProducts(); });
-
-document.getElementById('resetFilters').addEventListener('click', () => {
-    selectedStore = 'All'; selectedSet = 'All'; minPrice = 0; maxPrice = Infinity; currentCategory = 'All'; searchQuery = '';
-    document.getElementById('searchInput').value = ''; document.getElementById('searchInputMobile').value = '';
-    updateDropdowns(); renderFilters(); renderProducts();
-});
-
-const backToTopBtn = document.getElementById('backToTop');
-window.onscroll = () => { window.scrollY > 400 ? backToTopBtn.classList.add('show') : backToTopBtn.classList.remove('show'); };
-backToTopBtn.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
-
-// Modern Theme Toggle Logic
-const themeBtn = document.getElementById('themeToggle');
-const themeIcon = document.getElementById('themeIcon');
-let isDark = false;
-
-themeBtn.addEventListener('click', () => {
-    isDark = !isDark;
-    document.documentElement.classList.toggle('dark', isDark);
-    
-    if (isDark) {
-        themeIcon.setAttribute('fill', 'currentColor'); // Fill bulb
-        themeIcon.classList.replace('text-gray-600', 'text-yellow-400');
-    } else {
-        themeIcon.setAttribute('fill', 'none'); // Outline only
-        themeIcon.classList.replace('text-yellow-400', 'text-gray-600');
+        return { name: _on, img: _oi };
     }
-});
 
-fetchProducts();
-setInterval(fetchProducts, 1800000);
+    // === UI RENDERING (Cleaned for Speed) ===
+
+    window.updateDropdowns = function() {
+        const sS = document.getElementById('storeFilter');
+        const sT = document.getElementById('setFilter');
+        const pS = _0x3c;
+        const pT = _0x4d;
+        const cM = _0x1a.filter(p => _0x2b === 'All' || p.category === _0x2b);
+        const aS = [...new Set(cM.map(p => p.store))].sort();
+        const aT = [...new Set(cM.map(p => p.set))].sort();
+        sS.innerHTML = '<option value="All">All Stores</option>' + aS.map(s => `<option value="${s}" ${s === pS ? 'selected' : ''}>${s}</option>`).join('');
+        sT.innerHTML = '<option value="All">All Sets</option>' + aT.map(s => `<option value="${s}" ${s === pT ? 'selected' : ''}>${s}</option>`).join('');
+    };
+
+    window.setCategory = function(cat) { _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); };
+
+    window.renderFilters = function() {
+        const c = document.getElementById('filterContainer');
+        c.innerHTML = _0x8b.map(cat => `<button onclick="setCategory('${cat}')" class="px-4 py-2 rounded-full text-sm font-medium transition border ${_0x2b === cat ? 'bg-red-600 text-white border-red-600' : 'bg-white text-gray-700 dark:bg-gray-800 dark:text-gray-300 border-gray-300 dark:border-gray-600'}">${cat}</button>`).join('');
+    };
+
+    window.renderProducts = function() {
+        const g = document.getElementById('productGrid');
+        const f = _0x1a.filter(p => {
+            const mC = _0x2b === 'All' || p.category === _0x2b;
+            const mS = _0x3c === 'All' || p.store === _0x3c;
+            const mT = _0x4d === 'All' || p.set === _0x4d;
+            const mP = p.price >= _0x6f && p.price <= _0x7a;
+            const mH = p.name.toLowerCase().includes(_0x5e.toLowerCase()) || p.store.toLowerCase().includes(_0x5e.toLowerCase());
+            return mC && mS && mT && mP && mH;
+        });
+        document.getElementById('productCount').textContent = `${f.length} products found`;
+        if (f.length === 0) { g.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500">No products match these filters.</div>`; return; }
+        g.innerHTML = f.map(p => `
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
+                <div class="h-48 bg-white flex items-center justify-center p-2">
+                    <img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-1"><span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter">${p.store}</span><span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span></div>
+                    <h3 class="text-sm font-semibold mb-3 line-clamp-2">${p.name}</h3>
+                    <div class="mt-auto flex justify-between items-center"><span class="text-lg font-bold">€${p.price.toFixed(2)}</span><a href="${p.url}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition">BUY NOW</a></div>
+                </div>
+            </div>
+        `).join('');
+    };
+
+    async function fetchData() {
+        try {
+            const r = await fetch(`seen_products.json?t=${Date.now()}`);
+            const d = await r.json();
+            _0x1a = [];
+            for (const k in d) {
+                const p = d[k];
+                if (p.in_stock) {
+                    const cl = _0x15f(p.name, p.url, p.img);
+                    _0x1a.push({ name: cl.name, img: cl.img, url: p.url, price: _0x11b(p.price), store: _0x14e(p.url), category: _0x13d(cl.name, p.url), set: _0x12c(cl.name, p.url) });
+                }
+            }
+            updateDropdowns(); renderFilters(); renderProducts();
+            document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
+        } catch (e) { console.error("ERR_DATA_FETCH"); }
+    }
+
+    // Initialize Event Listeners
+    document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    document.getElementById('searchInputMobile').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; renderProducts(); });
+    document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; renderProducts(); });
+    document.getElementById('minPrice').addEventListener('input', (e) => { _0x6f = parseFloat(e.target.value) || 0; renderProducts(); });
+    document.getElementById('maxPrice').addEventListener('input', (e) => { _0x7a = parseFloat(e.target.value) || Infinity; renderProducts(); });
+    document.getElementById('resetFilters').addEventListener('click', () => {
+        _0x3c = 'All'; _0x4d = 'All'; _0x6f = 0; _0x7a = Infinity; _0x2b = 'All'; _0x5e = '';
+        document.getElementById('searchInput').value = ''; document.getElementById('searchInputMobile').value = '';
+        updateDropdowns(); renderFilters(); renderProducts();
+    });
+
+    const bTT = document.getElementById('backToTop');
+    window.onscroll = () => { window.scrollY > 400 ? bTT.classList.add('show') : bTT.classList.remove('show'); };
+    bTT.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+    const tB = document.getElementById('themeToggle');
+    const tI = document.getElementById('themeIcon');
+    let iD = false;
+    tB.addEventListener('click', () => {
+        iD = !iD;
+        document.documentElement.classList.toggle('dark', iD);
+        if (iD) { tI.setAttribute('fill', 'currentColor'); tI.classList.replace('text-gray-600', 'text-yellow-400'); } 
+        else { tI.setAttribute('fill', 'none'); tI.classList.replace('text-yellow-400', 'text-gray-600'); }
+    });
+
+    fetchData();
+    setInterval(fetchData, 1800000);
+})();

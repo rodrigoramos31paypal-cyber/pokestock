@@ -1,20 +1,14 @@
 (function() {
-    // === 🛡️ SECURITY SHIELD: Deterrents ===
-    
-    // 1. Disable Right-Click
+    // === 🛡️ SECURITY SHIELD ===
     document.addEventListener('contextmenu', e => e.preventDefault());
-
-    // 2. Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
     document.onkeydown = function(e) {
-        if (e.keyCode == 123) return false; // F12
+        if (e.keyCode == 123) return false;
         if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) return false;
-        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // View Source
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
     };
-
-    // 3. Simple Console Trap (Freezes if DevTools is opened)
     setInterval(() => { (function() { (function a() { try { (function b(i) { if (('' + (i / i)).length !== 1 || i % 20 === 0) { (function() {}).constructor('debugger')(); } else { debugger; } b(++i); })(0); } catch (e) { setTimeout(a, 5000); } })() })(); }, 5000);
 
-    // === 🧠 OBFUSCATED CORE LOGIC ===
+    // === 🧠 LOGIC ===
     let _0x1a = [];
     let _0x2b = 'All';
     let _0x3c = 'All';
@@ -24,9 +18,10 @@
     let _0x7a = Infinity;
 
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
-    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage"];
     
-    // Master Product Catalog (Hard-coded mappings)
+    // UPDATED: Added new set names to the list
+    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution"];
+
     const _0x10a = [
         { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box", i: "images/etbph.png" },
         { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box", i: "images/etbfable.png" },
@@ -41,18 +36,43 @@
         return parseFloat(c) || 0;
     }
 
+    /**
+     * UPDATED: Refined Set Identification
+     * Handles specific overrides and the Rota151 "151" URL issue.
+     */
     function _0x12c(_n, _u) {
-        const t = (_n + " " + _u).toLowerCase();
-        for (const s of _0x9c) if (t.includes(s.toLowerCase())) return s;
+        const _nn = _n.toLowerCase();
+        const _uu = _u.toLowerCase();
+        
+        // 1. Specific Set Overrides
+        if (_nn.includes("charizard x ex") && _nn.includes("premium collection")) return "Phantasmal Flames";
+        if (_nn.includes("black bolt")) return "Black & White";
+        if (_nn.includes("chaos rising")) return "Chaos Rising";
+        if (_nn.includes("ascended heroes")) return "Ascended Heroes";
+        if (_nn.includes("mega evolution") || _nn.includes("mega evolutions")) return "Mega Evolution";
+        
+        // 2. Rota151 URL Shield
+        if (_uu.includes("rota151")) {
+            if (_nn.includes("151")) return "151";
+        } else {
+            if (_uu.includes("151") || _nn.includes("151")) return "151";
+        }
+
+        const _t = (_nn + " " + _uu);
+        for (const _s of _0x9c) {
+            if (_t.includes(_s.toLowerCase())) return _s;
+        }
+        
         return _n.includes(" - ") ? _n.split(" - ")[0] : "Other Sets";
     }
 
-    // Mangled Category Logic
     function _0x13d(_n, _u) {
         const _t = (_n + " " + _u).toLowerCase();
         const _cn = _n.toLowerCase();
+        
+        // Priority check
         if (_t.includes("elite trainer") || _t.includes("etb") || _t.includes("elitetrainer")) return _0x8b[1];
-        if ((_t.includes("booster box") || _t.includes("display")) && !_t.includes("bundle")) return _0x8b[2];
+        if ((_t.includes("booster box") || _t.includes("half booster box") || _t.includes("display")) && !_t.includes("bundle")) return _0x8b[2];
         if (_cn.includes("36") && _cn.includes("booster") && !_t.includes("bundle")) return _0x8b[2];
         if (_t.includes("booster bundle")) return _0x8b[3];
         if (_cn.includes("blister") || _cn.includes("tech") || _cn.includes("3-pack") || _cn.includes("checklane")) return _0x8b[6];
@@ -77,8 +97,6 @@
         }
         return { name: _on, img: _oi };
     }
-
-    // === UI RENDERING (Cleaned for Speed) ===
 
     window.updateDropdowns = function() {
         const sS = document.getElementById('storeFilter');
@@ -142,7 +160,6 @@
         } catch (e) { console.error("ERR_DATA_FETCH"); }
     }
 
-    // Initialize Event Listeners
     document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
     document.getElementById('searchInputMobile').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
     document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; renderProducts(); });

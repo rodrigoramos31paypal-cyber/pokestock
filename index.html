@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon TCG Stock Tracker</title>
+    <title>PokéStock Tracker - Advanced Search</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Configure Tailwind for dark mode toggling
-        tailwind.config = {
-            darkMode: 'class',
-        }
+        tailwind.config = { darkMode: 'class' }
     </script>
     <style>
-        /* Smooth transitions for dark mode */
         body { transition: background-color 0.3s, color 0.3s; }
+        /* Style for the price slider appearance */
+        input[type=number]::-webkit-inner-spin-button { opacity: 1; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
     
-    <nav class="p-4 bg-white dark:bg-gray-800 shadow-md flex justify-between items-center">
+    <nav class="p-4 bg-white dark:bg-gray-800 shadow-md flex justify-between items-center sticky top-0 z-50">
         <h1 class="text-2xl font-bold text-red-600 dark:text-red-400">PokéStock Tracker</h1>
         <button id="themeToggle" class="p-2 bg-gray-200 dark:bg-gray-700 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition">
             🌙 Dark Mode
@@ -26,18 +24,58 @@
     </nav>
 
     <main class="container mx-auto p-4 max-w-7xl">
-        
-        <div class="my-6">
-            <h2 class="text-lg font-semibold mb-3">Filter by Category:</h2>
-            <div id="filterContainer" class="flex flex-wrap gap-2">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <aside class="w-full lg:w-64 flex-shrink-0 space-y-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <span>🔍</span> Filters
+                    </h2>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-2">Store</label>
+                        <select id="storeFilter" class="w-full p-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600">
+                            <option value="All">All Stores</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-2">Expansion Set</label>
+                        <select id="setFilter" class="w-full p-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600">
+                            <option value="All">All Sets</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-2">Price Range (€)</label>
+                        <div class="flex gap-2 items-center">
+                            <input type="number" id="minPrice" placeholder="Min" class="w-1/2 p-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600">
+                            <span>-</span>
+                            <input type="number" id="maxPrice" placeholder="Max" class="w-1/2 p-2 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600">
+                        </div>
+                    </div>
+
+                    <button id="resetFilters" class="w-full mt-2 py-2 text-sm text-red-500 hover:text-red-600 font-medium">
+                        Clear All Filters
+                    </button>
                 </div>
-        </div>
+            </aside>
 
-        <p id="lastUpdated" class="text-sm text-gray-500 dark:text-gray-400 mb-4">Fetching data...</p>
+            <div class="flex-grow">
+                <div class="mb-6 overflow-x-auto pb-2">
+                    <div id="filterContainer" class="flex gap-2 min-w-max">
+                        </div>
+                </div>
 
-        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="flex justify-between items-end mb-4">
+                    <p id="productCount" class="text-sm font-medium text-gray-500"></p>
+                    <p id="lastUpdated" class="text-xs text-gray-400"></p>
+                </div>
+
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                    </div>
             </div>
-
+        </div>
     </main>
 
     <script src="script.js"></script>

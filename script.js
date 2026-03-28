@@ -1,23 +1,52 @@
 // --- State ---
 let allProducts = [];
 let currentCategory = 'All';
+let selectedStore = 'All';
+let selectedSet = 'All';
+let minPrice = 0;
+let maxPrice = Infinity;
 
-// --- Category Logic ---
-const CATEGORIES = [
-    'All', 
-    'Elite Trainer Box', 
-    'Booster Box', 
-    'Build & Battle',
-    'Collection Boxes',
-    'Tins',
-    'Blisters',
-    'Booster Packs',
-    'Other'
+// --- Config ---
+const CATEGORIES = ['All', 'Elite Trainer Box', 'Booster Box', 'Build & Battle', 'Collection Boxes', 'Tins', 'Blisters', 'Booster Packs', 'Other'];
+
+// List of known sets to help extraction if not in Catalog
+const KNOWN_SETS = [
+    "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", 
+    "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", 
+    "151", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest",
+    "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", 
+    "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage",
+    "Champion's Path", "Darkness Ablaze", "Rebel Clash", "Sword & Shield", "Cosmic Eclipse",
+    "Hidden Fates", "Unified Minds", "Unbroken Bonds", "Team Up"
 ];
 
-function detectCategory(name, url) {
+// --- Helper: Parse Price String to Number ---
+function parsePrice(priceStr) {
+    if (!priceStr) return 0;
+    // Remove currency symbols and non-numeric characters except , and .
+    // Example: "15,99 €" -> "15.99"
+    let cleaned = priceStr.replace(/[^\d.,]/g, '').replace(',', '.');
+    return parseFloat(cleaned) || 0;
+}
+
+// --- Helper: Identify Set ---
+function identifySet(name, url) {
     const text = (name + " " + url).toLowerCase();
     
+    // Check known sets list
+    for (const set of KNOWN_SETS) {
+        if (text.includes(set.toLowerCase())) return set;
+    }
+    
+    // If it follows "Set Name - Product" format from Catalog
+    if (name.includes(" - ")) return name.split(" - ")[0];
+    
+    return "Unknown Set";
+}
+
+// --- Existing logic from your fixed version ---
+function detectCategory(name, url) {
+    const text = (name + " " + url).toLowerCase();
     if (text.includes("elite trainer box") || text.includes("etb")) return "Elite Trainer Box";
     if (text.includes("booster box") || text.includes("display") || text.includes("36")) return "Booster Box";
     if (text.includes("build & battle") || text.includes("stadium") || text.includes("b&b")) return "Build & Battle";
@@ -25,177 +54,157 @@ function detectCategory(name, url) {
     if (text.includes("tin")) return "Tins";
     if (text.includes("blister") || text.includes("3-pack") || text.includes("checklane")) return "Blisters";
     if (text.includes("booster") || text.includes("pack") || text.includes("sleeved")) return "Booster Packs";
-    
     return "Other";
 }
 
-// --- Store Name Extractor ---
 function getStoreName(url) {
     try {
-        const hostname = new URL(url).hostname;
-        const storePart = hostname.replace(/^www\./, '').split('.')[0];
-        return storePart.charAt(0).toUpperCase() + storePart.slice(1);
-    } catch {
-        return "Unknown Store";
-    }
+        const host = new URL(url).hostname.replace(/^www\./, '').split('.')[0];
+        return host.charAt(0).toUpperCase() + host.slice(1);
+    } catch { return "Unknown Store"; }
 }
 
-// --- MASTER PRODUCT CATALOG (Normalization) ---
-// Add your product rules here! 
+// Paste your PRODUCT_CATALOG and standardizeProduct function here...
+// (Using the matchGroups logic we built earlier)
 const PRODUCT_CATALOG = [
     {
-        // We look for these keywords in the messy name/url
-        keywords: ["phantasmal flames elite", "phantasmal flames etb", "phantasmal flames - elite"],
-        // If found, we force it to use this exact Name and Image:
+        matchGroups: [ ["phantasmal", "flames", "elite"], ["phantasmal", "flames", "etb"] ],
         standardName: "Phantasmal Flames - Elite Trainer Box",
         image: "images/etbph.png"
     },
-    {
-        keywords: ["v memories collection", "v-memories collection", "v memories"],
-        standardName: "Celebrations: V Memories Collection",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    },
-    {
-        keywords: ["mega evolution build", "mega evolution b&b"],
-        standardName: "Mega Evolution - Build & Battle Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
-    }
-    // Add new products here as you find them!
+    // ... add all other ETB groups here ...
 ];
 
 function standardizeProduct(originalName, originalUrl, originalImg) {
-    const textToSearch = (originalName + " " + originalUrl).toLowerCase();
-    
+    let textToSearch = (originalName + " " + originalUrl).toLowerCase().replace(/[^a-z0-9]/g, ' ');
     for (const item of PRODUCT_CATALOG) {
-        // If any of the keywords for this item are found in the store's text
-        const isMatch = item.keywords.some(keyword => textToSearch.includes(keyword));
-        
-        if (isMatch) {
-            return {
-                name: item.standardName,
-                img: item.image
-            };
+        for (const wordGroup of item.matchGroups) {
+            if (wordGroup.every(word => textToSearch.includes(word))) {
+                return { name: item.standardName, img: item.image };
+            }
         }
     }
-    
-    // If we don't have a rule for it yet, return the store's original data
-    return {
-        name: originalName,
-        img: originalImg
-    };
+    return { name: originalName, img: originalImg };
 }
 
-// --- Fetch & Process Data ---
+// --- Core Data Fetching ---
 async function fetchProducts() {
     try {
-        const response = await fetch(`seen_products.json?t=${new Date().getTime()}`);
+        const response = await fetch(`seen_products.json?t=${Date.now()}`);
         const data = await response.json();
         
         allProducts = [];
-        
         for (const key in data) {
             const product = data[key];
-            
             if (product.in_stock) {
-                // 1. Standardize the Name and Image first!
-                const cleanData = standardizeProduct(product.name, product.url, product.img);
-                product.displayName = cleanData.name;
-                product.displayImg = cleanData.img;
+                const clean = standardizeProduct(product.name, product.url, product.img);
                 
-                // 2. Detect category (using our newly cleaned name for better accuracy)
-                product.category = detectCategory(product.displayName, product.url);
-                
-                // 3. Get Store Name
-                product.storeName = getStoreName(product.url);
-                
-                allProducts.push(product);
+                allProducts.push({
+                    name: clean.name,
+                    img: clean.img,
+                    url: product.url,
+                    priceRaw: product.price,
+                    price: parsePrice(product.price),
+                    store: getStoreName(product.url),
+                    category: detectCategory(clean.name, product.url),
+                    set: identifySet(clean.name, product.url)
+                });
             }
         }
         
-        document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleTimeString()} (Updates every 30 mins)`;
+        populateDropdowns();
+        renderFilters();
         renderProducts();
-        
-    } catch (error) {
-        console.error("Failed to fetch products:", error);
-        document.getElementById('lastUpdated').textContent = "Error loading data. Retrying soon...";
-    }
+        document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
+    } catch (e) { console.error("Data error:", e); }
 }
 
-// --- Render UI ---
+// --- UI Management ---
+function populateDropdowns() {
+    const storeSelect = document.getElementById('storeFilter');
+    const setSelect = document.getElementById('setFilter');
+    
+    const stores = [...new Set(allProducts.map(p => p.store))].sort();
+    const sets = [...new Set(allProducts.map(p => p.set))].sort();
+
+    storeSelect.innerHTML = '<option value="All">All Stores</option>' + 
+        stores.map(s => `<option value="${s}">${s}</option>`).join('');
+    
+    setSelect.innerHTML = '<option value="All">All Sets</option>' + 
+        sets.map(s => `<option value="${s}">${s}</option>`).join('');
+}
+
 function renderFilters() {
     const container = document.getElementById('filterContainer');
-    container.innerHTML = '';
-    
-    CATEGORIES.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.textContent = cat;
-        const baseClasses = "px-4 py-2 rounded-full text-sm font-medium transition duration-200 border";
-        const activeClasses = "bg-red-600 text-white border-red-600";
-        const inactiveClasses = "bg-white text-gray-700 border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700";
-        
-        btn.className = `${baseClasses} ${currentCategory === cat ? activeClasses : inactiveClasses}`;
-        
-        btn.onclick = () => {
-            currentCategory = cat;
-            renderFilters(); 
-            renderProducts();
-        };
-        
-        container.appendChild(btn);
-    });
+    container.innerHTML = CATEGORIES.map(cat => {
+        const isActive = currentCategory === cat;
+        return `<button onclick="setCategory('${cat}')" class="px-4 py-2 rounded-full text-sm font-medium transition border ${isActive ? 'bg-red-600 text-white border-red-600' : 'bg-white text-gray-700 dark:bg-gray-800 dark:text-gray-300 border-gray-300 dark:border-gray-600'}">${cat}</button>`;
+    }).join('');
 }
 
 function renderProducts() {
     const grid = document.getElementById('productGrid');
-    grid.innerHTML = '';
     
-    const filtered = currentCategory === 'All' 
-        ? allProducts 
-        : allProducts.filter(p => p.category === currentCategory);
-        
+    const filtered = allProducts.filter(p => {
+        const matchCat = currentCategory === 'All' || p.category === currentCategory;
+        const matchStore = selectedStore === 'All' || p.store === selectedStore;
+        const matchSet = selectedSet === 'All' || p.set === selectedSet;
+        const matchPrice = p.price >= minPrice && p.price <= maxPrice;
+        return matchCat && matchStore && matchSet && matchPrice;
+    });
+
+    document.getElementById('productCount').textContent = `${filtered.length} products found`;
+
     if (filtered.length === 0) {
-        grid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">No items found in this category.</p>`;
+        grid.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500">No products match these filters.</div>`;
         return;
     }
 
-    filtered.forEach(product => {
-        // Fallback in case a store image is completely missing
-        const safeImg = product.displayImg || 'https://via.placeholder.com/300x300?text=No+Image';
-        
-        const card = document.createElement('div');
-        card.className = "bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition";
-        
-        card.innerHTML = `
-            <div class="h-48 w-full bg-white flex items-center justify-center p-2">
-                <img src="${safeImg}" 
-                     alt="${product.displayName}" 
-                     class="max-h-full max-w-full object-contain mix-blend-multiply"
-                     onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=Image+Not+Found';">
+    grid.innerHTML = filtered.map(p => `
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
+            <div class="h-48 bg-white flex items-center justify-center p-4">
+                <img src="${p.img || 'https://via.placeholder.com/300'}" class="max-h-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
             </div>
             <div class="p-4 flex flex-col flex-grow">
-                <span class="text-xs font-bold text-red-500 uppercase tracking-wider mb-1">${product.storeName}</span>
-                <h3 class="text-sm font-semibold mb-2 line-clamp-2" title="${product.displayName}">${product.displayName}</h3>
+                <div class="flex justify-between items-start mb-1">
+                    <span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter">${p.store}</span>
+                    <span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span>
+                </div>
+                <h3 class="text-sm font-semibold mb-3 line-clamp-2">${p.name}</h3>
                 <div class="mt-auto flex justify-between items-center">
-                    <span class="text-lg font-bold">${product.price}</span>
-                    <a href="${product.url}" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">Buy Now</a>
+                    <span class="text-lg font-bold">€${p.price.toFixed(2)}</span>
+                    <a href="${p.url}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition">BUY NOW</a>
                 </div>
             </div>
-        `;
-        grid.appendChild(card);
-    });
+        </div>
+    `).join('');
 }
 
-// --- Theme Toggle ---
-const themeBtn = document.getElementById('themeToggle');
-let isDark = false; 
+// --- Event Listeners ---
+function setCategory(cat) { currentCategory = cat; renderFilters(); renderProducts(); }
 
+document.getElementById('storeFilter').addEventListener('change', (e) => { selectedStore = e.target.value; renderProducts(); });
+document.getElementById('setFilter').addEventListener('change', (e) => { selectedSet = e.target.value; renderProducts(); });
+document.getElementById('minPrice').addEventListener('input', (e) => { minPrice = parseFloat(e.target.value) || 0; renderProducts(); });
+document.getElementById('maxPrice').addEventListener('input', (e) => { maxPrice = parseFloat(e.target.value) || Infinity; renderProducts(); });
+
+document.getElementById('resetFilters').addEventListener('click', () => {
+    selectedStore = 'All'; selectedSet = 'All'; minPrice = 0; maxPrice = Infinity; currentCategory = 'All';
+    document.getElementById('storeFilter').value = 'All';
+    document.getElementById('setFilter').value = 'All';
+    document.getElementById('minPrice').value = '';
+    document.getElementById('maxPrice').value = '';
+    renderFilters(); renderProducts();
+});
+
+const themeBtn = document.getElementById('themeToggle');
+let isDark = false;
 themeBtn.addEventListener('click', () => {
     isDark = !isDark;
     document.documentElement.classList.toggle('dark', isDark);
     themeBtn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
 });
 
-// --- Initialization ---
-renderFilters();
+// Init
 fetchProducts();
 setInterval(fetchProducts, 1800000);

@@ -41,6 +41,11 @@ const PRODUCT_CATALOG = [
         standardName: "Ascended Heroes - Elite Trainer Box",
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     },
+	{
+        matchGroups: [ ["perfect", "order", "elite"], ["perfect", "order", "etb"] ],
+        standardName: "Perfect Order - Elite Trainer Box",
+        image: "images/etbpo.png"
+    },
     {
         matchGroups: [ ["destined", "rivals", "elite"], ["destined", "rivals", "etb"] ],
         standardName: "Destined Rivals - Elite Trainer Box",

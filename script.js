@@ -41,7 +41,7 @@
     let _0x4d = 'All';
     let _0x5e = '';
     let _0xMaxP = 2000; 
-    let _0xSort = 'default'; // ADDED: Sort State
+    let _0xSort = 'default'; 
 
     const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Half Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Other'];
     const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together", "Rebel Clash", "Crown Zenith"];
@@ -139,7 +139,6 @@
     window.renderProducts = function() {
         const g = document.getElementById('productGrid');
         
-        // 1. Filter Data
         let f = _0x1a.filter(p => {
             const mC = _0x2b === 'All' || p.category === _0x2b;
             const mS = _0x3c === 'All' || p.store === _0x3c;
@@ -149,14 +148,13 @@
             return mC && mS && mT && mP && mH;
         });
 
-        // 2. Sort Data (ADDED)
+        // ACTIVATE SORTING
         if (_0xSort === 'lowToHigh') {
             f.sort((a, b) => a.price - b.price);
         } else if (_0xSort === 'highToLow') {
             f.sort((a, b) => b.price - a.price);
         }
 
-        // 3. Render Data
         document.getElementById('productCount').textContent = `${f.length} items found`;
         g.innerHTML = f.map(p => `
             <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
@@ -207,13 +205,13 @@
     document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; updateDropdowns(); renderProducts(); });
     document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; updateDropdowns(); renderProducts(); });
     
-    // ADDED: Sort Event Listener
+    // EVENT LISTENER FOR SORTING
     document.getElementById('sortFilter').addEventListener('change', (e) => { _0xSort = e.target.value; renderProducts(); });
 
     document.getElementById('resetFilters').addEventListener('click', () => { 
         _0x3c = 'All'; _0x4d = 'All'; _0xMaxP = 2000; _0x2b = 'All'; _0x5e = ''; _0xSort = 'default';
         slider.value = 2000; label.textContent = '€2000';
-        document.getElementById('sortFilter').value = 'default'; // Reset Dropdown
+        document.getElementById('sortFilter').value = 'default';
         fetchData(); 
     });
 

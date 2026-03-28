@@ -87,4 +87,109 @@
         return _0x8b[8];
     }
 
-    function _
+    function _0x14e(_u) {
+        try { return new URL(_u).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(); } 
+        catch { return "STORE"; }
+    }
+
+    function _0x15f(_on, _ou, _oi) {
+        let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
+        for (const _it of _0x10a) {
+            for (const _wg of _it.m) {
+                if (_wg.every(_w => _ts.includes(_w))) return { name: _it.s, img: _it.i };
+            }
+        }
+        return { name: _on, img: _oi };
+    }
+
+    window.updateDropdowns = function() {
+        const sS = document.getElementById('storeFilter');
+        const sT = document.getElementById('setFilter');
+        const pS = _0x3c;
+        const pT = _0x4d;
+        const cM = _0x1a.filter(p => _0x2b === 'All' || p.category === _0x2b);
+        const aS = [...new Set(cM.map(p => p.store))].sort();
+        const aT = [...new Set(cM.map(p => p.set))].sort();
+        sS.innerHTML = '<option value="All">All Stores</option>' + aS.map(s => `<option value="${s}" ${s === pS ? 'selected' : ''}>${s}</option>`).join('');
+        sT.innerHTML = '<option value="All">All Sets</option>' + aT.map(s => `<option value="${s}" ${s === pT ? 'selected' : ''}>${s}</option>`).join('');
+    };
+
+    window.setCategory = function(cat) { _0x2b = cat; updateDropdowns(); renderFilters(); renderProducts(); };
+
+    window.renderFilters = function() {
+        const c = document.getElementById('filterContainer');
+        c.innerHTML = _0x8b.map(cat => `<button onclick="setCategory('${cat}')" class="px-4 py-2 rounded-full text-sm font-medium transition border ${_0x2b === cat ? 'bg-red-600 text-white border-red-600' : 'bg-white text-gray-700 dark:bg-gray-800 dark:text-gray-300 border-gray-300 dark:border-gray-600'}">${cat}</button>`).join('');
+    };
+
+    window.renderProducts = function() {
+        const g = document.getElementById('productGrid');
+        const f = _0x1a.filter(p => {
+            const mC = _0x2b === 'All' || p.category === _0x2b;
+            const mS = _0x3c === 'All' || p.store === _0x3c;
+            const mT = _0x4d === 'All' || p.set === _0x4d;
+            const mP = p.price >= _0x6f && p.price <= _0x7a;
+            const mH = p.name.toLowerCase().includes(_0x5e.toLowerCase()) || p.store.toLowerCase().includes(_0x5e.toLowerCase());
+            return mC && mS && mT && mP && mH;
+        });
+        document.getElementById('productCount').textContent = `${f.length} products found`;
+        if (f.length === 0) { g.innerHTML = `<div class="col-span-full py-20 text-center text-gray-500">No products match these filters.</div>`; return; }
+        g.innerHTML = f.map(p => `
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col hover:shadow-md transition">
+                <div class="h-48 bg-white flex items-center justify-center p-2">
+                    <img src="${p.img}" referrerpolicy="no-referrer" class="h-full w-full object-contain mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-1"><span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter">${p.store}</span><span class="text-[10px] bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-gray-500">${p.set}</span></div>
+                    <h3 class="text-sm font-semibold mb-3 line-clamp-2">${p.name}</h3>
+                    <div class="mt-auto flex justify-between items-center"><span class="text-lg font-bold">€${p.price.toFixed(2)}</span><a href="${p.url}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition">BUY NOW</a></div>
+                </div>
+            </div>
+        `).join('');
+    };
+
+    async function fetchData() {
+        try {
+            const r = await fetch(`seen_products.json?t=${Date.now()}`);
+            const d = await r.json();
+            _0x1a = [];
+            for (const k in d) {
+                const p = d[k];
+                if (p.in_stock) {
+                    const cl = _0x15f(p.name, p.url, p.img);
+                    _0x1a.push({ name: cl.name, img: cl.img, url: p.url, price: _0x11b(p.price), store: _0x14e(p.url), category: _0x13d(cl.name, p.url), set: _0x12c(cl.name, p.url) });
+                }
+            }
+            updateDropdowns(); renderFilters(); renderProducts();
+            document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
+        } catch (e) { console.error("ERR_DATA_FETCH"); }
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    document.getElementById('searchInputMobile').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; renderProducts(); });
+    document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; renderProducts(); });
+    document.getElementById('minPrice').addEventListener('input', (e) => { _0x6f = parseFloat(e.target.value) || 0; renderProducts(); });
+    document.getElementById('maxPrice').addEventListener('input', (e) => { _0x7a = parseFloat(e.target.value) || Infinity; renderProducts(); });
+    document.getElementById('resetFilters').addEventListener('click', () => {
+        _0x3c = 'All'; _0x4d = 'All'; _0x6f = 0; _0x7a = Infinity; _0x2b = 'All'; _0x5e = '';
+        document.getElementById('searchInput').value = ''; document.getElementById('searchInputMobile').value = '';
+        updateDropdowns(); renderFilters(); renderProducts();
+    });
+
+    const bTT = document.getElementById('backToTop');
+    window.onscroll = () => { window.scrollY > 400 ? bTT.classList.add('show') : bTT.classList.remove('show'); };
+    bTT.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+    const tB = document.getElementById('themeToggle');
+    const tI = document.getElementById('themeIcon');
+    let iD = false;
+    tB.addEventListener('click', () => {
+        iD = !iD;
+        document.documentElement.classList.toggle('dark', iD);
+        if (iD) { tI.setAttribute('fill', 'currentColor'); tI.classList.replace('text-gray-600', 'text-yellow-400'); } 
+        else { tI.setAttribute('fill', 'none'); tI.classList.replace('text-yellow-400', 'text-gray-600'); }
+    });
+
+    fetchData();
+    setInterval(fetchData, 1800000);
+})();

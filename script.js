@@ -99,9 +99,13 @@ const PRODUCT_CATALOG = [
         image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
     },
     {
-        matchGroups: [ ["shrouded", "fable", "elite"], ["shrouded", "fable", "etb"] ],
+        matchGroups: [ 
+            ["shrouded", "fable", "elite"], 
+            ["shrouded", "fable", "etb"], 
+            ["shrouded", "fable", "elitetrainer"] 
+        ],
         standardName: "Shrouded Fable - Elite Trainer Box",
-        image: "https://tcg.pokemon.com/assets/img/global/tcg-card-back-2x.jpg"
+        image: "images/etbfable.png" // Your local high-quality image
     },
     {
         matchGroups: [ ["prismatic", "evolutions", "elite"], ["prismatic", "evolutions", "etb"] ],

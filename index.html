@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokéStock Tracker - Advanced Search</title>
     <meta name="referrer" content="no-referrer">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png?v=3">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon.png?v=3">
-    <link rel="apple-touch-icon" href="./favicon.png?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png?v=6">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon.png?v=6">
+    <link rel="apple-touch-icon" href="./favicon.png?v=6">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' }
@@ -37,6 +37,39 @@
 </head>
 <body class="text-gray-900 dark:text-gray-100 min-h-screen">
 
+    <div id="donateModal" class="fixed inset-0 z-[100] bg-gray-900/60 backdrop-blur-sm flex items-center justify-center invisible opacity-0 transition-all duration-300">
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl w-11/12 max-w-md transform scale-95 transition-transform duration-300" id="donateModalContent">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-black text-gray-900 dark:text-white flex items-center gap-2"><span class="text-red-500">❤️</span> Support PokéStock</h2>
+                <button id="closeDonateModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors bg-gray-100 dark:bg-gray-700 p-2 rounded-full">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-8 font-medium">If this tool helped you snag a great deal, consider leaving a tip to help keep the servers running!</p>
+            
+            <div class="space-y-4">
+                <a href="https://paypal.me/pokestockpt" target="_blank" class="w-full flex items-center justify-center gap-3 p-4 bg-[#003087]/10 hover:bg-[#003087]/20 border border-[#003087]/20 rounded-2xl text-[#003087] dark:text-[#4b9dec] font-black transition-colors">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/></svg>
+                    PayPal
+                </a>
+                
+                <button onclick="copyCrypto('BTC', 'bc1qlhqznqep0txmzkfey8sv64zrmw9eds9qa4y9xy')" class="w-full flex items-center justify-center gap-3 p-4 bg-orange-100 hover:bg-orange-200 dark:bg-orange-900/20 dark:hover:bg-orange-900/40 border border-orange-200 dark:border-orange-800/50 rounded-2xl text-orange-600 dark:text-orange-400 font-black transition-colors relative overflow-hidden group">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.036-1.24 15.525.362 9.095 1.964 2.667 8.475-1.243 14.906.361c6.43 1.603 10.34 8.113 8.732 14.543zm-6.634-5.35c.537-3.593-2.186-4.66-4.596-5.462l.983-3.943-2.396-.598-.952 3.824c-.63-.157-1.272-.307-1.9-.452l.955-3.83-2.396-.598-.985 3.947c-.52-.12-1.02-.24-1.493-.362l-2.062 5.097s1.112.257 1.088.27c.606.152.716.554.697.876l-1.393 5.59c-.063.172-.218.43-.68.315.025.025-1.09-.272-1.09-.272l-1.503 5.8 2.872.717c.583.146 1.173.298 1.764.444l-.994 3.987 2.396.598.983-3.95c.65.174 1.282.336 1.9.488l-.966 3.87 2.396.598.995-3.99c3.275.613 5.74.37 6.326-2.585.472-2.375-.246-3.744-1.768-4.64.757-.174 1.326-.606 1.488-1.543zm-4.324 6.273c-.66 2.65-5.116 1.218-6.558.857l1.175-4.717c1.44.36 6.07 1.087 5.383 3.86zm.575-6.84c-.602 2.417-4.34 1.185-5.556.883l1.062-4.26c1.216.303 5.12 1.077 4.494 3.377z"/></svg>
+                    Crypto BTC
+                </button>
+                
+                <button onclick="copyCrypto('USDC (SOL)', 'FFefPJiXLbExrZuek7cLVsvawp5gj9zbDAVuQm84K7u4')" class="w-full flex items-center justify-center gap-3 p-4 bg-teal-100 hover:bg-teal-200 dark:bg-teal-900/20 dark:hover:bg-teal-900/40 border border-teal-200 dark:border-teal-800/50 rounded-2xl text-teal-700 dark:text-teal-400 font-black transition-colors relative overflow-hidden group">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.632 17.514c-1.348 1.424-3.328 2.252-5.632 2.252-4.108 0-7.44-3.332-7.44-7.44s3.332-7.44 7.44-7.44c2.253 0 4.204.795 5.567 2.155l-2.07 2.07c-.9-.865-2.146-1.357-3.497-1.357-2.607 0-4.665 2.058-4.665 4.665 0 2.608 2.058 4.666 4.665 4.666 1.423 0 2.69-.533 3.585-1.428l2.047 1.857z"/></svg>
+                    Crypto USDC (SOL)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-3 rounded-full shadow-2xl font-bold text-sm transition-all duration-300 translate-y-20 opacity-0 z-[110] flex items-center gap-2">
+        ✅ <span id="toastMsg">Address copied!</span>
+    </div>
+
     <nav class="p-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 z-[60]">
         <h1 class="text-2xl font-black text-red-600 dark:text-red-500 tracking-tighter italic">POKÉSTOCK</h1>
         
@@ -45,6 +78,10 @@
                 <input type="text" id="searchInput" placeholder="Search products..." class="pl-10 pr-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-700/50 border-none focus:ring-2 focus:ring-red-500 w-64 transition-all">
                 <span class="absolute left-3 top-2.5 text-gray-400">🔍</span>
             </div>
+
+            <button id="donateBtn" class="nav-btn p-2.5 bg-red-100 dark:bg-red-900/30 rounded-xl shadow-sm border border-red-200 dark:border-red-800 flex items-center justify-center transition-all hover:bg-red-200 dark:hover:bg-red-800/50 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 dark:text-red-400 group-hover:scale-110 transition-transform"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </button>
 
             <a href="https://discord.gg/awxunXD9" target="_blank" class="nav-btn p-2.5 bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 group">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-gray-500 dark:text-gray-300 group-hover:text-[#5865F2]" viewBox="0 0 24 24">
@@ -108,6 +145,6 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
     </button>
 
-    <script src="script.js?v=5"></script>
+    <script src="script.js?v=6"></script>
 </body>
 </html>

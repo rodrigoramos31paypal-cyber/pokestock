@@ -119,16 +119,11 @@ const PRODUCT_CATALOG = [
 function parsePrice(priceStr) {
     if (!priceStr) return 0;
     let cleaned = priceStr.replace(/[^\d.,]/g, '');
-    
-    // Handle European format (1.150,00)
     if (cleaned.includes('.') && cleaned.includes(',')) {
         cleaned = cleaned.replace(/\./g, '').replace(',', '.');
-    } 
-    // Handle simple decimal comma (15,99)
-    else if (cleaned.includes(',')) {
+    } else if (cleaned.includes(',')) {
         cleaned = cleaned.replace(',', '.');
     }
-    
     return parseFloat(cleaned) || 0;
 }
 
@@ -140,33 +135,40 @@ function identifySet(name, url) {
     return name.includes(" - ") ? name.split(" - ")[0] : "Other Sets";
 }
 
+/**
+ * FIXED: Refined Category Logic
+ * Priority: Accessories/Decks -> Blisters -> Specific TCG Items -> General Collections
+ */
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
     
-    // 1. Accessories Priority (Other)
+    // 1. Others Priority: Accessories AND Decks
     if (text.includes("portfólio") || text.includes("portfolio") || 
-        text.includes("acrílico") || text.includes("acrilico")) return "Other";
+        text.includes("acrílico") || text.includes("acrilico") ||
+        text.includes("deck")) return "Other"; // Moves Battle Decks to "Other"
 
-    // 2. High Priority Specifics
+    // 2. Blisters Priority: Must catch this before "Collection" or "Premium"
+    if (text.includes("blister") || text.includes("3-pack") || text.includes("checklane")) return "Blisters";
+
+    // 3. High Priority TCG Specifics
     if (text.includes("elite trainer box") || text.includes("etb")) return "Elite Trainer Box";
     if (text.includes("tin")) return "Tins";
-    if (text.includes("blister") || text.includes("3-pack") || text.includes("checklane")) return "Blisters";
     if (text.includes("build & battle") || text.includes("stadium") || text.includes("b&b")) return "Build & Battle";
     
-    // 3. Booster Box
+    // 4. Booster Boxes (Specific check to avoid bundles)
     if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display") || text.includes("36")) && 
         !text.includes("bundle") && !text.includes("pack")) {
         return "Booster Box";
     }
 
-    // 4. Collection Boxes (New Rules: Premium/Collection)
+    // 5. Collection Boxes: (Catching "Premium" and "Collection")
     if (text.includes("collection") || text.includes("premium") || 
         text.includes("upc") || text.includes("box") || 
-        text.includes("bundle") || text.includes("deck")) {
+        text.includes("bundle")) {
         return "Collection Boxes";
     }
 
-    // 5. Booster Packs
+    // 6. Booster Packs
     if (text.includes("booster") || text.includes("pack") || text.includes("sleeved")) return "Booster Packs";
     
     return "Other";
@@ -290,7 +292,24 @@ async function fetchProducts() {
 
 function setCategory(cat) { currentCategory = cat; updateDropdowns(); renderFilters(); renderProducts(); }
 
-// --- Listeners ---
+// --- Scroll & UI Listeners ---
+
+const backToTopBtn = document.getElementById('backToTop');
+
+window.onscroll = function() {
+    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+        backToTopBtn.classList.add('opacity-100', 'pointer-events-auto');
+    } else {
+        backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+        backToTopBtn.classList.remove('opacity-100', 'pointer-events-auto');
+    }
+};
+
+backToTopBtn.onclick = function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 document.getElementById('storeFilter').addEventListener('change', (e) => { selectedStore = e.target.value; renderProducts(); });
 document.getElementById('setFilter').addEventListener('change', (e) => { selectedSet = e.target.value; renderProducts(); });
 document.getElementById('minPrice').addEventListener('input', (e) => { minPrice = parseFloat(e.target.value) || 0; renderProducts(); });

@@ -23,6 +23,8 @@ const PRODUCT_CATALOG = [
     { matchGroups: [["perfect", "order", "elite"]], standardName: "Perfect Order - Elite Trainer Box", image: "images/etbpo.png" }
 ];
 
+// --- Helper Functions ---
+
 function parsePrice(priceStr) {
     if (!priceStr) return 0;
     let cleaned = priceStr.replace(/[^\d.,]/g, '');
@@ -37,21 +39,39 @@ function identifySet(name, url) {
     return name.includes(" - ") ? name.split(" - ")[0] : "Other Sets";
 }
 
+/**
+ * REFINED CATEGORY LOGIC - PRIORITY FIXED
+ * Ensures proper categorization and handles the Mega Charizard UPC.
+ */
 function detectCategory(name, url) {
     const text = (name + " " + url).toLowerCase();
     const cleanName = name.toLowerCase();
     
+    // 1. ELITE TRAINER BOX (Highest Priority)
     if (text.includes("elite trainer box") || text.includes("etb") || text.includes("elitetrainer")) return "Elite Trainer Box";
+
+    // 2. BOOSTER BOX
     if ((text.includes("booster box") || text.includes("half booster box") || text.includes("display")) && !text.includes("booster bundle")) return "Booster Box";
+    if (cleanName.includes("36") && cleanName.includes("booster") && !text.includes("bundle")) return "Booster Box";
+
+    // 3. BOOSTER BUNDLE
     if (text.includes("booster bundle")) return "Booster Bundle";
+
+    // 4. BLISTERS
     if (cleanName.includes("blister") || cleanName.includes("tech") || cleanName.includes("3-pack blister") || cleanName.includes("checklane")) return "Blisters";
+
+    // 5. TINS
     if (cleanName.includes("tin")) return "Tins";
 
-    const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special"];
+    // 6. COLLECTION BOXES (Strict Keywords)
+    // Included 'upc' to ensure Ultra Premium Collections are caught.
+    const collectionKeywords = ["ultra", "premium", "collection", "ex box", "special", "upc"];
     if (collectionKeywords.some(kw => cleanName.includes(kw))) return "Collection Boxes";
 
+    // 7. BOOSTER PACKS
     if (text.includes("pack") || text.includes("booster") || text.includes("sleeved")) return "Booster Packs";
 
+    // 8. OTHERS (Accessories fallback)
     if (text.includes("binder") || text.includes("poster") || (text.includes("sleeve") && !text.includes("sleeved")) || text.includes("portfolio") || text.includes("portfólio") || text.includes("acrilico") || text.includes("acrílico") || text.includes("deck")) return "Other";
 
     return "Other";
@@ -154,7 +174,7 @@ const backToTopBtn = document.getElementById('backToTop');
 window.onscroll = () => { window.scrollY > 400 ? backToTopBtn.classList.add('show') : backToTopBtn.classList.remove('show'); };
 backToTopBtn.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
-// Updated Theme Toggle Logic for the Modern Lightbulb Icon
+// Modern Theme Toggle Logic
 const themeBtn = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 let isDark = false;
@@ -164,10 +184,10 @@ themeBtn.addEventListener('click', () => {
     document.documentElement.classList.toggle('dark', isDark);
     
     if (isDark) {
-        themeIcon.setAttribute('fill', 'currentColor'); // Yellow bulb
+        themeIcon.setAttribute('fill', 'currentColor'); // Fill bulb
         themeIcon.classList.replace('text-gray-600', 'text-yellow-400');
     } else {
-        themeIcon.setAttribute('fill', 'none'); // Empty bulb
+        themeIcon.setAttribute('fill', 'none'); // Outline only
         themeIcon.classList.replace('text-yellow-400', 'text-gray-600');
     }
 });

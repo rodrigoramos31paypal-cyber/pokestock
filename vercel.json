@@ -1,0 +1,17 @@
+{
+  "headers": [
+    {
+      "source": "/seen_products.json",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://www.pokestockpt.com"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    }
+  ]
+}

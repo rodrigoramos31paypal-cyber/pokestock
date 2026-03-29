@@ -38,12 +38,61 @@
 </head>
 <body class="text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
 
+    <div id="donateModal" class="fixed inset-0 z-[100] bg-gray-900/60 backdrop-blur-sm flex items-center justify-center invisible opacity-0 transition-all duration-300">
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl w-11/12 max-w-md transform scale-95 transition-all duration-300" id="donateModalContent">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-black text-gray-900 dark:text-white flex items-center gap-2 transition-colors duration-300"><span class="text-emerald-500">💸</span> Support PokéStock</h2>
+                <button id="closeDonateModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors bg-gray-100 dark:bg-gray-700 w-9 h-9 flex items-center justify-center rounded-full">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-8 font-medium transition-colors duration-300">If this tool helped you snag a great deal, consider leaving a tip to help keep the servers running!</p>
+            
+            <div class="space-y-4">
+                <a href="https://paypal.me/pokestockpt" target="_blank" class="w-full flex items-center justify-center gap-3 p-4 bg-[#003087]/10 hover:bg-[#003087]/20 border border-[#003087]/20 rounded-2xl text-[#003087] dark:text-[#4b9dec] font-black transition-colors">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/></svg>
+                    PayPal
+                </a>
+                
+                <button onclick="copyCrypto('BTC', 'bc1qlhqznqep0txmzkfey8sv64zrmw9eds9qa4y9xy')" class="w-full flex items-center justify-center gap-3 p-4 bg-orange-100 hover:bg-orange-200 dark:bg-orange-900/20 dark:hover:bg-orange-900/40 border border-orange-200 dark:border-orange-800/50 rounded-2xl text-orange-600 dark:text-orange-400 font-black transition-colors relative overflow-hidden group">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.036-1.24 15.525.362 9.095 1.964 2.667 8.475-1.243 14.906.361c6.43 1.603 10.34 8.113 8.732 14.543zm-6.634-5.35c.537-3.593-2.186-4.66-4.596-5.462l.983-3.943-2.396-.598-.952 3.824c-.63-.157-1.272-.307-1.9-.452l.955-3.83-2.396-.598-.985 3.947c-.52-.12-1.02-.24-1.493-.362l-2.062 5.097s1.112.257 1.088.27c.606.152.716.554.697.876l-1.393 5.59c-.063.172-.218.43-.68.315.025.025-1.09-.272-1.09-.272l-1.503 5.8 2.872.717c.583.146 1.173.298 1.764.444l-.994 3.987 2.396.598.983-3.95c.65.174 1.282.336 1.9.488l-.966 3.87 2.396.598.995-3.99c3.275.613 5.74.37 6.326-2.585.472-2.375-.246-3.744-1.768-4.64.757-.174 1.326-.606 1.488-1.543zm-4.324 6.273c-.66 2.65-5.116 1.218-6.558.857l1.175-4.717c1.44.36 6.07 1.087 5.383 3.86zm.575-6.84c-.602 2.417-4.34 1.185-5.556.883l1.062-4.26c1.216.303 5.12 1.077 4.494 3.377z"/></svg>
+                    Crypto BTC
+                </button>
+                
+                <button onclick="copyCrypto('USDC (SOL)', 'FFefPJiXLbExrZuek7cLVsvawp5gj9zbDAVuQm84K7u4')" class="w-full flex items-center justify-center gap-3 p-4 bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/20 dark:hover:bg-blue-900/40 border border-blue-200 dark:border-blue-800/50 rounded-2xl text-blue-600 dark:text-blue-400 font-black transition-colors relative overflow-hidden group">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" fill="currentColor" stroke="none" class="text-blue-600 dark:text-blue-500" />
+                        <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" stroke="#ffffff" stroke-width="2"/>
+                        <line x1="12" y1="18" x2="12" y2="6" stroke="#ffffff" stroke-width="2"/>
+                    </svg>
+                    Crypto USDC (SOL)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-3 rounded-full shadow-2xl font-bold text-sm transition-all duration-300 translate-y-20 opacity-0 z-[110] flex items-center gap-2">
+        ✅ <span id="toastMsg">Address copied!</span>
+    </div>
+
     <nav class="p-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 z-[60] transition-colors duration-300">
-        <a href="index.html" class="text-2xl font-black text-red-600 dark:text-red-500 tracking-tighter italic hover:opacity-80 transition-opacity">POKESTOCKPT</a>
+        
+        <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
+            <a href="index.html" class="text-2xl font-black text-red-600 dark:text-red-500 tracking-tighter italic transition-colors duration-300 hover:opacity-80">POKESTOCKPT</a>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">Home</a>
+                <a href="about.html" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">About Us</a>
+            </div>
+        </div>
         
         <div class="flex items-center gap-3">
-            <a href="index.html" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 mr-4 transition-colors">Home</a>
-            
+            <button id="donateBtn" class="nav-btn w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl shadow-sm border border-emerald-200 dark:border-emerald-800 flex items-center justify-center transition-all hover:bg-emerald-200 dark:hover:bg-emerald-800/50 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+                    <line x1="12" x2="12" y1="2" y2="22"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+            </button>
+
             <a href="https://discord.gg/awxunXD9" target="_blank" class="nav-btn w-10 h-10 bg-[#5865F2] hover:bg-[#4752c4] rounded-xl shadow-lg shadow-[#5865F2]/30 flex items-center justify-center transition-all group">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-white group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
                     <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.862-1.297 1.197-1.99a.076.076 0 0 0-.041-.105 13.11 13.11 0 0 1-1.872-.89.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.89.076.076 0 0 0-.041.106c.34.693.74 1.362 1.196 1.99a.076.076 0 0 0 .084.029 19.835 19.835 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
@@ -52,7 +101,15 @@
 
             <button id="themeToggle" class="nav-btn w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 flex items-center justify-center transition-colors duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500 block dark:hidden transition-transform duration-300 hover:rotate-90">
-                    <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                 </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400 hidden dark:block transition-transform duration-300 hover:-rotate-12">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -101,13 +158,44 @@
     </main>
 
     <script>
+        // Theme Toggle Logic
         const tB = document.getElementById('themeToggle');
-        // Check local storage for theme preference if you implement it, otherwise default to light
         let iD = document.documentElement.classList.contains('dark');
         tB.addEventListener('click', () => {
             iD = !iD;
             document.documentElement.classList.toggle('dark', iD);
         });
+
+        // Donate Modal & Clipboard Logic
+        const donateModal = document.getElementById('donateModal');
+        const donateContent = document.getElementById('donateModalContent');
+        const donateBtn = document.getElementById('donateBtn');
+        const closeDonate = document.getElementById('closeDonateModal');
+
+        donateBtn.onclick = () => {
+            donateModal.classList.remove('invisible', 'opacity-0');
+            donateContent.classList.remove('scale-95');
+            donateContent.classList.add('scale-100');
+        };
+
+        const closeModal = () => {
+            donateContent.classList.remove('scale-100');
+            donateContent.classList.add('scale-95');
+            donateModal.classList.add('opacity-0');
+            setTimeout(() => donateModal.classList.add('invisible'), 300);
+        };
+
+        closeDonate.onclick = closeModal;
+        donateModal.onclick = (e) => { if(e.target === donateModal) closeModal(); };
+
+        window.copyCrypto = function(cryptoName, address) {
+            navigator.clipboard.writeText(address).then(() => {
+                const toast = document.getElementById('toast');
+                document.getElementById('toastMsg').textContent = `${cryptoName} Address Copied!`;
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
+            });
+        };
     </script>
 
     <script>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | PokeStockPT</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png?v=15">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon.png?v=15">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
+    <style>
+        body { background-color: #F4F7F9; transition: background-color 0.3s ease, color 0.3s ease; }
+        .dark body { background-color: #0f172a; }
+        body::before { content: ''; position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(#e5e7eb 1px, transparent 1px); background-size: 20px 20px; transition: opacity 0.3s ease; opacity: 1; pointer-events: none; }
+        body::after { content: ''; position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(#1e293b 1px, transparent 1px); background-size: 20px 20px; transition: opacity 0.3s ease; opacity: 0; pointer-events: none; }
+        .dark body::before { opacity: 0; }
+        .dark body::after { opacity: 1; }
+        .nav-btn { transition: all 0.2s ease-in-out; }
+        .nav-btn:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+
+    <nav class="p-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 z-[60] transition-colors duration-300">
+        <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
+            <a href="index.html" class="text-2xl font-black text-red-600 dark:text-red-500 tracking-tighter italic transition-colors duration-300 hover:opacity-80">POKESTOCKPT</a>
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">Home</a>
+                <a href="about.html" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">About Us</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <button id="themeToggle" class="nav-btn w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 flex items-center justify-center transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500 block dark:hidden transition-transform duration-300 hover:rotate-90">
+                    <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400 hidden dark:block transition-transform duration-300 hover:-rotate-12">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 max-w-4xl flex-grow mt-8 mb-16">
+        <div class="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700">
+            <h1 class="text-3xl font-black mb-6 text-gray-900 dark:text-white">Privacy Policy</h1>
+            <div class="space-y-6 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                <p>Last updated: <span id="date"></span></p>
+                
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">1. Introduction</h2>
+                <p>Welcome to PokéStockPT. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and tell you about your privacy rights.</p>
+
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">2. Data We Collect</h2>
+                <p>We do not require you to create an account to use our site. However, we use third-party analytics (Vercel Analytics) and advertising partners (Google AdSense) that may automatically collect technical data such as your IP address, browser type, and usage data via cookies.</p>
+
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">3. Cookies and Advertising</h2>
+                <p>Third party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites. Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</p>
+                <p>Users may opt out of personalized advertising by visiting <a href="https://myadcenter.google.com/" target="_blank" class="text-red-500 hover:underline">Ads Settings</a>.</p>
+
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">4. External Links</h2>
+                <p>Our website contains links to external retailers to help you find Pokémon TCG products. We are not responsible for the privacy policies or practices of any third-party sites.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('date').textContent = new Date().toLocaleDateString();
+        const tB = document.getElementById('themeToggle');
+        let iD = document.documentElement.classList.contains('dark');
+        tB.addEventListener('click', () => { iD = !iD; document.documentElement.classList.toggle('dark', iD); });
+    </script>
+</body>
+</html>

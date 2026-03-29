@@ -123,7 +123,7 @@
             <h1 class="text-3xl md:text-5xl font-black mb-6 text-gray-900 dark:text-white tracking-tight">Your Ultimate <span class="text-red-600 dark:text-red-500">Pokémon TCG</span> Tracker</h1>
             
             <p class="text-lg text-gray-600 dark:text-gray-300 mb-10 leading-relaxed font-medium">
-                Hunting for Pokémon sealed products shouldn't feel like a full-time job. PokeStockPT was created to automatically scan your favorite stores, gather the best deals, and put them all in one easy-to-search place.
+                Hunting for Pokémon cards shouldn't feel like a full-time job. PokéStockPT was created to automatically scan your favorite stores, gather the best deals, and put them all in one easy-to-search place.
             </p>
 
             <div class="grid md:grid-cols-2 gap-8 mb-12">
@@ -197,6 +197,27 @@
         };
     </script>
 
+    <div id="cookieBanner" class="fixed bottom-0 left-0 w-full bg-gray-900 dark:bg-gray-950 text-white p-4 z-[120] transform transition-transform duration-500 translate-y-full flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-center sm:text-left">We use cookies to analyze traffic and provide personalized ads. By continuing to use this site, you consent to our <a href="privacy.html" class="underline hover:text-red-400">Privacy Policy</a>.</p>
+        <button id="acceptCookies" class="whitespace-nowrap bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-6 rounded-xl transition-colors">Got it!</button>
+    </div>
+    <script>
+        if (!localStorage.getItem('cookiesAccepted')) {
+            setTimeout(() => document.getElementById('cookieBanner').classList.remove('translate-y-full'), 1000);
+        }
+        document.getElementById('acceptCookies').onclick = () => {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieBanner').classList.add('translate-y-full');
+        };
+    </script>
+
+    <footer class="py-6 text-center border-t border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 mt-auto">
+        <p class="text-xs text-gray-500 dark:text-gray-400">
+            © <script>document.write(new Date().getFullYear())</script> PokéStockPT. All rights reserved. <br>
+            <a href="privacy.html" class="hover:text-red-500 transition-colors">Privacy Policy</a>
+        </p>
+    </footer>
+
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
@@ -205,11 +226,5 @@
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
-	<footer class="py-6 text-center border-t border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 mt-auto">
-        <p class="text-xs text-gray-500 dark:text-gray-400">
-            © <script>document.write(new Date().getFullYear())</script> PokéStockPT. All rights reserved. <br>
-            <a href="privacy.html" class="hover:text-red-500 transition-colors">Privacy Policy</a>
-        </p>
-    </footer>
 </body>
 </html>

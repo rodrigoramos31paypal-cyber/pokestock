@@ -103,6 +103,11 @@
     }
 
     function _0x15f(_on, _ou, _oi) {
+        // PREVENT "BOOSTER PACK" PRODUCTS FROM MERGING WITH "BOX" URLs
+        if (_on.toLowerCase().includes('booster pack')) {
+            return { name: _on, img: _oi };
+        }
+
         let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
         for (const _it of _0x10a) {
             for (const _wg of _it.m) {
@@ -117,13 +122,13 @@
     window.updateDropdowns = function() {
         const sS = document.getElementById('storeFilter');
         const sT = document.getElementById('setFilter');
-        const cM = _0x1a.filter(p => (_0x2b === 'All' || p.category === _0x2b) && p.price <= _0xMaxP);
-        const aS = [...new Set(cM.map(p => p.store))].sort();
-        const aT = [...new Set(cM.map(p => p.set))].sort();
+        
+        // POPULATE ALL STORES/SETS SO SELECTIONS PERSIST BETWEEN CATEGORIES
+        const aS = [...new Set(_0x1a.map(p => p.store))].sort();
+        const aT = [...new Set(_0x1a.map(p => p.set))].sort();
         
         sS.innerHTML = '<option value="All">All Stores</option>' + aS.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
         sT.innerHTML = '<option value="All">All Sets</option>' + aT.map(s => `<option value="${s}" ${_0x4d === s ? 'selected' : ''}>${s}</option>`).join('');
-        _0x3c = sS.value; _0x4d = sT.value;
     };
 
     window.setCategory = function(cat) { 
@@ -191,6 +196,11 @@
             for (const k in d) {
                 const p = d[k];
                 if (p.in_stock) {
+                    // IGNORE BATTLE PARTNERS
+                    if ((p.name || "").toLowerCase().includes("battle partners")) {
+                        continue;
+                    }
+
                     const cl = _0x15f(p.name, p.url, p.img);
                     _0x1a.push({ name: cl.name, img: cl.img, url: p.url, price: _0x11b(p.price), store: new URL(p.url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(), category: _0x13d(cl.name), set: _0x12c(cl.name) });
                 }
@@ -211,7 +221,7 @@
     document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
     document.getElementById('searchInputMobile').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
     
-    // NEW: Category Select Event Listener
+    // Category Select Event Listener
     document.getElementById('categorySelect').addEventListener('change', (e) => { setCategory(e.target.value); });
     
     document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; updateDropdowns(); renderProducts(); });

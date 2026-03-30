@@ -1,1 +1,258 @@
-function _0x83a0(_0x1cc9c6,_0x5a51db){_0x1cc9c6=_0x1cc9c6-0xc3;const _0x2894b6=_0x2894();let _0x83a083=_0x2894b6[_0x1cc9c6];return _0x83a083;}(function(_0x4937de,_0x1fdc7f){const _0x5585a5=_0x83a0,_0x4d7abe=_0x4937de();while(!![]){try{const _0x2e511d=-parseInt(_0x5585a5(0x125))/0x1+-parseInt(_0x5585a5(0xc4))/0x2*(-parseInt(_0x5585a5(0x114))/0x3)+-parseInt(_0x5585a5(0x135))/0x4*(-parseInt(_0x5585a5(0x14e))/0x5)+parseInt(_0x5585a5(0x161))/0x6+-parseInt(_0x5585a5(0x150))/0x7*(parseInt(_0x5585a5(0xe3))/0x8)+parseInt(_0x5585a5(0x110))/0x9+-parseInt(_0x5585a5(0x152))/0xa*(parseInt(_0x5585a5(0x168))/0xb);if(_0x2e511d===_0x1fdc7f)break;else _0x4d7abe['push'](_0x4d7abe['shift']());}catch(_0x37b97b){_0x4d7abe['push'](_0x4d7abe['shift']());}}}(_0x2894,0x5e7dc),(function(){const _0x1f1df8=_0x83a0;document[_0x1f1df8(0x185)]('contextmenu',_0x56e850=>_0x56e850[_0x1f1df8(0x195)]()),document['onkeydown']=function(_0xb3c607){const _0x2f6a60=_0x1f1df8;if(_0xb3c607[_0x2f6a60(0x11b)]==0x7b)return![];if(_0xb3c607[_0x2f6a60(0xdb)]&&_0xb3c607[_0x2f6a60(0x104)]&&(_0xb3c607[_0x2f6a60(0x11b)]=='I'['charCodeAt'](0x0)||_0xb3c607[_0x2f6a60(0x11b)]=='J'[_0x2f6a60(0x111)](0x0)))return![];if(_0xb3c607['ctrlKey']&&_0xb3c607[_0x2f6a60(0x11b)]=='U'[_0x2f6a60(0x111)](0x0))return![];};const _0x18cdbf=document[_0x1f1df8(0x17e)]('donateModal'),_0x47eaa4=document[_0x1f1df8(0x17e)](_0x1f1df8(0xdc)),_0x182738=document[_0x1f1df8(0x17e)](_0x1f1df8(0x14f)),_0x2734ba=document[_0x1f1df8(0x17e)](_0x1f1df8(0x12a));_0x182738['onclick']=()=>{const _0x352bc7=_0x1f1df8;_0x18cdbf[_0x352bc7(0x11d)]['remove'](_0x352bc7(0x153),_0x352bc7(0x12f)),_0x47eaa4[_0x352bc7(0x11d)][_0x352bc7(0x15f)](_0x352bc7(0x12b)),_0x47eaa4['classList'][_0x352bc7(0xd1)](_0x352bc7(0xd0));};const _0x5bb33f=()=>{const _0x1a84be=_0x1f1df8;_0x47eaa4[_0x1a84be(0x11d)][_0x1a84be(0x15f)](_0x1a84be(0xd0)),_0x47eaa4[_0x1a84be(0x11d)]['add'](_0x1a84be(0x12b)),_0x18cdbf[_0x1a84be(0x11d)][_0x1a84be(0xd1)](_0x1a84be(0x12f)),setTimeout(()=>_0x18cdbf[_0x1a84be(0x11d)][_0x1a84be(0xd1)](_0x1a84be(0x153)),0x12c);};_0x2734ba[_0x1f1df8(0x17d)]=_0x5bb33f,_0x18cdbf[_0x1f1df8(0x17d)]=_0x10b542=>{const _0x4ce8b4=_0x1f1df8;if(_0x10b542[_0x4ce8b4(0xf2)]===_0x18cdbf)_0x5bb33f();},window['copyCrypto']=function(_0xd0f2e8,_0x5c0249){const _0x146d6b=_0x1f1df8;navigator[_0x146d6b(0x100)]['writeText'](_0x5c0249)[_0x146d6b(0x14b)](()=>{const _0x297518=_0x146d6b,_0x558abf=document[_0x297518(0x17e)](_0x297518(0x118));document[_0x297518(0x17e)](_0x297518(0x17f))['textContent']=_0xd0f2e8+_0x297518(0x163),_0x558abf[_0x297518(0x11d)]['remove'](_0x297518(0xf9),_0x297518(0x12f)),setTimeout(()=>{const _0x5070df=_0x297518;_0x558abf[_0x5070df(0x11d)][_0x5070df(0xd1)]('translate-y-20',_0x5070df(0x12f));},0xbb8);});};let _0x16a4df=[],_0xe0382b=_0x1f1df8(0x16a),_0x1343b9=_0x1f1df8(0x16a),_0x4f1c38=_0x1f1df8(0x16a),_0x59ed37='',_0x4a4706=0x7d0,_0xe65c5c='default';const _0x1b931f=[_0x1f1df8(0x16a),_0x1f1df8(0x105),_0x1f1df8(0x127),'Half\x20Booster\x20Box','Booster\x20Bundle','Collection\x20Boxes',_0x1f1df8(0x164),_0x1f1df8(0x151)],_0x857e4e=[_0x1f1df8(0x112),_0x1f1df8(0x190),_0x1f1df8(0x16e),_0x1f1df8(0xfd),_0x1f1df8(0x18c),_0x1f1df8(0x101),'Temporal\x20Forces',_0x1f1df8(0xc5),'Paradox\x20Rift',_0x1f1df8(0x145),_0x1f1df8(0x119),_0x1f1df8(0xc9),_0x1f1df8(0x15e),_0x1f1df8(0xd4),_0x1f1df8(0x117),'Brilliant\x20Stars',_0x1f1df8(0xe0),_0x1f1df8(0x10c),_0x1f1df8(0x122),_0x1f1df8(0x158),_0x1f1df8(0xe5),_0x1f1df8(0x15b),_0x1f1df8(0x148),'Ascended\x20Heroes',_0x1f1df8(0x157),'Chaos\x20Rising',_0x1f1df8(0x166),_0x1f1df8(0xd9),_0x1f1df8(0x174),_0x1f1df8(0x162),_0x1f1df8(0xf4),_0x1f1df8(0x139),'Crown\x20Zenith'],_0x515499=[{'m':[['phantasmal','flames',_0x1f1df8(0x146)]],'s':_0x1f1df8(0x12c)},{'m':[[_0x1f1df8(0x16b),_0x1f1df8(0xef),_0x1f1df8(0x179),'box']],'s':_0x1f1df8(0xdd)},{'m':[[_0x1f1df8(0x16b),_0x1f1df8(0xef),_0x1f1df8(0x179),_0x1f1df8(0xf6)]],'s':_0x1f1df8(0x14c)},{'m':[[_0x1f1df8(0xc7),_0x1f1df8(0x133),_0x1f1df8(0x179),_0x1f1df8(0xf1)]],'s':_0x1f1df8(0xd3)},{'m':[[_0x1f1df8(0xc7),_0x1f1df8(0x133),_0x1f1df8(0x179),'bundle']],'s':_0x1f1df8(0xd2)},{'m':[[_0x1f1df8(0xc6),_0x1f1df8(0xff),'booster',_0x1f1df8(0xf1)]],'s':_0x1f1df8(0x18b)},{'m':[[_0x1f1df8(0xc6),_0x1f1df8(0xff),'booster','bundle']],'s':_0x1f1df8(0x11f)},{'m':[[_0x1f1df8(0x15d),_0x1f1df8(0x130),_0x1f1df8(0x146)]],'s':_0x1f1df8(0xec)},{'m':[['shrouded','fable',_0x1f1df8(0x179),_0x1f1df8(0xf6)]],'s':_0x1f1df8(0x18f)},{'m':[['perfect',_0x1f1df8(0x13e),_0x1f1df8(0x146)]],'s':'Perfect\x20Order\x20-\x20Elite\x20Trainer\x20Box'},{'m':[['surging','sparks','elite']],'s':_0x1f1df8(0x115)},{'m':[[_0x1f1df8(0xc6),_0x1f1df8(0xff),_0x1f1df8(0x146)]],'s':_0x1f1df8(0xdf)},{'m':[[_0x1f1df8(0x19b),_0x1f1df8(0xfe),'elite']],'s':_0x1f1df8(0xe8)},{'m':[[_0x1f1df8(0x156),_0x1f1df8(0x18d),_0x1f1df8(0x146)]],'s':_0x1f1df8(0x149)},{'m':[[_0x1f1df8(0x16c),_0x1f1df8(0x18e),_0x1f1df8(0x146)]],'s':_0x1f1df8(0xcc)},{'m':[[_0x1f1df8(0x182),_0x1f1df8(0x142),_0x1f1df8(0x146)]],'s':_0x1f1df8(0x131)}];function _0x4574f4(_0x43cf6f){const _0x4b7684=_0x1f1df8;if(!_0x43cf6f)return 0x0;let _0x5ef24f=_0x43cf6f[_0x4b7684(0xf8)](/[^\d.,]/g,'');if(_0x5ef24f['includes']('.')&&_0x5ef24f[_0x4b7684(0x170)](','))_0x5ef24f=_0x5ef24f[_0x4b7684(0xf8)](/\./g,'')[_0x4b7684(0xf8)](',','.');else{if(_0x5ef24f[_0x4b7684(0x170)](','))_0x5ef24f=_0x5ef24f[_0x4b7684(0xf8)](',','.');}return parseFloat(_0x5ef24f)||0x0;}function _0x5441b2(_0x54f277){const _0x4040cc=_0x1f1df8,_0x3cbceb=_0x54f277[_0x4040cc(0x14a)]();if(_0x3cbceb['includes']('portfolio')||_0x3cbceb['includes'](_0x4040cc(0x19a)))return _0x4040cc(0xd5);if(_0x3cbceb[_0x4040cc(0x170)]('charizard')&&(_0x3cbceb['includes'](_0x4040cc(0x172))||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x14d))||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0xe9))))return'Phantasmal\x20Flames';if(_0x3cbceb['includes']('black\x20bolt')||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x17c))||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x188)))return _0x4040cc(0x157);if(_0x3cbceb['includes'](_0x4040cc(0x159))||_0x3cbceb[_0x4040cc(0x170)]('fernando\x20cifuentes')||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x11a)))return _0x4040cc(0x162);if(_0x3cbceb[_0x4040cc(0x170)]('destined\x20rivals')||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x123)))return _0x4040cc(0x174);if(_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0xcb)))return _0x4040cc(0xf4);if(_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0xed)))return _0x4040cc(0xd9);if(_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0xd8)))return _0x4040cc(0x196);if(_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x128))||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x193))||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x144))||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x167))||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x16f))||_0x3cbceb[_0x4040cc(0x170)]('mega\x20kangaskhan'))return'Mega\x20Evolution';if(_0x3cbceb[_0x4040cc(0x170)]('iono')||_0x3cbceb['includes'](_0x4040cc(0xe7))||_0x3cbceb[_0x4040cc(0x170)](_0x4040cc(0x106)))return _0x4040cc(0xd5);for(const _0x49ce7b of _0x857e4e)if(_0x3cbceb[_0x4040cc(0x170)](_0x49ce7b['toLowerCase']()))return _0x49ce7b;return'Other\x20Sets';}function _0x2ae7e0(_0x32fda8){const _0x285d6c=_0x1f1df8,_0x38e2b8=_0x32fda8[_0x285d6c(0x14a)]();if([_0x285d6c(0x134),_0x285d6c(0x109),_0x285d6c(0x181),_0x285d6c(0x13a),_0x285d6c(0x103),'tech',_0x285d6c(0x136),_0x285d6c(0x13b)][_0x285d6c(0x147)](_0x33a339=>_0x38e2b8[_0x285d6c(0x170)](_0x33a339)))return _0x285d6c(0x151);if((_0x38e2b8[_0x285d6c(0x170)](_0x285d6c(0xce))||_0x38e2b8[_0x285d6c(0x170)]('sleeved')||_0x38e2b8[_0x285d6c(0x170)](_0x285d6c(0x179)))&&!_0x38e2b8[_0x285d6c(0x170)](_0x285d6c(0xf1))&&!_0x38e2b8[_0x285d6c(0x170)]('bundle')&&!_0x38e2b8['includes'](_0x285d6c(0x129))&&!_0x38e2b8[_0x285d6c(0x170)]('tin')&&!_0x38e2b8[_0x285d6c(0x170)](_0x285d6c(0x146)))return _0x285d6c(0x151);if(_0x38e2b8[_0x285d6c(0x170)]('half')||_0x38e2b8[_0x285d6c(0x170)](_0x285d6c(0x141))&&_0x38e2b8[_0x285d6c(0x170)]('18')||_0x38e2b8['includes'](_0x285d6c(0x129))&&_0x38e2b8[_0x285d6c(0x170)]('18'))return _0x285d6c(0x194);if(_0x38e2b8[_0x285d6c(0x170)]('elite\x20trainer')||_0x38e2b8['includes'](_0x285d6c(0x15c)))return _0x285d6c(0x105);if((_0x38e2b8['includes']('booster\x20box')||_0x38e2b8['includes'](_0x285d6c(0x129)))&&!_0x38e2b8[_0x285d6c(0x170)](_0x285d6c(0xf6)))return _0x285d6c(0x127);if(_0x38e2b8[_0x285d6c(0x170)](_0x285d6c(0xf6)))return'Booster\x20Bundle';if(_0x38e2b8[_0x285d6c(0x170)](_0x285d6c(0x172)))return _0x285d6c(0x164);if(['ultra',_0x285d6c(0x13f),_0x285d6c(0x116),_0x285d6c(0xfa),_0x285d6c(0x192),'upc'][_0x285d6c(0x147)](_0x2fa409=>_0x38e2b8['includes'](_0x2fa409)))return'Collection\x20Boxes';return'Other';}function _0x2f2231(_0x5bbb4f,_0x54bec1,_0x1ca022){const _0x4de6a3=_0x1f1df8;if(_0x5bbb4f[_0x4de6a3(0x14a)]()[_0x4de6a3(0x170)](_0x4de6a3(0xf3)))return{'name':_0x5bbb4f,'img':_0x1ca022};let _0x4b07fb=(_0x5bbb4f+'\x20'+_0x54bec1)[_0x4de6a3(0x14a)]()[_0x4de6a3(0xf8)](/[^a-z0-9]/g,'\x20');for(const _0x50b9ef of _0x515499){for(const _0x2228b5 of _0x50b9ef['m']){if(_0x2228b5[_0x4de6a3(0x12d)](_0x3eaee4=>_0x4b07fb[_0x4de6a3(0x170)](_0x3eaee4)))return{'name':_0x50b9ef['s'],'img':_0x50b9ef['i']||_0x1ca022};}}return{'name':_0x5bbb4f,'img':_0x1ca022};}function _0x4038ba(_0x53e14e){const _0xb9d3e=_0x1f1df8;try{return new URL(_0x53e14e)[_0xb9d3e(0x183)][_0xb9d3e(0xf8)](/^www\./,'')[_0xb9d3e(0xd6)]('.')[0x0][_0xb9d3e(0x187)]();}catch{return _0xb9d3e(0x107);}}window[_0x1f1df8(0x13c)]=function(){const _0x5893e7=_0x1f1df8,_0x2fae1f=document[_0x5893e7(0x17e)]('storeFilter'),_0x1bbfdb=document[_0x5893e7(0x17e)](_0x5893e7(0x155)),_0x3b2531=[...new Set(_0x16a4df[_0x5893e7(0x177)](_0x748437=>_0x748437[_0x5893e7(0xc3)]))][_0x5893e7(0x184)](),_0x3fe992=[...new Set(_0x16a4df[_0x5893e7(0x177)](_0x596b70=>_0x596b70[_0x5893e7(0x126)]))][_0x5893e7(0x184)]();_0x2fae1f[_0x5893e7(0xcd)]='<option\x20value=\x22All\x22>All\x20Stores</option>'+_0x3b2531[_0x5893e7(0x177)](_0x4e2dc6=>_0x5893e7(0x189)+_0x4e2dc6+'\x22\x20'+(_0x1343b9===_0x4e2dc6?_0x5893e7(0x137):'')+'>'+_0x4e2dc6+_0x5893e7(0xeb))[_0x5893e7(0x12e)](''),_0x1bbfdb[_0x5893e7(0xcd)]='<option\x20value=\x22All\x22>All\x20Sets</option>'+_0x3fe992[_0x5893e7(0x177)](_0x391da2=>_0x5893e7(0x189)+_0x391da2+'\x22\x20'+(_0x4f1c38===_0x391da2?_0x5893e7(0x137):'')+'>'+_0x391da2+_0x5893e7(0xeb))['join']('');},window[_0x1f1df8(0x10f)]=function(_0x1ed1e0){const _0x1ffe92=_0x1f1df8;_0xe0382b=_0x1ed1e0,document[_0x1ffe92(0x17e)](_0x1ffe92(0x160))[_0x1ffe92(0xc8)]=_0x1ed1e0,updateDropdowns(),renderFilters(),renderProducts();},window[_0x1f1df8(0x11c)]=function(){const _0x51b4e3=_0x1f1df8,_0x1b6534=document[_0x51b4e3(0x17e)](_0x51b4e3(0x10d));_0x1b6534[_0x51b4e3(0xcd)]=_0x1b931f[_0x51b4e3(0x177)](_0x298480=>{const _0xc83270=_0x51b4e3,_0x31db96=_0xe0382b===_0x298480;return'<button\x20onclick=\x22setCategory(\x27'+_0x298480+_0xc83270(0x10e)+(_0x31db96?'bg-gradient-to-r\x20from-red-600\x20to-red-500\x20text-white\x20border-transparent\x20shadow-lg\x20shadow-red-500/40\x20scale-105':_0xc83270(0x102))+'\x22>'+_0x298480+_0xc83270(0xf7);})[_0x51b4e3(0x12e)](''),document[_0x51b4e3(0x17e)](_0x51b4e3(0x160))[_0x51b4e3(0xc8)]=_0xe0382b;},window[_0x1f1df8(0x165)]=function(){const _0xf4182f=_0x1f1df8,_0x483caa=document[_0xf4182f(0x17e)]('productGrid');let _0x29bb61=_0x16a4df[_0xf4182f(0xca)](_0x1eef7b=>{const _0x29624e=_0xf4182f,_0x253661=_0xe0382b===_0x29624e(0x16a)||_0x1eef7b[_0x29624e(0x138)]===_0xe0382b,_0x93175c=_0x1343b9===_0x29624e(0x16a)||_0x1eef7b[_0x29624e(0xc3)]===_0x1343b9,_0x517171=_0x4f1c38==='All'||_0x1eef7b[_0x29624e(0x126)]===_0x4f1c38,_0x559f85=_0x1eef7b[_0x29624e(0x16d)]<=_0x4a4706,_0x53ca60=_0x1eef7b['name']['toLowerCase']()['includes'](_0x59ed37[_0x29624e(0x14a)]());return _0x253661&&_0x93175c&&_0x517171&&_0x559f85&&_0x53ca60;});if(_0xe65c5c===_0xf4182f(0x154))_0x29bb61[_0xf4182f(0x184)]((_0x3257a0,_0xa36ec0)=>_0x3257a0['price']-_0xa36ec0[_0xf4182f(0x16d)]);else _0xe65c5c===_0xf4182f(0x143)&&_0x29bb61[_0xf4182f(0x184)]((_0x213032,_0x3cd8fc)=>_0x3cd8fc[_0xf4182f(0x16d)]-_0x213032['price']);document[_0xf4182f(0x17e)](_0xf4182f(0x140))[_0xf4182f(0xd7)]=_0x29bb61[_0xf4182f(0xe4)]+_0xf4182f(0xde),_0x483caa[_0xf4182f(0xcd)]=_0x29bb61[_0xf4182f(0x177)](_0x380a4a=>_0xf4182f(0xcf)+_0x380a4a['img']+_0xf4182f(0x178)+_0x380a4a[_0xf4182f(0xc3)]+_0xf4182f(0x108)+_0x380a4a['set']+_0xf4182f(0x175)+_0x380a4a[_0xf4182f(0xfc)]+_0xf4182f(0x121)+_0x380a4a['price'][_0xf4182f(0x176)](0x2)+_0xf4182f(0x132)+_0x380a4a[_0xf4182f(0x17a)]+_0xf4182f(0x198))[_0xf4182f(0x12e)]('');};async function _0xb41c0a(){const _0x652cd8=_0x1f1df8;try{const _0x9dfc5c=await fetch(_0x652cd8(0x180)+Date['now']()),_0x176bb0=await _0x9dfc5c[_0x652cd8(0x120)]();_0x16a4df=[];for(const _0x2944b8 in _0x176bb0){const _0x4e3145=_0x176bb0[_0x2944b8];if(_0x4e3145['in_stock']){if((_0x4e3145['name']||'')[_0x652cd8(0x14a)]()[_0x652cd8(0x170)](_0x652cd8(0x15a)))continue;const _0x147ee2=_0x2f2231(_0x4e3145[_0x652cd8(0xfc)],_0x4e3145[_0x652cd8(0x17a)],_0x4e3145['img']);_0x16a4df[_0x652cd8(0x13d)]({'name':_0x147ee2[_0x652cd8(0xfc)],'img':_0x147ee2['img'],'url':_0x4e3145[_0x652cd8(0x17a)],'price':_0x4574f4(_0x4e3145['price']),'store':new URL(_0x4e3145['url'])[_0x652cd8(0x183)][_0x652cd8(0xf8)](/^www\./,'')['split']('.')[0x0][_0x652cd8(0x187)](),'category':_0x2ae7e0(_0x147ee2[_0x652cd8(0xfc)]),'set':_0x5441b2(_0x147ee2['name'])});}}updateDropdowns(),renderFilters(),renderProducts(),document[_0x652cd8(0x17e)](_0x652cd8(0x171))[_0x652cd8(0xd7)]='Sync:\x20'+new Date()[_0x652cd8(0xda)]();}catch(_0x2cf817){console[_0x652cd8(0x199)](_0x652cd8(0xf5));}}const _0x2a299c=document[_0x1f1df8(0x17e)](_0x1f1df8(0x18a)),_0x38346a=document[_0x1f1df8(0x17e)]('priceLabel');_0x2a299c[_0x1f1df8(0x185)](_0x1f1df8(0xf0),_0x3eed44=>{const _0x46dabd=_0x1f1df8;_0x4a4706=parseInt(_0x3eed44['target'][_0x46dabd(0xc8)]),_0x38346a[_0x46dabd(0xd7)]='€'+_0x4a4706,updateDropdowns(),renderProducts();}),document[_0x1f1df8(0x17e)](_0x1f1df8(0x186))[_0x1f1df8(0x185)]('input',_0x26509c=>{const _0x515353=_0x1f1df8;_0x59ed37=_0x26509c[_0x515353(0xf2)][_0x515353(0xc8)],renderProducts();}),document[_0x1f1df8(0x17e)](_0x1f1df8(0xee))['addEventListener'](_0x1f1df8(0xf0),_0x30fd1e=>{const _0x59389d=_0x1f1df8;_0x59ed37=_0x30fd1e['target'][_0x59389d(0xc8)],renderProducts();}),document['getElementById'](_0x1f1df8(0x160))[_0x1f1df8(0x185)]('change',_0x3bd920=>{const _0x5982fc=_0x1f1df8;setCategory(_0x3bd920[_0x5982fc(0xf2)][_0x5982fc(0xc8)]);}),document[_0x1f1df8(0x17e)]('storeFilter')['addEventListener'](_0x1f1df8(0x124),_0x58e9a3=>{const _0x183410=_0x1f1df8;_0x1343b9=_0x58e9a3['target'][_0x183410(0xc8)],updateDropdowns(),renderProducts();}),document[_0x1f1df8(0x17e)](_0x1f1df8(0x155))[_0x1f1df8(0x185)](_0x1f1df8(0x124),_0x35d160=>{const _0x2d9a8a=_0x1f1df8;_0x4f1c38=_0x35d160['target'][_0x2d9a8a(0xc8)],updateDropdowns(),renderProducts();}),document[_0x1f1df8(0x17e)](_0x1f1df8(0xe2))['addEventListener']('change',_0x10e0f2=>{_0xe65c5c=_0x10e0f2['target']['value'],renderProducts();}),document['getElementById'](_0x1f1df8(0x191))['addEventListener']('click',()=>{const _0x26ef7f=_0x1f1df8;_0x1343b9=_0x26ef7f(0x16a),_0x4f1c38=_0x26ef7f(0x16a),_0x4a4706=0x7d0,_0xe0382b='All',_0x59ed37='',_0xe65c5c=_0x26ef7f(0x169),_0x2a299c[_0x26ef7f(0xc8)]=0x7d0,_0x38346a[_0x26ef7f(0xd7)]=_0x26ef7f(0x10b),document['getElementById']('sortFilter')['value']=_0x26ef7f(0x169),document[_0x26ef7f(0x17e)](_0x26ef7f(0x160))['value']=_0x26ef7f(0x16a),_0xb41c0a();});const _0x32d37f=document[_0x1f1df8(0x17e)](_0x1f1df8(0x197));window[_0x1f1df8(0xfb)]=()=>{const _0x5c0998=_0x1f1df8;window[_0x5c0998(0x17b)]>0x190?_0x32d37f['classList'][_0x5c0998(0xd1)](_0x5c0998(0x173)):_0x32d37f[_0x5c0998(0x11d)][_0x5c0998(0x15f)](_0x5c0998(0x173));},_0x32d37f['onclick']=()=>{const _0x59deec=_0x1f1df8;window[_0x59deec(0xe6)]({'top':0x0,'behavior':_0x59deec(0x113)});};const _0x1596a0=document['getElementById'](_0x1f1df8(0x11e));let _0x5881da=![];_0x1596a0['addEventListener'](_0x1f1df8(0x10a),()=>{const _0x3ecff2=_0x1f1df8;_0x5881da=!_0x5881da,document[_0x3ecff2(0xea)][_0x3ecff2(0x11d)]['toggle'](_0x3ecff2(0xe1),_0x5881da);}),_0xb41c0a(),setInterval(_0xb41c0a,0x1b7740);}()));function _0x2894(){const _0x2fba91=['add','Surging\x20Sparks\x20-\x20Booster\x20Bundle','Surging\x20Sparks\x20-\x20Booster\x20Box','Lost\x20Origin','Other\x20Sets','split','textContent','ascended\x20heroes','Perfect\x20Order','toLocaleTimeString','ctrlKey','donateModalContent','Phantasmal\x20Flames\x20-\x20Booster\x20Box','\x20items\x20found','Stellar\x20Crown\x20-\x20Elite\x20Trainer\x20Box','Fusion\x20Strike','dark','sortFilter','4053824SwUjrd','length','Battle\x20Styles','scrollTo','classic','Black\x20Bolt\x20-\x20Elite\x20Trainer\x20Box','ultra-premium','documentElement','</option>','Shrouded\x20Fable\x20-\x20Elite\x20Trainer\x20Box','perfect\x20order','searchInputMobile','flames','input','box','target','booster\x20pack','Journey\x20Together','ERR','bundle','</button>','replace','translate-y-20','ex\x20box','onscroll','name','Stellar\x20Crown','bolt','crown','clipboard','Twilight\x20Masquerade','bg-white\x20dark:bg-gray-800\x20text-gray-500\x20border-gray-100\x20dark:border-gray-700\x20hover:border-red-200','checklan','shiftKey','Elite\x20Trainer\x20Box','cynthia','STORE','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-[9px]\x20font-bold\x20px-2\x20py-1\x20rounded-md\x20uppercase\x20tracking-widest\x20bg-gray-200\x20text-gray-700\x20dark:bg-gray-700\x20dark:text-gray-300\x20transition-colors\x20duration-300\x20truncate\x22>','blister','click','€2000','Celebrations','filterContainer','\x27)\x22\x20class=\x22px-5\x20py-2.5\x20rounded-xl\x20text-xs\x20font-bold\x20transition-all\x20duration-300\x20border\x20','setCategory','1411506xqhoJS','charCodeAt','Surging\x20Sparks','smooth','1143kMjARe','Surging\x20Sparks\x20-\x20Elite\x20Trainer\x20Box','collection','Astral\x20Radiance','toast','Paldea\x20Evolved','ancient\x20toolbox','keyCode','renderFilters','classList','themeToggle','Stellar\x20Crown\x20-\x20Booster\x20Bundle','json','</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22mt-auto\x20flex\x20justify-between\x20items-center\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-xl\x20font-black\x20text-gray-900\x20dark:text-white\x20transition-colors\x20duration-300\x22>€','Evolving\x20Skies','team\x20rocket','change','688961YCpXDu','set','Booster\x20Box','mega\x20evolution','display','closeDonateModal','scale-95','Phantasmal\x20Flames\x20-\x20Elite\x20Trainer\x20Box','every','join','opacity-0','fable','Paldea\x20Evolved\x20-\x20Elite\x20Trainer\x20Box','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<a\x20href=\x22','sparks','deck','455740algDIM','binder','selected','category','Rebel\x20Clash','checkla','poster','updateDropdowns','push','order','premium','productCount','booster\x20box','evolved','highToLow','mega\x20lucario','Obsidian\x20Flames','elite','some','Vivid\x20Voltage','White\x20Flare\x20-\x20Elite\x20Trainer\x20Box','toLowerCase','then','Phantasmal\x20Flames\x20-\x20Booster\x20Bundle','ultra\x20premium','25rSHtlk','donateBtn','7cDddqZ','Other','10JbphYE','invisible','lowToHigh','setFilter','white','Black\x20&\x20White','Chilling\x20Reign','world\x20championship','battle\x20partners','Shining\x20Fates','etb','shrouded','Silver\x20Tempest','remove','categorySelect','4114218sdbCeH','Pokémon\x20World\x20Championship','\x20Address\x20Copied!','Tins','renderProducts','Mega\x20Evolution','mega\x20latias','2512334fRaobJ','default','All','phantasmal','rebel','price','Prismatic\x20Evolutions','mega\x20gardevoir','includes','lastUpdated','tin','show','Destined\x20Rivals','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3\x20class=\x22text-sm\x20font-bold\x20mb-4\x20line-clamp-2\x20h-10\x20group-hover:text-red-600\x20transition-colors\x20duration-300\x22>','toFixed','map','\x22\x20referrerpolicy=\x22no-referrer\x22\x20class=\x22h-full\x20w-full\x20object-contain\x20mix-blend-multiply\x20transition-transform\x20duration-500\x20group-hover:scale-110\x22\x20onerror=\x22this.src=\x27https://via.placeholder.com/300?text=No+Image\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22p-5\x20flex\x20flex-col\x20flex-grow\x20bg-white\x20dark:bg-gray-800\x20transition-colors\x20duration-300\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x20justify-between\x20items-center\x20mb-3\x20gap-2\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-[9px]\x20font-black\x20px-2\x20py-1\x20rounded-md\x20uppercase\x20tracking-widest\x20bg-gray-200\x20text-gray-700\x20dark:bg-gray-700\x20dark:text-gray-300\x20transition-colors\x20duration-300\x20truncate\x22>','booster','url','scrollY','white\x20flare','onclick','getElementById','toastMsg','seen_products.json?t=','checklane','paldea','hostname','sort','addEventListener','searchInput','toUpperCase','unova','<option\x20value=\x22','priceSlider','Stellar\x20Crown\x20-\x20Booster\x20Box','Shrouded\x20Fable','flare','clash','Shrouded\x20Fable\x20-\x20Booster\x20Bundle','Phantasmal\x20Flames','resetFilters','special','mega\x20heroes\x20mini\x20tin','Half\x20Booster\x20Box','preventDefault','Ascended\x20Heroes','backToTop','\x22\x20target=\x22_blank\x22\x20class=\x22px-5\x20py-2.5\x20bg-gray-900\x20dark:bg-red-600\x20hover:bg-red-600\x20text-white\x20text-[10px]\x20font-black\x20uppercase\x20tracking-widest\x20rounded-xl\x20transition-all\x20shadow-lg\x20shadow-gray-900/10\x20dark:shadow-red-600/20\x22>View\x20Deal</a>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>','error','portfólio','black','store','2094juyCrh','Paldean\x20Fates','stellar','surging','value','Scarlet\x20&\x20Violet','filter','journey\x20together','Rebel\x20Clash\x20-\x20Elite\x20Trainer\x20Box','innerHTML','pack','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22group\x20relative\x20bg-white\x20dark:bg-gray-800\x20rounded-2xl\x20shadow-xl\x20shadow-gray-200/40\x20dark:shadow-none\x20border\x20border-transparent\x20dark:border-gray-700\x20overflow-hidden\x20flex\x20flex-col\x20transition-all\x20duration-300\x20hover:-translate-y-2\x20hover:shadow-2xl\x20hover:shadow-red-500/10\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22h-52\x20bg-white\x20flex\x20items-center\x20justify-center\x20p-6\x20overflow-hidden\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22','scale-100'];_0x2894=function(){return _0x2fba91;};return _0x2894();}
+(function() {
+    // === 🛡️ SECURITY ===
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = function(e) { 
+        if (e.keyCode == 123) return false; 
+        if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) return false; 
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
+    };
+
+    // === 💸 DONATION MODAL & CLIPBOARD LOGIC ===
+    const donateModal = document.getElementById('donateModal');
+    const donateContent = document.getElementById('donateModalContent');
+    const donateBtn = document.getElementById('donateBtn');
+    const closeDonate = document.getElementById('closeDonateModal');
+
+    donateBtn.onclick = () => {
+        donateModal.classList.remove('invisible', 'opacity-0');
+        donateContent.classList.remove('scale-95');
+        donateContent.classList.add('scale-100');
+    };
+
+    const closeModal = () => {
+        donateContent.classList.remove('scale-100');
+        donateContent.classList.add('scale-95');
+        donateModal.classList.add('opacity-0');
+        setTimeout(() => donateModal.classList.add('invisible'), 300);
+    };
+
+    closeDonate.onclick = closeModal;
+    donateModal.onclick = (e) => { if(e.target === donateModal) closeModal(); };
+
+    window.copyCrypto = function(cryptoName, address) {
+        navigator.clipboard.writeText(address).then(() => {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = `${cryptoName} Address Copied!`;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
+        });
+    };
+
+    // === 🧠 LOGIC ===
+    let _0x1a = [];
+    let _0x2b = 'All';
+    let _0x3c = 'All';
+    let _0x4d = 'All';
+    let _0x5e = '';
+    let _0xMaxP = 2000; 
+    let _0xSort = 'default'; 
+
+    const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Half Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Other'];
+    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together", "Rebel Clash", "Crown Zenith"];
+
+    const _0x10a = [
+        { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box" },
+        { m: [["phantasmal", "flames", "booster", "box"]], s: "Phantasmal Flames - Booster Box" },
+        { m: [["phantasmal", "flames", "booster", "bundle"]], s: "Phantasmal Flames - Booster Bundle" },
+        { m: [["surging", "sparks", "booster", "box"]], s: "Surging Sparks - Booster Box" },
+        { m: [["surging", "sparks", "booster", "bundle"]], s: "Surging Sparks - Booster Bundle" },
+        { m: [["stellar", "crown", "booster", "box"]], s: "Stellar Crown - Booster Box" },
+        { m: [["stellar", "crown", "booster", "bundle"]], s: "Stellar Crown - Booster Bundle" },
+        { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box" },
+        { m: [["shrouded", "fable", "booster", "bundle"]], s: "Shrouded Fable - Booster Bundle" },
+        { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box" },
+        { m: [["surging", "sparks", "elite"]], s: "Surging Sparks - Elite Trainer Box" },
+        { m: [["stellar", "crown", "elite"]], s: "Stellar Crown - Elite Trainer Box" },
+        { m: [["black", "bolt", "elite"]], s: "Black Bolt - Elite Trainer Box" },
+        { m: [["white", "flare", "elite"]], s: "White Flare - Elite Trainer Box" },
+        { m: [["rebel", "clash", "elite"]], s: "Rebel Clash - Elite Trainer Box" },
+        { m: [["paldea", "evolved", "elite"]], s: "Paldea Evolved - Elite Trainer Box" }
+    ];
+
+    function _0x11b(_v) {
+        if (!_v) return 0;
+        let c = _v.replace(/[^\d.,]/g, '');
+        if (c.includes('.') && c.includes(',')) c = c.replace(/\./g, '').replace(',', '.');
+        else if (c.includes(',')) c = c.replace(',', '.');
+        return parseFloat(c) || 0;
+    }
+
+    function _0x12c(_n) {
+        const _nn = _n.toLowerCase();
+        if (_nn.includes("portfolio") || _nn.includes("portfólio")) return "Other Sets";
+        if (_nn.includes("charizard") && (_nn.includes("tin") || _nn.includes("ultra premium") || _nn.includes("ultra-premium"))) return "Phantasmal Flames";
+        if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
+        if (_nn.includes("world championship") || _nn.includes("fernando cifuentes") || _nn.includes("ancient toolbox")) return "Pokémon World Championship";
+        if (_nn.includes("destined rivals") || _nn.includes("team rocket")) return "Destined Rivals";
+        if (_nn.includes("journey together")) return "Journey Together";
+        if (_nn.includes("perfect order")) return "Perfect Order";
+        if (_nn.includes("ascended heroes")) return "Ascended Heroes";
+        if (_nn.includes("mega evolution") || _nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("mega kangaskhan")) return "Mega Evolution";
+        if (_nn.includes("iono") || _nn.includes("classic") || _nn.includes("cynthia")) return "Other Sets";
+        for (const _s of _0x9c) if (_nn.includes(_s.toLowerCase())) return _s;
+        return "Other Sets";
+    }
+
+    function _0x13d(_n) {
+        const _t = _n.toLowerCase();
+        if (['deck', 'blister', 'checklane', 'checkla', 'checklan', 'tech', 'binder', 'poster'].some(k => _t.includes(k))) return 'Other';
+        if ((_t.includes('pack') || _t.includes('sleeved') || _t.includes('booster')) && !_t.includes('box') && !_t.includes('bundle') && !_t.includes('display') && !_t.includes('tin') && !_t.includes('elite')) return 'Other';
+        if (_t.includes('half') || (_t.includes('booster box') && _t.includes('18')) || (_t.includes('display') && _t.includes('18'))) return 'Half Booster Box';
+        if (_t.includes('elite trainer') || _t.includes('etb')) return 'Elite Trainer Box';
+        if ((_t.includes('booster box') || _t.includes('display')) && !_t.includes('bundle')) return 'Booster Box';
+        if (_t.includes('bundle')) return 'Booster Bundle';
+        if (_t.includes('tin')) return 'Tins';
+        if (['ultra', 'premium', 'collection', 'ex box', 'special', 'upc'].some(k => _t.includes(k))) return 'Collection Boxes';
+        return 'Other';
+    }
+
+    function _0x15f(_on, _ou, _oi) {
+        // PREVENT "BOOSTER PACK" FROM BEING MISIDENTIFIED DUE TO "BOX" IN STORE URL
+        if (_on.toLowerCase().includes('booster pack')) {
+            return { name: _on, img: _oi };
+        }
+
+        let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
+        for (const _it of _0x10a) {
+            for (const _wg of _it.m) {
+                if (_wg.every(_w => _ts.includes(_w))) return { name: _it.s, img: _it.i || _oi };
+            }
+        }
+        return { name: _on, img: _oi };
+    }
+
+    function _0x14e(_u) { try { return new URL(_u).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(); } catch { return "STORE"; } }
+
+    window.updateDropdowns = function() {
+        const sS = document.getElementById('storeFilter');
+        const sT = document.getElementById('setFilter');
+        
+        // PERSISTENCE: Use the full master list (_0x1a) so options don't vanish when switching categories
+        const aS = [...new Set(_0x1a.map(p => p.store))].sort();
+        const aT = [...new Set(_0x1a.map(p => p.set))].sort();
+        
+        sS.innerHTML = '<option value="All">All Stores</option>' + aS.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
+        sT.innerHTML = '<option value="All">All Sets</option>' + aT.map(s => `<option value="${s}" ${_0x4d === s ? 'selected' : ''}>${s}</option>`).join('');
+    };
+
+    window.setCategory = function(cat) { 
+        _0x2b = cat; 
+        document.getElementById('categorySelect').value = cat; 
+        updateDropdowns(); 
+        renderFilters(); 
+        renderProducts(); 
+    };
+
+    window.renderFilters = function() {
+        const c = document.getElementById('filterContainer');
+        c.innerHTML = _0x8b.map(cat => {
+            const isActive = _0x2b === cat;
+            return `<button onclick="setCategory('${cat}')" class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 border ${isActive ? 'bg-gradient-to-r from-red-600 to-red-500 text-white border-transparent shadow-lg shadow-red-500/40 scale-105' : 'bg-white dark:bg-gray-800 text-gray-500 border-gray-100 dark:border-gray-700 hover:border-red-200'}">${cat}</button>`;
+        }).join('');
+        document.getElementById('categorySelect').value = _0x2b; 
+    };
+
+    window.renderProducts = function() {
+        const g = document.getElementById('productGrid');
+        
+        let f = _0x1a.filter(p => {
+            const mC = _0x2b === 'All' || p.category === _0x2b;
+            const mS = _0x3c === 'All' || p.store === _0x3c;
+            const mT = _0x4d === 'All' || p.set === _0x4d;
+            const mP = p.price <= _0xMaxP;
+            const mH = p.name.toLowerCase().includes(_0x5e.toLowerCase());
+            return mC && mS && mT && mP && mH;
+        });
+
+        if (_0xSort === 'lowToHigh') {
+            f.sort((a, b) => a.price - b.price);
+        } else if (_0xSort === 'highToLow') {
+            f.sort((a, b) => b.price - a.price);
+        }
+
+        document.getElementById('productCount').textContent = `${f.length} items found`;
+        
+        // PERFORMANCE: Added lazy loading and priority hints to boost LCP scores
+        g.innerHTML = f.map((p, index) => `
+            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
+                <div class="h-52 bg-white flex items-center justify-center p-6 overflow-hidden">
+                    <img src="${p.img}" 
+                         referrerpolicy="no-referrer" 
+                         loading="${index < 6 ? 'eager' : 'lazy'}" 
+                         fetchpriority="${index < 3 ? 'high' : 'auto'}"
+                         class="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110" 
+                         onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                </div>
+                <div class="p-5 flex flex-col flex-grow bg-white dark:bg-gray-800 transition-colors duration-300">
+                    <div class="flex justify-between items-center mb-3 gap-2">
+                        <span class="text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 transition-colors duration-300 truncate">${p.store}</span>
+                        <span class="text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 transition-colors duration-300 truncate">${p.set}</span>
+                    </div>
+                    <h3 class="text-sm font-bold mb-4 line-clamp-2 h-10 group-hover:text-red-600 transition-colors duration-300">${p.name}</h3>
+                    <div class="mt-auto flex justify-between items-center">
+                        <span class="text-xl font-black text-gray-900 dark:text-white transition-colors duration-300">€${p.price.toFixed(2)}</span>
+                        <a href="${p.url}" target="_blank" class="px-5 py-2.5 bg-gray-900 dark:bg-red-600 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-gray-900/10 dark:shadow-red-600/20">View Deal</a>
+                    </div>
+                </div>
+            </div>`).join('');
+    };
+
+    async function fetchData() {
+        try {
+            const r = await fetch(`seen_products.json?t=${Date.now()}`);
+            const d = await r.json();
+            _0x1a = [];
+            for (const k in d) {
+                const p = d[k];
+                if (p.in_stock) {
+                    // EXCLUDE BATTLE PARTNERS
+                    if ((p.name || "").toLowerCase().includes("battle partners")) {
+                        continue;
+                    }
+
+                    const cl = _0x15f(p.name, p.url, p.img);
+                    _0x1a.push({ name: cl.name, img: cl.img, url: p.url, price: _0x11b(p.price), store: new URL(p.url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(), category: _0x13d(cl.name), set: _0x12c(cl.name) });
+                }
+            }
+            updateDropdowns(); renderFilters(); renderProducts();
+            document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
+        } catch (e) { console.error("ERR"); }
+    }
+
+    const slider = document.getElementById('priceSlider');
+    const label = document.getElementById('priceLabel');
+    slider.addEventListener('input', (e) => {
+        _0xMaxP = parseInt(e.target.value);
+        label.textContent = `€${_0xMaxP}`;
+        updateDropdowns(); renderProducts();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    document.getElementById('searchInputMobile').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    document.getElementById('categorySelect').addEventListener('change', (e) => { setCategory(e.target.value); });
+    document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; renderProducts(); });
+    document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; renderProducts(); });
+    document.getElementById('sortFilter').addEventListener('change', (e) => { _0xSort = e.target.value; renderProducts(); });
+
+    document.getElementById('resetFilters').addEventListener('click', () => { 
+        _0x3c = 'All'; _0x4d = 'All'; _0xMaxP = 2000; _0x2b = 'All'; _0x5e = ''; _0xSort = 'default';
+        slider.value = 2000; label.textContent = '€2000';
+        document.getElementById('sortFilter').value = 'default';
+        document.getElementById('categorySelect').value = 'All';
+        fetchData(); 
+    });
+
+    const bTT = document.getElementById('backToTop');
+    window.onscroll = () => { window.scrollY > 400 ? bTT.classList.add('show') : bTT.classList.remove('show'); };
+    bTT.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+    const tB = document.getElementById('themeToggle');
+    let iD = false;
+    tB.addEventListener('click', () => {
+        iD = !iD;
+        document.documentElement.classList.toggle('dark', iD);
+    });
+
+    fetchData();
+    setInterval(fetchData, 1800000);
+})();

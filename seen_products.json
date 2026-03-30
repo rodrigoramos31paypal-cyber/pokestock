@@ -8607,14 +8607,6 @@
     "in_stock": true,
     "last_checked": 1774875133.6575315
   },
-  "https://pokejotta.com/products/battle-partners-booster-box": {
-    "name": "Battle Partners Booster Box",
-    "url": "https://pokejotta.com/products/battle-partners-booster-box",
-    "img": "https://pokejotta.com/cdn/shop/files/battle-partners-booster-box.jpg?v=1773229237&width=533",
-    "price": "€99,99 EUR",
-    "in_stock": true,
-    "last_checked": 1774875133.6575315
-  },
   "https://pokejotta.com/products/phantasmal-flames-booster-box": {
     "name": "Phantasmal Flames Booster Box",
     "url": "https://pokejotta.com/products/phantasmal-flames-booster-box",
@@ -11741,14 +11733,6 @@
     "img": "https://lojasenhorgato.pt/cdn/shop/files/TCG-Pokemon-Booster-Destined-Rivals.png?v=1749393042&width=533",
     "price": "€9,50 EUR",
     "in_stock": true,
-    "last_checked": 1774875133.6575315
-  },
-  "https://lojasenhorgato.pt/products/tcg-pokemon-booster-battle-partners": {
-    "name": "TCG Pokémon - Booster - Battle Partners",
-    "url": "https://lojasenhorgato.pt/products/tcg-pokemon-booster-battle-partners",
-    "img": "https://lojasenhorgato.pt/cdn/shop/files/TCG-Pokemon-Booster-Battle-Partners.png?v=1748614175&width=533",
-    "price": "€3,50 EUR",
-    "in_stock": false,
     "last_checked": 1774875133.6575315
   },
   "https://lojasenhorgato.pt/products/tcg-pokemon-booster-paradox-rift": {

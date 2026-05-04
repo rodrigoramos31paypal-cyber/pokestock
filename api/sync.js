@@ -1,19 +1,12 @@
 const { Redis } = require('@upstash/redis');
 
+// This version is specifically designed for the HTTPS REST URL
+const redis = Redis.fromEnv();
+
 module.exports = async function handler(request, response) {
-    // Disable caching for cross-device sync
     response.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
 
     try {
-        // This will now look for the exact key you see in your Vercel Dashboard
-        const redisUrl = process.env.REDIS_URL;
-
-        if (!redisUrl) {
-            return response.status(500).json({ error: 'REDIS_URL is missing in Vercel settings.' });
-        }
-
-        // Standard Redis instances use a different connection method
-        const redis = Redis.fromEnv();
         const DB_KEY = 'user_state_v1';
 
         if (request.method === 'GET') {
@@ -28,8 +21,8 @@ module.exports = async function handler(request, response) {
         }
 
         return response.status(405).json({ error: 'Method not allowed' });
-        
     } catch (error) {
+        console.error("Redis Error:", error);
         return response.status(500).json({ error: error.message });
     }
 };

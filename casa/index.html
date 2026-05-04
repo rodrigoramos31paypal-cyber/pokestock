@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Scraper Manager</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        #hideBtn { background-color: #e74c3c; color: white; }
+        #hideBtn:hover { background-color: #c0392b; }
+        #showAllBtn { background-color: #3498db; color: white; margin-left: 10px; }
+        #showAllBtn:hover { background-color: #2980b9; }
+        
+        .house-row {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.1s;
+        }
+        .house-row:hover {
+            transform: scale(1.01);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .house-row.contacted {
+            background-color: #e8f8f5;
+            border-left: 5px solid #2ecc71;
+        }
+        .col-select { margin-right: 15px; }
+        .col-select input { transform: scale(1.5); cursor: pointer; }
+        
+        .col-img img {
+            width: 120px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+        .col-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .col-info a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .col-info a:hover { color: #3498db; }
+        .price { font-size: 18px; color: #27ae60; font-weight: bold; }
+        
+        .col-contact {
+            text-align: center;
+            min-width: 100px;
+            padding-left: 15px;
+            border-left: 1px solid #eee;
+        }
+        .col-contact label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        .col-contact input {
+            transform: scale(1.8);
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .stats { font-size: 14px; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div>
+            <h2>🏠 House Scraper Manager</h2>
+            <div class="stats" id="statsDisplay">Loading data...</div>
+        </div>
+        <div>
+            <button id="hideBtn">Hide Selected (Batch)</button>
+            <button id="showAllBtn">Restore Hidden Houses</button>
+        </div>
+    </div>
+
+    <div id="house-container"></div>
+
+    <script>
+    let housesData = {};
+    let userState = {};
+
+    // 1. Fetch our synced state from the Vercel API
+    async function loadSyncedState() {
+        try {
+            const response = await fetch('/api/sync');
+            if (response.ok) {
+                userState = await response.json();
+            }
+        } catch (error) {
+            console.log("No previous state found or error loading. Starting fresh.");
+            userState = {};
+        }
+    }
+
+    // 2. Save state back to the server using the Vercel API
+    async function saveState() {
+        try {
+            await fetch('/api/sync', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userState)
+            });
+        } catch (error) {
+            console.error("Failed to sync state to server:", error);
+            alert("Warning: Failed to sync your changes to the server.");
+        }
+    }
+
+    // 3. Fetch the houses from seen_houses.json
+    async function fetchHouses() {
+        try {
+            const response = await fetch('seen_houses.json?t=' + new Date().getTime());
+            housesData = await response.json();
+            renderHouses();
+        } catch (error) {
+            document.getElementById('statsDisplay').innerText = "⚠️ Error loading seen_houses.json. Make sure it is uploaded to the same folder.";
+            console.error("Fetch error:", error);
+        }
+    }
+
+    function renderHouses() {
+        const container = document.getElementById('house-container');
+        container.innerHTML = ''; 
+        
+        let visibleCount = 0;
+        let blockedCount = 0;
+
+        Object.values(housesData).forEach(house => {
+            const url = house.url;
+            
+            // Ensure this house has a memory profile in our state
+            if (!userState[url]) {
+                userState[url] = { contacted: false, hidden: false };
+            }
+
+            // Skip showing agencies/blocked properties
+            if (house.is_blocked) {
+                blockedCount++;
+                return; 
+            }
+            
+            // Skip if the user chose to hide it manually
+            if (userState[url].hidden) return;
+
+            visibleCount++;
+
+            // Create the row
+            const row = document.createElement('div');
+            row.className = `house-row ${userState[url].contacted ? 'contacted' : ''}`;
+
+            // --- Column: Select Checkbox ---
+            const colSelect = document.createElement('div');
+            colSelect.className = 'col-select';
+            colSelect.innerHTML = `<input type="checkbox" class="hide-checkbox" data-url="${url}">`;
+
+            // --- Column: Image ---
+            const colImg = document.createElement('div');
+            colImg.className = 'col-img';
+            const imgSrc = house.img ? house.img : 'https://via.placeholder.com/120x90?text=No+Image';
+            colImg.innerHTML = `<img src="${imgSrc}" alt="House Image" onerror="this.src='https://via.placeholder.com/120x90?text=Error'">`;
+
+            // --- Column: Info ---
+            const colInfo = document.createElement('div');
+            colInfo.className = 'col-info';
+            colInfo.innerHTML = `
+                <a href="${url}" target="_blank">${house.name || 'Unknown Title'}</a>
+                <div class="price">${house.price || 'Price N/A'}</div>
+            `;
+
+            // --- Column: Contacted Tick ---
+            const colContact = document.createElement('div');
+            colContact.className = 'col-contact';
+            
+            const contactLabel = document.createElement('label');
+            contactLabel.innerText = 'Contacted?';
+            const contactInput = document.createElement('input');
+            contactInput.type = 'checkbox';
+            contactInput.checked = userState[url].contacted;
+            
+            // Listen for changes to the Contacted tick and save to server
+            contactInput.addEventListener('change', (e) => {
+                userState[url].contacted = e.target.checked;
+                if(e.target.checked) {
+                    row.classList.add('contacted');
+                } else {
+                    row.classList.remove('contacted');
+                }
+                saveState();
+            });
+
+            contactLabel.appendChild(contactInput);
+            colContact.appendChild(contactLabel);
+
+            // Assemble the row
+            row.appendChild(colSelect);
+            row.appendChild(colImg);
+            row.appendChild(colInfo);
+            row.appendChild(colContact);
+
+            container.appendChild(row);
+        });
+
+        // Update Stats Display
+        document.getElementById('statsDisplay').innerText = 
+            `Showing ${visibleCount} Private Properties (Filtered out ${blockedCount} Agencies/Blocked)`;
+    }
+
+    // --- Batch Hide Logic ---
+    document.getElementById('hideBtn').addEventListener('click', () => {
+        const checkedBoxes = document.querySelectorAll('.hide-checkbox:checked');
+        if(checkedBoxes.length === 0) {
+            alert("Please select at least one house to hide using the left checkboxes.");
+            return;
+        }
+
+        checkedBoxes.forEach(box => {
+            const url = box.getAttribute('data-url');
+            userState[url].hidden = true;
+        });
+        
+        saveState();
+        renderHouses(); // Re-render to clear them from screen
+    });
+
+    // --- Restore Hidden Logic ---
+    document.getElementById('showAllBtn').addEventListener('click', () => {
+        for (let url in userState) {
+            userState[url].hidden = false;
+        }
+        saveState();
+        renderHouses();
+    });
+
+    // Boot sequence: Load the synced memory FIRST, then load the houses.
+    async function boot() {
+        await loadSyncedState();
+        await fetchHouses();
+    }
+    
+    boot();
+</script>
+</body>
+</html>

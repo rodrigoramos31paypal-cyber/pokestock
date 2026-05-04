@@ -38,7 +38,7 @@
         table { width: 100%; border-collapse: collapse; table-layout: fixed; }
         th { background: #f8fafc; text-align: left; padding: 15px 12px; font-size: 0.85rem; color: #475569; border-bottom: 2px solid #e2e8f0; }
         
-        /* Adjusted Row Height for ~9-10 per screen */
+        /* Fixed Row Height for ~9-10 per screen */
         td { padding: 18px 12px; border-bottom: 1px solid #e2e8f0; font-size: 1rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         
         .row-ticked { background-color: var(--ticked); }
@@ -69,7 +69,7 @@
     <div class="header">
         <div>
             <h2>🏠 House Scraper Manager</h2>
-            <div class="stats" id="statsDisplay">Initializing storage...</div>
+            <div class="stats" id="statsDisplay">Synchronizing memory...</div>
         </div>
         <div class="btn-group">
             <button class="btn" id="hideBtn">Hide</button>
@@ -86,7 +86,7 @@
                     <th class="img-cell">Preview</th>
                     <th class="title-cell">Property Details</th>
                     <th class="price-cell">Price</th>
-                    <th class="date-cell">First Identified (GMT+1)</th>
+                    <th class="date-cell">Date Identified (GMT+1)</th>
                     <th class="check-cell">Ok?</th>
                 </tr>
             </thead>
@@ -103,7 +103,7 @@
         try {
             const response = await fetch('/api/sync?t=' + Date.now());
             if (response.ok) userState = await response.json();
-        } catch (e) { console.log("Memory error:", e); }
+        } catch (e) { console.log("Memory load error"); }
     }
 
     async function saveState() {
@@ -122,22 +122,25 @@
             const data = await response.json();
             housesData = Array.isArray(data) ? data : Object.values(data);
             
-            // LOGIC: If a house is new to our memory, assign current date once.
             let updated = false;
             housesData.forEach(h => {
+                // If house is totally new to memory
                 if (!userState[h.url]) {
-                    userState[h.url] = { 
-                        contacted: false, 
-                        hidden: false, 
-                        added_at: Date.now() 
-                    };
+                    userState[h.url] = { contacted: false, hidden: false };
+                }
+                
+                // CRITICAL: Ensure every house in current view has an added_at date
+                if (!userState[h.url].added_at) {
+                    // Fallback order: JSON timestamp -> Current Time
+                    const fallbackDate = h.last_checked ? (h.last_checked * 1000) : Date.now();
+                    userState[h.url].added_at = fallbackDate;
                     updated = true;
                 }
             });
+
             if (updated) await saveState();
-            
             render();
-        } catch (e) { console.error("JSON Error:", e); }
+        } catch (e) { console.error("Data error"); }
     }
 
     function render() {
@@ -155,11 +158,12 @@
             visibleCount++;
             const state = userState[url] || {};
             
-            // Format the "First Seen" date to Lisbon/GMT+1
-            const dateStr = state.added_at ? new Date(state.added_at).toLocaleString('pt-PT', {
+            // Format identifying date to GMT+1 (Europe/Lisbon)
+            const timestamp = state.added_at || Date.now();
+            const dateStr = new Date(timestamp).toLocaleString('pt-PT', {
                 timeZone: 'Europe/Lisbon',
                 day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
-            }) : '---';
+            });
 
             const tr = document.createElement('tr');
             if (state.contacted) tr.className = 'row-ticked';
@@ -179,6 +183,7 @@
     }
 
     function toggleTick(url, el) {
+        if (!userState[url]) userState[url] = { added_at: Date.now() };
         userState[url].contacted = el.checked;
         saveState();
         el.closest('tr').classList.toggle('row-ticked', el.checked);
@@ -186,27 +191,25 @@
 
     document.getElementById('hideBtn').addEventListener('click', () => {
         document.querySelectorAll('.hide-checkbox:checked').forEach(cb => {
-            userState[cb.getAttribute('data-url')].hidden = true;
+            const url = cb.getAttribute('data-url');
+            if (!userState[url]) userState[url] = { added_at: Date.now() };
+            userState[url].hidden = true;
         });
         saveState();
         render();
     });
 
-    // PURGE LOGIC: Remove any house from storage older than 10 days
     document.getElementById('cleanupBtn').addEventListener('click', async () => {
         const countBefore = Object.keys(userState).length;
         const now = Date.now();
-        
         for (let url in userState) {
             if (userState[url].added_at && (now - userState[url].added_at > TEN_DAYS_MS)) {
                 delete userState[url];
             }
         }
-        
-        const countAfter = Object.keys(userState).length;
-        alert(`Cleaned up ${countBefore - countAfter} old records from memory.`);
         await saveState();
-        location.reload(); // Refresh to re-process current houses
+        alert(`Deleted ${countBefore - Object.keys(userState).length} old records.`);
+        location.reload();
     });
 
     document.getElementById('showAllBtn').addEventListener('click', () => {

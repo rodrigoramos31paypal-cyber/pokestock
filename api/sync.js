@@ -1,12 +1,10 @@
-import { Redis } from '@upstash/redis';
+const { Redis } = require('@upstash/redis');
 
-// Automatically connects using the environment variables Vercel injected!
 const redis = Redis.fromEnv();
 
-export default async function handler(request, response) {
+module.exports = async function handler(request, response) {
     const DB_KEY = 'user_state_v1';
 
-    // Handle GET request: Load the state
     if (request.method === 'GET') {
         try {
             const state = await redis.get(DB_KEY);
@@ -16,7 +14,6 @@ export default async function handler(request, response) {
         }
     }
 
-    // Handle POST request: Save the state
     if (request.method === 'POST') {
         try {
             const newState = request.body;
@@ -27,6 +24,5 @@ export default async function handler(request, response) {
         }
     }
 
-    // Handle unsupported methods
     return response.status(405).json({ error: 'Method not allowed' });
-}
+};

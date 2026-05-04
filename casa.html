@@ -9,38 +9,44 @@
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); margin: 0; padding: 15px; color: #1e293b; }
         
         /* Password Overlay */
-        #passwordOverlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #1e293b; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 1000; color: white;
-        }
-        #passwordOverlay input { padding: 12px; border-radius: 8px; border: none; margin-top: 15px; width: 200px; text-align: center; }
+        #passwordOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1e293b; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; color: white; }
+        #passwordOverlay input { padding: 12px; border-radius: 8px; border: none; margin-top: 15px; width: 200px; text-align: center; font-size: 1rem; }
         #passwordOverlay button { margin-top: 10px; padding: 10px 20px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: bold; }
         #appContent { display: none; }
 
         .header { display: flex; justify-content: space-between; align-items: center; background: white; padding: 15px 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px; position: sticky; top: 10px; z-index: 100; }
-        .stats { font-size: 0.9rem; color: #64748b; }
+        .stats { font-size: 0.9rem; color: #64748b; margin-top: 4px; }
+
         .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
-        .btn { padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 1px solid var(--border); font-size: 0.8rem; font-weight: 600; }
-        #hideBtn { background: #ef4444; color: white; border: none; }
-        #cleanupBtn { background: #f97316; color: white; border: none; }
-        #undoPurgeBtn { background: #10b981; color: white; border: none; }
-        #showAllBtn { background: #3b82f6; color: white; border: none; }
+        .btn { padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 1px solid var(--border); font-size: 0.8rem; font-weight: 600; transition: 0.2s; color: white; border: none; }
+        #hideBtn { background: #ef4444; }
+        #cleanupBtn { background: #f97316; }
+        #undoPurgeBtn { background: #10b981; }
+        #showAllBtn { background: #3b82f6; }
 
         .table-container { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; }
         table { width: 100%; border-collapse: collapse; table-layout: fixed; }
         th { background: #f8fafc; text-align: left; padding: 15px 12px; font-size: 0.85rem; color: #475569; border-bottom: 2px solid #e2e8f0; }
         .sortable { cursor: pointer; user-select: none; }
-        
-        td { padding: 18px 12px; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .row-ticked { background-color: var(--ticked); }
-        .house-img { width: 100px; height: 75px; object-fit: cover; border-radius: 8px; display: block; }
-        
-        .price-cell { width: 100px; font-weight: 700; color: #15803d; }
-        .source-tag { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; background: #e2e8f0; font-weight: bold; }
-        .phone-link { color: var(--primary); text-decoration: none; font-weight: bold; font-size: 0.85rem; }
 
-        @media (max-width: 1000px) { .hide-mobile { display: none; } }
+        /* Row Height Adjusted for ~9-10 houses per screen */
+        td { padding: 18px 12px; border-bottom: 1px solid #e2e8f0; font-size: 1rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .row-ticked { background-color: var(--ticked); }
+        .row-ticked td { border-bottom-color: var(--ticked-border); }
+
+        .img-cell { width: 130px; }
+        .house-img { width: 110px; height: 80px; object-fit: cover; border-radius: 8px; display: block; background: #e2e8f0; }
+        
+        .price-cell { width: 110px; font-weight: 700; color: #15803d; font-size: 1.1rem; }
+        .date-cell { width: 150px; color: #64748b; font-size: 0.85rem; line-height: 1.2; }
+        .source-tag { font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; background: #e2e8f0; font-weight: bold; text-transform: uppercase; }
+
+        .house-link { text-decoration: none; color: #1e293b; display: block; overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
+        .house-link:hover { color: var(--primary); }
+
+        input[type="checkbox"] { cursor: pointer; transform: scale(1.5); }
+
+        @media (max-width: 1100px) { .hide-mobile { display: none; } }
     </style>
 </head>
 <body>
@@ -48,19 +54,19 @@
     <div id="passwordOverlay">
         <h2>Access Key Required</h2>
         <input type="password" id="pwInput" placeholder="Password...">
-        <button onclick="checkPassword()">Unlock</button>
+        <button onclick="checkPassword()">Unlock Dashboard</button>
         <p id="pwError" style="color: #ef4444; margin-top: 10px; display: none;">Incorrect password.</p>
     </div>
 
     <div id="appContent">
         <div class="header">
             <div>
-                <h2>🏠 House Manager</h2>
+                <h2>🏠 House Scraper Manager</h2>
                 <div class="stats" id="statsDisplay">Syncing...</div>
             </div>
             <div class="btn-group">
                 <button class="btn" id="hideBtn">Hide</button>
-                <button class="btn" id="cleanupBtn">Purge +10days</button>
+                <button class="btn" id="cleanupBtn">Purge >10d</button>
                 <button class="btn" id="undoPurgeBtn">Undo Purge</button>
                 <button class="btn" id="showAllBtn">Restore All</button>
             </div>
@@ -70,15 +76,15 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 40px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
-                        <th style="width: 110px;">Preview</th>
+                        <th style="width: 45px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
+                        <th style="width: 130px;">Preview</th>
                         <th>Details</th>
-                        <th style="width: 100px;">Price</th>
-                        <th style="width: 120px;" class="hide-mobile">Location</th>
-                        <th style="width: 100px;" class="hide-mobile">Source</th>
-                        <th style="width: 130px;" class="hide-mobile">Phone</th>
-                        <th style="width: 140px;" class="sortable" onclick="toggleDateSort()">Date <span id="sortDirection">▼</span></th>
-                        <th style="width: 50px; text-align: center;">Ok?</th>
+                        <th style="width: 120px;">Price</th>
+                        <th style="width: 120px;" class="hide-mobile">City</th>
+                        <th style="width: 110px;" class="hide-mobile">Source</th>
+                        <th style="width: 140px;" class="hide-mobile">Phone</th>
+                        <th style="width: 150px;" class="sortable" onclick="toggleDateSort()">Date <span id="sortDirection">▼</span></th>
+                        <th style="width: 60px; text-align: center;">Ok?</th>
                     </tr>
                 </thead>
                 <tbody id="table-body"></tbody>
@@ -93,7 +99,7 @@
     const TEN_DAYS_MS = 10 * 24 * 60 * 60 * 1000;
 
     function checkPassword() {
-        if (document.getElementById('pwInput').value === 'alex') {
+        if (document.getElementById('pwInput').value === 'casa') {
             document.getElementById('passwordOverlay').style.display = 'none';
             document.getElementById('appContent').style.display = 'block';
             start();
@@ -117,7 +123,7 @@
                 updated = true;
             }
         });
-        if (updated) await fetch('/api/sync', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(userState) });
+        if (updated) await saveState();
         render();
     }
 
@@ -131,6 +137,9 @@
         const tbody = document.getElementById('table-body');
         tbody.innerHTML = '';
         
+        let visibleCount = 0;
+        let blockedCount = 0;
+
         const sorted = [...housesData].sort((a,b) => {
             const da = userState[a.url]?.added_at || 0;
             const db = userState[b.url]?.added_at || 0;
@@ -138,32 +147,40 @@
         });
 
         sorted.forEach(h => {
-            if (h.is_blocked || userState[h.url]?.hidden || userState[h.url]?.purged) return;
-
+            // STRICT FILTER: Only show is_blocked: false
+            if (h.is_blocked === true) { blockedCount++; return; }
+            
             const state = userState[h.url] || {};
+            if (state.hidden || state.purged) return;
+
+            visibleCount++;
             const dateStr = new Date(state.added_at || Date.now()).toLocaleString('pt-PT', {timeZone: 'Europe/Lisbon', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'});
             
-            // Identify Source[cite: 5]
-            let source = "Other";
-            if (h.url.includes("idealista.pt")) source = "Idealista";
-            else if (h.url.includes("imovirtual.com")) source = "Imovirtual";
-            else if (h.url.includes("supercasa.pt")) source = "SuperCasa";
+            // Source Tagging
+            let source = h.source || "Unknown";
+            if (!h.source) {
+                if (h.url.includes("idealista.pt")) source = "Idealista";
+                else if (h.url.includes("imovirtual.com")) source = "Imovirtual";
+                else if (h.url.includes("supercasa.pt")) source = "SuperCasa";
+            }
 
             const tr = document.createElement('tr');
             if (state.contacted) tr.className = 'row-ticked';
             tr.innerHTML = `
                 <td style="text-align: center;"><input type="checkbox" class="hide-checkbox" data-url="${h.url}"></td>
-                <td><img src="${h.img || ''}" class="house-img" onerror="this.src='https://via.placeholder.com/100x75?text=No+Image'"></td>
+                <td><img src="${h.img || ''}" class="house-img" onerror="this.src='https://via.placeholder.com/110x80?text=No+Image'"></td>
                 <td><a href="${h.url}" target="_blank" class="house-link">${h.name || 'No Title'}</a></td>
                 <td class="price-cell">${h.price || '---'}</td>
-                <td class="hide-mobile" style="color: #64748b; font-size: 0.85rem;">${h.location || '---'}</td>
+                <td class="hide-mobile" style="color: #64748b;">${h.location || '---'}</td>
                 <td class="hide-mobile"><span class="source-tag">${source}</span></td>
-                <td class="hide-mobile">${h.phone ? `<a href="tel:${h.phone}" class="phone-link">📞 ${h.phone}</a>` : '---'}</td>
-                <td><div style="font-size: 0.8rem; color: #64748b;">${dateStr}</div></td>
+                <td class="hide-mobile">${h.phone ? `📞 <b>${h.phone}</b>` : '---'}</td>
+                <td class="date-cell">${dateStr}</td>
                 <td style="text-align: center;"><input type="checkbox" ${state.contacted ? 'checked' : ''} onchange="toggleTick('${h.url}', this)"></td>
             `;
             tbody.appendChild(tr);
         });
+
+        document.getElementById('statsDisplay').innerText = `Showing ${visibleCount} Private Listings (${blockedCount} Agencies Hidden)`;
     }
 
     function toggleTick(url, el) { userState[url].contacted = el.checked; saveState(); el.closest('tr').classList.toggle('row-ticked', el.checked); }
@@ -172,7 +189,7 @@
     document.getElementById('hideBtn').onclick = () => { document.querySelectorAll('.hide-checkbox:checked').forEach(cb => { userState[cb.getAttribute('data-url')].hidden = true; }); saveState(); render(); };
     document.getElementById('cleanupBtn').onclick = () => { const now = Date.now(); for (let u in userState) if (userState[u].added_at && (now - userState[u].added_at > TEN_DAYS_MS)) userState[u].purged = true; saveState(); render(); };
     document.getElementById('undoPurgeBtn').onclick = () => { for (let u in userState) userState[u].purged = false; saveState(); render(); };
-    document.getElementById('showAllBtn').onclick = () => { if(confirm("Restore ALL?")) { for (let u in userState) { userState[u].hidden = false; userState[u].purged = false; } saveState(); render(); } };
+    document.getElementById('showAllBtn').onclick = () => { if(confirm("Restore all hidden and purged houses?")) { for (let u in userState) { userState[u].hidden = false; userState[u].purged = false; } saveState(); render(); } };
     document.getElementById('masterCheck').onchange = e => document.querySelectorAll('.hide-checkbox').forEach(cb => cb.checked = e.target.checked);
     </script>
 </body>

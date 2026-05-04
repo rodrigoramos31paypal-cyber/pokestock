@@ -5,108 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>House Manager Pro</title>
     <style>
-        :root {
-            --primary: #2563eb;
-            --bg: #f1f5f9;
-            --border: #cbd5e1;
-            --ticked: #f0fdf4;
-            --ticked-border: #86efac;
-        }
-
+        :root { --primary: #2563eb; --bg: #f1f5f9; --border: #cbd5e1; --ticked: #f0fdf4; --ticked-border: #86efac; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); margin: 0; padding: 15px; color: #1e293b; }
         
-        /* Password Protection Styles */
+        /* Password Overlay */
         #passwordOverlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #1e293b; display: flex; flex-direction: column;
             justify-content: center; align-items: center; z-index: 1000; color: white;
         }
-        #passwordOverlay input {
-            padding: 12px; border-radius: 8px; border: none; margin-top: 15px;
-            width: 200px; text-align: center; font-size: 1rem;
-        }
-        #passwordOverlay button {
-            margin-top: 10px; padding: 10px 20px; border-radius: 8px;
-            border: none; background: var(--primary); color: white;
-            cursor: pointer; font-weight: bold;
-        }
-        #appContent { display: none; } /* Hidden by default */
+        #passwordOverlay input { padding: 12px; border-radius: 8px; border: none; margin-top: 15px; width: 200px; text-align: center; }
+        #passwordOverlay button { margin-top: 10px; padding: 10px 20px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: bold; }
+        #appContent { display: none; }
 
-        .header { 
-            display: flex; justify-content: space-between; align-items: center; 
-            background: white; padding: 15px 25px; border-radius: 12px; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px;
-            position: sticky; top: 10px; z-index: 100;
-        }
-        h2 { font-size: 1.3rem; margin: 0; }
-        .stats { font-size: 0.9rem; color: #64748b; margin-top: 4px; }
-
+        .header { display: flex; justify-content: space-between; align-items: center; background: white; padding: 15px 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px; position: sticky; top: 10px; z-index: 100; }
+        .stats { font-size: 0.9rem; color: #64748b; }
         .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
-        .btn { 
-            padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 1px solid var(--border);
-            font-size: 0.8rem; font-weight: 600; transition: 0.2s;
-        }
+        .btn { padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 1px solid var(--border); font-size: 0.8rem; font-weight: 600; }
         #hideBtn { background: #ef4444; color: white; border: none; }
         #cleanupBtn { background: #f97316; color: white; border: none; }
         #undoPurgeBtn { background: #10b981; color: white; border: none; }
         #showAllBtn { background: #3b82f6; color: white; border: none; }
 
         .table-container { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; }
-        
         table { width: 100%; border-collapse: collapse; table-layout: fixed; }
         th { background: #f8fafc; text-align: left; padding: 15px 12px; font-size: 0.85rem; color: #475569; border-bottom: 2px solid #e2e8f0; }
+        .sortable { cursor: pointer; user-select: none; }
         
-        .sortable { cursor: pointer; user-select: none; transition: background 0.2s; }
-        .sortable:hover { background: #e2e8f0; }
-
-        td { padding: 18px 12px; border-bottom: 1px solid #e2e8f0; font-size: 1rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        
+        td { padding: 18px 12px; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .row-ticked { background-color: var(--ticked); }
-        .row-ticked td { border-bottom-color: var(--ticked-border); }
-
-        .img-cell { width: 130px; }
-        .house-img { width: 110px; height: 80px; object-fit: cover; border-radius: 8px; display: block; background: #e2e8f0; }
+        .house-img { width: 100px; height: 75px; object-fit: cover; border-radius: 8px; display: block; }
         
-        .title-cell { width: 45%; }
-        .price-cell { width: 110px; font-weight: 700; color: #15803d; font-size: 1.1rem; }
-        .date-cell { width: 150px; color: #64748b; font-size: 0.85rem; line-height: 1.2; }
-        .check-cell { width: 60px; text-align: center; }
+        .price-cell { width: 100px; font-weight: 700; color: #15803d; }
+        .source-tag { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; background: #e2e8f0; font-weight: bold; }
+        .phone-link { color: var(--primary); text-decoration: none; font-weight: bold; font-size: 0.85rem; }
 
-        .house-link { text-decoration: none; color: #1e293b; display: block; overflow: hidden; text-overflow: ellipsis; font-weight: 600; margin-bottom: 4px; }
-        .house-link:hover { color: var(--primary); }
-
-        input[type="checkbox"] { cursor: pointer; transform: scale(1.5); }
-
-        @media (max-width: 900px) {
-            .date-cell, th:nth-child(5) { display: none; }
-            .img-cell { width: 90px; }
-            .house-img { width: 80px; height: 60px; }
-            .btn { padding: 6px 10px; font-size: 0.75rem; }
-        }
+        @media (max-width: 1000px) { .hide-mobile { display: none; } }
     </style>
 </head>
 <body>
 
-    <!-- 1. Password Overlay -->
     <div id="passwordOverlay">
-        <h2>Enter Access Key</h2>
+        <h2>Access Key Required</h2>
         <input type="password" id="pwInput" placeholder="Password...">
-        <button onclick="checkPassword()">Unlock Dashboard</button>
-        <p id="pwError" style="color: #ef4444; margin-top: 10px; font-size: 0.8rem; display: none;">Incorrect password. Try again.</p>
+        <button onclick="checkPassword()">Unlock</button>
+        <p id="pwError" style="color: #ef4444; margin-top: 10px; display: none;">Incorrect password.</p>
     </div>
 
-    <!-- 2. Main Content Container -->
     <div id="appContent">
         <div class="header">
             <div>
-                <h2>🏠 House Scraper Manager</h2>
-                <div class="stats" id="statsDisplay">Syncing memory...</div>
+                <h2>🏠 House Manager</h2>
+                <div class="stats" id="statsDisplay">Syncing...</div>
             </div>
             <div class="btn-group">
                 <button class="btn" id="hideBtn">Hide</button>
-                <button class="btn" id="cleanupBtn" title="Dismiss houses >10 days old">Purge Old</button>
-                <button class="btn" id="undoPurgeBtn" title="Bring back houses removed by the purge">Undo Purge</button>
-                <button class="btn" id="showAllBtn" title="Restore EVERYTHING">Restore All</button>
+                <button class="btn" id="cleanupBtn">Purge >10d</button>
+                <button class="btn" id="undoPurgeBtn">Undo Purge</button>
+                <button class="btn" id="showAllBtn">Restore All</button>
             </div>
         </div>
 
@@ -114,14 +70,15 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 45px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
-                        <th class="img-cell">Preview</th>
-                        <th class="title-cell">Property Details</th>
-                        <th class="price-cell">Price</th>
-                        <th class="date-cell sortable" onclick="toggleDateSort()">
-                            Date Identified <span id="sortDirection">▼</span>
-                        </th>
-                        <th class="check-cell">Ok?</th>
+                        <th style="width: 40px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
+                        <th style="width: 110px;">Preview</th>
+                        <th>Details</th>
+                        <th style="width: 100px;">Price</th>
+                        <th style="width: 120px;" class="hide-mobile">Location</th>
+                        <th style="width: 100px;" class="hide-mobile">Source</th>
+                        <th style="width: 130px;" class="hide-mobile">Phone</th>
+                        <th style="width: 140px;" class="sortable" onclick="toggleDateSort()">Date <span id="sortDirection">▼</span></th>
+                        <th style="width: 50px; text-align: center;">Ok?</th>
                     </tr>
                 </thead>
                 <tbody id="table-body"></tbody>
@@ -135,63 +92,33 @@
     let sortOrder = 'desc';
     const TEN_DAYS_MS = 10 * 24 * 60 * 60 * 1000;
 
-    // --- Password Logic ---
     function checkPassword() {
-        const input = document.getElementById('pwInput').value;
-        if (input === 'casa') {
+        if (document.getElementById('pwInput').value === 'alex') {
             document.getElementById('passwordOverlay').style.display = 'none';
             document.getElementById('appContent').style.display = 'block';
-            start(); // Initialize app only after login
-        } else {
-            document.getElementById('pwError').style.display = 'block';
-        }
+            start();
+        } else { document.getElementById('pwError').style.display = 'block'; }
     }
+    document.getElementById('pwInput').addEventListener('keypress', e => { if (e.key === 'Enter') checkPassword(); });
 
-    // Allow pressing "Enter" to submit password
-    document.getElementById('pwInput').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') checkPassword();
-    });
-
-    // --- House Scraper Logic ---
-    async function loadSyncedState() {
-        try {
-            const response = await fetch('/api/sync?t=' + Date.now());
-            if (response.ok) userState = await response.json();
-        } catch (e) { console.log("Memory error"); }
-    }
-
-    async function saveState() {
-        try {
-            await fetch('/api/sync', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(userState)
-            });
-        } catch (e) { console.error("Sync failed"); }
-    }
-
-    async function fetchHouses() {
-        try {
-            const response = await fetch('seen_houses.json?t=' + Date.now());
-            const data = await response.json();
-            housesData = Array.isArray(data) ? data : Object.values(data);
-            
-            let updated = false;
-            housesData.forEach(h => {
-                if (!userState[h.url]) {
-                    const initialDate = h.last_checked ? (h.last_checked * 1000) : Date.now();
-                    userState[h.url] = { contacted: false, hidden: false, added_at: initialDate };
-                    updated = true;
-                }
-                else if (!userState[h.url].added_at) {
-                    userState[h.url].added_at = h.last_checked ? (h.last_checked * 1000) : Date.now();
-                    updated = true;
-                }
-            });
-
-            if (updated) await saveState();
-            render();
-        } catch (e) { console.error("Data load error"); }
+    async function start() {
+        const resMem = await fetch('/api/sync?t=' + Date.now());
+        if (resMem.ok) userState = await resMem.json();
+        
+        const resHouses = await fetch('seen_houses.json?t=' + Date.now());
+        const data = await resHouses.json();
+        housesData = Array.isArray(data) ? data : Object.values(data);
+        
+        let updated = false;
+        housesData.forEach(h => {
+            if (!userState[h.url]) {
+                const date = h.last_checked ? (h.last_checked * 1000) : Date.now();
+                userState[h.url] = { contacted: false, hidden: false, added_at: date };
+                updated = true;
+            }
+        });
+        if (updated) await fetch('/api/sync', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(userState) });
+        render();
     }
 
     function toggleDateSort() {
@@ -204,109 +131,49 @@
         const tbody = document.getElementById('table-body');
         tbody.innerHTML = '';
         
-        let visibleCount = 0;
-        let blockedCount = 0;
-
-        const sortedHouses = [...housesData].sort((a, b) => {
-            const dateA = userState[a.url]?.added_at || 0;
-            const dateB = userState[b.url]?.added_at || 0;
-            return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+        const sorted = [...housesData].sort((a,b) => {
+            const da = userState[a.url]?.added_at || 0;
+            const db = userState[b.url]?.added_at || 0;
+            return sortOrder === 'desc' ? db - da : da - db;
         });
 
-        sortedHouses.forEach(house => {
-            const url = house.url;
-            if (house.is_blocked) { blockedCount++; return; }
-            if (userState[url]?.hidden || userState[url]?.purged) return;
+        sorted.forEach(h => {
+            if (h.is_blocked || userState[h.url]?.hidden || userState[h.url]?.purged) return;
 
-            visibleCount++;
-            const state = userState[url] || {};
+            const state = userState[h.url] || {};
+            const dateStr = new Date(state.added_at || Date.now()).toLocaleString('pt-PT', {timeZone: 'Europe/Lisbon', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'});
             
-            const timestamp = state.added_at || (house.last_checked ? house.last_checked * 1000 : Date.now());
-            const dateStr = new Date(timestamp).toLocaleString('pt-PT', {
-                timeZone: 'Europe/Lisbon',
-                day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
-            });
+            // Identify Source[cite: 5]
+            let source = "Other";
+            if (h.url.includes("idealista.pt")) source = "Idealista";
+            else if (h.url.includes("imovirtual.com")) source = "Imovirtual";
+            else if (h.url.includes("supercasa.pt")) source = "SuperCasa";
 
             const tr = document.createElement('tr');
             if (state.contacted) tr.className = 'row-ticked';
-
             tr.innerHTML = `
-                <td style="text-align: center;"><input type="checkbox" class="hide-checkbox" data-url="${url}"></td>
-                <td class="img-cell"><img src="${house.img || 'https://via.placeholder.com/110x80'}" class="house-img" onerror="this.src='https://via.placeholder.com/110x80'"></td>
-                <td class="title-cell"><a href="${url}" target="_blank" class="house-link" title="${house.name}">${house.name || 'No Title'}</a></td>
-                <td class="price-cell">${house.price || '---'}</td>
-                <td class="date-cell">${dateStr}</td>
-                <td class="check-cell"><input type="checkbox" ${state.contacted ? 'checked' : ''} onchange="toggleTick('${url}', this)"></td>
+                <td style="text-align: center;"><input type="checkbox" class="hide-checkbox" data-url="${h.url}"></td>
+                <td><img src="${h.img || ''}" class="house-img" onerror="this.src='https://via.placeholder.com/100x75?text=No+Image'"></td>
+                <td><a href="${h.url}" target="_blank" class="house-link">${h.name || 'No Title'}</a></td>
+                <td class="price-cell">${h.price || '---'}</td>
+                <td class="hide-mobile" style="color: #64748b; font-size: 0.85rem;">${h.location || '---'}</td>
+                <td class="hide-mobile"><span class="source-tag">${source}</span></td>
+                <td class="hide-mobile">${h.phone ? `<a href="tel:${h.phone}" class="phone-link">📞 ${h.phone}</a>` : '---'}</td>
+                <td><div style="font-size: 0.8rem; color: #64748b;">${dateStr}</div></td>
+                <td style="text-align: center;"><input type="checkbox" ${state.contacted ? 'checked' : ''} onchange="toggleTick('${h.url}', this)"></td>
             `;
             tbody.appendChild(tr);
         });
-
-        document.getElementById('statsDisplay').innerText = `Showing ${visibleCount} Houses (${blockedCount} filtered)`;
     }
 
-    function toggleTick(url, el) {
-        if (!userState[url]) userState[url] = { added_at: Date.now() };
-        userState[url].contacted = el.checked;
-        saveState();
-        el.closest('tr').classList.toggle('row-ticked', el.checked);
-    }
-
-    document.getElementById('hideBtn').addEventListener('click', () => {
-        document.querySelectorAll('.hide-checkbox:checked').forEach(cb => {
-            const url = cb.getAttribute('data-url');
-            if (!userState[url]) userState[url] = { added_at: Date.now() };
-            userState[url].hidden = true;
-        });
-        saveState();
-        render();
-    });
-
-    document.getElementById('cleanupBtn').addEventListener('click', async () => {
-        const now = Date.now();
-        let purgeCount = 0;
-        for (let url in userState) {
-            if (userState[url].added_at && (now - userState[url].added_at > TEN_DAYS_MS)) {
-                userState[url].purged = true;
-                purgeCount++;
-            }
-        }
-        await saveState();
-        alert(`Dismissed ${purgeCount} old houses.`);
-        render();
-    });
-
-    document.getElementById('undoPurgeBtn').addEventListener('click', async () => {
-        let restoredCount = 0;
-        for (let url in userState) {
-            if (userState[url].purged) {
-                userState[url].purged = false;
-                restoredCount++;
-            }
-        }
-        await saveState();
-        alert(`Restored ${restoredCount} houses.`);
-        render();
-    });
-
-    document.getElementById('showAllBtn').addEventListener('click', () => {
-        if(confirm("Restore ALL houses (Hidden and Purged)?")) {
-            for (let url in userState) {
-                userState[url].hidden = false;
-                userState[url].purged = false;
-            }
-            saveState();
-            render();
-        }
-    });
-
-    document.getElementById('masterCheck').addEventListener('change', (e) => {
-        document.querySelectorAll('.hide-checkbox').forEach(cb => cb.checked = e.target.checked);
-    });
-
-    async function start() {
-        await loadSyncedState();
-        await fetchHouses();
-    }
+    function toggleTick(url, el) { userState[url].contacted = el.checked; saveState(); el.closest('tr').classList.toggle('row-ticked', el.checked); }
+    async function saveState() { await fetch('/api/sync', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(userState) }); }
+    
+    document.getElementById('hideBtn').onclick = () => { document.querySelectorAll('.hide-checkbox:checked').forEach(cb => { userState[cb.getAttribute('data-url')].hidden = true; }); saveState(); render(); };
+    document.getElementById('cleanupBtn').onclick = () => { const now = Date.now(); for (let u in userState) if (userState[u].added_at && (now - userState[u].added_at > TEN_DAYS_MS)) userState[u].purged = true; saveState(); render(); };
+    document.getElementById('undoPurgeBtn').onclick = () => { for (let u in userState) userState[u].purged = false; saveState(); render(); };
+    document.getElementById('showAllBtn').onclick = () => { if(confirm("Restore ALL?")) { for (let u in userState) { userState[u].hidden = false; userState[u].purged = false; } saveState(); render(); } };
+    document.getElementById('masterCheck').onchange = e => document.querySelectorAll('.hide-checkbox').forEach(cb => cb.checked = e.target.checked);
     </script>
 </body>
 </html>

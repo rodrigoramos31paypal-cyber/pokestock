@@ -38,7 +38,11 @@
         table { width: 100%; border-collapse: collapse; table-layout: fixed; }
         th { background: #f8fafc; text-align: left; padding: 15px 12px; font-size: 0.85rem; color: #475569; border-bottom: 2px solid #e2e8f0; }
         
-        /* Fixed Row Height for ~9-10 per screen */
+        /* Sortable Header Style */
+        .sortable { cursor: pointer; user-select: none; transition: background 0.2s; }
+        .sortable:hover { background: #e2e8f0; }
+        .sort-icon { display: inline-block; margin-left: 5px; font-size: 0.7rem; }
+
         td { padding: 18px 12px; border-bottom: 1px solid #e2e8f0; font-size: 1rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         
         .row-ticked { background-color: var(--ticked); }
@@ -86,7 +90,9 @@
                     <th class="img-cell">Preview</th>
                     <th class="title-cell">Property Details</th>
                     <th class="price-cell">Price</th>
-                    <th class="date-cell">Date Identified (GMT+1)</th>
+                    <th class="date-cell sortable" onclick="toggleDateSort()">
+                        Date Identified <span id="sortDirection">▼</span>
+                    </th>
                     <th class="check-cell">Ok?</th>
                 </tr>
             </thead>
@@ -97,6 +103,7 @@
     <script>
     let housesData = [];
     let userState = {};
+    let sortOrder = 'desc'; // 'desc' = Newest first, 'asc' = Oldest first
     const TEN_DAYS_MS = 10 * 24 * 60 * 60 * 1000;
 
     async function loadSyncedState() {
@@ -124,14 +131,10 @@
             
             let updated = false;
             housesData.forEach(h => {
-                // If house is totally new to memory
                 if (!userState[h.url]) {
                     userState[h.url] = { contacted: false, hidden: false };
                 }
-                
-                // CRITICAL: Ensure every house in current view has an added_at date
                 if (!userState[h.url].added_at) {
-                    // Fallback order: JSON timestamp -> Current Time
                     const fallbackDate = h.last_checked ? (h.last_checked * 1000) : Date.now();
                     userState[h.url].added_at = fallbackDate;
                     updated = true;
@@ -143,6 +146,12 @@
         } catch (e) { console.error("Data error"); }
     }
 
+    function toggleDateSort() {
+        sortOrder = (sortOrder === 'desc') ? 'asc' : 'desc';
+        document.getElementById('sortDirection').innerText = (sortOrder === 'desc') ? '▼' : '▲';
+        render();
+    }
+
     function render() {
         const tbody = document.getElementById('table-body');
         tbody.innerHTML = '';
@@ -150,7 +159,14 @@
         let visibleCount = 0;
         let blockedCount = 0;
 
-        housesData.forEach(house => {
+        // Sort the data based on current state before rendering
+        const sortedHouses = [...housesData].sort((a, b) => {
+            const dateA = userState[a.url]?.added_at || 0;
+            const dateB = userState[b.url]?.added_at || 0;
+            return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+        });
+
+        sortedHouses.forEach(house => {
             const url = house.url;
             if (house.is_blocked) { blockedCount++; return; }
             if (userState[url]?.hidden) return;
@@ -158,7 +174,6 @@
             visibleCount++;
             const state = userState[url] || {};
             
-            // Format identifying date to GMT+1 (Europe/Lisbon)
             const timestamp = state.added_at || Date.now();
             const dateStr = new Date(timestamp).toLocaleString('pt-PT', {
                 timeZone: 'Europe/Lisbon',

@@ -17,16 +17,16 @@
         
         .header { 
             display: flex; justify-content: space-between; align-items: center; 
-            background: white; padding: 10px 20px; border-radius: 8px; 
+            background: white; padding: 15px 20px; border-radius: 8px; 
             box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;
             position: sticky; top: 10px; z-index: 100;
         }
-        h2 { font-size: 1.1rem; margin: 0; }
-        .stats { font-size: 0.75rem; color: #64748b; }
+        h2 { font-size: 1.2rem; margin: 0; }
+        .stats { font-size: 0.85rem; color: #64748b; }
 
         .btn { 
-            padding: 6px 12px; border-radius: 6px; cursor: pointer; border: 1px solid var(--border);
-            font-size: 0.8rem; font-weight: bold; transition: 0.2s;
+            padding: 8px 16px; border-radius: 6px; cursor: pointer; border: 1px solid var(--border);
+            font-size: 0.9rem; font-weight: bold; transition: 0.2s;
         }
         #hideBtn { background: #ef4444; color: white; border: none; }
         #showAllBtn { background: #3b82f6; color: white; border: none; margin-left: 5px; }
@@ -34,26 +34,26 @@
         .table-container { background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; }
         
         table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-        th { background: #f1f5f9; text-align: left; padding: 8px; font-size: 0.7rem; color: #64748b; border-bottom: 1px solid var(--border); }
+        th { background: #f1f5f9; text-align: left; padding: 12px; font-size: 0.8rem; color: #64748b; border-bottom: 1px solid var(--border); }
         
-        /* Compact Row Styles */
-        td { padding: 4px 8px; border-bottom: 1px solid var(--border); font-size: 0.8rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        /* Adjusted Row Heights for ~10 per screen */
+        td { padding: 12px 8px; border-bottom: 1px solid var(--border); font-size: 0.95rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         
         .row-ticked { background-color: var(--ticked); }
         .row-ticked td { border-bottom-color: var(--ticked-border); }
 
-        .img-cell { width: 60px; }
-        .house-img { width: 50px; height: 38px; object-fit: cover; border-radius: 4px; display: block; }
+        .img-cell { width: 90px; }
+        .house-img { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; display: block; }
         
         .title-cell { width: 40%; }
-        .price-cell { width: 90px; font-weight: bold; color: #059669; }
-        .date-cell { width: 110px; color: #64748b; font-size: 0.7rem; }
-        .check-cell { width: 40px; text-align: center; }
+        .price-cell { width: 100px; font-weight: bold; color: #059669; }
+        .date-cell { width: 130px; color: #64748b; font-size: 0.8rem; }
+        .check-cell { width: 50px; text-align: center; }
 
-        .house-link { text-decoration: none; color: inherit; display: block; overflow: hidden; text-overflow: ellipsis; }
+        .house-link { text-decoration: none; color: inherit; display: block; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
         .house-link:hover { color: var(--primary); }
 
-        input[type="checkbox"] { cursor: pointer; transform: scale(1.1); }
+        input[type="checkbox"] { cursor: pointer; transform: scale(1.3); }
 
         @media (max-width: 650px) {
             .date-cell, th:nth-child(5) { display: none; }
@@ -77,7 +77,7 @@
         <table>
             <thead>
                 <tr>
-                    <th style="width: 30px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
+                    <th style="width: 40px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
                     <th class="img-cell">Image</th>
                     <th class="title-cell">Details</th>
                     <th class="price-cell">Price</th>
@@ -93,7 +93,6 @@
     let housesData = [];
     let userState = {};
 
-    // 1. Fetch Sync State (Memory)
     async function loadSyncedState() {
         try {
             const response = await fetch('/api/sync?t=' + Date.now());
@@ -101,7 +100,6 @@
         } catch (e) { console.log("State load error:", e); }
     }
 
-    // 2. Save State to Redis
     async function saveState() {
         try {
             await fetch('/api/sync', {
@@ -112,12 +110,10 @@
         } catch (e) { alert("Error saving to database!"); }
     }
 
-    // 3. Fetch House List
     async function fetchHouses() {
         try {
             const response = await fetch('seen_houses.json?t=' + Date.now());
             const data = await response.json();
-            // Handle both Array and Object JSON formats
             housesData = Array.isArray(data) ? data : Object.values(data);
             render();
         } catch (e) { console.error("JSON load error:", e); }
@@ -138,8 +134,10 @@
             visibleCount++;
             const isTicked = userState[url]?.contacted || false;
 
-            // Format Date to GMT+1 (Europe/Lisbon)
-            const dateStr = house.added_at ? new Date(house.added_at).toLocaleString('pt-PT', {
+            // Try to find the date property regardless of its name
+            const rawDate = house.added_at || house.date || house.timestamp || house.time;
+            
+            const dateStr = rawDate ? new Date(rawDate).toLocaleString('pt-PT', {
                 timeZone: 'Europe/Lisbon',
                 day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
             }) : '---';
@@ -149,7 +147,7 @@
 
             tr.innerHTML = `
                 <td style="text-align: center;"><input type="checkbox" class="hide-checkbox" data-url="${url}"></td>
-                <td class="img-cell"><img src="${house.img || 'https://via.placeholder.com/50x38'}" class="house-img" onerror="this.src='https://via.placeholder.com/50x38'"></td>
+                <td class="img-cell"><img src="${house.img || 'https://via.placeholder.com/80x60'}" class="house-img" onerror="this.src='https://via.placeholder.com/80x60'"></td>
                 <td class="title-cell"><a href="${url}" target="_blank" class="house-link" title="${house.name}">${house.name || 'No Title'}</a></td>
                 <td class="price-cell">${house.price || '---'}</td>
                 <td class="date-cell">${dateStr}</td>

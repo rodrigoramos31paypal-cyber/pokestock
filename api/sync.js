@@ -1,9 +1,10 @@
 const { Redis } = require('@upstash/redis');
 
-// This version is specifically designed for the HTTPS REST URL
+// This automatically picks up UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN
 const redis = Redis.fromEnv();
 
 module.exports = async function handler(request, response) {
+    // Prevent caching to ensure sync between PC and Phone
     response.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
 
     try {

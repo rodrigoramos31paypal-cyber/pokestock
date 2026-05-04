@@ -38,11 +38,10 @@
         table { width: 100%; border-collapse: collapse; table-layout: fixed; }
         th { background: #f8fafc; text-align: left; padding: 15px 12px; font-size: 0.85rem; color: #475569; border-bottom: 2px solid #e2e8f0; }
         
-        /* Sortable Header Style */
         .sortable { cursor: pointer; user-select: none; transition: background 0.2s; }
         .sortable:hover { background: #e2e8f0; }
-        .sort-icon { display: inline-block; margin-left: 5px; font-size: 0.7rem; }
 
+        /* Row Height Adjusted for ~9-10 houses per screen */
         td { padding: 18px 12px; border-bottom: 1px solid #e2e8f0; font-size: 1rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         
         .row-ticked { background-color: var(--ticked); }
@@ -73,11 +72,11 @@
     <div class="header">
         <div>
             <h2>🏠 House Scraper Manager</h2>
-            <div class="stats" id="statsDisplay">Synchronizing memory...</div>
+            <div class="stats" id="statsDisplay">Syncing...</div>
         </div>
         <div class="btn-group">
             <button class="btn" id="hideBtn">Hide</button>
-            <button class="btn" id="cleanupBtn" title="Remove houses older than 10 days from memory">Purge Old</button>
+            <button class="btn" id="cleanupBtn" title="Dismiss houses older than 10 days">Purge Old</button>
             <button class="btn" id="showAllBtn">Restore</button>
         </div>
     </div>
@@ -103,14 +102,14 @@
     <script>
     let housesData = [];
     let userState = {};
-    let sortOrder = 'desc'; // 'desc' = Newest first, 'asc' = Oldest first
+    let sortOrder = 'desc';
     const TEN_DAYS_MS = 10 * 24 * 60 * 60 * 1000;
 
     async function loadSyncedState() {
         try {
             const response = await fetch('/api/sync?t=' + Date.now());
             if (response.ok) userState = await response.json();
-        } catch (e) { console.log("Memory load error"); }
+        } catch (e) { console.log("Memory error"); }
     }
 
     async function saveState() {
@@ -131,12 +130,16 @@
             
             let updated = false;
             housesData.forEach(h => {
+                // Initial identification logic
                 if (!userState[h.url]) {
-                    userState[h.url] = { contacted: false, hidden: false };
+                    // Fallback to the JSON timestamp if available
+                    const initialDate = h.last_checked ? (h.last_checked * 1000) : Date.now();
+                    userState[h.url] = { contacted: false, hidden: false, added_at: initialDate };
+                    updated = true;
                 }
-                if (!userState[h.url].added_at) {
-                    const fallbackDate = h.last_checked ? (h.last_checked * 1000) : Date.now();
-                    userState[h.url].added_at = fallbackDate;
+                // Fix for houses previously saved without a date
+                else if (!userState[h.url].added_at) {
+                    userState[h.url].added_at = h.last_checked ? (h.last_checked * 1000) : Date.now();
                     updated = true;
                 }
             });
@@ -159,7 +162,6 @@
         let visibleCount = 0;
         let blockedCount = 0;
 
-        // Sort the data based on current state before rendering
         const sortedHouses = [...housesData].sort((a, b) => {
             const dateA = userState[a.url]?.added_at || 0;
             const dateB = userState[b.url]?.added_at || 0;
@@ -169,12 +171,15 @@
         sortedHouses.forEach(house => {
             const url = house.url;
             if (house.is_blocked) { blockedCount++; return; }
-            if (userState[url]?.hidden) return;
+            
+            // Do not show houses marked as hidden OR permanently purged
+            if (userState[url]?.hidden || userState[url]?.purged) return;
 
             visibleCount++;
             const state = userState[url] || {};
             
-            const timestamp = state.added_at || Date.now();
+            // Format identifying date
+            const timestamp = state.added_at || (house.last_checked ? house.last_checked * 1000 : Date.now());
             const dateStr = new Date(timestamp).toLocaleString('pt-PT', {
                 timeZone: 'Europe/Lisbon',
                 day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
@@ -198,7 +203,6 @@
     }
 
     function toggleTick(url, el) {
-        if (!userState[url]) userState[url] = { added_at: Date.now() };
         userState[url].contacted = el.checked;
         saveState();
         el.closest('tr').classList.toggle('row-ticked', el.checked);
@@ -206,31 +210,38 @@
 
     document.getElementById('hideBtn').addEventListener('click', () => {
         document.querySelectorAll('.hide-checkbox:checked').forEach(cb => {
-            const url = cb.getAttribute('data-url');
-            if (!userState[url]) userState[url] = { added_at: Date.now() };
-            userState[url].hidden = true;
+            userState[cb.getAttribute('data-url')].hidden = true;
         });
         saveState();
         render();
     });
 
+    // NEW PURGE LOGIC: Marks them as "purged" so they stay off the screen
     document.getElementById('cleanupBtn').addEventListener('click', async () => {
-        const countBefore = Object.keys(userState).length;
         const now = Date.now();
+        let purgeCount = 0;
+        
         for (let url in userState) {
             if (userState[url].added_at && (now - userState[url].added_at > TEN_DAYS_MS)) {
-                delete userState[url];
+                userState[url].purged = true; // Mark instead of delete
+                purgeCount++;
             }
         }
+        
         await saveState();
-        alert(`Deleted ${countBefore - Object.keys(userState).length} old records.`);
-        location.reload();
+        alert(`Permanently dismissed ${purgeCount} houses older than 10 days.`);
+        render();
     });
 
     document.getElementById('showAllBtn').addEventListener('click', () => {
-        for (let url in userState) userState[url].hidden = false;
-        saveState();
-        render();
+        if(confirm("Restore all hidden and purged houses?")) {
+            for (let url in userState) {
+                userState[url].hidden = false;
+                userState[url].purged = false;
+            }
+            saveState();
+            render();
+        }
     });
 
     document.getElementById('masterCheck').addEventListener('change', (e) => {

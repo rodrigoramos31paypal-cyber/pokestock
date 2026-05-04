@@ -24,13 +24,14 @@
         h2 { font-size: 1.3rem; margin: 0; }
         .stats { font-size: 0.9rem; color: #64748b; margin-top: 4px; }
 
-        .btn-group { display: flex; gap: 8px; }
+        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
         .btn { 
-            padding: 10px 18px; border-radius: 8px; cursor: pointer; border: 1px solid var(--border);
-            font-size: 0.85rem; font-weight: 600; transition: 0.2s;
+            padding: 8px 14px; border-radius: 8px; cursor: pointer; border: 1px solid var(--border);
+            font-size: 0.8rem; font-weight: 600; transition: 0.2s;
         }
         #hideBtn { background: #ef4444; color: white; border: none; }
         #cleanupBtn { background: #f97316; color: white; border: none; }
+        #undoPurgeBtn { background: #10b981; color: white; border: none; }
         #showAllBtn { background: #3b82f6; color: white; border: none; }
 
         .table-container { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; }
@@ -41,7 +42,6 @@
         .sortable { cursor: pointer; user-select: none; transition: background 0.2s; }
         .sortable:hover { background: #e2e8f0; }
 
-        /* Row Height Adjusted for ~9-10 houses per screen */
         td { padding: 18px 12px; border-bottom: 1px solid #e2e8f0; font-size: 1rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         
         .row-ticked { background-color: var(--ticked); }
@@ -60,10 +60,11 @@
 
         input[type="checkbox"] { cursor: pointer; transform: scale(1.5); }
 
-        @media (max-width: 800px) {
+        @media (max-width: 900px) {
             .date-cell, th:nth-child(5) { display: none; }
             .img-cell { width: 90px; }
             .house-img { width: 80px; height: 60px; }
+            .btn { padding: 6px 10px; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -72,12 +73,13 @@
     <div class="header">
         <div>
             <h2>🏠 House Scraper Manager</h2>
-            <div class="stats" id="statsDisplay">Syncing...</div>
+            <div class="stats" id="statsDisplay">Syncing memory...</div>
         </div>
         <div class="btn-group">
             <button class="btn" id="hideBtn">Hide</button>
-            <button class="btn" id="cleanupBtn" title="Dismiss houses older than 10 days">Purge Old</button>
-            <button class="btn" id="showAllBtn">Restore</button>
+            <button class="btn" id="cleanupBtn" title="Dismiss houses >10 days old">Purge Old</button>
+            <button class="btn" id="undoPurgeBtn" title="Bring back houses removed by the purge">Undo Purge</button>
+            <button class="btn" id="showAllBtn" title="Restore EVERYTHING including manual hides">Restore All</button>
         </div>
     </div>
 
@@ -130,14 +132,12 @@
             
             let updated = false;
             housesData.forEach(h => {
-                // Initial identification logic
                 if (!userState[h.url]) {
-                    // Fallback to the JSON timestamp if available
+                    // Logic to pull date from JSON if available, otherwise now
                     const initialDate = h.last_checked ? (h.last_checked * 1000) : Date.now();
                     userState[h.url] = { contacted: false, hidden: false, added_at: initialDate };
                     updated = true;
                 }
-                // Fix for houses previously saved without a date
                 else if (!userState[h.url].added_at) {
                     userState[h.url].added_at = h.last_checked ? (h.last_checked * 1000) : Date.now();
                     updated = true;
@@ -146,7 +146,7 @@
 
             if (updated) await saveState();
             render();
-        } catch (e) { console.error("Data error"); }
+        } catch (e) { console.error("Data load error"); }
     }
 
     function toggleDateSort() {
@@ -172,13 +172,12 @@
             const url = house.url;
             if (house.is_blocked) { blockedCount++; return; }
             
-            // Do not show houses marked as hidden OR permanently purged
+            // Skip if manually hidden or system purged
             if (userState[url]?.hidden || userState[url]?.purged) return;
 
             visibleCount++;
             const state = userState[url] || {};
             
-            // Format identifying date
             const timestamp = state.added_at || (house.last_checked ? house.last_checked * 1000 : Date.now());
             const dateStr = new Date(timestamp).toLocaleString('pt-PT', {
                 timeZone: 'Europe/Lisbon',
@@ -203,6 +202,7 @@
     }
 
     function toggleTick(url, el) {
+        if (!userState[url]) userState[url] = { added_at: Date.now() };
         userState[url].contacted = el.checked;
         saveState();
         el.closest('tr').classList.toggle('row-ticked', el.checked);
@@ -210,31 +210,44 @@
 
     document.getElementById('hideBtn').addEventListener('click', () => {
         document.querySelectorAll('.hide-checkbox:checked').forEach(cb => {
-            userState[cb.getAttribute('data-url')].hidden = true;
+            const url = cb.getAttribute('data-url');
+            if (!userState[url]) userState[url] = { added_at: Date.now() };
+            userState[url].hidden = true;
         });
         saveState();
         render();
     });
 
-    // NEW PURGE LOGIC: Marks them as "purged" so they stay off the screen
     document.getElementById('cleanupBtn').addEventListener('click', async () => {
         const now = Date.now();
         let purgeCount = 0;
-        
         for (let url in userState) {
             if (userState[url].added_at && (now - userState[url].added_at > TEN_DAYS_MS)) {
-                userState[url].purged = true; // Mark instead of delete
+                userState[url].purged = true;
                 purgeCount++;
             }
         }
-        
         await saveState();
-        alert(`Permanently dismissed ${purgeCount} houses older than 10 days.`);
+        alert(`Dismissed ${purgeCount} old houses.`);
+        render();
+    });
+
+    // NEW UNDO PURGE LOGIC: Specifically un-purges without affecting manual hides
+    document.getElementById('undoPurgeBtn').addEventListener('click', async () => {
+        let restoredCount = 0;
+        for (let url in userState) {
+            if (userState[url].purged) {
+                userState[url].purged = false;
+                restoredCount++;
+            }
+        }
+        await saveState();
+        alert(`Restored ${restoredCount} previously purged houses.`);
         render();
     });
 
     document.getElementById('showAllBtn').addEventListener('click', () => {
-        if(confirm("Restore all hidden and purged houses?")) {
+        if(confirm("Restore ALL houses (Hidden and Purged)?")) {
             for (let url in userState) {
                 userState[url].hidden = false;
                 userState[url].purged = false;

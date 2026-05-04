@@ -125,7 +125,8 @@
     // 1. Fetch our synced state from the Vercel API
     async function loadSyncedState() {
         try {
-            const response = await fetch('/api/sync');
+            // Force mobile browsers to get fresh data by adding a timestamp
+            const response = await fetch('/api/sync?t=' + new Date().getTime());
             if (response.ok) {
                 userState = await response.json();
             }
@@ -138,14 +139,17 @@
     // 2. Save state back to the server using the Vercel API
     async function saveState() {
         try {
-            await fetch('/api/sync', {
+            const res = await fetch('/api/sync', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userState)
             });
+            // Force JS to throw an error if the server crashes
+            if (!res.ok) throw new Error("Server returned " + res.status);
+            
         } catch (error) {
             console.error("Failed to sync state to server:", error);
-            alert("Warning: Failed to sync your changes to the server.");
+            alert("⚠️ The database failed to save your tick! Please check your Vercel Environment Variables.");
         }
     }
 

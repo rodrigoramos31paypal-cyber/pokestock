@@ -1,30 +1,28 @@
 const { Redis } = require('@upstash/redis');
 
 module.exports = async function handler(request, response) {
-    try {
-        // Initialize inside the handler to prevent Vercel build crashes!
-        // This safely checks for both Vercel KV and Upstash variable formats
-        const redisUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || process.env.REDIS_URL;
-        const redisToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || process.env.REDIS_TOKEN;
+    // 1. Tell Vercel and mobile browsers NEVER to cache this data
+    response.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    response.setHeader('Pragma', 'no-cache');
+    response.setHeader('Expires', '0');
 
-        if (!redisUrl || !redisToken) {
-            return response.status(500).json({ error: 'Database environment variables are missing in Vercel.' });
+    try {
+        // 2. Look for the correct database keys safely
+        const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+        const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+
+        if (!url || !token) {
+            return response.status(500).json({ error: 'Database keys are missing from Vercel.' });
         }
 
-        const redis = new Redis({
-            url: redisUrl,
-            token: redisToken,
-        });
-
+        const redis = new Redis({ url, token });
         const DB_KEY = 'user_state_v1';
 
-        // Load the state
         if (request.method === 'GET') {
             const state = await redis.get(DB_KEY);
             return response.status(200).json(state || {});
         }
 
-        // Save the state
         if (request.method === 'POST') {
             const newState = request.body;
             await redis.set(DB_KEY, newState);
@@ -32,7 +30,6 @@ module.exports = async function handler(request, response) {
         }
 
         return response.status(405).json({ error: 'Method not allowed' });
-        
     } catch (error) {
         console.error("API Error:", error);
         return response.status(500).json({ error: error.message });

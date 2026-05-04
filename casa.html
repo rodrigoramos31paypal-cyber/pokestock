@@ -3,60 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>House Scraper Manager</title>
+    <title>House Manager Pro</title>
     <style>
         :root {
             --primary: #2563eb;
-            --bg: #f8fafc;
-            --border: #e2e8f0;
+            --bg: #f1f5f9;
+            --border: #cbd5e1;
             --ticked: #f0fdf4;
-            --ticked-border: #bbf7d0;
+            --ticked-border: #86efac;
         }
 
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); margin: 0; padding: 15px; color: #333; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); margin: 0; padding: 15px; color: #1e293b; }
         
         .header { 
             display: flex; justify-content: space-between; align-items: center; 
-            background: white; padding: 15px 20px; border-radius: 8px; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;
+            background: white; padding: 15px 25px; border-radius: 12px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px;
             position: sticky; top: 10px; z-index: 100;
         }
-        h2 { font-size: 1.2rem; margin: 0; }
-        .stats { font-size: 0.85rem; color: #64748b; }
+        h2 { font-size: 1.3rem; margin: 0; }
+        .stats { font-size: 0.9rem; color: #64748b; margin-top: 4px; }
 
+        .btn-group { display: flex; gap: 8px; }
         .btn { 
-            padding: 8px 16px; border-radius: 6px; cursor: pointer; border: 1px solid var(--border);
-            font-size: 0.9rem; font-weight: bold; transition: 0.2s;
+            padding: 10px 18px; border-radius: 8px; cursor: pointer; border: 1px solid var(--border);
+            font-size: 0.85rem; font-weight: 600; transition: 0.2s;
         }
         #hideBtn { background: #ef4444; color: white; border: none; }
-        #showAllBtn { background: #3b82f6; color: white; border: none; margin-left: 5px; }
+        #cleanupBtn { background: #f97316; color: white; border: none; }
+        #showAllBtn { background: #3b82f6; color: white; border: none; }
 
-        .table-container { background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; }
+        .table-container { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; }
         
         table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-        th { background: #f1f5f9; text-align: left; padding: 12px; font-size: 0.8rem; color: #64748b; border-bottom: 1px solid var(--border); }
+        th { background: #f8fafc; text-align: left; padding: 15px 12px; font-size: 0.85rem; color: #475569; border-bottom: 2px solid #e2e8f0; }
         
-        /* Adjusted Row Heights for ~10 per screen */
-        td { padding: 12px 8px; border-bottom: 1px solid var(--border); font-size: 0.95rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        /* Adjusted Row Height for ~9-10 per screen */
+        td { padding: 18px 12px; border-bottom: 1px solid #e2e8f0; font-size: 1rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         
         .row-ticked { background-color: var(--ticked); }
         .row-ticked td { border-bottom-color: var(--ticked-border); }
 
-        .img-cell { width: 90px; }
-        .house-img { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; display: block; }
+        .img-cell { width: 130px; }
+        .house-img { width: 110px; height: 80px; object-fit: cover; border-radius: 8px; display: block; background: #e2e8f0; }
         
-        .title-cell { width: 40%; }
-        .price-cell { width: 100px; font-weight: bold; color: #059669; }
-        .date-cell { width: 130px; color: #64748b; font-size: 0.8rem; }
-        .check-cell { width: 50px; text-align: center; }
+        .title-cell { width: 45%; }
+        .price-cell { width: 110px; font-weight: 700; color: #15803d; font-size: 1.1rem; }
+        .date-cell { width: 150px; color: #64748b; font-size: 0.85rem; line-height: 1.2; }
+        .check-cell { width: 60px; text-align: center; }
 
-        .house-link { text-decoration: none; color: inherit; display: block; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+        .house-link { text-decoration: none; color: #1e293b; display: block; overflow: hidden; text-overflow: ellipsis; font-weight: 600; margin-bottom: 4px; }
         .house-link:hover { color: var(--primary); }
 
-        input[type="checkbox"] { cursor: pointer; transform: scale(1.3); }
+        input[type="checkbox"] { cursor: pointer; transform: scale(1.5); }
 
-        @media (max-width: 650px) {
+        @media (max-width: 800px) {
             .date-cell, th:nth-child(5) { display: none; }
+            .img-cell { width: 90px; }
+            .house-img { width: 80px; height: 60px; }
         }
     </style>
 </head>
@@ -64,12 +68,13 @@
 
     <div class="header">
         <div>
-            <h2>🏠 House Manager</h2>
-            <div class="stats" id="statsDisplay">Loading data...</div>
+            <h2>🏠 House Scraper Manager</h2>
+            <div class="stats" id="statsDisplay">Initializing storage...</div>
         </div>
-        <div>
-            <button class="btn" id="hideBtn">Hide Selected</button>
-            <button class="btn" id="showAllBtn">Restore All</button>
+        <div class="btn-group">
+            <button class="btn" id="hideBtn">Hide</button>
+            <button class="btn" id="cleanupBtn" title="Remove houses older than 10 days from memory">Purge Old</button>
+            <button class="btn" id="showAllBtn">Restore</button>
         </div>
     </div>
 
@@ -77,11 +82,11 @@
         <table>
             <thead>
                 <tr>
-                    <th style="width: 40px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
-                    <th class="img-cell">Image</th>
-                    <th class="title-cell">Details</th>
+                    <th style="width: 45px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
+                    <th class="img-cell">Preview</th>
+                    <th class="title-cell">Property Details</th>
                     <th class="price-cell">Price</th>
-                    <th class="date-cell">Added (GMT+1)</th>
+                    <th class="date-cell">First Identified (GMT+1)</th>
                     <th class="check-cell">Ok?</th>
                 </tr>
             </thead>
@@ -92,12 +97,13 @@
     <script>
     let housesData = [];
     let userState = {};
+    const TEN_DAYS_MS = 10 * 24 * 60 * 60 * 1000;
 
     async function loadSyncedState() {
         try {
             const response = await fetch('/api/sync?t=' + Date.now());
             if (response.ok) userState = await response.json();
-        } catch (e) { console.log("State load error:", e); }
+        } catch (e) { console.log("Memory error:", e); }
     }
 
     async function saveState() {
@@ -107,7 +113,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userState)
             });
-        } catch (e) { alert("Error saving to database!"); }
+        } catch (e) { console.error("Sync failed"); }
     }
 
     async function fetchHouses() {
@@ -115,8 +121,23 @@
             const response = await fetch('seen_houses.json?t=' + Date.now());
             const data = await response.json();
             housesData = Array.isArray(data) ? data : Object.values(data);
+            
+            // LOGIC: If a house is new to our memory, assign current date once.
+            let updated = false;
+            housesData.forEach(h => {
+                if (!userState[h.url]) {
+                    userState[h.url] = { 
+                        contacted: false, 
+                        hidden: false, 
+                        added_at: Date.now() 
+                    };
+                    updated = true;
+                }
+            });
+            if (updated) await saveState();
+            
             render();
-        } catch (e) { console.error("JSON load error:", e); }
+        } catch (e) { console.error("JSON Error:", e); }
     }
 
     function render() {
@@ -132,57 +153,66 @@
             if (userState[url]?.hidden) return;
 
             visibleCount++;
-            const isTicked = userState[url]?.contacted || false;
-
-            // Try to find the date property regardless of its name
-            const rawDate = house.added_at || house.date || house.timestamp || house.time;
+            const state = userState[url] || {};
             
-            const dateStr = rawDate ? new Date(rawDate).toLocaleString('pt-PT', {
+            // Format the "First Seen" date to Lisbon/GMT+1
+            const dateStr = state.added_at ? new Date(state.added_at).toLocaleString('pt-PT', {
                 timeZone: 'Europe/Lisbon',
                 day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
             }) : '---';
 
             const tr = document.createElement('tr');
-            if (isTicked) tr.className = 'row-ticked';
+            if (state.contacted) tr.className = 'row-ticked';
 
             tr.innerHTML = `
                 <td style="text-align: center;"><input type="checkbox" class="hide-checkbox" data-url="${url}"></td>
-                <td class="img-cell"><img src="${house.img || 'https://via.placeholder.com/80x60'}" class="house-img" onerror="this.src='https://via.placeholder.com/80x60'"></td>
+                <td class="img-cell"><img src="${house.img || 'https://via.placeholder.com/110x80'}" class="house-img" onerror="this.src='https://via.placeholder.com/110x80'"></td>
                 <td class="title-cell"><a href="${url}" target="_blank" class="house-link" title="${house.name}">${house.name || 'No Title'}</a></td>
                 <td class="price-cell">${house.price || '---'}</td>
                 <td class="date-cell">${dateStr}</td>
-                <td class="check-cell"><input type="checkbox" ${isTicked ? 'checked' : ''} onchange="toggleTick('${url}', this)"></td>
+                <td class="check-cell"><input type="checkbox" ${state.contacted ? 'checked' : ''} onchange="toggleTick('${url}', this)"></td>
             `;
             tbody.appendChild(tr);
         });
 
-        document.getElementById('statsDisplay').innerText = `Showing ${visibleCount} Houses (Filtered ${blockedCount} blocked)`;
+        document.getElementById('statsDisplay').innerText = `Showing ${visibleCount} Houses (${blockedCount} filtered)`;
     }
 
     function toggleTick(url, el) {
-        if (!userState[url]) userState[url] = { contacted: false, hidden: false };
         userState[url].contacted = el.checked;
         saveState();
         el.closest('tr').classList.toggle('row-ticked', el.checked);
     }
 
     document.getElementById('hideBtn').addEventListener('click', () => {
-        const checks = document.querySelectorAll('.hide-checkbox:checked');
-        checks.forEach(cb => {
-            const url = cb.getAttribute('data-url');
-            if (!userState[url]) userState[url] = { contacted: false, hidden: false };
-            userState[url].hidden = true;
+        document.querySelectorAll('.hide-checkbox:checked').forEach(cb => {
+            userState[cb.getAttribute('data-url')].hidden = true;
         });
         saveState();
         render();
     });
 
-    document.getElementById('showAllBtn').addEventListener('click', () => {
-        if (confirm("Restore all hidden houses?")) {
-            for (let url in userState) userState[url].hidden = false;
-            saveState();
-            render();
+    // PURGE LOGIC: Remove any house from storage older than 10 days
+    document.getElementById('cleanupBtn').addEventListener('click', async () => {
+        const countBefore = Object.keys(userState).length;
+        const now = Date.now();
+        
+        for (let url in userState) {
+            if (userState[url].added_at && (now - userState[url].added_at > TEN_DAYS_MS)) {
+                delete userState[url];
+            }
         }
+        
+        const countAfter = Object.keys(userState).length;
+        alert(`Cleaned up ${countBefore - countAfter} old records from memory.`);
+        await saveState();
+        location.reload(); // Refresh to re-process current houses
+    });
+
+    document.getElementById('showAllBtn').addEventListener('click', () => {
+        for (let url in userState) userState[url].hidden = false;
+        saveState();
+        render();
     });
 
     document.getElementById('masterCheck').addEventListener('change', (e) => {

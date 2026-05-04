@@ -4523,8 +4523,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/ce/4f/9e/314282470.jpg",
     "price": "230.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34955549": {
     "name": "Moradia geminada na Rua dos Fragateiros, 51, Gaio-Rosário e Sarilhos Pequenos, Moita",
@@ -5378,8 +5381,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/45/9c/9c/314525336.jpg",
     "price": "329.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34955257": {
     "name": "Apartamento T2 na Rua da Recosta, 43, Verderena, Alto do Seixalinho - Santo André - Verderena",
@@ -5483,11 +5489,14 @@
   "https://idealista.pt/imovel/34960380": {
     "name": "Apartamento T2 em Santo André, Alto do Seixalinho - Santo André - Verderena",
     "url": "https://idealista.pt/imovel/34960380",
-    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/0c/85/e9/314480607.jpg",
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/0f/ce/a3/315491745.jpg",
     "price": "274.900€",
     "in_stock": true,
-    "last_checked": 1777033658.0683043,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34960248": {
     "name": "Apartamento T3 em Verderena, Alto do Seixalinho - Santo André - Verderena",
@@ -6224,8 +6233,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/dc/1e/ec/314853496.jpg",
     "price": "269.500€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://supercasa.pt/venda-apartamento-t3-barreiro/i2191947": {
     "name": "Apartamento T3 na Avenida Dom Afonso Henriques, Alto do Seixalinho, Santo André e Verderena, Barreiro",
@@ -7649,15 +7661,6 @@
     "last_checked": 1777652186.5804627,
     "is_blocked": true
   },
-  "https://idealista.pt/imovel/34975714": {
-    "name": "Apartamento T2 em Alto do Seixalinho, Alto do Seixalinho - Santo André - Verderena",
-    "url": "https://idealista.pt/imovel/34975714",
-    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/fd/64/9a/315126839.jpg",
-    "price": "255.000€",
-    "in_stock": true,
-    "last_checked": 1777652186.5804627,
-    "is_blocked": false
-  },
   "https://idealista.pt/imovel/34975642": {
     "name": "Moradia em banda em Alhos Vedros, Moita",
     "url": "https://idealista.pt/imovel/34975642",
@@ -8465,8 +8468,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/85/ce/14/315374823.jpg",
     "price": "600.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34981512": {
     "name": "Apartamento T3 na Rua Ary dos Santos, 19, Santo António da Charneca, Barreiro",
@@ -8474,8 +8480,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/ed/76/94/315373673.jpg",
     "price": "335.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": false
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34980395": {
     "name": "Moradia independente, moita gaio Rosário e sarilhos pequenos, Gaio-Rosário e Sarilhos Pequenos, Moita",
@@ -8483,8 +8492,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/23/fe/f1/315365541.jpg",
     "price": "649.900€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34981451": {
     "name": "Moradia geminada na Rua Henrique Andrade Evans, 9, Santo António da Charneca, Barreiro",
@@ -8492,8 +8504,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/23/93/06/315373061.jpg",
     "price": "340.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": false
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34981455": {
     "name": "Apartamento T2 na Avenida Joaquim José Fernandes, Lavradio, Barreiro e Lavradio",
@@ -8501,8 +8516,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/87/98/5d/315368040.jpg",
     "price": "260.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34981334": {
     "name": "Apartamento T1 na Rua de Goa, 1, Baixa da Banheira, Baixa da Banheira e Vale da Amoreira",
@@ -8510,8 +8528,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/66/aa/d7/315364715.jpg",
     "price": "180.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": false
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34981236": {
     "name": "Apartamento T2 em Baixa da Banheira, Baixa da Banheira e Vale da Amoreira",
@@ -8519,8 +8540,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/d9/cc/b6/315363346.jpg",
     "price": "255.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34981212": {
     "name": "Apartamento T2 na Rua de Damão, 17, Alhos Vedros, Moita",
@@ -8528,8 +8552,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/65/23/96/315359823.jpg",
     "price": "275.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": false
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34980959": {
     "name": "Apartamento T2 em Verderena, Alto do Seixalinho - Santo André - Verderena",
@@ -8546,7 +8573,7 @@
     "img": null,
     "price": "290.000 €",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
+    "last_checked": 1777905579.8875635,
     "is_blocked": true
   },
   "https://idealista.pt/imovel/34982423": {
@@ -8555,8 +8582,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/d8/28/16/315418334.jpg",
     "price": "275.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34982388": {
     "name": "Apartamento T2 na Rua de Damão, Alhos Vedros, Moita",
@@ -8564,8 +8594,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/db/1f/73/315418008.jpg",
     "price": "275.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34971195": {
     "name": "Apartamento T2 em Lavradio, Barreiro e Lavradio",
@@ -8573,8 +8606,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/07/0e/55/314942483.jpg",
     "price": "226.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34981965": {
     "name": "Apartamento T2 na Rua de Damão, 17, Alhos Vedros, Moita",
@@ -8582,8 +8618,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/54/51/d4/315396736.jpg",
     "price": "275.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://idealista.pt/imovel/34981942": {
     "name": "Apartamento T3 na Rua Fernando Lopes Graça, 27, Centro, Pinhal Novo",
@@ -8600,7 +8639,7 @@
     "img": null,
     "price": "230.000 €",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
+    "last_checked": 1777905579.8875635,
     "is_blocked": true
   },
   "https://idealista.pt/imovel/34983216": {
@@ -8609,8 +8648,11 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/7e/8d/ba/315446277.jpg",
     "price": "275.000€",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
-    "is_blocked": true
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
   },
   "https://supercasa.pt/venda-moradia-t2-moita/i2196535": {
     "name": "Moradia T2 em Baixa da Banheira e Vale da Amoreira, Moita",
@@ -8618,7 +8660,7 @@
     "img": null,
     "price": "275.000 €",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
+    "last_checked": 1777905579.8875635,
     "is_blocked": true
   },
   "https://supercasa.pt/venda-apartamento-t2-moita/i2196508": {
@@ -8627,7 +8669,7 @@
     "img": null,
     "price": "205.000 €",
     "in_stock": true,
-    "last_checked": 1777893899.3900907,
+    "last_checked": 1777905579.8875635,
     "is_blocked": true
   },
   "https://idealista.pt/imovel/34983553": {
@@ -8636,7 +8678,115 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/84/a4/cf/315462075.jpg",
     "price": "237.500€",
     "in_stock": true,
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
     "is_blocked": true,
-    "last_checked": 1777893899.3900907
+    "phone": null,
+    "location": null
+  },
+  "https://idealista.pt/imovel/34983833": {
+    "name": "Apartamento T3 em Moita",
+    "url": "https://idealista.pt/imovel/34983833",
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/d0/1e/a8/315471757.jpg",
+    "price": "315.000€",
+    "in_stock": true,
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
+  },
+  "https://idealista.pt/imovel/34983840": {
+    "name": "Apartamento T2 em Baixa da Banheira, Baixa da Banheira e Vale da Amoreira",
+    "url": "https://idealista.pt/imovel/34983840",
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/bd/32/9c/315471182.jpg",
+    "price": "274.900€",
+    "in_stock": true,
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
+  },
+  "https://idealista.pt/imovel/34983673": {
+    "name": "Apartamento T2 na Rua José Augusto Pimenta, s/n, Alto do Seixalinho, Alto do Seixalinho - Santo André - Verderena",
+    "url": "https://idealista.pt/imovel/34983673",
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/4a/04/2a/315465453.jpg",
+    "price": "205.000€",
+    "in_stock": true,
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
+  },
+  "https://idealista.pt/imovel/34983624": {
+    "name": "Apartamento T2 em Baixa da Banheira, Baixa da Banheira e Vale da Amoreira",
+    "url": "https://idealista.pt/imovel/34983624",
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/84/62/63/315463212.jpg",
+    "price": "220.000€",
+    "in_stock": true,
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
+  },
+  "https://supercasa.pt/venda-apartamento-t3-moita/i2196715": {
+    "name": "Apartamento T3 na Moita, Moita",
+    "url": "https://supercasa.pt/venda-apartamento-t3-moita/i2196715",
+    "img": null,
+    "price": "315.000 €",
+    "in_stock": true,
+    "last_checked": 1777905579.8875635,
+    "is_blocked": true
+  },
+  "https://idealista.pt/imovel/34983823": {
+    "name": "Apartamento T3 na Rua Diogo Cão, s/n, Centro, Pinhal Novo",
+    "url": "https://idealista.pt/imovel/34983823",
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/4f/c7/a0/315472398.jpg",
+    "price": "348.000€",
+    "in_stock": true,
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
+  },
+  "https://idealista.pt/imovel/34983855": {
+    "name": "Apartamento T3 na Rua Diogo Cão, s/n, Centro, Pinhal Novo",
+    "url": "https://idealista.pt/imovel/34983855",
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/21/2c/bf/315471962.jpg",
+    "price": "318.000€",
+    "in_stock": true,
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
+  },
+  "https://idealista.pt/imovel/34984086": {
+    "name": "Apartamento T2 em Lavradio, Barreiro e Lavradio",
+    "url": "https://idealista.pt/imovel/34984086",
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/67/d4/6d/315487779.jpg",
+    "price": "226.000€",
+    "in_stock": true,
+    "source": "Idealista",
+    "last_checked": 1777906286.4952762,
+    "is_blocked": true,
+    "phone": null,
+    "location": null
+  },
+  "https://idealista.pt/imovel/34984131": {
+    "name": "Moradia independente em Olhos de Água - Brejos Carreteiros, Quinta do Anjo",
+    "url": "https://idealista.pt/imovel/34984131",
+    "img": null,
+    "price": "600.000€",
+    "in_stock": true,
+    "source": "Idealista",
+    "phone": null,
+    "location": "Unknown",
+    "is_blocked": true,
+    "last_checked": 1777906286.4952762
   }
 }

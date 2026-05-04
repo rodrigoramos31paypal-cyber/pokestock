@@ -15,6 +15,23 @@
 
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); margin: 0; padding: 15px; color: #1e293b; }
         
+        /* Password Protection Styles */
+        #passwordOverlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #1e293b; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 1000; color: white;
+        }
+        #passwordOverlay input {
+            padding: 12px; border-radius: 8px; border: none; margin-top: 15px;
+            width: 200px; text-align: center; font-size: 1rem;
+        }
+        #passwordOverlay button {
+            margin-top: 10px; padding: 10px 20px; border-radius: 8px;
+            border: none; background: var(--primary); color: white;
+            cursor: pointer; font-weight: bold;
+        }
+        #appContent { display: none; } /* Hidden by default */
+
         .header { 
             display: flex; justify-content: space-between; align-items: center; 
             background: white; padding: 15px 25px; border-radius: 12px; 
@@ -70,35 +87,46 @@
 </head>
 <body>
 
-    <div class="header">
-        <div>
-            <h2>🏠 House Scraper Manager</h2>
-            <div class="stats" id="statsDisplay">Syncing memory...</div>
-        </div>
-        <div class="btn-group">
-            <button class="btn" id="hideBtn">Hide</button>
-            <button class="btn" id="cleanupBtn" title="Dismiss houses >10 days old">Purge Old</button>
-            <button class="btn" id="undoPurgeBtn" title="Bring back houses removed by the purge">Undo Purge</button>
-            <button class="btn" id="showAllBtn" title="Restore EVERYTHING including manual hides">Restore All</button>
-        </div>
+    <!-- 1. Password Overlay -->
+    <div id="passwordOverlay">
+        <h2>Enter Access Key</h2>
+        <input type="password" id="pwInput" placeholder="Password...">
+        <button onclick="checkPassword()">Unlock Dashboard</button>
+        <p id="pwError" style="color: #ef4444; margin-top: 10px; font-size: 0.8rem; display: none;">Incorrect password. Try again.</p>
     </div>
 
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 45px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
-                    <th class="img-cell">Preview</th>
-                    <th class="title-cell">Property Details</th>
-                    <th class="price-cell">Price</th>
-                    <th class="date-cell sortable" onclick="toggleDateSort()">
-                        Date Identified <span id="sortDirection">▼</span>
-                    </th>
-                    <th class="check-cell">Ok?</th>
-                </tr>
-            </thead>
-            <tbody id="table-body"></tbody>
-        </table>
+    <!-- 2. Main Content Container -->
+    <div id="appContent">
+        <div class="header">
+            <div>
+                <h2>🏠 House Scraper Manager</h2>
+                <div class="stats" id="statsDisplay">Syncing memory...</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn" id="hideBtn">Hide</button>
+                <button class="btn" id="cleanupBtn" title="Dismiss houses >10 days old">Purge Old</button>
+                <button class="btn" id="undoPurgeBtn" title="Bring back houses removed by the purge">Undo Purge</button>
+                <button class="btn" id="showAllBtn" title="Restore EVERYTHING">Restore All</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 45px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
+                        <th class="img-cell">Preview</th>
+                        <th class="title-cell">Property Details</th>
+                        <th class="price-cell">Price</th>
+                        <th class="date-cell sortable" onclick="toggleDateSort()">
+                            Date Identified <span id="sortDirection">▼</span>
+                        </th>
+                        <th class="check-cell">Ok?</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </div>
     </div>
 
     <script>
@@ -107,6 +135,24 @@
     let sortOrder = 'desc';
     const TEN_DAYS_MS = 10 * 24 * 60 * 60 * 1000;
 
+    // --- Password Logic ---
+    function checkPassword() {
+        const input = document.getElementById('pwInput').value;
+        if (input === 'casa') {
+            document.getElementById('passwordOverlay').style.display = 'none';
+            document.getElementById('appContent').style.display = 'block';
+            start(); // Initialize app only after login
+        } else {
+            document.getElementById('pwError').style.display = 'block';
+        }
+    }
+
+    // Allow pressing "Enter" to submit password
+    document.getElementById('pwInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') checkPassword();
+    });
+
+    // --- House Scraper Logic ---
     async function loadSyncedState() {
         try {
             const response = await fetch('/api/sync?t=' + Date.now());
@@ -133,7 +179,6 @@
             let updated = false;
             housesData.forEach(h => {
                 if (!userState[h.url]) {
-                    // Logic to pull date from JSON if available, otherwise now
                     const initialDate = h.last_checked ? (h.last_checked * 1000) : Date.now();
                     userState[h.url] = { contacted: false, hidden: false, added_at: initialDate };
                     updated = true;
@@ -171,8 +216,6 @@
         sortedHouses.forEach(house => {
             const url = house.url;
             if (house.is_blocked) { blockedCount++; return; }
-            
-            // Skip if manually hidden or system purged
             if (userState[url]?.hidden || userState[url]?.purged) return;
 
             visibleCount++;
@@ -232,7 +275,6 @@
         render();
     });
 
-    // NEW UNDO PURGE LOGIC: Specifically un-purges without affecting manual hides
     document.getElementById('undoPurgeBtn').addEventListener('click', async () => {
         let restoredCount = 0;
         for (let url in userState) {
@@ -242,7 +284,7 @@
             }
         }
         await saveState();
-        alert(`Restored ${restoredCount} previously purged houses.`);
+        alert(`Restored ${restoredCount} houses.`);
         render();
     });
 
@@ -265,7 +307,6 @@
         await loadSyncedState();
         await fetchHouses();
     }
-    start();
     </script>
 </body>
 </html>

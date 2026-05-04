@@ -1,4 +1,28 @@
 {
+  "https://idealista.pt/imovel/34984637": {
+    "name": "Apartamento T2 na Rua de Damão, 17, Alhos Vedros, Moita",
+    "url": "https://idealista.pt/imovel/34984637",
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/25/e6/88/315508017.jpg",
+    "price": "275.000€",
+    "in_stock": true,
+    "is_blocked": true,
+    "last_checked": 1777912506.6039164,
+    "phone": null,
+    "location": "---",
+    "source": "Unknown"
+  },
+  "https://idealista.pt/imovel/34984631": {
+    "name": "Moradia em banda em Baixa da Banheira, Baixa da Banheira e Vale da Amoreira",
+    "url": "https://idealista.pt/imovel/34984631",
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/1f/cf/ce/315505305.jpg",
+    "price": "215.000€",
+    "in_stock": true,
+    "is_blocked": true,
+    "last_checked": 1777912506.6039164,
+    "phone": null,
+    "location": "---",
+    "source": "Unknown"
+  },
   "https://idealista.pt/imovel/34984308": {
     "name": "Apartamento T2 na Rua Bernardino Curado, 36, Centro, Pinhal Novo",
     "url": "https://idealista.pt/imovel/34984308",
@@ -6,7 +30,7 @@
     "price": "250.000€",
     "in_stock": true,
     "is_blocked": false,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -18,7 +42,7 @@
     "price": "274.900€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -26,11 +50,11 @@
   "https://idealista.pt/imovel/34984131": {
     "name": "Moradia independente em Olhos de Água - Brejos Carreteiros, Quinta do Anjo",
     "url": "https://idealista.pt/imovel/34984131",
-    "img": null,
+    "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/67/34/fe/315500106.jpg",
     "price": "600.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -41,8 +65,8 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/4f/c7/a0/315472398.jpg",
     "price": "348.000€",
     "in_stock": true,
-    "is_blocked": false,
-    "last_checked": 1777908456.7536216,
+    "is_blocked": true,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -53,8 +77,8 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/21/2c/bf/315471962.jpg",
     "price": "318.000€",
     "in_stock": true,
-    "is_blocked": false,
-    "last_checked": 1777908456.7536216,
+    "is_blocked": true,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -66,7 +90,7 @@
     "price": "226.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -78,7 +102,7 @@
     "price": "315.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -90,7 +114,7 @@
     "price": "274.900€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -102,7 +126,7 @@
     "price": "205.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -114,7 +138,7 @@
     "price": "220.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -126,7 +150,7 @@
     "price": "237.500€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -137,8 +161,8 @@
     "img": "https://img4.idealista.pt/blur/480_360_mq/0/id.pro.pt.image.master/dc/1e/ec/314853496.jpg",
     "price": "269.500€",
     "in_stock": true,
-    "is_blocked": false,
-    "last_checked": 1777908456.7536216,
+    "is_blocked": true,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -150,7 +174,7 @@
     "price": "275.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -162,7 +186,7 @@
     "price": "275.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -174,7 +198,7 @@
     "price": "275.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -186,7 +210,7 @@
     "price": "226.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -198,7 +222,7 @@
     "price": "275.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -210,7 +234,7 @@
     "price": "230.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -222,7 +246,7 @@
     "price": "600.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -234,7 +258,7 @@
     "price": "335.000€",
     "in_stock": true,
     "is_blocked": false,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -246,7 +270,7 @@
     "price": "649.900€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -258,7 +282,7 @@
     "price": "340.000€",
     "in_stock": true,
     "is_blocked": false,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -270,7 +294,7 @@
     "price": "260.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -282,7 +306,7 @@
     "price": "180.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -294,7 +318,7 @@
     "price": "255.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -306,7 +330,7 @@
     "price": "275.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -318,7 +342,7 @@
     "price": "329.000€",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -330,7 +354,7 @@
     "price": "307 000 €",
     "in_stock": true,
     "is_blocked": false,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -342,7 +366,7 @@
     "price": "307 000 €",
     "in_stock": true,
     "is_blocked": false,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -354,7 +378,7 @@
     "price": "274.900 €",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -366,7 +390,31 @@
     "price": "290.000 €",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
+    "phone": null,
+    "location": "---",
+    "source": "Unknown"
+  },
+  "https://supercasa.pt/venda-apartamento-t2-barreiro/i2196849": {
+    "name": "Apartamento T2 na Avenida Movimento das Forças Armadas, Alto do Seixalinho, Santo André e Verderena, Barreiro",
+    "url": "https://supercasa.pt/venda-apartamento-t2-barreiro/i2196849",
+    "img": null,
+    "price": "274.000 €",
+    "in_stock": true,
+    "is_blocked": true,
+    "last_checked": 1777912506.6039164,
+    "phone": null,
+    "location": "---",
+    "source": "Unknown"
+  },
+  "https://supercasa.pt/venda-apartamento-t2-barreiro/i2196970": {
+    "name": "Apartamento T2 em Barreiro e Lavradio, Barreiro",
+    "url": "https://supercasa.pt/venda-apartamento-t2-barreiro/i2196970",
+    "img": null,
+    "price": "226.000 €",
+    "in_stock": true,
+    "is_blocked": true,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -378,7 +426,7 @@
     "price": "230.000 €",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -390,7 +438,7 @@
     "price": "205.000 €",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -402,7 +450,19 @@
     "price": "275.000 €",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
+    "phone": null,
+    "location": "---",
+    "source": "Unknown"
+  },
+  "https://supercasa.pt/venda-moradia-t1-moita/i2196952": {
+    "name": "Moradia em Banda T1+1 na Rua Jaime Cortesão, Baixa da Banheira e Vale da Amoreira, Moita",
+    "url": "https://supercasa.pt/venda-moradia-t1-moita/i2196952",
+    "img": null,
+    "price": "215.000 €",
+    "in_stock": true,
+    "is_blocked": true,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"
@@ -414,7 +474,7 @@
     "price": "315.000 €",
     "in_stock": true,
     "is_blocked": true,
-    "last_checked": 1777908456.7536216,
+    "last_checked": 1777912506.6039164,
     "phone": null,
     "location": "---",
     "source": "Unknown"

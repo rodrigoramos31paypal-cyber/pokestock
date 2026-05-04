@@ -1,21 +1,19 @@
 const { Redis } = require('@upstash/redis');
 
 module.exports = async function handler(request, response) {
-    // 1. Tell Vercel and mobile browsers NEVER to cache this data
+    // Disable caching for cross-device sync
     response.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    response.setHeader('Pragma', 'no-cache');
-    response.setHeader('Expires', '0');
 
     try {
-        // 2. Look for the correct database keys safely
-        const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-        const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+        // This will now look for the exact key you see in your Vercel Dashboard
+        const redisUrl = process.env.REDIS_URL;
 
-        if (!url || !token) {
-            return response.status(500).json({ error: 'Database keys are missing from Vercel.' });
+        if (!redisUrl) {
+            return response.status(500).json({ error: 'REDIS_URL is missing in Vercel settings.' });
         }
 
-        const redis = new Redis({ url, token });
+        // Standard Redis instances use a different connection method
+        const redis = Redis.fromEnv();
         const DB_KEY = 'user_state_v1';
 
         if (request.method === 'GET') {
@@ -30,8 +28,8 @@ module.exports = async function handler(request, response) {
         }
 
         return response.status(405).json({ error: 'Method not allowed' });
+        
     } catch (error) {
-        console.error("API Error:", error);
         return response.status(500).json({ error: error.message });
     }
 };

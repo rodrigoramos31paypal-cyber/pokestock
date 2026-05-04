@@ -1,8 +1,11 @@
 {
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/casa", "destination": "/casa.html" }
+  ],
   "headers": [
     {
-      "source": "/seen_products.json",
+      "source": "/seen_houses.json",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",

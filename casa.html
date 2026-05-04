@@ -5,286 +5,197 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>House Scraper Manager</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --border: #e2e8f0;
+            --ticked: #f0fdf4;
+            --ticked-border: #bbf7d0;
         }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fff;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-        }
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-        #hideBtn { background-color: #e74c3c; color: white; }
-        #hideBtn:hover { background-color: #c0392b; }
-        #showAllBtn { background-color: #3498db; color: white; margin-left: 10px; }
-        #showAllBtn:hover { background-color: #2980b9; }
+
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); margin: 0; padding: 15px; color: #333; }
         
-        .house-row {
-            display: flex;
-            align-items: center;
-            background: #fff;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            transition: transform 0.1s;
+        .header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: white; padding: 10px 20px; border-radius: 8px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;
+            position: sticky; top: 10px; z-index: 100;
         }
-        .house-row:hover {
-            transform: scale(1.01);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        h2 { font-size: 1.1rem; margin: 0; }
+        .stats { font-size: 0.75rem; color: #64748b; }
+
+        .btn { 
+            padding: 6px 12px; border-radius: 6px; cursor: pointer; border: 1px solid var(--border);
+            font-size: 0.8rem; font-weight: bold; transition: 0.2s;
         }
-        .house-row.contacted {
-            background-color: #e8f8f5;
-            border-left: 5px solid #2ecc71;
-        }
-        .col-select { margin-right: 15px; }
-        .col-select input { transform: scale(1.5); cursor: pointer; }
+        #hideBtn { background: #ef4444; color: white; border: none; }
+        #showAllBtn { background: #3b82f6; color: white; border: none; margin-left: 5px; }
+
+        .table-container { background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; }
         
-        .col-img img {
-            width: 120px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-right: 20px;
-        }
-        .col-info {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .col-info a {
-            text-decoration: none;
-            color: #2c3e50;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .col-info a:hover { color: #3498db; }
-        .price { font-size: 18px; color: #27ae60; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        th { background: #f1f5f9; text-align: left; padding: 8px; font-size: 0.7rem; color: #64748b; border-bottom: 1px solid var(--border); }
         
-        .col-contact {
-            text-align: center;
-            min-width: 100px;
-            padding-left: 15px;
-            border-left: 1px solid #eee;
+        /* Compact Row Styles */
+        td { padding: 4px 8px; border-bottom: 1px solid var(--border); font-size: 0.8rem; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        
+        .row-ticked { background-color: var(--ticked); }
+        .row-ticked td { border-bottom-color: var(--ticked-border); }
+
+        .img-cell { width: 60px; }
+        .house-img { width: 50px; height: 38px; object-fit: cover; border-radius: 4px; display: block; }
+        
+        .title-cell { width: 40%; }
+        .price-cell { width: 90px; font-weight: bold; color: #059669; }
+        .date-cell { width: 110px; color: #64748b; font-size: 0.7rem; }
+        .check-cell { width: 40px; text-align: center; }
+
+        .house-link { text-decoration: none; color: inherit; display: block; overflow: hidden; text-overflow: ellipsis; }
+        .house-link:hover { color: var(--primary); }
+
+        input[type="checkbox"] { cursor: pointer; transform: scale(1.1); }
+
+        @media (max-width: 650px) {
+            .date-cell, th:nth-child(5) { display: none; }
         }
-        .col-contact label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-weight: bold;
-            cursor: pointer;
-            color: #7f8c8d;
-        }
-        .col-contact input {
-            transform: scale(1.8);
-            margin-top: 10px;
-            cursor: pointer;
-        }
-        .stats { font-size: 14px; color: #7f8c8d; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <div>
-            <h2>🏠 House Scraper Manager</h2>
+            <h2>🏠 House Manager</h2>
             <div class="stats" id="statsDisplay">Loading data...</div>
         </div>
         <div>
-            <button id="hideBtn">Hide Selected (Batch)</button>
-            <button id="showAllBtn">Restore Hidden Houses</button>
+            <button class="btn" id="hideBtn">Hide Selected</button>
+            <button class="btn" id="showAllBtn">Restore All</button>
         </div>
     </div>
 
-    <div id="house-container"></div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30px; text-align: center;"><input type="checkbox" id="masterCheck"></th>
+                    <th class="img-cell">Image</th>
+                    <th class="title-cell">Details</th>
+                    <th class="price-cell">Price</th>
+                    <th class="date-cell">Added (GMT+1)</th>
+                    <th class="check-cell">Ok?</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
 
     <script>
-    let housesData = {};
+    let housesData = [];
     let userState = {};
 
-    // 1. Fetch our synced state from the Vercel API
+    // 1. Fetch Sync State (Memory)
     async function loadSyncedState() {
         try {
-            // Force mobile browsers to get fresh data by adding a timestamp
-            const response = await fetch('/api/sync?t=' + new Date().getTime());
-            if (response.ok) {
-                userState = await response.json();
-            }
-        } catch (error) {
-            console.log("No previous state found or error loading. Starting fresh.");
-            userState = {};
-        }
+            const response = await fetch('/api/sync?t=' + Date.now());
+            if (response.ok) userState = await response.json();
+        } catch (e) { console.log("State load error:", e); }
     }
 
-    // 2. Save state back to the server using the Vercel API
+    // 2. Save State to Redis
     async function saveState() {
         try {
-            const res = await fetch('/api/sync', {
+            await fetch('/api/sync', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userState)
             });
-            // Force JS to throw an error if the server crashes
-            if (!res.ok) throw new Error("Server returned " + res.status);
-            
-        } catch (error) {
-            console.error("Failed to sync state to server:", error);
-            alert("⚠️ The database failed to save your tick! Please check your Vercel Environment Variables.");
-        }
+        } catch (e) { alert("Error saving to database!"); }
     }
 
-    // 3. Fetch the houses from seen_houses.json
+    // 3. Fetch House List
     async function fetchHouses() {
         try {
-            const response = await fetch('seen_houses.json?t=' + new Date().getTime());
-            housesData = await response.json();
-            renderHouses();
-        } catch (error) {
-            document.getElementById('statsDisplay').innerText = "⚠️ Error loading seen_houses.json. Make sure it is uploaded to the same folder.";
-            console.error("Fetch error:", error);
-        }
+            const response = await fetch('seen_houses.json?t=' + Date.now());
+            const data = await response.json();
+            // Handle both Array and Object JSON formats
+            housesData = Array.isArray(data) ? data : Object.values(data);
+            render();
+        } catch (e) { console.error("JSON load error:", e); }
     }
 
-    function renderHouses() {
-        const container = document.getElementById('house-container');
-        container.innerHTML = ''; 
+    function render() {
+        const tbody = document.getElementById('table-body');
+        tbody.innerHTML = '';
         
         let visibleCount = 0;
         let blockedCount = 0;
 
-        Object.values(housesData).forEach(house => {
+        housesData.forEach(house => {
             const url = house.url;
-            
-            // Ensure this house has a memory profile in our state
-            if (!userState[url]) {
-                userState[url] = { contacted: false, hidden: false };
-            }
-
-            // Skip showing agencies/blocked properties
-            if (house.is_blocked) {
-                blockedCount++;
-                return; 
-            }
-            
-            // Skip if the user chose to hide it manually
-            if (userState[url].hidden) return;
+            if (house.is_blocked) { blockedCount++; return; }
+            if (userState[url]?.hidden) return;
 
             visibleCount++;
+            const isTicked = userState[url]?.contacted || false;
 
-            // Create the row
-            const row = document.createElement('div');
-            row.className = `house-row ${userState[url].contacted ? 'contacted' : ''}`;
+            // Format Date to GMT+1 (Europe/Lisbon)
+            const dateStr = house.added_at ? new Date(house.added_at).toLocaleString('pt-PT', {
+                timeZone: 'Europe/Lisbon',
+                day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
+            }) : '---';
 
-            // --- Column: Select Checkbox ---
-            const colSelect = document.createElement('div');
-            colSelect.className = 'col-select';
-            colSelect.innerHTML = `<input type="checkbox" class="hide-checkbox" data-url="${url}">`;
+            const tr = document.createElement('tr');
+            if (isTicked) tr.className = 'row-ticked';
 
-            // --- Column: Image ---
-            const colImg = document.createElement('div');
-            colImg.className = 'col-img';
-            const imgSrc = house.img ? house.img : 'https://via.placeholder.com/120x90?text=No+Image';
-            colImg.innerHTML = `<img src="${imgSrc}" alt="House Image" onerror="this.src='https://via.placeholder.com/120x90?text=Error'">`;
-
-            // --- Column: Info ---
-            const colInfo = document.createElement('div');
-            colInfo.className = 'col-info';
-            colInfo.innerHTML = `
-                <a href="${url}" target="_blank">${house.name || 'Unknown Title'}</a>
-                <div class="price">${house.price || 'Price N/A'}</div>
+            tr.innerHTML = `
+                <td style="text-align: center;"><input type="checkbox" class="hide-checkbox" data-url="${url}"></td>
+                <td class="img-cell"><img src="${house.img || 'https://via.placeholder.com/50x38'}" class="house-img" onerror="this.src='https://via.placeholder.com/50x38'"></td>
+                <td class="title-cell"><a href="${url}" target="_blank" class="house-link" title="${house.name}">${house.name || 'No Title'}</a></td>
+                <td class="price-cell">${house.price || '---'}</td>
+                <td class="date-cell">${dateStr}</td>
+                <td class="check-cell"><input type="checkbox" ${isTicked ? 'checked' : ''} onchange="toggleTick('${url}', this)"></td>
             `;
-
-            // --- Column: Contacted Tick ---
-            const colContact = document.createElement('div');
-            colContact.className = 'col-contact';
-            
-            const contactLabel = document.createElement('label');
-            contactLabel.innerText = 'Contacted?';
-            const contactInput = document.createElement('input');
-            contactInput.type = 'checkbox';
-            contactInput.checked = userState[url].contacted;
-            
-            // Listen for changes to the Contacted tick and save to server
-            contactInput.addEventListener('change', (e) => {
-                userState[url].contacted = e.target.checked;
-                if(e.target.checked) {
-                    row.classList.add('contacted');
-                } else {
-                    row.classList.remove('contacted');
-                }
-                saveState();
-            });
-
-            contactLabel.appendChild(contactInput);
-            colContact.appendChild(contactLabel);
-
-            // Assemble the row
-            row.appendChild(colSelect);
-            row.appendChild(colImg);
-            row.appendChild(colInfo);
-            row.appendChild(colContact);
-
-            container.appendChild(row);
+            tbody.appendChild(tr);
         });
 
-        // Update Stats Display
-        document.getElementById('statsDisplay').innerText = 
-            `Showing ${visibleCount} Private Properties (Filtered out ${blockedCount} Agencies/Blocked)`;
+        document.getElementById('statsDisplay').innerText = `Showing ${visibleCount} Houses (Filtered ${blockedCount} blocked)`;
     }
 
-    // --- Batch Hide Logic ---
-    document.getElementById('hideBtn').addEventListener('click', () => {
-        const checkedBoxes = document.querySelectorAll('.hide-checkbox:checked');
-        if(checkedBoxes.length === 0) {
-            alert("Please select at least one house to hide using the left checkboxes.");
-            return;
-        }
+    function toggleTick(url, el) {
+        if (!userState[url]) userState[url] = { contacted: false, hidden: false };
+        userState[url].contacted = el.checked;
+        saveState();
+        el.closest('tr').classList.toggle('row-ticked', el.checked);
+    }
 
-        checkedBoxes.forEach(box => {
-            const url = box.getAttribute('data-url');
+    document.getElementById('hideBtn').addEventListener('click', () => {
+        const checks = document.querySelectorAll('.hide-checkbox:checked');
+        checks.forEach(cb => {
+            const url = cb.getAttribute('data-url');
+            if (!userState[url]) userState[url] = { contacted: false, hidden: false };
             userState[url].hidden = true;
         });
-        
         saveState();
-        renderHouses(); // Re-render to clear them from screen
+        render();
     });
 
-    // --- Restore Hidden Logic ---
     document.getElementById('showAllBtn').addEventListener('click', () => {
-        for (let url in userState) {
-            userState[url].hidden = false;
+        if (confirm("Restore all hidden houses?")) {
+            for (let url in userState) userState[url].hidden = false;
+            saveState();
+            render();
         }
-        saveState();
-        renderHouses();
     });
 
-    // Boot sequence: Load the synced memory FIRST, then load the houses.
-    async function boot() {
+    document.getElementById('masterCheck').addEventListener('change', (e) => {
+        document.querySelectorAll('.hide-checkbox').forEach(cb => cb.checked = e.target.checked);
+    });
+
+    async function start() {
         await loadSyncedState();
         await fetchHouses();
     }
-    
-    boot();
-</script>
+    start();
+    </script>
 </body>
 </html>

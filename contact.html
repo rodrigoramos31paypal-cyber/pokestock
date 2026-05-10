@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacidade e Termos | PokéStockPT</title>
+    <title>Contactos | PokéStockPT</title>
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png?v=15">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon.png?v=15">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -40,38 +40,31 @@
         </div>
     </nav>
 
-    <main class="container mx-auto p-4 max-w-4xl flex-grow mt-8 mb-16">
+    <main class="container mx-auto p-4 max-w-2xl flex-grow mt-8 mb-16">
         <div class="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700">
             
-            <h1 class="text-3xl font-black mb-6 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-4">Política de Privacidade</h1>
-            <div class="space-y-6 text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-16">
-                <p>Bem-vindo ao PokéStockPT. A sua privacidade é importante para nós. Esta Política de Privacidade explica como recolhemos, usamos e protegemos as suas informações.</p>
+            <h1 class="text-3xl font-black mb-2 text-gray-900 dark:text-white">Contactos</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-8">Tens alguma dúvida, encontraste um erro, ou representas uma loja que quer ser listada? Envia-nos uma mensagem.</p>
+            
+            <form action="https://formspree.io/f/xvzlvepb" method="POST" class="space-y-6">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">Email</label>
+                    <input type="email" name="email" required class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-red-500 focus:outline-none transition-colors duration-300">
+                </div>
                 
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">1. Recolha de Dados e Cookies</h2>
-                <p>O PokéStockPT utiliza cookies e tecnologias semelhantes para melhorar a experiência do utilizador, analisar o tráfego do site (via Vercel Analytics) e personalizar conteúdo. Fornecedores de terceiros, incluindo o Google, utilizam cookies para apresentar anúncios com base em visitas anteriores do utilizador a este ou a outros websites.</p>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">Mensagem</label>
+                    <textarea name="message" rows="5" required class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-red-500 focus:outline-none transition-colors duration-300"></textarea>
+                </div>
+                
+                <button type="submit" class="w-full py-3 bg-red-600 hover:bg-red-500 text-white font-black uppercase tracking-widest rounded-xl transition-all hover:scale-105 shadow-lg shadow-red-600/30">
+                    Enviar Mensagem
+                </button>
+            </form>
 
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">2. Publicidade (Google AdSense)</h2>
-                <p>Este website utiliza o Google AdSense. A utilização de cookies de publicidade pelo Google permite-lhe a si e aos seus parceiros apresentar anúncios aos utilizadores com base na sua visita aos nossos sites e/ou a outros sites na Internet. Os utilizadores podem desativar a publicidade personalizada visitando as <a href="https://myadcenter.google.com/" target="_blank" class="text-red-500 hover:underline">Definições de Anúncios do Google</a>.</p>
-
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">3. Links de Afiliados e Terceiros</h2>
-                <p>O nosso site agrega produtos de lojas independentes. Quando clica num produto, é redirecionado para o site da loja. Não somos responsáveis pelas políticas de privacidade desses sites de terceiros.</p>
-            </div>
-
-            <h1 class="text-3xl font-black mb-6 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-4">Termos e Condições</h1>
-            <div class="space-y-6 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                <p>Ao utilizar o PokéStockPT, concorda com os seguintes termos:</p>
-
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">1. Natureza do Serviço</h2>
-                <p>O PokéStockPT é um motor de busca e agregador de stock. Não vendemos, expedimos ou gerimos qualquer inventário de produtos físicos. Todo o processo de compra é feito diretamente nas lojas listadas no nosso site.</p>
-
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">2. Precisão de Preços e Stock</h2>
-                <p>O nosso bot atualiza os preços e o stock regularmente, mas não garantimos que as informações estejam 100% corretas no momento do clique. O preço final e a disponibilidade são sempre os que constam no site da loja parceira.</p>
-
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">3. Propriedade Intelectual</h2>
-                <p>O PokéStockPT não é afiliado, patrocinado ou endossado pela Nintendo, Creatures, GAME FREAK ou The Pokémon Company. "Pokémon" e todos os nomes relacionados são marcas registadas da Nintendo.</p>
-
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6">4. Responsabilidade</h2>
-                <p>Não nos responsabilizamos por encomendas perdidas, produtos danificados, atrasos ou problemas de faturação. Qualquer problema relacionado com uma compra deve ser resolvido diretamente com a loja onde a transação foi efetuada.</p>
+            <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
+                <p class="text-sm text-gray-500 dark:text-gray-400">Preferes usar o Discord?</p>
+                <a href="https://discord.gg/6RCD7YkZF3" target="_blank" class="text-[#5865F2] font-bold hover:underline mt-2 inline-block">Junta-te ao nosso Servidor</a>
             </div>
 
         </div>

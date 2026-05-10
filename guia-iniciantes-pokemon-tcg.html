@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia para Começar a Colecionar | PokéStockPT</title>
+    <meta name="description" content="O guia definitivo para começar a colecionar Pokémon TCG em Portugal. Descobre o que comprar e como evitar preços inflacionados.">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png?v=15">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon.png?v=15">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
+    <style>
+        body { background-color: #F4F7F9; transition: background-color 0.3s ease, color 0.3s ease; }
+        .dark body { background-color: #0f172a; }
+        body::before { content: ''; position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(#e5e7eb 1px, transparent 1px); background-size: 20px 20px; transition: opacity 0.3s ease; opacity: 1; pointer-events: none; }
+        body::after { content: ''; position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(#1e293b 1px, transparent 1px); background-size: 20px 20px; transition: opacity 0.3s ease; opacity: 0; pointer-events: none; }
+        .dark body::before { opacity: 0; }
+        .dark body::after { opacity: 1; }
+        .nav-btn { transition: all 0.2s ease-in-out; }
+        .nav-btn:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+
+    <nav class="p-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 z-[60] transition-colors duration-300">
+        <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
+            <a href="/" class="text-2xl font-black text-red-600 dark:text-red-500 tracking-tighter italic transition-colors duration-300 hover:opacity-80">POKESTOCKPT</a>
+            <div class="flex items-center gap-4">
+                <a href="/" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">Home</a>
+                <a href="/about" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">About Us</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <button id="themeToggle" class="nav-btn w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 flex items-center justify-center transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500 block dark:hidden transition-transform duration-300 hover:rotate-90">
+                    <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400 hidden dark:block transition-transform duration-300 hover:-rotate-12">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 max-w-3xl flex-grow mt-8 mb-16">
+        <div class="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            
+            <div class="mb-6">
+                <span class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-widest">Guia para Iniciantes</span>
+                <h1 class="text-3xl md:text-5xl font-black mt-2 mb-4 text-gray-900 dark:text-white tracking-tight">O Guia Definitivo para Começar a Colecionar Pokémon TCG em Portugal</h1>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Publicado em <script>document.write(new Date().toLocaleDateString())</script></p>
+            </div>
+            
+            <div class="space-y-6 text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                <p>O mundo do Pokémon Trading Card Game (TCG) está mais vivo do que nunca em Portugal. Quer sejas um colecionador nostálgico que quer reviver a infância ou um novo jogador à procura das cartas mais raras dos sets recentes como <em>Phantasmal Flames</em> ou <em>Perfect Order</em>, saber por onde começar pode ser um desafio.</p>
+                
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">O que comprar primeiro?</h2>
+                <p>Para quem está a começar, as <strong class="text-gray-900 dark:text-white">Elite Trainer Boxes (ETBs)</strong> são a melhor porta de entrada. Uma ETB não só traz pacotes de reforço (booster packs), mas também inclui dados, marcadores de dano, sleeves (mangas protetoras) e um guia do set. É o pacote completo. Se o teu objetivo é apenas abrir o máximo de cartas possível para completar um set, as <strong class="text-gray-900 dark:text-white">Booster Boxes</strong> (com 36 pacotes) são o melhor investimento a longo prazo.</p>
+                
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Como evitar preços inflacionados?</h2>
+                <p>Em Portugal, o stock de Pokémon TCG pode esgotar numa questão de horas, especialmente em lançamentos muito antecipados. É aqui que muitos colecionadores acabam por pagar preços absurdos a revendedores (scalpers). A melhor estratégia é comprar em lojas certificadas e acompanhar os re-stocks em tempo real.</p>
+                
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Como o PokéStockPT te pode ajudar</h2>
+                <p>Foi exatamente por isso que criámos o PokéStockPT. Em vez de teres de abrir 20 separadores diferentes no teu navegador para verificar se a tua loja favorita tem stock, o nosso tracker faz isso por ti. Podes filtrar por produto, expansão e preço, garantindo que encontras sempre o melhor negócio disponível no mercado nacional.</p>
+            </div>
+
+            <div class="mt-10 p-6 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800/50 text-center">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Não percas os próximos lançamentos!</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Junta-te ao nosso Discord para receberes alertas instantâneos de stock.</p>
+                <a href="https://discord.gg/6RCD7YkZF3" target="_blank" class="inline-flex items-center gap-2 bg-[#5865F2] hover:bg-[#4752c4] text-white font-bold py-2 px-6 rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#5865F2]/30">
+                    Discord Alerts
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-6 text-center border-t border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 mt-auto">
+        <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">
+            © <script>document.write(new Date().getFullYear())</script> PokéStockPT. All rights reserved.
+        </p>
+        <div class="flex justify-center gap-4 text-xs">
+            <a href="/privacy" class="text-gray-500 hover:text-red-500 transition-colors">Privacidade & Termos</a>
+            <a href="/contact" class="text-gray-500 hover:text-red-500 transition-colors">Contactos</a>
+        </div>
+    </footer>
+
+    <script>
+        const tB = document.getElementById('themeToggle');
+        let iD = document.documentElement.classList.contains('dark');
+        tB.addEventListener('click', () => { iD = !iD; document.documentElement.classList.toggle('dark', iD); });
+    </script>
+</body>
+</html>

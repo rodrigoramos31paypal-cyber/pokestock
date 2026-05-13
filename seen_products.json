@@ -9301,7 +9301,7 @@
     "url": "https://zukacards.com/products/pokemon-mega-charizard-x-ex-tin",
     "img": "https://www.zukacards.com/cdn/shop/files/pokemon_charizardX_ed2b31ec-c0e1-40e0-b9be-17d0a74033b1.jpg?v=1767091537&width=533",
     "price": "€39,00",
-    "in_stock": true,
+    "in_stock": false,
     "last_checked": 1778668972.3902473,
     "store_name": "ZukaCards"
   },

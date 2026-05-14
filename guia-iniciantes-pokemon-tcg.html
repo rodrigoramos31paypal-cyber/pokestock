@@ -49,22 +49,40 @@
         </div>
     </nav>
 
-    <main class="container mx-auto p-4 max-w-3xl flex-grow mt-8 mb-16">
-        <div class="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+    <main class="container mx-auto p-4 max-w-6xl flex-grow mt-8 mb-16">
+        <div class="flex flex-col lg:flex-row gap-8">
             
-            <div class="mb-6">
-                <span class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-widest">Guia para Iniciantes</span>
-                <h1 class="text-3xl md:text-5xl font-black mt-2 mb-4 text-gray-900 dark:text-white tracking-tight">O Guia Definitivo para Começar a Colecionar Pokémon TCG em Portugal</h1>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Publicado em 11/05/2026</p>
+            <div class="flex-grow lg:w-2/3 bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+                <div class="mb-6">
+                    <span class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-widest">Guia para Iniciantes</span>
+                    <h1 class="text-3xl md:text-5xl font-black mt-2 mb-4 text-gray-900 dark:text-white tracking-tight">O Guia Definitivo para Começar a Colecionar Pokémon TCG em Portugal</h1>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Publicado em 11/05/2026</p>
+                </div>
+                
+                <div class="space-y-6 text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                    <p>O mundo do Pokémon Trading Card Game (TCG) está mais vivo do que nunca em Portugal. Quer sejas um colecionador nostálgico que quer reviver a infância ou um novo jogador à procura das cartas mais raras dos sets recentes como <em>Phantasmal Flames</em> ou <em>Perfect Order</em>, saber por onde começar pode ser um desafio.</p>
+                    
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">O que comprar primeiro?</h2>
+                    <p>Para quem está a começar, as <strong class="text-gray-900 dark:text-white">Elite Trainer Boxes (ETBs)</strong> são a melhor porta de entrada. Uma ETB não só traz pacotes de reforço (booster packs), mas também inclui dados, marcadores de dano, sleeves (mangas protetoras) e um guia do set. É o pacote completo. Se o teu objetivo é apenas abrir o máximo de cartas possível para completar um set, as <strong class="text-gray-900 dark:text-white">Booster Boxes</strong> (com 36 pacotes) são o melhor investimento a longo prazo.</p>
+                    
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Como evitar preços inflacionados?</h2>
+                    <p>Em Portugal, o stock de Pokémon TCG pode esgotar numa questão de horas, especialmente em lançamentos muito antecipados. É aqui que muitos colecionadores acabam por pagar preços absurdos a revendedores (scalpers). A melhor estratégia é comprar em lojas certificadas e acompanhar os re-stocks em tempo real.</p>
+                    
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Como o PokéStockPT te pode ajudar</h2>
+                    <p>Foi exatamente por isso que criámos o PokéStockPT. Em vez de teres de abrir 20 separadores diferentes no teu navegador para verificar se a tua loja favorita tem stock, o nosso tracker faz isso por ti. Podes filtrar por produto, expansão e preço, garantindo que encontras sempre o melhor negócio disponível no mercado nacional.</p>
+                </div>
+
+                <div class="mt-10 p-6 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800/50 text-center">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Não percas os próximos lançamentos!</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Junta-te ao nosso Discord para receberes alertas instantâneos de stock.</p>
+                    <a href="https://discord.gg/6RCD7YkZF3" target="_blank" class="inline-flex items-center gap-2 bg-[#5865F2] hover:bg-[#4752c4] text-white font-bold py-2 px-6 rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#5865F2]/30">
+                        Discord Alerts
+                    </a>
+                </div>
             </div>
-            
-            <div class="space-y-6 text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
-                <p>O mundo do Pokémon Trading Card Game (TCG) está mais vivo do que nunca em Portugal. Quer sejas um colecionador nostálgico que quer reviver a infância ou um novo jogador à procura das cartas mais raras dos sets recentes como <em>Phantasmal Flames</em> ou <em>Perfect Order</em>, saber por onde começar pode ser um desafio.</p>
-                
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">O que comprar primeiro?</h2>
-                <p>Para quem está a começar, as <strong class="text-gray-900 dark:text-white">Elite Trainer Boxes (ETBs)</strong> são a melhor porta de entrada. Uma ETB não só traz pacotes de reforço (booster packs), mas também inclui dados, marcadores de dano, sleeves (mangas protetoras) e um guia do set. É o pacote completo. Se o teu objetivo é apenas abrir o máximo de cartas possível para completar um set, as <strong class="text-gray-900 dark:text-white">Booster Boxes</strong> (com 36 pacotes) são o melhor investimento a longo prazo.</p>
-                
-                <div class="w-full my-8 flex justify-center overflow-hidden rounded-2xl min-h-[250px]">
+
+            <aside class="w-full lg:w-1/3 flex-shrink-0 lg:sticky lg:top-24 h-fit z-40">
+                <div class="w-full bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 flex justify-center overflow-hidden transition-colors duration-300 min-h-[250px]">
                     <ins class="adsbygoogle"
                          style="display:block; width: 100%;"
                          data-ad-client="ca-pub-8177325025629542"
@@ -75,21 +93,8 @@
                          (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
                 </div>
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Como evitar preços inflacionados?</h2>
-                <p>Em Portugal, o stock de Pokémon TCG pode esgotar numa questão de horas, especialmente em lançamentos muito antecipados. É aqui que muitos colecionadores acabam por pagar preços absurdos a revendedores (scalpers). A melhor estratégia é comprar em lojas certificadas e acompanhar os re-stocks em tempo real.</p>
-                
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Como o PokéStockPT te pode ajudar</h2>
-                <p>Foi exatamente por isso que criámos o PokéStockPT. Em vez de teres de abrir 20 separadores diferentes no teu navegador para verificar se a tua loja favorita tem stock, o nosso tracker faz isso por ti. Podes filtrar por produto, expansão e preço, garantindo que encontras sempre o melhor negócio disponível no mercado nacional.</p>
-            </div>
-
-            <div class="mt-10 p-6 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl border border-indigo-100 dark:border-indigo-800/50 text-center">
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Não percas os próximos lançamentos!</h3>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Junta-te ao nosso Discord para receberes alertas instantâneos de stock.</p>
-                <a href="https://discord.gg/6RCD7YkZF3" target="_blank" class="inline-flex items-center gap-2 bg-[#5865F2] hover:bg-[#4752c4] text-white font-bold py-2 px-6 rounded-xl transition-all hover:scale-105 shadow-lg shadow-[#5865F2]/30">
-                    Discord Alerts
-                </a>
-            </div>
-
+                </aside>
+            
         </div>
     </main>
 

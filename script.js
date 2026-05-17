@@ -79,7 +79,7 @@
         } else if (store.includes("drawstep")) {
             couponText = "7% OFF: POKESTOCKDRAWSTEP";
         } else if (store.includes("pokelotas")) {
-            couponText = "5% OFF: POKELOTASSTOCK (+50€)";
+            couponText = "5% OFF: POKELOTASSTOCK (Min: 50€)";
         } else if (store.includes("manavault")) {
             couponText = "5% OFF: POKESTOCK5";
         }

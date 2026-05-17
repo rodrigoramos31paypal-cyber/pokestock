@@ -85,9 +85,10 @@
         }
 
         if (couponText) {
+            // Updated design: Full width, dashed border, sits above the price
             return `
-                <div class="mt-1 w-fit inline-flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[9px] font-black px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800/50 uppercase tracking-wider">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a2 2 0 0 1-2.83 0l-8.97-8.97A2 2 0 0 1 0 9.86V2a2 2 0 0 1 2-2h7.86a2 2 0 0 1 1.41.59l9.19 9.19a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                <div class="mb-4 w-full flex items-center justify-center gap-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-black px-3 py-2 rounded-xl border-2 border-dashed border-emerald-200 dark:border-emerald-800/50 uppercase tracking-widest">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a2 2 0 0 1-2.83 0l-8.97-8.97A2 2 0 0 1 0 9.86V2a2 2 0 0 1 2-2h7.86a2 2 0 0 1 1.41.59l9.19 9.19a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
                     ${couponText}
                 </div>
             `;
@@ -204,7 +205,7 @@
         document.getElementById('productCount').textContent = `${f.length} items found`;
         
         // PERFORMANCE: Added lazy loading and priority hints to boost LCP scores
-        // ADDED: getCouponBadge integration inside the card's footer
+        // ADDED: Layout restructure so price and button are side-by-side, and coupon is on top
         g.innerHTML = f.map((p, index) => `
             <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
                 <div class="h-52 bg-white flex items-center justify-center p-6 overflow-hidden">
@@ -222,12 +223,12 @@
                     </div>
                     <h3 class="text-sm font-bold mb-4 line-clamp-2 h-10 group-hover:text-red-600 transition-colors duration-300">${p.name}</h3>
                     
-                    <div class="mt-auto flex justify-between items-end">
-                        <div class="flex flex-col">
+                    <div class="mt-auto flex flex-col">
+                        ${getCouponBadge(p.store)}
+                        <div class="flex justify-between items-center">
                             <span class="text-xl font-black text-gray-900 dark:text-white transition-colors duration-300">€${p.price.toFixed(2)}</span>
-                            ${getCouponBadge(p.store)}
+                            <a href="${p.url}" target="_blank" class="px-5 py-2.5 bg-gray-900 dark:bg-red-600 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-gray-900/10 dark:shadow-red-600/20">View Deal</a>
                         </div>
-                        <a href="${p.url}" target="_blank" class="px-5 py-2.5 mb-0.5 bg-gray-900 dark:bg-red-600 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-gray-900/10 dark:shadow-red-600/20">View Deal</a>
                     </div>
                 </div>
             </div>`).join('');

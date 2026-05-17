@@ -1,1 +1,294 @@
-(function(_0x2d7f86,_0x7c3722){const _0x32b831=_0x30d3,_0x1d826a=_0x2d7f86();while(!![]){try{const _0x335691=-parseInt(_0x32b831(0x159))/0x1*(-parseInt(_0x32b831(0x18c))/0x2)+parseInt(_0x32b831(0x198))/0x3*(-parseInt(_0x32b831(0x1d0))/0x4)+-parseInt(_0x32b831(0x15c))/0x5*(parseInt(_0x32b831(0x1a0))/0x6)+parseInt(_0x32b831(0x175))/0x7+parseInt(_0x32b831(0x1d2))/0x8*(-parseInt(_0x32b831(0x1a7))/0x9)+parseInt(_0x32b831(0x15a))/0xa+parseInt(_0x32b831(0x1a5))/0xb*(parseInt(_0x32b831(0x1dc))/0xc);if(_0x335691===_0x7c3722)break;else _0x1d826a['push'](_0x1d826a['shift']());}catch(_0x51efcb){_0x1d826a['push'](_0x1d826a['shift']());}}}(_0x2c19,0xd9ad4),(function(){const _0x131bcd=_0x30d3;document[_0x131bcd(0x1e6)](_0x131bcd(0x1db),_0x5c3f80=>_0x5c3f80[_0x131bcd(0x1a4)]()),document[_0x131bcd(0x1e4)]=function(_0x4f3a12){const _0x1d97e3=_0x131bcd;if(_0x4f3a12[_0x1d97e3(0x1da)]==0x7b)return![];if(_0x4f3a12[_0x1d97e3(0x22b)]&&_0x4f3a12[_0x1d97e3(0x1fe)]&&(_0x4f3a12[_0x1d97e3(0x1da)]=='I'[_0x1d97e3(0x203)](0x0)||_0x4f3a12[_0x1d97e3(0x1da)]=='J'[_0x1d97e3(0x203)](0x0)))return![];if(_0x4f3a12[_0x1d97e3(0x22b)]&&_0x4f3a12[_0x1d97e3(0x1da)]=='U'['charCodeAt'](0x0))return![];};const _0xe3eb0b=document[_0x131bcd(0x19c)](_0x131bcd(0x1cc)),_0xb30a7e=document[_0x131bcd(0x19c)](_0x131bcd(0x1c8)),_0x56c3ab=document[_0x131bcd(0x19c)]('donateBtn'),_0x4343c3=document[_0x131bcd(0x19c)](_0x131bcd(0x1c1));_0x56c3ab['onclick']=()=>{const _0x8e5256=_0x131bcd;_0xe3eb0b[_0x8e5256(0x216)][_0x8e5256(0x17e)]('invisible','opacity-0'),_0xb30a7e['classList'][_0x8e5256(0x17e)](_0x8e5256(0x15f)),_0xb30a7e['classList'][_0x8e5256(0x158)](_0x8e5256(0x1b8));};const _0x101752=()=>{const _0x49af82=_0x131bcd;_0xb30a7e[_0x49af82(0x216)]['remove'](_0x49af82(0x1b8)),_0xb30a7e[_0x49af82(0x216)][_0x49af82(0x158)](_0x49af82(0x15f)),_0xe3eb0b['classList']['add']('opacity-0'),setTimeout(()=>_0xe3eb0b[_0x49af82(0x216)][_0x49af82(0x158)]('invisible'),0x12c);};_0x4343c3['onclick']=_0x101752,_0xe3eb0b[_0x131bcd(0x185)]=_0x563bf9=>{const _0x491600=_0x131bcd;if(_0x563bf9[_0x491600(0x15e)]===_0xe3eb0b)_0x101752();},window[_0x131bcd(0x1a3)]=function(_0x10dbd5,_0xd62536){const _0x5cac2c=_0x131bcd;navigator[_0x5cac2c(0x20f)][_0x5cac2c(0x213)](_0xd62536)[_0x5cac2c(0x215)](()=>{const _0x46a3e5=_0x5cac2c,_0x5d9b11=document[_0x46a3e5(0x19c)]('toast');document[_0x46a3e5(0x19c)]('toastMsg')[_0x46a3e5(0x1e3)]=_0x10dbd5+'\x20Address\x20Copied!',_0x5d9b11[_0x46a3e5(0x216)][_0x46a3e5(0x17e)](_0x46a3e5(0x187),_0x46a3e5(0x227)),setTimeout(()=>{const _0x517c54=_0x46a3e5;_0x5d9b11['classList']['add'](_0x517c54(0x187),_0x517c54(0x227));},0xbb8);});};let _0x5c8e8f=[],_0x26f573=_0x131bcd(0x190),_0x36f56d=_0x131bcd(0x190),_0x1f5310='All',_0x4464a2='',_0x200bae=0x7d0,_0x3a9ff8='default';const _0x319bc5=[_0x131bcd(0x190),'Elite\x20Trainer\x20Box',_0x131bcd(0x1bd),'Half\x20Booster\x20Box',_0x131bcd(0x167),_0x131bcd(0x17d),_0x131bcd(0x229),_0x131bcd(0x16a)],_0x4be91c=[_0x131bcd(0x1ac),_0x131bcd(0x21a),'Prismatic\x20Evolutions',_0x131bcd(0x209),_0x131bcd(0x20b),_0x131bcd(0x225),_0x131bcd(0x1cd),_0x131bcd(0x214),_0x131bcd(0x1d5),_0x131bcd(0x1c6),_0x131bcd(0x19d),_0x131bcd(0x1dd),_0x131bcd(0x1b5),_0x131bcd(0x1a9),_0x131bcd(0x1cf),_0x131bcd(0x188),'Fusion\x20Strike','Celebrations','Evolving\x20Skies',_0x131bcd(0x1f9),'Battle\x20Styles',_0x131bcd(0x1c4),'Vivid\x20Voltage',_0x131bcd(0x218),'Black\x20&\x20White',_0x131bcd(0x1d9),_0x131bcd(0x1d4),'Perfect\x20Order',_0x131bcd(0x165),_0x131bcd(0x18b),'Journey\x20Together',_0x131bcd(0x1ab),'Crown\x20Zenith'],_0x52fd45=[{'m':[[_0x131bcd(0x1c0),_0x131bcd(0x1c9),'elite']],'s':'Phantasmal\x20Flames\x20-\x20Elite\x20Trainer\x20Box'},{'m':[[_0x131bcd(0x1c0),'flames',_0x131bcd(0x1f6),_0x131bcd(0x177)]],'s':_0x131bcd(0x1e5)},{'m':[[_0x131bcd(0x1c0),_0x131bcd(0x1c9),'booster',_0x131bcd(0x212)]],'s':_0x131bcd(0x18f)},{'m':[[_0x131bcd(0x1f3),_0x131bcd(0x1b3),_0x131bcd(0x1f6),_0x131bcd(0x177)]],'s':_0x131bcd(0x1af)},{'m':[['surging',_0x131bcd(0x1b3),'booster',_0x131bcd(0x212)]],'s':'Surging\x20Sparks\x20-\x20Booster\x20Bundle'},{'m':[['stellar',_0x131bcd(0x1e0),_0x131bcd(0x1f6),'box']],'s':_0x131bcd(0x1d3)},{'m':[['stellar','crown',_0x131bcd(0x1f6),_0x131bcd(0x212)]],'s':'Stellar\x20Crown\x20-\x20Booster\x20Bundle'},{'m':[[_0x131bcd(0x224),_0x131bcd(0x1fc),_0x131bcd(0x208)]],'s':'Shrouded\x20Fable\x20-\x20Elite\x20Trainer\x20Box'},{'m':[['shrouded',_0x131bcd(0x1fc),_0x131bcd(0x1f6),_0x131bcd(0x212)]],'s':_0x131bcd(0x17a)},{'m':[[_0x131bcd(0x1d6),'order','elite']],'s':'Perfect\x20Order\x20-\x20Elite\x20Trainer\x20Box'},{'m':[['surging',_0x131bcd(0x1b3),_0x131bcd(0x208)]],'s':_0x131bcd(0x17c)},{'m':[['stellar',_0x131bcd(0x1e0),'elite']],'s':_0x131bcd(0x16d)},{'m':[[_0x131bcd(0x178),_0x131bcd(0x221),'elite']],'s':_0x131bcd(0x1bf)},{'m':[[_0x131bcd(0x1ee),_0x131bcd(0x163),_0x131bcd(0x208)]],'s':'White\x20Flare\x20-\x20Elite\x20Trainer\x20Box'},{'m':[[_0x131bcd(0x1e9),'clash','elite']],'s':'Rebel\x20Clash\x20-\x20Elite\x20Trainer\x20Box'},{'m':[['paldea',_0x131bcd(0x192),_0x131bcd(0x208)]],'s':'Paldea\x20Evolved\x20-\x20Elite\x20Trainer\x20Box'}];function _0x892e20(_0x336fa1){const _0x594ef5=_0x131bcd;if(!_0x336fa1)return 0x0;let _0x14888e=_0x336fa1[_0x594ef5(0x1aa)](/[^\d.,]/g,'');if(_0x14888e[_0x594ef5(0x222)]('.')&&_0x14888e[_0x594ef5(0x222)](','))_0x14888e=_0x14888e[_0x594ef5(0x1aa)](/\./g,'')[_0x594ef5(0x1aa)](',','.');else{if(_0x14888e[_0x594ef5(0x222)](','))_0x14888e=_0x14888e[_0x594ef5(0x1aa)](',','.');}return parseFloat(_0x14888e)||0x0;}function _0x32d197(_0xbee41d){const _0x53ec24=_0x131bcd,_0x24a6f9=_0xbee41d[_0x53ec24(0x170)]();if(_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x1fa))||_0x24a6f9['includes'](_0x53ec24(0x1be)))return _0x53ec24(0x1bb);if(_0x24a6f9[_0x53ec24(0x222)]('chaos\x20rising'))return _0x53ec24(0x1d9);if(_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x15d))&&(_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x205))||_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x1f8))||_0x24a6f9['includes']('ultra-premium')))return'Phantasmal\x20Flames';if(_0x24a6f9['includes']('black\x20bolt')||_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x183))||_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x1c5)))return'Black\x20&\x20White';if(_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x162))||_0x24a6f9['includes'](_0x53ec24(0x1ff))||_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x179)))return _0x53ec24(0x18b);if(_0x24a6f9['includes'](_0x53ec24(0x1b1))||_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x18a)))return _0x53ec24(0x165);if(_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x1f1)))return _0x53ec24(0x220);if(_0x24a6f9['includes']('perfect\x20order'))return _0x53ec24(0x22a);if(_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x16c)))return _0x53ec24(0x218);if(_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x16e))||_0x24a6f9['includes'](_0x53ec24(0x16f))||_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x1a6))||_0x24a6f9['includes'](_0x53ec24(0x1cb))||_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x1b7))||_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x1c2)))return'Mega\x20Evolution';if(_0x24a6f9['includes'](_0x53ec24(0x19e))||_0x24a6f9[_0x53ec24(0x222)](_0x53ec24(0x17b))||_0x24a6f9['includes']('cynthia'))return _0x53ec24(0x1bb);for(const _0x245244 of _0x4be91c)if(_0x24a6f9[_0x53ec24(0x222)](_0x245244[_0x53ec24(0x170)]()))return _0x245244;return _0x53ec24(0x1bb);}function _0x2d4bdb(_0x22637d){const _0x10417e=_0x131bcd,_0x26c310=_0x22637d['toLowerCase']();if([_0x10417e(0x1ad),_0x10417e(0x21d),_0x10417e(0x191),_0x10417e(0x1f7),'checklan',_0x10417e(0x1ae),_0x10417e(0x204),'poster'][_0x10417e(0x20e)](_0x385b75=>_0x26c310[_0x10417e(0x222)](_0x385b75)))return _0x10417e(0x16a);if((_0x26c310[_0x10417e(0x222)](_0x10417e(0x200))||_0x26c310['includes']('sleeved')||_0x26c310[_0x10417e(0x222)]('booster'))&&!_0x26c310[_0x10417e(0x222)](_0x10417e(0x177))&&!_0x26c310[_0x10417e(0x222)](_0x10417e(0x212))&&!_0x26c310[_0x10417e(0x222)](_0x10417e(0x1b6))&&!_0x26c310[_0x10417e(0x222)](_0x10417e(0x205))&&!_0x26c310['includes'](_0x10417e(0x208)))return _0x10417e(0x16a);if(_0x26c310[_0x10417e(0x222)](_0x10417e(0x1b4))||_0x26c310[_0x10417e(0x222)](_0x10417e(0x1b2))&&_0x26c310[_0x10417e(0x222)]('18')||_0x26c310[_0x10417e(0x222)]('display')&&_0x26c310[_0x10417e(0x222)]('18'))return _0x10417e(0x1ec);if(_0x26c310[_0x10417e(0x222)]('elite\x20trainer')||_0x26c310['includes']('etb'))return'Elite\x20Trainer\x20Box';if((_0x26c310['includes'](_0x10417e(0x1b2))||_0x26c310['includes'](_0x10417e(0x1b6)))&&!_0x26c310[_0x10417e(0x222)]('bundle'))return _0x10417e(0x1bd);if(_0x26c310['includes'](_0x10417e(0x212)))return'Booster\x20Bundle';if(_0x26c310[_0x10417e(0x222)]('tin'))return _0x10417e(0x229);if([_0x10417e(0x18d),_0x10417e(0x182),_0x10417e(0x1f2),_0x10417e(0x169),_0x10417e(0x17f),'upc'][_0x10417e(0x20e)](_0x334d3a=>_0x26c310[_0x10417e(0x222)](_0x334d3a)))return _0x10417e(0x17d);return _0x10417e(0x16a);}function _0x3f264b(_0x3226f1,_0x165800,_0x3a08cb){const _0x3ecc83=_0x131bcd;if(_0x3226f1['toLowerCase']()[_0x3ecc83(0x222)](_0x3ecc83(0x193)))return{'name':_0x3226f1,'img':_0x3a08cb};let _0x37b59f=(_0x3226f1+'\x20'+_0x165800)[_0x3ecc83(0x170)]()['replace'](/[^a-z0-9]/g,'\x20');for(const _0x43baed of _0x52fd45){for(const _0x136412 of _0x43baed['m']){if(_0x136412[_0x3ecc83(0x20a)](_0xee1fb3=>_0x37b59f['includes'](_0xee1fb3)))return{'name':_0x43baed['s'],'img':_0x43baed['i']||_0x3a08cb};}}return{'name':_0x3226f1,'img':_0x3a08cb};}function _0x57535a(_0x2ea88f){const _0x5a0249=_0x131bcd;try{return new URL(_0x2ea88f)['hostname'][_0x5a0249(0x1aa)](/^www\./,'')[_0x5a0249(0x19a)]('.')[0x0][_0x5a0249(0x1ed)]();}catch{return _0x5a0249(0x171);}}window[_0x131bcd(0x180)]=function(){const _0x49ca90=_0x131bcd,_0x217db0=document['getElementById'](_0x49ca90(0x197)),_0x4bd737=document[_0x49ca90(0x19c)](_0x49ca90(0x1f0)),_0x2aed01=[...new Set(_0x5c8e8f[_0x49ca90(0x161)](_0xbd7589=>_0xbd7589[_0x49ca90(0x1c7)]))][_0x49ca90(0x166)](),_0x438d4f=[...new Set(_0x5c8e8f[_0x49ca90(0x161)](_0x1580b3=>_0x1580b3['set']))][_0x49ca90(0x166)]();_0x217db0[_0x49ca90(0x1f5)]=_0x49ca90(0x186)+_0x2aed01['map'](_0x20611f=>'<option\x20value=\x22'+_0x20611f+'\x22\x20'+(_0x36f56d===_0x20611f?_0x49ca90(0x199):'')+'>'+_0x20611f+_0x49ca90(0x1f4))['join'](''),_0x4bd737[_0x49ca90(0x1f5)]=_0x49ca90(0x219)+_0x438d4f[_0x49ca90(0x161)](_0x54f202=>'<option\x20value=\x22'+_0x54f202+'\x22\x20'+(_0x1f5310===_0x54f202?_0x49ca90(0x199):'')+'>'+_0x54f202+'</option>')[_0x49ca90(0x1ba)]('');},window[_0x131bcd(0x19f)]=function(_0x1268c0){const _0x3c4f69=_0x131bcd;_0x26f573=_0x1268c0,document[_0x3c4f69(0x19c)](_0x3c4f69(0x226))['value']=_0x1268c0,updateDropdowns(),renderFilters(),renderProducts();},window[_0x131bcd(0x194)]=function(){const _0x5a4b32=_0x131bcd,_0x118cf4=document[_0x5a4b32(0x19c)]('filterContainer');_0x118cf4[_0x5a4b32(0x1f5)]=_0x319bc5[_0x5a4b32(0x161)](_0xe24013=>{const _0x4e5759=_0x5a4b32,_0x21754c=_0x26f573===_0xe24013;return _0x4e5759(0x211)+_0xe24013+_0x4e5759(0x201)+(_0x21754c?'bg-gradient-to-r\x20from-red-600\x20to-red-500\x20text-white\x20border-transparent\x20shadow-lg\x20shadow-red-500/40\x20scale-105':_0x4e5759(0x18e))+'\x22>'+_0xe24013+_0x4e5759(0x15b);})[_0x5a4b32(0x1ba)](''),document['getElementById']('categorySelect')[_0x5a4b32(0x1c3)]=_0x26f573;},window['renderProducts']=function(){const _0x11d6ed=_0x131bcd,_0x58fd9e=document[_0x11d6ed(0x19c)](_0x11d6ed(0x172));let _0x125319=_0x5c8e8f[_0x11d6ed(0x173)](_0x31ef48=>{const _0x21a6d4=_0x11d6ed,_0x3deb98=_0x26f573===_0x21a6d4(0x190)||_0x31ef48[_0x21a6d4(0x19b)]===_0x26f573,_0x29f3f1=_0x36f56d===_0x21a6d4(0x190)||_0x31ef48['store']===_0x36f56d,_0x568685=_0x1f5310==='All'||_0x31ef48['set']===_0x1f5310,_0x532a56=_0x31ef48[_0x21a6d4(0x202)]<=_0x200bae,_0x2a3909=_0x31ef48['name'][_0x21a6d4(0x170)]()['includes'](_0x4464a2[_0x21a6d4(0x170)]());return _0x3deb98&&_0x29f3f1&&_0x568685&&_0x532a56&&_0x2a3909;});if(_0x3a9ff8===_0x11d6ed(0x1fd))_0x125319[_0x11d6ed(0x166)]((_0x45542a,_0x392e9e)=>_0x45542a[_0x11d6ed(0x202)]-_0x392e9e[_0x11d6ed(0x202)]);else _0x3a9ff8===_0x11d6ed(0x1b0)&&_0x125319[_0x11d6ed(0x166)]((_0x1febc3,_0x30b147)=>_0x30b147[_0x11d6ed(0x202)]-_0x1febc3[_0x11d6ed(0x202)]);document[_0x11d6ed(0x19c)](_0x11d6ed(0x184))[_0x11d6ed(0x1e3)]=_0x125319[_0x11d6ed(0x196)]+_0x11d6ed(0x210),_0x58fd9e[_0x11d6ed(0x1f5)]=_0x125319['map']((_0x37fd6e,_0x294eb9)=>_0x11d6ed(0x1a8)+_0x37fd6e[_0x11d6ed(0x195)]+_0x11d6ed(0x1b9)+(_0x294eb9<0x6?_0x11d6ed(0x1e1):_0x11d6ed(0x1fb))+_0x11d6ed(0x1ea)+(_0x294eb9<0x3?_0x11d6ed(0x189):_0x11d6ed(0x21b))+'\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22h-full\x20w-full\x20object-contain\x20mix-blend-multiply\x20transition-transform\x20duration-500\x20group-hover:scale-110\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20onerror=\x22this.src=\x27https://via.placeholder.com/300?text=No+Image\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22p-5\x20flex\x20flex-col\x20flex-grow\x20bg-white\x20dark:bg-gray-800\x20transition-colors\x20duration-300\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22flex\x20justify-between\x20items-center\x20mb-3\x20gap-2\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-[9px]\x20font-black\x20px-2\x20py-1\x20rounded-md\x20uppercase\x20tracking-widest\x20bg-gray-200\x20text-gray-700\x20dark:bg-gray-700\x20dark:text-gray-300\x20transition-colors\x20duration-300\x20truncate\x22>'+_0x37fd6e['store']+_0x11d6ed(0x1de)+_0x37fd6e[_0x11d6ed(0x160)]+_0x11d6ed(0x1ca)+_0x37fd6e[_0x11d6ed(0x21e)]+'</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22mt-auto\x20flex\x20justify-between\x20items-center\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-xl\x20font-black\x20text-gray-900\x20dark:text-white\x20transition-colors\x20duration-300\x22>€'+_0x37fd6e[_0x11d6ed(0x202)]['toFixed'](0x2)+_0x11d6ed(0x174)+_0x37fd6e['url']+'\x22\x20target=\x22_blank\x22\x20class=\x22px-5\x20py-2.5\x20bg-gray-900\x20dark:bg-red-600\x20hover:bg-red-600\x20text-white\x20text-[10px]\x20font-black\x20uppercase\x20tracking-widest\x20rounded-xl\x20transition-all\x20shadow-lg\x20shadow-gray-900/10\x20dark:shadow-red-600/20\x22>View\x20Deal</a>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>')['join']('');};async function _0x1532c1(){const _0x28fd86=_0x131bcd;try{const _0x362118=await fetch('seen_products.json?t='+Date[_0x28fd86(0x207)]()),_0x456476=await _0x362118[_0x28fd86(0x168)]();_0x5c8e8f=[];for(const _0x78f285 in _0x456476){const _0x57e113=_0x456476[_0x78f285];if(_0x57e113[_0x28fd86(0x1a2)]){if((_0x57e113[_0x28fd86(0x21e)]||'')[_0x28fd86(0x170)]()['includes'](_0x28fd86(0x1a1)))continue;const _0x2aae6d=_0x3f264b(_0x57e113[_0x28fd86(0x21e)],_0x57e113[_0x28fd86(0x1e8)],_0x57e113[_0x28fd86(0x195)]);_0x5c8e8f['push']({'name':_0x2aae6d['name'],'img':_0x2aae6d[_0x28fd86(0x195)],'url':_0x57e113[_0x28fd86(0x1e8)],'price':_0x892e20(_0x57e113[_0x28fd86(0x202)]),'store':new URL(_0x57e113['url'])['hostname'][_0x28fd86(0x1aa)](/^www\./,'')[_0x28fd86(0x19a)]('.')[0x0][_0x28fd86(0x1ed)](),'category':_0x2d4bdb(_0x2aae6d[_0x28fd86(0x21e)]),'set':_0x32d197(_0x2aae6d[_0x28fd86(0x21e)])});}}updateDropdowns(),renderFilters(),renderProducts(),document['getElementById'](_0x28fd86(0x1ef))[_0x28fd86(0x1e3)]=_0x28fd86(0x1d8)+new Date()[_0x28fd86(0x223)]();}catch(_0x2ff318){console[_0x28fd86(0x21c)]('ERR');}}const _0x47250c=document['getElementById'](_0x131bcd(0x1eb)),_0x1993f5=document[_0x131bcd(0x19c)](_0x131bcd(0x20d));_0x47250c[_0x131bcd(0x1e6)](_0x131bcd(0x1bc),_0xd1c816=>{const _0x1777a8=_0x131bcd;_0x200bae=parseInt(_0xd1c816['target'][_0x1777a8(0x1c3)]),_0x1993f5[_0x1777a8(0x1e3)]='€'+_0x200bae,updateDropdowns(),renderProducts();}),document[_0x131bcd(0x19c)]('searchInput')[_0x131bcd(0x1e6)]('input',_0x52d066=>{const _0x462e13=_0x131bcd;_0x4464a2=_0x52d066[_0x462e13(0x15e)][_0x462e13(0x1c3)],renderProducts();}),document[_0x131bcd(0x19c)](_0x131bcd(0x181))['addEventListener']('input',_0xa36ae5=>{const _0x5452ba=_0x131bcd;_0x4464a2=_0xa36ae5[_0x5452ba(0x15e)][_0x5452ba(0x1c3)],renderProducts();}),document[_0x131bcd(0x19c)]('categorySelect')['addEventListener'](_0x131bcd(0x16b),_0x12e1c7=>{const _0xf2faa8=_0x131bcd;setCategory(_0x12e1c7[_0xf2faa8(0x15e)]['value']);}),document[_0x131bcd(0x19c)]('storeFilter')[_0x131bcd(0x1e6)]('change',_0x58ae72=>{const _0xaf0e08=_0x131bcd;_0x36f56d=_0x58ae72[_0xaf0e08(0x15e)][_0xaf0e08(0x1c3)],renderProducts();}),document['getElementById'](_0x131bcd(0x1f0))[_0x131bcd(0x1e6)]('change',_0x1c05f0=>{const _0x574420=_0x131bcd;_0x1f5310=_0x1c05f0[_0x574420(0x15e)][_0x574420(0x1c3)],renderProducts();}),document[_0x131bcd(0x19c)](_0x131bcd(0x1d7))[_0x131bcd(0x1e6)](_0x131bcd(0x16b),_0x7b5a5d=>{const _0x576312=_0x131bcd;_0x3a9ff8=_0x7b5a5d[_0x576312(0x15e)][_0x576312(0x1c3)],renderProducts();}),document['getElementById'](_0x131bcd(0x206))[_0x131bcd(0x1e6)]('click',()=>{const _0x13bbae=_0x131bcd;_0x36f56d=_0x13bbae(0x190),_0x1f5310=_0x13bbae(0x190),_0x200bae=0x7d0,_0x26f573=_0x13bbae(0x190),_0x4464a2='',_0x3a9ff8=_0x13bbae(0x1ce),_0x47250c[_0x13bbae(0x1c3)]=0x7d0,_0x1993f5['textContent']=_0x13bbae(0x1e2),document[_0x13bbae(0x19c)](_0x13bbae(0x1d7))['value']=_0x13bbae(0x1ce),document[_0x13bbae(0x19c)](_0x13bbae(0x226))[_0x13bbae(0x1c3)]='All',_0x1532c1();});const _0x1f1b46=document[_0x131bcd(0x19c)](_0x131bcd(0x1d1));window['onscroll']=()=>{const _0x56dc02=_0x131bcd;window[_0x56dc02(0x164)]>0x190?_0x1f1b46[_0x56dc02(0x216)][_0x56dc02(0x158)](_0x56dc02(0x228)):_0x1f1b46[_0x56dc02(0x216)][_0x56dc02(0x17e)](_0x56dc02(0x228));},_0x1f1b46[_0x131bcd(0x185)]=()=>{const _0x14ed0b=_0x131bcd;window[_0x14ed0b(0x217)]({'top':0x0,'behavior':_0x14ed0b(0x1e7)});};const _0x370ea1=document[_0x131bcd(0x19c)](_0x131bcd(0x176));let _0x12ee1c=![];_0x370ea1['addEventListener'](_0x131bcd(0x1df),()=>{const _0x2cf7d1=_0x131bcd;_0x12ee1c=!_0x12ee1c,document[_0x2cf7d1(0x20c)]['classList'][_0x2cf7d1(0x21f)]('dark',_0x12ee1c);}),_0x1532c1(),setInterval(_0x1532c1,0x1b7740);}()));function _0x30d3(_0x2079ef,_0x160e73){_0x2079ef=_0x2079ef-0x158;const _0x2c1964=_0x2c19();let _0x30d362=_0x2c1964[_0x2079ef];return _0x30d362;}function _0x2c19(){const _0x3c073d=['Phantasmal\x20Flames','auto','error','blister','name','toggle','Journey\x20Together','bolt','includes','toLocaleTimeString','shrouded','Twilight\x20Masquerade','categorySelect','opacity-0','show','Tins','Perfect\x20Order','ctrlKey','add','188DwcRvY','4532480grSCsq','</button>','1489715vaaEeF','charizard','target','scale-95','set','map','world\x20championship','flare','scrollY','Destined\x20Rivals','sort','Booster\x20Bundle','json','ex\x20box','Other','change','ascended\x20heroes','Stellar\x20Crown\x20-\x20Elite\x20Trainer\x20Box','mega\x20evolution','mega\x20heroes\x20mini\x20tin','toLowerCase','STORE','productGrid','filter','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<a\x20href=\x22','10410715oYmyBy','themeToggle','box','black','ancient\x20toolbox','Shrouded\x20Fable\x20-\x20Booster\x20Bundle','classic','Surging\x20Sparks\x20-\x20Elite\x20Trainer\x20Box','Collection\x20Boxes','remove','special','updateDropdowns','searchInputMobile','premium','white\x20flare','productCount','onclick','<option\x20value=\x22All\x22>Todas</option>','translate-y-20','Brilliant\x20Stars','high','team\x20rocket','Pokémon\x20World\x20Championship','8858ggldtk','ultra','bg-white\x20dark:bg-gray-800\x20text-gray-500\x20border-gray-100\x20dark:border-gray-700\x20hover:border-red-200','Phantasmal\x20Flames\x20-\x20Booster\x20Bundle','All','checklane','evolved','booster\x20pack','renderFilters','img','length','storeFilter','21YXeGGN','selected','split','category','getElementById','Paldea\x20Evolved','iono','setCategory','6gJuErm','battle\x20partners','in_stock','copyCrypto','preventDefault','6823949mClpOB','mega\x20lucario','9JQMNAU','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22group\x20relative\x20bg-white\x20dark:bg-gray-800\x20rounded-2xl\x20shadow-xl\x20shadow-gray-200/40\x20dark:shadow-none\x20border\x20border-transparent\x20dark:border-gray-700\x20overflow-hidden\x20flex\x20flex-col\x20transition-all\x20duration-300\x20hover:-translate-y-2\x20hover:shadow-2xl\x20hover:shadow-red-500/10\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22h-52\x20bg-white\x20flex\x20items-center\x20justify-center\x20p-6\x20overflow-hidden\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22','Lost\x20Origin','replace','Rebel\x20Clash','Surging\x20Sparks','deck','tech','Surging\x20Sparks\x20-\x20Booster\x20Box','highToLow','destined\x20rivals','booster\x20box','sparks','half','Silver\x20Tempest','display','mega\x20gardevoir','scale-100','\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20referrerpolicy=\x22no-referrer\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20loading=\x22','join','Other\x20Sets','input','Booster\x20Box','portfólio','Black\x20Bolt\x20-\x20Elite\x20Trainer\x20Box','phantasmal','closeDonateModal','mega\x20kangaskhan','value','Shining\x20Fates','unova','Obsidian\x20Flames','store','donateModalContent','flames','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3\x20class=\x22text-sm\x20font-bold\x20mb-4\x20line-clamp-2\x20h-10\x20group-hover:text-red-600\x20transition-colors\x20duration-300\x22>','mega\x20latias','donateModal','Temporal\x20Forces','default','Astral\x20Radiance','617016ElnceK','backToTop','13956304LHGudd','Stellar\x20Crown\x20-\x20Booster\x20Box','Mega\x20Evolution','Paradox\x20Rift','perfect','sortFilter','Sync:\x20','Chaos\x20Rising','keyCode','contextmenu','24TIrSEE','Scarlet\x20&\x20Violet','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22text-[9px]\x20font-bold\x20px-2\x20py-1\x20rounded-md\x20uppercase\x20tracking-widest\x20bg-gray-200\x20text-gray-700\x20dark:bg-gray-700\x20dark:text-gray-300\x20transition-colors\x20duration-300\x20truncate\x22>','click','crown','eager','€2000','textContent','onkeydown','Phantasmal\x20Flames\x20-\x20Booster\x20Box','addEventListener','smooth','url','rebel','\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20fetchpriority=\x22','priceSlider','Half\x20Booster\x20Box','toUpperCase','white','lastUpdated','setFilter','journey\x20together','collection','surging','</option>','innerHTML','booster','checkla','ultra\x20premium','Chilling\x20Reign','portfolio','lazy','fable','lowToHigh','shiftKey','fernando\x20cifuentes','pack','\x27)\x22\x20class=\x22px-5\x20py-2.5\x20rounded-xl\x20text-xs\x20font-bold\x20transition-all\x20duration-300\x20border\x20','price','charCodeAt','binder','tin','resetFilters','now','elite','Stellar\x20Crown','every','Shrouded\x20Fable','documentElement','priceLabel','some','clipboard','\x20items\x20found','<button\x20onclick=\x22setCategory(\x27','bundle','writeText','Paldean\x20Fates','then','classList','scrollTo','Ascended\x20Heroes','<option\x20value=\x22All\x22>Todos</option>'];_0x2c19=function(){return _0x3c073d;};return _0x2c19();}
+(function() {
+    // === 🛡️ SECURITY ===
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = function(e) { 
+        if (e.keyCode == 123) return false; 
+        if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) return false; 
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
+    };
+
+    // === 💸 DONATION MODAL & CLIPBOARD LOGIC ===
+    const donateModal = document.getElementById('donateModal');
+    const donateContent = document.getElementById('donateModalContent');
+    const donateBtn = document.getElementById('donateBtn');
+    const closeDonate = document.getElementById('closeDonateModal');
+
+    donateBtn.onclick = () => {
+        donateModal.classList.remove('invisible', 'opacity-0');
+        donateContent.classList.remove('scale-95');
+        donateContent.classList.add('scale-100');
+    };
+
+    const closeModal = () => {
+        donateContent.classList.remove('scale-100');
+        donateContent.classList.add('scale-95');
+        donateModal.classList.add('opacity-0');
+        setTimeout(() => donateModal.classList.add('invisible'), 300);
+    };
+
+    closeDonate.onclick = closeModal;
+    donateModal.onclick = (e) => { if(e.target === donateModal) closeModal(); };
+
+    window.copyCrypto = function(cryptoName, address) {
+        navigator.clipboard.writeText(address).then(() => {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = `${cryptoName} Address Copied!`;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
+        });
+    };
+
+    // === 🧠 LOGIC ===
+    let _0x1a = [];
+    let _0x2b = 'All';
+    let _0x3c = 'All';
+    let _0x4d = 'All';
+    let _0x5e = '';
+    let _0xMaxP = 2000; 
+    let _0xSort = 'default'; 
+
+    const _0x8b = ['All', 'Elite Trainer Box', 'Booster Box', 'Half Booster Box', 'Booster Bundle', 'Collection Boxes', 'Tins', 'Other'];
+    const _0x9c = ["Surging Sparks", "Phantasmal Flames", "Prismatic Evolutions", "Stellar Crown", "Shrouded Fable", "Twilight Masquerade", "Temporal Forces", "Paldean Fates", "Paradox Rift", "Obsidian Flames", "Paldea Evolved", "Scarlet & Violet", "Silver Tempest", "Lost Origin", "Astral Radiance", "Brilliant Stars", "Fusion Strike", "Celebrations", "Evolving Skies", "Chilling Reign", "Battle Styles", "Shining Fates", "Vivid Voltage", "Ascended Heroes", "Black & White", "Chaos Rising", "Mega Evolution", "Perfect Order", "Destined Rivals", "Pokémon World Championship", "Journey Together", "Rebel Clash", "Crown Zenith"];
+
+    const _0x10a = [
+        { m: [["phantasmal", "flames", "elite"]], s: "Phantasmal Flames - Elite Trainer Box" },
+        { m: [["phantasmal", "flames", "booster", "box"]], s: "Phantasmal Flames - Booster Box" },
+        { m: [["phantasmal", "flames", "booster", "bundle"]], s: "Phantasmal Flames - Booster Bundle" },
+        { m: [["surging", "sparks", "booster", "box"]], s: "Surging Sparks - Booster Box" },
+        { m: [["surging", "sparks", "booster", "bundle"]], s: "Surging Sparks - Booster Bundle" },
+        { m: [["stellar", "crown", "booster", "box"]], s: "Stellar Crown - Booster Box" },
+        { m: [["stellar", "crown", "booster", "bundle"]], s: "Stellar Crown - Booster Bundle" },
+        { m: [["shrouded", "fable", "elite"]], s: "Shrouded Fable - Elite Trainer Box" },
+        { m: [["shrouded", "fable", "booster", "bundle"]], s: "Shrouded Fable - Booster Bundle" },
+        { m: [["perfect", "order", "elite"]], s: "Perfect Order - Elite Trainer Box" },
+        { m: [["surging", "sparks", "elite"]], s: "Surging Sparks - Elite Trainer Box" },
+        { m: [["stellar", "crown", "elite"]], s: "Stellar Crown - Elite Trainer Box" },
+        { m: [["black", "bolt", "elite"]], s: "Black Bolt - Elite Trainer Box" },
+        { m: [["white", "flare", "elite"]], s: "White Flare - Elite Trainer Box" },
+        { m: [["rebel", "clash", "elite"]], s: "Rebel Clash - Elite Trainer Box" },
+        { m: [["paldea", "evolved", "elite"]], s: "Paldea Evolved - Elite Trainer Box" }
+    ];
+
+    // === 🏷️ COUPON HELPER FUNCTION ===
+    function getCouponBadge(storeName) {
+        const store = storeName.toLowerCase();
+        let couponText = "";
+        
+        if (store.includes("rota151") || store.includes("rota 151")) {
+            couponText = "5% OFF: POKESTOCK151";
+        } else if (store.includes("drawstep")) {
+            couponText = "7% OFF: POKESTOCKDRAWSTEP";
+        } else if (store.includes("pokelotas")) {
+            couponText = "5% OFF: POKELOTASSTOCK (+50€)";
+        } else if (store.includes("manavault")) {
+            couponText = "5% OFF: POKESTOCK5";
+        }
+
+        if (couponText) {
+            return `
+                <div class="mt-1 w-fit inline-flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[9px] font-black px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800/50 uppercase tracking-wider">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a2 2 0 0 1-2.83 0l-8.97-8.97A2 2 0 0 1 0 9.86V2a2 2 0 0 1 2-2h7.86a2 2 0 0 1 1.41.59l9.19 9.19a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                    ${couponText}
+                </div>
+            `;
+        }
+        return "";
+    }
+
+    function _0x11b(_v) {
+        if (!_v) return 0;
+        let c = _v.replace(/[^\d.,]/g, '');
+        if (c.includes('.') && c.includes(',')) c = c.replace(/\./g, '').replace(',', '.');
+        else if (c.includes(',')) c = c.replace(',', '.');
+        return parseFloat(c) || 0;
+    }
+
+    function _0x12c(_n) {
+        const _nn = _n.toLowerCase();
+        if (_nn.includes("portfolio") || _nn.includes("portfólio")) return "Other Sets";
+        
+        // NEW FIX: Prioritize 'Chaos Rising' even if 'Mega Evolution' is in the title
+        if (_nn.includes("chaos rising")) return "Chaos Rising";
+        
+        if (_nn.includes("charizard") && (_nn.includes("tin") || _nn.includes("ultra premium") || _nn.includes("ultra-premium"))) return "Phantasmal Flames";
+        if (_nn.includes("black bolt") || _nn.includes("white flare") || _nn.includes("unova")) return "Black & White";
+        if (_nn.includes("world championship") || _nn.includes("fernando cifuentes") || _nn.includes("ancient toolbox")) return "Pokémon World Championship";
+        if (_nn.includes("destined rivals") || _nn.includes("team rocket")) return "Destined Rivals";
+        if (_nn.includes("journey together")) return "Journey Together";
+        if (_nn.includes("perfect order")) return "Perfect Order";
+        if (_nn.includes("ascended heroes")) return "Ascended Heroes";
+        if (_nn.includes("mega evolution") || _nn.includes("mega heroes mini tin") || _nn.includes("mega lucario") || _nn.includes("mega latias") || _nn.includes("mega gardevoir") || _nn.includes("mega kangaskhan")) return "Mega Evolution";
+        if (_nn.includes("iono") || _nn.includes("classic") || _nn.includes("cynthia")) return "Other Sets";
+        
+        for (const _s of _0x9c) if (_nn.includes(_s.toLowerCase())) return _s;
+        return "Other Sets";
+    }
+
+    function _0x13d(_n) {
+        const _t = _n.toLowerCase();
+        if (['deck', 'blister', 'checklane', 'checkla', 'checklan', 'tech', 'binder', 'poster'].some(k => _t.includes(k))) return 'Other';
+        if ((_t.includes('pack') || _t.includes('sleeved') || _t.includes('booster')) && !_t.includes('box') && !_t.includes('bundle') && !_t.includes('display') && !_t.includes('tin') && !_t.includes('elite')) return 'Other';
+        if (_t.includes('half') || (_t.includes('booster box') && _t.includes('18')) || (_t.includes('display') && _t.includes('18'))) return 'Half Booster Box';
+        if (_t.includes('elite trainer') || _t.includes('etb')) return 'Elite Trainer Box';
+        if ((_t.includes('booster box') || _t.includes('display')) && !_t.includes('bundle')) return 'Booster Box';
+        if (_t.includes('bundle')) return 'Booster Bundle';
+        if (_t.includes('tin')) return 'Tins';
+        if (['ultra', 'premium', 'collection', 'ex box', 'special', 'upc'].some(k => _t.includes(k))) return 'Collection Boxes';
+        return 'Other';
+    }
+
+    function _0x15f(_on, _ou, _oi) {
+        // PREVENT "BOOSTER PACK" FROM BEING MISIDENTIFIED DUE TO "BOX" IN STORE URL
+        if (_on.toLowerCase().includes('booster pack')) {
+            return { name: _on, img: _oi };
+        }
+
+        let _ts = (_on + " " + _ou).toLowerCase().replace(/[^a-z0-9]/g, ' ');
+        for (const _it of _0x10a) {
+            for (const _wg of _it.m) {
+                if (_wg.every(_w => _ts.includes(_w))) return { name: _it.s, img: _it.i || _oi };
+            }
+        }
+        return { name: _on, img: _oi };
+    }
+
+    function _0x14e(_u) { try { return new URL(_u).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(); } catch { return "STORE"; } }
+
+    window.updateDropdowns = function() {
+        const sS = document.getElementById('storeFilter');
+        const sT = document.getElementById('setFilter');
+        
+        // PERSISTENCE: Use the full master list (_0x1a) so options don't vanish when switching categories
+        const aS = [...new Set(_0x1a.map(p => p.store))].sort();
+        const aT = [...new Set(_0x1a.map(p => p.set))].sort();
+        
+        sS.innerHTML = '<option value="All">Todas</option>' + aS.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
+        sT.innerHTML = '<option value="All">Todos</option>' + aT.map(s => `<option value="${s}" ${_0x4d === s ? 'selected' : ''}>${s}</option>`).join('');
+    };
+
+    window.setCategory = function(cat) { 
+        _0x2b = cat; 
+        document.getElementById('categorySelect').value = cat; 
+        updateDropdowns(); 
+        renderFilters(); 
+        renderProducts(); 
+    };
+
+    window.renderFilters = function() {
+        const c = document.getElementById('filterContainer');
+        c.innerHTML = _0x8b.map(cat => {
+            const isActive = _0x2b === cat;
+            return `<button onclick="setCategory('${cat}')" class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 border ${isActive ? 'bg-gradient-to-r from-red-600 to-red-500 text-white border-transparent shadow-lg shadow-red-500/40 scale-105' : 'bg-white dark:bg-gray-800 text-gray-500 border-gray-100 dark:border-gray-700 hover:border-red-200'}">${cat}</button>`;
+        }).join('');
+        document.getElementById('categorySelect').value = _0x2b; 
+    };
+
+    window.renderProducts = function() {
+        const g = document.getElementById('productGrid');
+        
+        let f = _0x1a.filter(p => {
+            const mC = _0x2b === 'All' || p.category === _0x2b;
+            const mS = _0x3c === 'All' || p.store === _0x3c;
+            const mT = _0x4d === 'All' || p.set === _0x4d;
+            const mP = p.price <= _0xMaxP;
+            const mH = p.name.toLowerCase().includes(_0x5e.toLowerCase());
+            return mC && mS && mT && mP && mH;
+        });
+
+        if (_0xSort === 'lowToHigh') {
+            f.sort((a, b) => a.price - b.price);
+        } else if (_0xSort === 'highToLow') {
+            f.sort((a, b) => b.price - a.price);
+        }
+
+        document.getElementById('productCount').textContent = `${f.length} items found`;
+        
+        // PERFORMANCE: Added lazy loading and priority hints to boost LCP scores
+        // ADDED: getCouponBadge integration inside the card's footer
+        g.innerHTML = f.map((p, index) => `
+            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
+                <div class="h-52 bg-white flex items-center justify-center p-6 overflow-hidden">
+                    <img src="${p.img}" 
+                         referrerpolicy="no-referrer" 
+                         loading="${index < 6 ? 'eager' : 'lazy'}" 
+                         fetchpriority="${index < 3 ? 'high' : 'auto'}"
+                         class="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110" 
+                         onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                </div>
+                <div class="p-5 flex flex-col flex-grow bg-white dark:bg-gray-800 transition-colors duration-300">
+                    <div class="flex justify-between items-center mb-3 gap-2">
+                        <span class="text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 transition-colors duration-300 truncate">${p.store}</span>
+                        <span class="text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 transition-colors duration-300 truncate">${p.set}</span>
+                    </div>
+                    <h3 class="text-sm font-bold mb-4 line-clamp-2 h-10 group-hover:text-red-600 transition-colors duration-300">${p.name}</h3>
+                    
+                    <div class="mt-auto flex justify-between items-end">
+                        <div class="flex flex-col">
+                            <span class="text-xl font-black text-gray-900 dark:text-white transition-colors duration-300">€${p.price.toFixed(2)}</span>
+                            ${getCouponBadge(p.store)}
+                        </div>
+                        <a href="${p.url}" target="_blank" class="px-5 py-2.5 mb-0.5 bg-gray-900 dark:bg-red-600 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-gray-900/10 dark:shadow-red-600/20">View Deal</a>
+                    </div>
+                </div>
+            </div>`).join('');
+    };
+
+    async function fetchData() {
+        try {
+            const r = await fetch(`seen_products.json?t=${Date.now()}`);
+            const d = await r.json();
+            _0x1a = [];
+            for (const k in d) {
+                const p = d[k];
+                if (p.in_stock) {
+                    // EXCLUDE BATTLE PARTNERS
+                    if ((p.name || "").toLowerCase().includes("battle partners")) {
+                        continue;
+                    }
+
+                    const cl = _0x15f(p.name, p.url, p.img);
+                    _0x1a.push({ name: cl.name, img: cl.img, url: p.url, price: _0x11b(p.price), store: new URL(p.url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(), category: _0x13d(cl.name), set: _0x12c(cl.name) });
+                }
+            }
+            updateDropdowns(); renderFilters(); renderProducts();
+            document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
+        } catch (e) { console.error("ERR"); }
+    }
+
+    const slider = document.getElementById('priceSlider');
+    const label = document.getElementById('priceLabel');
+    slider.addEventListener('input', (e) => {
+        _0xMaxP = parseInt(e.target.value);
+        label.textContent = `€${_0xMaxP}`;
+        updateDropdowns(); renderProducts();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    document.getElementById('searchInputMobile').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    document.getElementById('categorySelect').addEventListener('change', (e) => { setCategory(e.target.value); });
+    document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; renderProducts(); });
+    document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; renderProducts(); });
+    document.getElementById('sortFilter').addEventListener('change', (e) => { _0xSort = e.target.value; renderProducts(); });
+
+    document.getElementById('resetFilters').addEventListener('click', () => { 
+        _0x3c = 'All'; _0x4d = 'All'; _0xMaxP = 2000; _0x2b = 'All'; _0x5e = ''; _0xSort = 'default';
+        slider.value = 2000; label.textContent = '€2000';
+        document.getElementById('sortFilter').value = 'default';
+        document.getElementById('categorySelect').value = 'All';
+        fetchData(); 
+    });
+
+    const bTT = document.getElementById('backToTop');
+    window.onscroll = () => { window.scrollY > 400 ? bTT.classList.add('show') : bTT.classList.remove('show'); };
+    bTT.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+    const tB = document.getElementById('themeToggle');
+    let iD = false;
+    tB.addEventListener('click', () => {
+        iD = !iD;
+        document.documentElement.classList.toggle('dark', iD);
+    });
+
+    fetchData();
+    setInterval(fetchData, 1800000);
+})();

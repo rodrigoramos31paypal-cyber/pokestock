@@ -150,4 +150,154 @@
         return { name: _on, img: _oi };
     }
 
-    function _0x14e(_u) { try { return new URL
+    function _0x14e(_u) { try { return new URL(_u).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(); } catch { return "STORE"; } }
+
+    window.updateDropdowns = function() {
+        const sS = document.getElementById('storeFilter');
+        const sT = document.getElementById('setFilter');
+        
+        const aS = [...new Set(_0x1a.map(p => p.store))].sort();
+        const aT = [...new Set(_0x1a.map(p => p.set))].sort();
+        
+        sS.innerHTML = '<option value="All">Todas</option>' + aS.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
+        sT.innerHTML = '<option value="All">Todos</option>' + aT.map(s => `<option value="${s}" ${_0x4d === s ? 'selected' : ''}>${s}</option>`).join('');
+    };
+
+    window.setCategory = function(cat) { 
+        _0x2b = cat; 
+        document.getElementById('categorySelect').value = cat; 
+        updateDropdowns(); 
+        renderFilters(); 
+        renderProducts(); 
+    };
+
+    window.renderFilters = function() {
+        const c = document.getElementById('filterContainer');
+        c.innerHTML = _0x8b.map(cat => {
+            const isActive = _0x2b === cat;
+            return `<button onclick="setCategory('${cat}')" class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 border ${isActive ? 'bg-gradient-to-r from-red-600 to-red-500 text-white border-transparent shadow-lg shadow-red-500/40 scale-105' : 'bg-white dark:bg-gray-800 text-gray-500 border-gray-100 dark:border-gray-700 hover:border-red-200'}">${cat}</button>`;
+        }).join('');
+        document.getElementById('categorySelect').value = _0x2b; 
+    };
+
+    window.renderProducts = function() {
+        const g = document.getElementById('productGrid');
+        
+        let f = _0x1a.filter(p => {
+            const mC = _0x2b === 'All' || p.category === _0x2b;
+            const mS = _0x3c === 'All' || p.store === _0x3c;
+            const mT = _0x4d === 'All' || p.set === _0x4d;
+            const mP = p.price <= _0xMaxP;
+            const mH = p.name.toLowerCase().includes(_0x5e.toLowerCase());
+            return mC && mS && mT && mP && mH;
+        });
+
+        // === 🌟 NEW SORT LOGIC: PARTNERS ALWAYS FIRST ===
+        f.sort((a, b) => {
+            // Check if the store generates a coupon badge
+            const aHasCoupon = getCouponBadge(a.store) !== "";
+            const bHasCoupon = getCouponBadge(b.store) !== "";
+
+            // If product 'A' is from a partner and 'B' is not, 'A' goes first
+            if (aHasCoupon && !bHasCoupon) return -1;
+            // If product 'B' is from a partner and 'A' is not, 'B' goes first
+            if (!aHasCoupon && bHasCoupon) return 1;
+
+            // If both are partners, or neither are partners, apply the user's selected sorting rules:
+            if (_0xSort === 'lowToHigh') {
+                return a.price - b.price;
+            } else if (_0xSort === 'highToLow') {
+                return b.price - a.price;
+            }
+            
+            return 0; // Default case: maintain original fetched order
+        });
+
+        document.getElementById('productCount').textContent = `${f.length} items found`;
+        
+        g.innerHTML = f.map((p, index) => `
+            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-gray-200/40 dark:shadow-none border border-transparent dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10">
+                <div class="h-52 bg-white flex items-center justify-center p-6 overflow-hidden">
+                    <img src="${p.img}" 
+                         referrerpolicy="no-referrer" 
+                         loading="${index < 6 ? 'eager' : 'lazy'}" 
+                         fetchpriority="${index < 3 ? 'high' : 'auto'}"
+                         class="h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110" 
+                         onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                </div>
+                <div class="p-5 flex flex-col flex-grow bg-white dark:bg-gray-800 transition-colors duration-300">
+                    <div class="flex justify-between items-center mb-3 gap-2">
+                        <span class="text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 transition-colors duration-300 truncate">${p.store}</span>
+                        <span class="text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-widest bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 transition-colors duration-300 truncate">${p.set}</span>
+                    </div>
+                    <h3 class="text-sm font-bold mb-4 line-clamp-2 h-10 group-hover:text-red-600 transition-colors duration-300">${p.name}</h3>
+                    
+                    <div class="mt-auto flex flex-col">
+                        ${getCouponBadge(p.store)}
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-black text-gray-900 dark:text-white transition-colors duration-300">€${p.price.toFixed(2)}</span>
+                            <a href="${p.url}" target="_blank" class="px-5 py-2.5 bg-gray-900 dark:bg-red-600 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-gray-900/10 dark:shadow-red-600/20">View Deal</a>
+                        </div>
+                    </div>
+                </div>
+            </div>`).join('');
+    };
+
+    async function fetchData() {
+        try {
+            const r = await fetch(`seen_products.json?t=${Date.now()}`);
+            const d = await r.json();
+            _0x1a = [];
+            for (const k in d) {
+                const p = d[k];
+                if (p.in_stock) {
+                    if ((p.name || "").toLowerCase().includes("battle partners")) {
+                        continue;
+                    }
+
+                    const cl = _0x15f(p.name, p.url, p.img);
+                    _0x1a.push({ name: cl.name, img: cl.img, url: p.url, price: _0x11b(p.price), store: new URL(p.url).hostname.replace(/^www\./, '').split('.')[0].toUpperCase(), category: _0x13d(cl.name), set: _0x12c(cl.name) });
+                }
+            }
+            updateDropdowns(); renderFilters(); renderProducts();
+            document.getElementById('lastUpdated').textContent = `Sync: ${new Date().toLocaleTimeString()}`;
+        } catch (e) { console.error("ERR"); }
+    }
+
+    const slider = document.getElementById('priceSlider');
+    const label = document.getElementById('priceLabel');
+    slider.addEventListener('input', (e) => {
+        _0xMaxP = parseInt(e.target.value);
+        label.textContent = `€${_0xMaxP}`;
+        updateDropdowns(); renderProducts();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    document.getElementById('searchInputMobile').addEventListener('input', (e) => { _0x5e = e.target.value; renderProducts(); });
+    document.getElementById('categorySelect').addEventListener('change', (e) => { setCategory(e.target.value); });
+    document.getElementById('storeFilter').addEventListener('change', (e) => { _0x3c = e.target.value; renderProducts(); });
+    document.getElementById('setFilter').addEventListener('change', (e) => { _0x4d = e.target.value; renderProducts(); });
+    document.getElementById('sortFilter').addEventListener('change', (e) => { _0xSort = e.target.value; renderProducts(); });
+
+    document.getElementById('resetFilters').addEventListener('click', () => { 
+        _0x3c = 'All'; _0x4d = 'All'; _0xMaxP = 2000; _0x2b = 'All'; _0x5e = ''; _0xSort = 'default';
+        slider.value = 2000; label.textContent = '€2000';
+        document.getElementById('sortFilter').value = 'default';
+        document.getElementById('categorySelect').value = 'All';
+        fetchData(); 
+    });
+
+    const bTT = document.getElementById('backToTop');
+    window.onscroll = () => { window.scrollY > 400 ? bTT.classList.add('show') : bTT.classList.remove('show'); };
+    bTT.onclick = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+    const tB = document.getElementById('themeToggle');
+    let iD = false;
+    tB.addEventListener('click', () => {
+        iD = !iD;
+        document.documentElement.classList.toggle('dark', iD);
+    });
+
+    fetchData();
+    setInterval(fetchData, 1800000);
+})();

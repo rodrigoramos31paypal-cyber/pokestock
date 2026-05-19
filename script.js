@@ -156,11 +156,31 @@
         const sS = document.getElementById('storeFilter');
         const sT = document.getElementById('setFilter');
         
-        const aS = [...new Set(_0x1a.map(p => p.store))].sort();
         const aT = [...new Set(_0x1a.map(p => p.set))].sort();
         
-        sS.innerHTML = '<option value="All">Todas</option>' + aS.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
-        sT.innerHTML = '<option value="All">Todos</option>' + aT.map(s => `<option value="${s}" ${_0x4d === s ? 'selected' : ''}>${s}</option>`).join('');
+        // === 🌟 NOVO: ORDENAÇÃO DO DROPDOWN DAS LOJAS 🌟 ===
+        const allStores = [...new Set(_0x1a.map(p => p.store))];
+        
+        // Separa parceiros e não-parceiros, e ordena ambos de A a Z
+        const partnerStores = allStores.filter(s => getCouponBadge(s) !== "").sort((a, b) => a.localeCompare(b));
+        const otherStores = allStores.filter(s => getCouponBadge(s) === "").sort((a, b) => a.localeCompare(b));
+        
+        let storeHTML = '<option value="All">Todas as Lojas</option>';
+        
+        if (partnerStores.length > 0) {
+            storeHTML += '<optgroup label="Parceiros (Com Cupão)">';
+            storeHTML += partnerStores.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
+            storeHTML += '</optgroup>';
+        }
+        
+        if (otherStores.length > 0) {
+            storeHTML += '<optgroup label="Outras Lojas">';
+            storeHTML += otherStores.map(s => `<option value="${s}" ${_0x3c === s ? 'selected' : ''}>${s}</option>`).join('');
+            storeHTML += '</optgroup>';
+        }
+        
+        sS.innerHTML = storeHTML;
+        sT.innerHTML = '<option value="All">Todos os Sets</option>' + aT.map(s => `<option value="${s}" ${_0x4d === s ? 'selected' : ''}>${s}</option>`).join('');
     };
 
     window.setCategory = function(cat) { 
@@ -192,25 +212,24 @@
             return mC && mS && mT && mP && mH;
         });
 
-        // === 🌟 NEW SORT LOGIC: PARTNERS ALWAYS FIRST ===
+        // === 🌟 NOVO: ORDENAÇÃO DA GRELHA (PARCEIROS ALFABÉTICOS + OUTROS ALFABÉTICOS) 🌟 ===
         f.sort((a, b) => {
-            // Check if the store generates a coupon badge
             const aHasCoupon = getCouponBadge(a.store) !== "";
             const bHasCoupon = getCouponBadge(b.store) !== "";
 
-            // If product 'A' is from a partner and 'B' is not, 'A' goes first
+            // Parceiros primeiro
             if (aHasCoupon && !bHasCoupon) return -1;
-            // If product 'B' is from a partner and 'A' is not, 'B' goes first
             if (!aHasCoupon && bHasCoupon) return 1;
 
-            // If both are partners, or neither are partners, apply the user's selected sorting rules:
+            // Ordenação por preço (se o utilizador selecionou)
             if (_0xSort === 'lowToHigh') {
                 return a.price - b.price;
             } else if (_0xSort === 'highToLow') {
                 return b.price - a.price;
             }
             
-            return 0; // Default case: maintain original fetched order
+            // Ordem Default: Agrupar por Loja de forma Alfabética (A-Z)
+            return a.store.localeCompare(b.store);
         });
 
         document.getElementById('productCount').textContent = `${f.length} items found`;

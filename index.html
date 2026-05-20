@@ -106,10 +106,10 @@
         <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
             <a href="/" class="text-2xl font-black text-red-600 dark:text-red-500 tracking-tighter italic transition-colors duration-300 hover:opacity-80">POKESTOCKPT</a>
             <div class="flex items-center gap-4">
-                <a href="/" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">Home</a>
+			<a href="/" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">Home</a>
                 <a href="/about" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">Sobre Nós</a>
-                <a href="/blog" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">Blog</a>
-                <a href="/contact" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">Contactos</a>
+				<a href="/blog" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">Blog</a>
+				<a href="/contact" class="text-sm font-bold text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors">Contactos</a>
             </div>
         </div>
         
@@ -154,16 +154,16 @@
 				<p>Para além do site, oferecemos um serviço de **alertas** instantâneos através do nosso servidor de **Discord**. Ao juntares-te à nossa comunidade, recebes notificações do nosso **bot** de restock no segundo em que os produtos chegam às prateleiras virtuais. Se procuras um **Portugal Pokémon stock finder** de confiança para os teus produtos de **TCG**, o PokéStockPT é a ferramenta ideal para ti.</p>
 		</div>
 
-        <div class="flex flex-col lg:flex-row gap-6 mt-4">
+        <div class="flex flex-col lg:flex-row gap-8 mt-4">
             
-            <aside class="w-full lg:w-1/4 xl:w-1/5 min-w-[200px] flex-shrink-0 lg:sticky lg:top-24 h-fit space-y-4 z-40">
+            <aside class="w-full lg:w-56 xl:w-64 flex-shrink-0 lg:sticky lg:top-24 h-fit max-h-[calc(100vh-6rem)] overflow-y-auto no-scrollbar space-y-4 xl:space-y-6 z-40 pb-4">
                 
-                <div class="bg-white dark:bg-gray-800 p-5 rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 transition-colors duration-300">
-                    <h2 class="text-base font-bold mb-4 flex items-center gap-2 transition-colors duration-300">📊 Filters</h2>
+                <div class="bg-white dark:bg-gray-800 p-5 xl:p-6 rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+                    <h2 class="text-lg font-bold mb-6 flex items-center gap-2 transition-colors duration-300">📊 Filters</h2>
                     
-                    <div class="mb-4">
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 transition-colors duration-300">Tipo de Produto</label>
-                        <select id="categorySelect" class="w-full p-2 rounded-xl bg-gray-50 dark:bg-gray-700/50 border-none text-xs focus:ring-2 focus:ring-red-500 transition-colors duration-300">
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 transition-colors duration-300">Tipo de Produto</label>
+                        <select id="categorySelect" class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-700/50 border-none text-sm focus:ring-2 focus:ring-red-500 transition-colors duration-300">
                             <option value="All">Todos</option>
                             <option value="Elite Trainer Box">Elite Trainer Box</option>
                             <option value="Booster Box">Booster Box</option>
@@ -175,40 +175,41 @@
                         </select>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 transition-colors duration-300">Loja</label>
-                        <select id="storeFilter" class="w-full p-2 rounded-xl bg-gray-50 dark:bg-gray-700/50 border-none text-xs focus:ring-2 focus:ring-red-500 transition-colors duration-300"></select>
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 transition-colors duration-300">Loja</label>
+                        <select id="storeFilter" class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-700/50 border-none text-sm focus:ring-2 focus:ring-red-500 transition-colors duration-300"></select>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 transition-colors duration-300">Pokémon Set</label>
-                        <select id="setFilter" class="w-full p-2 rounded-xl bg-gray-50 dark:bg-gray-700/50 border-none text-xs focus:ring-2 focus:ring-red-500 transition-colors duration-300"></select>
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 transition-colors duration-300">Pokémon Set</label>
+                        <select id="setFilter" class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-700/50 border-none text-sm focus:ring-2 focus:ring-red-500 transition-colors duration-300"></select>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 transition-colors duration-300">Filtrar por</label>
-                        <select id="sortFilter" class="w-full p-2 rounded-xl bg-gray-50 dark:bg-gray-700/50 border-none text-xs focus:ring-2 focus:ring-red-500 transition-colors duration-300">
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 transition-colors duration-300">Filtrar por</label>
+                        <select id="sortFilter" class="w-full p-3 rounded-xl bg-gray-50 dark:bg-gray-700/50 border-none text-sm focus:ring-2 focus:ring-red-500 transition-colors duration-300">
                             <option value="default">Default</option>
                             <option value="lowToHigh">Preço: Baixo para Alto</option>
                             <option value="highToLow">Preço: Alto para Baixo</option>
                         </select>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 transition-colors duration-300">Max Price: <span id="priceLabel" class="text-red-600">5000€</span></label>
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 transition-colors duration-300">Max Price: <span id="priceLabel" class="text-red-600">5000€</span></label>
                         <input type="range" id="priceSlider" min="0" max="5000" value="5000" step="10">
                     </div>
 
-                    <button id="resetFilters" class="w-full py-2 mt-2 text-xs font-black uppercase tracking-tighter text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors">Reset All</button>
+                    <button id="resetFilters" class="w-full py-3 text-xs font-black uppercase tracking-tighter text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors">Reset All</button>
                 </div>
 
-                <a href="https://rota151.pt" target="_blank" class="block w-full min-h-[160px] relative rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-red-200 dark:hover:border-red-900/50 bg-gray-900">
+                <a href="https://rota151.pt" target="_blank" class="block w-full min-h-[160px] xl:min-h-[200px] relative rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-red-200 dark:hover:border-red-900/50">
                     <img src="banner3.png" alt="Rota 151 Partner" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.style.opacity='0'">
-                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent p-3 pt-12 z-10">
-                        <p class="text-white text-[9px] font-black uppercase tracking-widest drop-shadow-md leading-tight">Parceiro Oficial</p>
-                        <p class="text-emerald-400 text-[10px] font-bold mt-0.5 drop-shadow-md">🎫 5% OFF: POKESTOCK151</p>
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent p-4 pt-12">
+                        <p class="text-white text-[10px] xl:text-[11px] font-black uppercase tracking-widest drop-shadow-md">Parceiro Oficial</p>
+                        <p class="text-emerald-400 text-[10px] xl:text-[11px] font-bold mt-0.5 drop-shadow-md">🎫 5% OFF: POKESTOCK151</p>
                     </div>
                 </a>
+
             </aside>
 
             <div class="flex-grow">

@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>PokéStock Live — frontend shell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   PokéStock Live — frontend shell
+   Theme: "trading-card vault" — deep navy, gold for money,
+   red for live/urgency, holo-foil accent on the wordmark.
+   ============================================================ */
+:root{
+  --bg:#0a0e17; --surf:#121826; --surf2:#18202f; --line:#283042;
+  --ink:#eef2f8; --mut:#8a94a8;
+  --gold:#ffcb45; --live:#ff3b46; --ok:#2ee6a0; --cool:#38bdf8;
+  --r:16px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;height:100%;}
+body{
+  background:
+    radial-gradient(900px 500px at 80% -10%, rgba(56,189,248,.10), transparent),
+    radial-gradient(700px 500px at -10% 10%, rgba(255,203,69,.07), transparent),
+    var(--bg);
+  color:var(--ink); font-family:"Figtree",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+button,input{font-family:inherit;}
+.app{max-width:1180px;margin:0 auto;padding:14px 16px 40px;}
+
+/* ---------- header ---------- */
+.bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:8px 2px 16px;}
+.logo{font-family:"Anton",sans-serif;font-size:30px;letter-spacing:1px;line-height:1;
+  background:linear-gradient(100deg,#ffd76b,#38bdf8,#ff7ac6,#ffd76b);
+  background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:foil 8s linear infinite;}
+@keyframes foil{to{background-position:300% 0;}}
+.logo small{display:block;font-family:"Figtree";font-weight:700;font-size:11px;letter-spacing:3px;
+  color:var(--mut);-webkit-text-fill-color:var(--mut);margin-top:3px;}
+.spacer{flex:1;}
+.status{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--mut);
+  background:var(--surf);border:1px solid var(--line);padding:7px 12px;border-radius:999px;}
+.statusdot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.status.ok .statusdot{background:var(--ok);box-shadow:0 0 0 0 rgba(46,230,160,.5);animation:ping 1.8s infinite;}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(46,230,160,.5)}70%{box-shadow:0 0 0 8px rgba(46,230,160,0)}100%{box-shadow:0 0 0 0 rgba(46,230,160,0)}}
+.roletoggle{display:flex;background:var(--surf);border:1px solid var(--line);border-radius:999px;padding:3px;}
+.roletoggle button{border:none;background:none;color:var(--mut);font-weight:700;font-size:13px;
+  padding:7px 14px;border-radius:999px;cursor:pointer;}
+.roletoggle button.on{background:var(--gold);color:#1a1304;}
+
+/* ---------- layout: two-pane -> stacks on mobile ---------- */
+.grid{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;align-items:start;}
+@media(max-width:860px){.grid{grid-template-columns:1fr;}}
+
+.card{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);}
+
+/* ---------- video pane ---------- */
+.video{overflow:hidden;}
+.videohead{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);}
+.chanbox{flex:1;display:flex;gap:8px;}
+.chanbox input{flex:1;background:var(--surf2);border:1px solid var(--line);border-radius:10px;
+  color:var(--ink);padding:9px 11px;font-size:14px;outline:none;}
+.chanbox input:focus{border-color:var(--cool);}
+.btn{border:none;border-radius:10px;font-weight:700;cursor:pointer;padding:9px 14px;font-size:14px;
+  transition:transform .07s,filter .15s;}
+.btn:active{transform:translateY(1px);}
+.btn-gold{background:var(--gold);color:#1a1304;}
+.btn-cool{background:var(--cool);color:#04212e;}
+.btn-ghost{background:var(--surf2);color:var(--ink);border:1px solid var(--line);}
+.btn-ghost:hover{border-color:var(--cool);}
+.btn-live{background:var(--live);color:#fff;}
+.btn-full{width:100%;}
+.playerwrap{position:relative;aspect-ratio:16/9;background:#000;}
+.playerwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:8px;color:var(--mut);text-align:center;padding:24px;}
+.placeholder .big{font-size:40px;}
+.livepill{position:absolute;top:12px;left:12px;z-index:2;background:var(--live);color:#fff;
+  font-weight:800;font-size:12px;letter-spacing:.5px;padding:5px 10px;border-radius:8px;
+  display:none;}
+.livepill.on{display:block;animation:blink 1.4s infinite;}
+@keyframes blink{50%{opacity:.5}}
+
+/* ---------- bidding pane ---------- */
+.bidpane{display:flex;flex-direction:column;}
+.lot{padding:16px;border-bottom:1px solid var(--line);display:flex;gap:14px;}
+.lotimg{width:74px;height:74px;border-radius:12px;object-fit:cover;background:var(--surf2);flex:none;}
+.lotimg.empty{display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--mut);}
+.lottitle{font-weight:800;font-size:17px;margin:0 0 4px;}
+.lotdesc{color:var(--mut);font-size:13px;margin:0;}
+.pricerow{display:flex;justify-content:space-between;align-items:flex-end;padding:16px;}
+.k{font-size:10px;letter-spacing:1.4px;color:var(--mut);text-transform:uppercase;}
+.price{font-family:"Anton";font-size:46px;line-height:.9;color:var(--gold);margin-top:4px;}
+.holder{font-size:12px;color:var(--mut);margin-top:4px;}
+.timer{text-align:right;}
+.clock{font-family:"Anton";font-size:42px;line-height:.9;margin-top:4px;}
+.timer.urgent .clock{color:var(--live);animation:blink 1s infinite;}
+
+.controls{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px;}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.quick .btn{padding:13px 4px;}
+.row2{display:grid;grid-template-columns:1fr auto;gap:8px;}
+.row2 input{background:var(--surf2);border:1px solid var(--line);border-radius:10px;color:var(--ink);
+  padding:11px 12px;font-size:15px;outline:none;}
+.row2 input:focus{border-color:var(--gold);}
+.kh{font-size:10px;letter-spacing:1.4px;color:var(--mut);text-transform:uppercase;padding:0 16px;}
+
+.setup{padding:16px;display:flex;flex-direction:column;gap:10px;}
+.setup input{background:var(--surf2);border:1px solid var(--line);border-radius:10px;color:var(--ink);
+  padding:11px 12px;font-size:14px;outline:none;}
+.setup .row2{grid-template-columns:1fr 1fr;}
+
+.feed{padding:12px 16px;border-top:1px solid var(--line);max-height:190px;overflow:auto;}
+.bidrow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;
+  animation:slidein .25s ease;}
+.bidrow:last-child{border:none;}
+@keyframes slidein{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.gold{color:var(--gold);font-weight:700;}
+.empty-note{color:var(--mut);font-size:14px;padding:6px 0;}
+
+.chat{border-top:1px solid var(--line);padding:12px 16px;}
+.chatlog{max-height:130px;overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:14px;margin-bottom:10px;}
+.chatlog p{margin:0;line-height:1.4;}
+.chatlog b{color:var(--cool);}
+
+.result{padding:22px 16px;text-align:center;}
+.result h3{font-family:"Anton";font-size:26px;margin:0 0 4px;letter-spacing:.5px;}
+
+.demohint{font-size:12px;color:var(--mut);padding:10px 16px 0;}
+.hidden{display:none !important;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="bar">
+    <div class="logo">POKÉSTOCK LIVE<small>LIVE CARD AUCTIONS · MVP SHELL</small></div>
+    <div class="spacer"></div>
+    <div class="roletoggle" id="roletoggle">
+      <button data-role="buyer" class="on">Buyer</button>
+      <button data-role="seller">Seller</button>
+    </div>
+    <div class="status" id="status"><span class="statusdot"></span><span id="statustext">Demo mode</span></div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ============ VIDEO PANE ============ -->
+    <div class="card video">
+      <div class="videohead">
+        <div class="chanbox">
+          <input id="chan" placeholder="Twitch channel (e.g. pokestock_pt)" />
+          <button class="btn btn-cool" id="loadchan">Load stream</button>
+        </div>
+      </div>
+      <div class="playerwrap">
+        <span class="livepill" id="livepill">● LIVE</span>
+        <div class="placeholder" id="placeholder">
+          <div class="big">📺</div>
+          <div>Enter a Twitch channel and hit <b>Load stream</b>.</div>
+          <div style="font-size:12px">The seller broadcasts on Twitch via OBS; this embeds their player.</div>
+        </div>
+        <div id="playerslot"></div>
+      </div>
+    </div>
+
+    <!-- ============ BIDDING PANE ============ -->
+    <div class="card bidpane">
+      <div class="lot">
+        <div class="lotimg empty" id="lotimg">🃏</div>
+        <div>
+          <p class="lottitle" id="lottitle">No live lot yet</p>
+          <p class="lotdesc" id="lotdesc">Waiting for the seller to start an auction.</p>
+        </div>
+      </div>
+
+      <div class="pricerow">
+        <div>
+          <div class="k">Current bid</div>
+          <div class="price" id="price">€0.00</div>
+          <div class="holder" id="holder">no bids yet</div>
+        </div>
+        <div class="timer" id="timerwrap">
+          <div class="k">Status</div>
+          <div class="clock" id="clock">—</div>
+        </div>
+      </div>
+
+      <!-- buyer controls -->
+      <div class="controls" id="buyerctl">
+        <div class="quick" id="quick"></div>
+        <div class="row2">
+          <input id="customamt" type="number" placeholder="Custom amount" />
+          <button class="btn btn-gold" id="custombid">Bid</button>
+        </div>
+      </div>
+
+      <!-- seller: setup -->
+      <div class="setup hidden" id="setup">
+        <input id="s_title" placeholder="Lot title — e.g. 1999 Base Set Holo PSA 8" />
+        <input id="s_img" placeholder="Image URL (optional)" />
+        <div class="row2">
+          <input id="s_start" type="number" value="5" placeholder="Start €" />
+          <input id="s_dur" type="number" value="60" placeholder="Seconds" />
+        </div>
+        <button class="btn btn-gold btn-full" id="golive">● Go live with this lot</button>
+      </div>
+
+      <!-- seller: live controls -->
+      <div class="controls hidden" id="sellerlive">
+        <div class="row2" style="grid-template-columns:1fr 1fr;">
+          <button class="btn btn-ghost" id="addtime">+15s</button>
+          <button class="btn btn-live" id="endauction">End auction</button>
+        </div>
+      </div>
+
+      <!-- result -->
+      <div class="result hidden" id="result"></div>
+
+      <div class="kh" style="padding-top:4px;">Bid history</div>
+      <div class="feed" id="feed"><p class="empty-note">No bids yet — be the first.</p></div>
+
+      <div class="chat">
+        <div class="chatlog" id="chatlog"></div>
+        <div class="row2">
+          <input id="chatinput" placeholder="Say something…" />
+          <button class="btn btn-ghost" id="chatsend">Send</button>
+        </div>
+      </div>
+
+      <div class="demohint" id="demohint">
+        Running in demo mode — bids are simulated locally. Start the Python server and this connects automatically.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   CONFIG
+   ============================================================ */
+const CONFIG = {
+  WS_URL: (location.protocol === "https:" ? "wss://" : "ws://") + location.hostname + ":8000/ws",
+  RECONNECT_MS: 2500,
+};
+
+/* ------------------------------------------------------------
+   CLIENT <-> SERVER PROTOCOL  (the Python server implements this)
+   Client -> Server (JSON):
+     {action:"join",    name, role}
+     {action:"bid",     amount}
+     {action:"chat",    msg}
+     {action:"go_live", item:{title,img,desc}, startBid, duration}
+     {action:"end"}
+     {action:"add_time",seconds}
+   Server -> Client (JSON):
+     {type:"state", serverNow, room:{
+         status:"setup"|"live"|"ended", sellerName, viewers,
+         item:{title,img,desc}, startBid, currentBid, highBidder,
+         endsAt (epoch ms), bids:[{name,amount,t}], chat:[{name,msg,t}]
+     }}
+     {type:"error", message}
+   ------------------------------------------------------------ */
+
+const $ = (id) => document.getElementById(id);
+const money = (n) => "€" + Number(n || 0).toFixed(2);
+
+let me = { name: "guest" + Math.floor(Math.random()*900+100), role: "buyer" };
+let ws = null, connected = false, clockOffset = 0;
+let room = blankRoom();
+
+function blankRoom(){
+  return { status:"setup", sellerName:"", viewers:1, item:{title:"",img:"",desc:""},
+           startBid:5, currentBid:0, highBidder:null, endsAt:null, bids:[], chat:[] };
+}
+
+/* ============================================================
+   TWITCH EMBED  (parent must match the serving domain; localhost works)
+   ============================================================ */
+$("loadchan").onclick = loadStream;
+$("chan").addEventListener("keydown", e => { if(e.key==="Enter") loadStream(); });
+function loadStream(){
+  const c = $("chan").value.trim().replace(/[^a-zA-Z0-9_]/g,"");
+  if(!c) return;
+  const src = `https://player.twitch.tv/?channel=${c}&parent=${location.hostname}&muted=false`;
+  $("playerslot").innerHTML = `<iframe src="${src}" allowfullscreen allow="autoplay; fullscreen"></iframe>`;
+  $("placeholder").classList.add("hidden");
+  $("livepill").classList.add("on");
+}
+
+/* ============================================================
+   ROLE TOGGLE
+   ============================================================ */
+$("roletoggle").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  [...$("roletoggle").children].forEach(x=>x.classList.remove("on"));
+  b.classList.add("on");
+  me.role = b.dataset.role;
+  send({action:"join", name:me.name, role:me.role});
+  render();
+});
+
+/* ============================================================
+   WEBSOCKET (with demo fallback)
+   ============================================================ */
+function connect(){
+  try { ws = new WebSocket(CONFIG.WS_URL); } catch(e){ return startDemo(); }
+  const giveUp = setTimeout(()=>{ if(!connected) try{ws.close();}catch(e){} }, 2000);
+
+  ws.onopen = () => {
+    clearTimeout(giveUp); connected = true; stopDemo();
+    setStatus(true, "Live server");
+    $("demohint").classList.add("hidden");
+    send({action:"join", name:me.name, role:me.role});
+  };
+  ws.onmessage = (ev) => {
+    let m; try { m = JSON.parse(ev.data); } catch(e){ return; }
+    if(m.type === "state"){
+      clockOffset = (m.serverNow || Date.now()) - Date.now();
+      room = m.room; render();
+    } else if(m.type === "error"){
+      flash($("price"));
+    }
+  };
+  ws.onclose = () => {
+    connected = false; setStatus(false, "Demo mode");
+    $("demohint").classList.remove("hidden");
+    startDemo();
+    setTimeout(connect, CONFIG.RECONNECT_MS);
+  };
+  ws.onerror = () => { try{ws.close();}catch(e){} };
+}
+
+function send(obj){
+  if(connected && ws && ws.readyState === 1){ ws.send(JSON.stringify(obj)); }
+  else { demoHandle(obj); }   // demo mode handles actions locally
+}
+
+function setStatus(ok, text){
+  $("status").classList.toggle("ok", ok);
+  $("statustext").textContent = text;
+}
+
+/* ============================================================
+   ACTIONS (UI -> send)
+   ============================================================ */
+const quick = $("quick");
+[1,5,10,25].forEach(inc => {
+  const b = document.createElement("button");
+  b.className = "btn btn-ghost"; b.textContent = "+" + money(inc);
+  b.onclick = () => send({action:"bid", amount: round2(room.currentBid + inc)});
+  quick.appendChild(b);
+});
+$("custombid").onclick = () => {
+  const v = Number($("customamt").value);
+  const min = minNext();
+  if(v >= min){ send({action:"bid", amount: round2(v)}); $("customamt").value=""; }
+  else flash($("customamt"));
+};
+$("golive").onclick = () => {
+  send({action:"go_live",
+    item:{ title:$("s_title").value||"Untitled lot", img:$("s_img").value, desc:$("s_title").value?"":"" },
+    startBid: Number($("s_start").value)||1,
+    duration: Number($("s_dur").value)||60 });
+};
+$("addtime").onclick   = () => send({action:"add_time", seconds:15});
+$("endauction").onclick= () => send({action:"end"});
+$("chatsend").onclick  = sendChat;
+$("chatinput").addEventListener("keydown", e => { if(e.key==="Enter") sendChat(); });
+function sendChat(){
+  const v = $("chatinput").value.trim(); if(!v) return;
+  send({action:"chat", msg:v}); $("chatinput").value="";
+}
+
+function minNext(){ return room.highBidder ? round2(room.currentBid + 1) : room.currentBid; }
+function round2(n){ return Math.round(n*100)/100; }
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function render(){
+  // lot
+  $("lottitle").textContent = room.item?.title || (room.status==="setup" ? "No live lot yet" : "Live lot");
+  $("lotdesc").textContent  = room.item?.desc || (room.status==="setup" ? "Waiting for the seller to start an auction." : "");
+  const img = $("lotimg");
+  if(room.item?.img){ img.outerHTML = `<img id="lotimg" class="lotimg" src="${room.item.img}" alt="" onerror="this.outerHTML='<div id=\\'lotimg\\' class=\\'lotimg empty\\'>🃏</div>'">`; }
+
+  // price + holder
+  $("price").textContent = money(room.currentBid);
+  $("holder").textContent = room.highBidder ? "held by " + room.highBidder : "starting bid — no bids yet";
+
+  // role panels
+  const seller = me.role === "seller";
+  show("buyerctl",  !seller && room.status==="live");
+  show("setup",      seller && room.status!=="live" );
+  show("sellerlive", seller && room.status==="live" );
+  show("result",     room.status==="ended");
+
+  if(room.status==="ended"){
+    $("result").innerHTML = room.highBidder
+      ? `<h3>🏆 Sold to ${esc(room.highBidder)}</h3><p class="holder">Final price ${money(room.currentBid)}</p>`
+      : `<h3>No bids</h3><p class="holder">The lot closed with no winning bid.</p>`;
+  }
+
+  // feed
+  const feed = $("feed");
+  if(!room.bids?.length){ feed.innerHTML = `<p class="empty-note">No bids yet — be the first.</p>`; }
+  else { feed.innerHTML = room.bids.map(b =>
+    `<div class="bidrow"><span>${esc(b.name)}</span><b class="gold">${money(b.amount)}</b></div>`).join(""); }
+
+  // chat
+  $("chatlog").innerHTML = (room.chat||[]).map(c =>
+    `<p><b>${esc(c.name)}</b> ${esc(c.msg)}</p>`).join("");
+  $("chatlog").scrollTop = $("chatlog").scrollHeight;
+}
+function show(id, on){ $(id).classList.toggle("hidden", !on); }
+function esc(s){ return String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+function flash(el){ el.style.borderColor="var(--live)"; setTimeout(()=>el.style.borderColor="",400); }
+
+/* live countdown — server-authoritative endsAt, corrected for clock skew */
+setInterval(() => {
+  const tw = $("timerwrap"), clk = $("clock");
+  if(room.status==="live" && room.endsAt){
+    const rem = Math.max(0, room.endsAt - (Date.now() + clockOffset));
+    const s = Math.ceil(rem/1000);
+    clk.textContent = s + "s";
+    tw.classList.toggle("urgent", s <= 10);
+    tw.querySelector(".k").textContent = "Ends in";
+  } else {
+    clk.textContent = room.status==="ended" ? "ENDED" : "—";
+    tw.classList.remove("urgent");
+    tw.querySelector(".k").textContent = "Status";
+  }
+}, 250);
+
+/* ============================================================
+   DEMO MODE — local simulator so the shell is alive with no server.
+   Mirrors the server's behavior (anti-snipe, auto-close) closely.
+   ============================================================ */
+let demoTimer = null;
+function startDemo(){ if(!demoTimer) demoTimer = setInterval(demoTick, 300); }
+function stopDemo(){ if(demoTimer){ clearInterval(demoTimer); demoTimer=null; } }
+function demoTick(){
+  if(room.status==="live" && room.endsAt && Date.now() >= room.endsAt){
+    room.status = "ended"; render();
+  }
+}
+function demoHandle(obj){
+  switch(obj.action){
+    case "join": break;
+    case "go_live":
+      room = blankRoom();
+      room.sellerName = me.name; room.item = obj.item;
+      room.startBid = obj.startBid; room.currentBid = obj.startBid;
+      room.status="live"; room.endsAt = Date.now() + (obj.duration*1000);
+      break;
+    case "bid":
+      if(room.status!=="live") break;
+      if(obj.amount < minNext()) { flash($("price")); break; }
+      room.currentBid = obj.amount; room.highBidder = me.name;
+      room.bids = [{name:me.name, amount:obj.amount, t:Date.now()}, ...room.bids].slice(0,40);
+      if(room.endsAt - Date.now() < 5000) room.endsAt = Date.now() + 10000; // anti-snipe
+      break;
+    case "chat":
+      room.chat = [...room.chat, {name:me.name, msg:obj.msg, t:Date.now()}].slice(-60);
+      break;
+    case "add_time": if(room.status==="live") room.endsAt += obj.seconds*1000; break;
+    case "end":      if(room.status==="live"){ room.status="ended"; } break;
+  }
+  render();
+}
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+startDemo();
+render();
+connect();
+</script>
+</body>
+</html>
